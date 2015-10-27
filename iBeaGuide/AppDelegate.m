@@ -17,7 +17,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    return YES;
+	
+	[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back.png"]];
+	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back.png"]];
+
+	return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
