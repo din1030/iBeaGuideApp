@@ -7,9 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface iBGMoniterViewController : UIViewController
+@interface iBGMoniterViewController : UIViewController <CLLocationManagerDelegate>
+
+@property (strong, nonatomic) CLBeaconRegion *myBeaconRegion;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 @property (strong, nonatomic) IBOutlet UIButton *moniterButton;
 @property (strong, nonatomic) IBOutlet UIImageView *moniterAnimation;
+
+@property (strong, nonatomic) NSDictionary *result;
+@property (nonatomic) int exhID;
+
+- (IBAction)clickItemTest:(id)sender;
+- (IBAction)clickExhTest:(id)sender;
 
 @end

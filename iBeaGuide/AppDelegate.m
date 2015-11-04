@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()
 
@@ -18,9 +19,47 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 	
+//	//Create Location manager instance and handle authorisation for iOS8
+//	self.locationManager = [[CLLocationManager alloc] init];
+//	
+//	if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+//		[self.locationManager requestAlwaysAuthorization];
+//	}
+//	
+//	//Set delegate and then start monitoring for regions, ranging the beacons and updating locations
+//	self.locationManager.delegate = self;
+//	self.locationManager.pausesLocationUpdatesAutomatically = NO;
+	
+	
+	// customized nav bar back btn img
 	[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back.png"]];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back.png"]];
+	
+	if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+		[[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge
+																											  categories:nil]];
+	}
 
+//	UIPageControl *pageControl = [UIPageControl appearance];
+//	[pageControl drawRect:CGRectMake(0, 484, 320, 100)];
+//	pageControl.pageIndicatorTintColor = UIColorFromRGBWithAlpha(0x333333, 1);
+//	pageControl.currentPageIndicatorTintColor = UIColorFromRGBWithAlpha(0x39A2AE, 1);
+//	pageControl.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
+	
+//	pageControl.opaque = false;
+//	pageControl.alpha = 0.5f;
+//	pageControl.clearsContextBeforeDrawing = false;
+	
+//	UIButton *btn = [UIButton appearance];
+//	[btn.layer setShadowColor:[UIColor whiteColor].CGColor];
+//	[btn.layer setShadowOpacity:0.8];
+//	
+//	btn.layer.shadowColor = [UIColor whiteColor].CGColor;
+//	btn.layer.shadowOffset = CGSizeMake(1.0f,3.0f);
+//	btn.layer.masksToBounds = NO;
+//	btn.layer.shadowRadius = 3.0f;
+//	btn.layer.shadowOpacity = 0.8;
+	
 	return YES;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "iBGExhInfoViewController.h"
+#import "iBGMoniterViewController.h"
 
 @interface iBGExhInfoViewController ()
 
@@ -16,8 +17,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//	self.navigationItem.backBarButtonItem.image = [UIImage imageNamed:@"back.png"];
+	// Do any additional setup after loading the view.
+	
+	self.exhNavItem.title = [self.exhInfo objectForKey:@"title"];
+	self.exhDate.text = [NSString stringWithFormat:@"%@ ~ %@", [self.exhInfo objectForKey:@"start_date"], [self.exhInfo objectForKey:@"end_date"]];
+	self.exhTime.text = [NSString stringWithFormat:@"%@ - %@", [self.exhInfo objectForKey:@"daily_open_time"], [self.exhInfo objectForKey:@"daily_close_time"]];
+	self.exhVenue.text = [self.exhInfo objectForKey:@"venue"];
+	self.exhSite.text = [self.exhInfo objectForKey:@"web_link"];
+	self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
+	
+	CGRect contentRect = CGRectZero;
+	for (UIView *view in self.exhScrollView.subviews) {
+		contentRect = CGRectUnion(contentRect, view.frame);
+	}
+	self.exhScrollView.contentSize = contentRect.size;
+	
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,4 +49,11 @@
 }
 */
 
+
+- (IBAction)clickStartGuide:(id)sender {
+	iBGMoniterViewController *iBGMoniterViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+	[iBGMoniterViewController setValue:[self.exhInfo objectForKey:@"id"] forKeyPath:@"exhID"];
+//	iBGMoniterViewController.exhID = [[self.exhInfo objectForKey:@"id"] integerValue];
+	[self.navigationController popViewControllerAnimated:NO];
+}
 @end
