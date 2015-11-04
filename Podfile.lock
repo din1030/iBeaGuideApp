@@ -1,0 +1,10 @@
+PODS:
+  - NYTPhotoViewer (0.1.2)
+
+DEPENDENCIES:
+  - NYTPhotoViewer
+
+SPEC CHECKSUMS:
+  NYTPhotoViewer: 874a57dd833238b52ab2e8d1c827356c763626c3
+
+COCOAPODS: 0.39.0
