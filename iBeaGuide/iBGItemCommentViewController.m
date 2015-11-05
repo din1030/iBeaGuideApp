@@ -21,8 +21,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	iBGItemPageViewController *pageVC = (iBGItemPageViewController*)self.parentViewController.parentViewController;
-	pageVC.itemPageControl.currentPage = 2;
+	iBGItemPageParentViewController *pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	pageParentVC.itemPageControl.currentPage = 2;
 }
 
 - (void)didReceiveMemoryWarning {

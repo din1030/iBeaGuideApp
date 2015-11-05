@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iBGItemPageViewController.h"
+#import "iBGItemPageParentViewController.h"
 
 @interface iBGItemCommentViewController : UIViewController
 

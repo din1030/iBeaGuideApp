@@ -17,14 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//	iBGItemPageViewController *pageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pageContainerVC"];
-//	pageVC.itemPageControl.currentPage = 1;
+//	iBGItemPageParentViewController *pageParentVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pageContainerVC"];
+//	pageParentVC.itemPageControl.currentPage = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	iBGItemPageViewController *pageVC = (iBGItemPageViewController*)self.parentViewController.parentViewController;
-	pageVC.itemPageControl.currentPage = 1;
+	iBGItemPageParentViewController *pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	pageParentVC.itemPageControl.currentPage = 1;
 }
 
 - (void)didReceiveMemoryWarning {

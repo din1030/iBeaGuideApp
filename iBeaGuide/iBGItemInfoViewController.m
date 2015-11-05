@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	self.pageVC = (iBGItemPageViewController*)self.parentViewController.parentViewController;
+	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	[self.view bringSubviewToFront:self.pageParentVC.itemMenuBtn];
 //	UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(235, 425, 60, 60)];
 //	UIImage *menuImg = [UIImage imageNamed:@"message.png"];
 //	[menuBtn setBackgroundImage:menuImg forState:UIControlStateNormal];
@@ -28,7 +29,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	self.pageVC.itemPageControl.currentPage = 0;
+	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	self.pageParentVC.itemPageControl.currentPage = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,10 +39,14 @@
 }
 
 - (IBAction)clickItemMenu:(id)sender {
+	
+	UIPageViewController *PVC = (UIPageViewController*)self.parentViewController;
+	[PVC setViewControllers:@[self] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+	
 	UIViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
-	[self addChildViewController:maskVC];
-	[self.view addSubview:maskVC.view];
-//	[self.view bringSubviewToFront:maskVC.view];
+	[self.parentViewController addChildViewController:maskVC];
+	[self.parentViewController.view addSubview:maskVC.view];	
+	//	[self.view bringSubviewToFront:maskVC.view];
 }
 
 /*

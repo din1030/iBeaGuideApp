@@ -1,46 +1,50 @@
 //
-//  iBGItemPageViewController.m
+//  iBGItemPageParentViewController.m
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/2.
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import "iBGItemPageViewController.h"
+#import "iBGItemPageParentViewController.h"
 #import "iBGItemInfoViewController.h"
 #import "iBGItemDetailViewController.h"
 #import "iBGItemCommentViewController.h"
 
-@interface iBGItemPageViewController ()
+@interface iBGItemPageParentViewController ()
 
 @end
 
-@implementation iBGItemPageViewController
+@implementation iBGItemPageParentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
+	// 建立 page view 的 child VC (item 的 3 個頁面)
 	iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
 	iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
 	iBGItemCommentViewController *iBGItemCommentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentVC"];
 	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentViewController];
-	NSArray *startingItemVC= @[iBGItemInfoViewController];
+
+	//	NSArray *startingItemVC= @[iBGItemInfoViewController];
 	
 	// Create page view controller
-	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemPageVC"];
+	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItempageParentVC"];
 	self.pageViewController.dataSource = self;
 	self.pageViewController.delegate = self;
 	
-	[self.pageViewController setViewControllers:startingItemVC direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+	[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 	
+	// 把 page VC 塞給目前的 VC	
 	[self addChildViewController:self.pageViewController];
 	[self.view addSubview:self.pageViewController.view];
 	[self.pageViewController didMoveToParentViewController:self];
 	
+	// 把固定顯示的物件拉到最前面
+	[self.view bringSubviewToFront:self.itemMenuBtn];
+	[self.view bringSubviewToFront:self.itemPageControlBG];
 	[self.view bringSubviewToFront:self.itemPageControl];
-	[self.view insertSubview:self.itemPageControlBG belowSubview:self.itemPageControl];
-	
 }
 
 
@@ -61,60 +65,44 @@ willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewContro
    previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers
 	   transitionCompleted:(BOOL)completed {
 	
-	if (completed) {
-//		self.itemPageControl.currentPage = [self.pageviewContentVCs indexOfObject:[previousViewControllers objectAtIndex:0]] + 1;
-	}
-	
 }
 
 #pragma mark - Page View Controller Data Source
 
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-	 viewControllerBeforeViewController:(UIViewController *)viewController
-{
+	 viewControllerBeforeViewController:(UIViewController *)viewController {
+	// 從 page content array 取出目前 VC 的 index
 	NSUInteger currentIndex = [self.pageviewContentVCs indexOfObject:viewController];
-	// get the index of the current view controller on display
-	
-	if (currentIndex > 0)
-	{
-//		self.itemPageControl.currentPage = currentIndex-1;
+	// 不是第一頁就傳回上一頁
+	if (currentIndex > 0) {
 		return [self.pageviewContentVCs objectAtIndex:currentIndex-1];
-		// return the previous viewcontroller
-	} else
-	{
+	} else {
 		return nil;
-		// do nothing
 	}
 }
+
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-	  viewControllerAfterViewController:(UIViewController *)viewController
-{
+	  viewControllerAfterViewController:(UIViewController *)viewController {
 	NSUInteger currentIndex = [self.pageviewContentVCs indexOfObject:viewController];
-	// get the index of the current view controller on display
-	// check if we are at the end and decide if we need to present
-	// the next viewcontroller
-	if (currentIndex < [self.pageviewContentVCs count]-1)
-	{
-//		self.itemPageControl.currentPage = currentIndex+1;
+	// 不是最後一頁就傳回下一頁
+	if (currentIndex < [self.pageviewContentVCs count]-1){
 		return [self.pageviewContentVCs objectAtIndex:currentIndex+1];
-		// return the next view controller
-	} else
-	{
+	} else {
 		return nil;
-		// do nothing
 	}
 }
 
+/* 設置的話會有 page VC 原生的 page control
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+{
+	return 3;
+}
 
-//- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
-//{
-//	return 3;
-//}
-//
-//- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
-//{
-//	return 0;
-//}
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
+	return 0;
+}
+*/
 
 /*
 #pragma mark - Navigation
@@ -126,4 +114,11 @@ willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewContro
 }
 */
 
+- (IBAction)clickMenu:(id)sender {
+	
+	UIViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
+	[self addChildViewController:maskVC];
+	[self.view addSubview:maskVC.view];
+	
+}
 @end

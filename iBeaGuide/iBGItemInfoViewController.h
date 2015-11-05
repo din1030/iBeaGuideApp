@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iBGItemPageViewController.h"
+#import "iBGItemPageParentViewController.h"
 
 @interface iBGItemInfoViewController : UIViewController
 
-@property (strong, nonatomic) iBGItemPageViewController *pageVC;
+@property (strong, nonatomic) iBGItemPageParentViewController *pageParentVC;
 - (IBAction)clickItemMenu:(id)sender;
 
 @end

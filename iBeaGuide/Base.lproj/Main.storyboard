@@ -110,7 +110,7 @@
         <!--（展品名稱）-->
         <scene sceneID="3SD-9s-ulY">
             <objects>
-                <pageViewController storyboardIdentifier="ItemPageVC" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="8q1-mU-Ffm" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="ItempageParentVC" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="8q1-mU-Ffm" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="（展品名稱）" id="rhT-pO-HYm"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </pageViewController>
@@ -121,12 +121,12 @@
         <!--（展覽名稱）-->
         <scene sceneID="ggL-FS-V0q">
             <objects>
-                <viewController storyboardIdentifier="pageContainerVC" autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="AQ9-wQ-PX7" customClass="iBGItemPageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageContainerVC" autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="AQ9-wQ-PX7" customClass="iBGItemPageParentViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="cSR-fd-Da4">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.65000000000000002" contentMode="scaleToFill" id="7ug-1R-GEt">
+                            <view alpha="0.64999997615814209" contentMode="scaleToFill" id="PLC-8c-Qmt">
                                 <rect key="frame" x="0.0" y="484" width="320" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,6 +137,14 @@
                                 <color key="pageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8CO-5b-kNJ">
+                                <rect key="frame" x="250" y="416" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="message_cut.png"/>
+                                <connections>
+                                    <action selector="clickMenu:" destination="AQ9-wQ-PX7" eventType="touchUpInside" id="csD-zY-BXz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -144,8 +152,9 @@
                     <navigationItem key="navigationItem" title="（展覽名稱）" id="Zfp-Al-v3a"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="itemMenuBtn" destination="8CO-5b-kNJ" id="I04-Ek-jw0"/>
                         <outlet property="itemPageControl" destination="upr-UH-0cZ" id="i3i-2v-5QA"/>
-                        <outlet property="itemPageControlBG" destination="upr-UH-0cZ" id="W7s-Em-nKE"/>
+                        <outlet property="itemPageControlBG" destination="PLC-8c-Qmt" id="e2n-4s-iZZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YlT-tu-MID" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -232,14 +241,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5h2-Dt-cS3">
-                                        <rect key="frame" x="252" y="426" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="message_cut.png"/>
-                                        <connections>
-                                            <action selector="clickItemMenu:" destination="qEw-I5-78k" eventType="touchUpInside" id="cSK-WX-Obh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -381,11 +382,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FDg-Ah-GQv">
-                                        <rect key="frame" x="252" y="425" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="message_cut.png"/>
-                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -612,7 +608,7 @@
                             <tableViewSection id="E8g-Yy-NsH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LFu-sb-8OX">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFu-sb-8OX" id="ZQJ-8V-o5D">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -620,7 +616,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FIp-Bs-rZY">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="108" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FIp-Bs-rZY" id="kNR-GB-cy9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -628,7 +624,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ry1-W4-t7w">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="152" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ry1-W4-t7w" id="eUZ-f9-EVp">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -669,6 +665,7 @@
         <!--Item Comment View Controller-->
         <scene sceneID="NhP-pc-T8A">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sE0-9J-70Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ItemCommentVC" hidesBottomBarWhenPushed="YES" id="UCU-58-VvL" customClass="iBGItemCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WlA-FF-imb">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
@@ -692,11 +689,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WsO-qY-dPV">
-                                        <rect key="frame" x="252" y="425" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="message_cut.png"/>
-                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -708,7 +700,6 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sE0-9J-70Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3312" y="-166"/>
         </scene>
