@@ -52,6 +52,10 @@
 		A6CE21C11BDFE1B100249226 /* setting_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21BB1BDFE1B100249226 /* setting_1@2x.png */; };
 		A6CE21C21BDFE1B100249226 /* setting_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21BC1BDFE1B100249226 /* setting_2@2x.png */; };
 		A6CE21CE1BE0732C00249226 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CE21CD1BE0732C00249226 /* CoreLocation.framework */; };
+		A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */; };
+		A6D09A8C1BECC31800E50EDC /* Sanpan@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */; };
+		A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */; };
+		A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */; };
 		A6D2F6941BEA350D00639707 /* message_cut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D2F6921BEA350D00639707 /* message_cut@2x.png */; };
 		A6D2F6951BEA350D00639707 /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D2F6931BEA350D00639707 /* message@2x.png */; };
 		A6D2F6981BEA3DF600639707 /* iBGItemMaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D2F6971BEA3DF600639707 /* iBGItemMaskViewController.m */; };
@@ -138,6 +142,13 @@
 		A6CE21BB1BDFE1B100249226 /* setting_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_1@2x.png"; sourceTree = "<group>"; };
 		A6CE21BC1BDFE1B100249226 /* setting_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_2@2x.png"; sourceTree = "<group>"; };
 		A6CE21CD1BE0732C00249226 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A6CF599E1BEDD35D0025A26C /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
+		A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
+		A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Sanpan@2x.jpg"; sourceTree = "<group>"; };
+		A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGNYTPhoto.h; sourceTree = "<group>"; };
+		A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGNYTPhoto.m; sourceTree = "<group>"; };
+		A6D09A901BECF27500E50EDC /* iBGItemCommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGItemCommentTableViewController.h; sourceTree = "<group>"; };
+		A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGItemCommentTableViewController.m; sourceTree = "<group>"; };
 		A6D2F6921BEA350D00639707 /* message_cut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_cut@2x.png"; sourceTree = "<group>"; };
 		A6D2F6931BEA350D00639707 /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
 		A6D2F6961BEA3DF600639707 /* iBGItemMaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGItemMaskViewController.h; sourceTree = "<group>"; };
@@ -235,6 +246,12 @@
 				A6D58BC31BE7863C00C4AFF4 /* iBGItemInfoViewController.m */,
 				A6A734881BE8DBA000772655 /* iBGItemDetailViewController.h */,
 				A6A734891BE8DBA000772655 /* iBGItemDetailViewController.m */,
+				A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */,
+				A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */,
+				A6D09A901BECF27500E50EDC /* iBGItemCommentTableViewController.h */,
+				A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */,
+				A6CF599E1BEDD35D0025A26C /* UIView+Glow.h */,
+				A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */,
 				A6A7348B1BE8E64800772655 /* iBGItemCommentViewController.h */,
 				A6A7348C1BE8E64800772655 /* iBGItemCommentViewController.m */,
 			);
@@ -310,6 +327,7 @@
 				A6CE21BB1BDFE1B100249226 /* setting_1@2x.png */,
 				A6CE21BC1BDFE1B100249226 /* setting_2@2x.png */,
 				A6CE21B21BDFC1DB00249226 /* Mona_Lisa@2x.jpg */,
+				A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -438,6 +456,7 @@
 				A6CE21C21BDFE1B100249226 /* setting_2@2x.png in Resources */,
 				A6CE21C01BDFE1B100249226 /* guide_2@2x.png in Resources */,
 				A63994481BDE4615003E1BCA /* Assets.xcassets in Resources */,
+				A6D09A8C1BECC31800E50EDC /* Sanpan@2x.jpg in Resources */,
 				A6D2F6A01BEA494100639707 /* plus_full@2x.png in Resources */,
 				A6CE219B1BDFB2BE00249226 /* detect_1@2x.png in Resources */,
 				A6CE21AC1BDFB2BE00249226 /* setting@2x.png in Resources */,
@@ -542,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */,
 				A6D2F6981BEA3DF600639707 /* iBGItemMaskViewController.m in Sources */,
 				A6A7348D1BE8E64800772655 /* iBGItemCommentViewController.m in Sources */,
 				A6CE21B61BDFD97200249226 /* iBGExhInfoViewController.m in Sources */,
@@ -551,6 +571,8 @@
 				A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */,
 				A639943A1BDE4615003E1BCA /* main.m in Sources */,
 				A6A7348A1BE8DBA000772655 /* iBGItemDetailViewController.m in Sources */,
+				A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */,
+				A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */,
 				A6D2F69B1BEA483500639707 /* iBGItemMenuButton.m in Sources */,
 				A6CE217C1BDF6AE600249226 /* iBGMoniterViewController.m in Sources */,
 			);

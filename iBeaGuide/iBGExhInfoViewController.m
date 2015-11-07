@@ -30,6 +30,7 @@
 	for (UIView *view in self.exhScrollView.subviews) {
 		contentRect = CGRectUnion(contentRect, view.frame);
 	}
+	contentRect.size.height += 60;
 	self.exhScrollView.contentSize = contentRect.size;
 	
 }

@@ -144,7 +144,7 @@
 	UILocalNotification *notification = [[UILocalNotification alloc] init];
 	notification.alertBody = message;
 	[[UIApplication sharedApplication] scheduleLocalNotification:notification];
-	[[UIApplication sharedApplication]  presentLocalNotificationNow:notification];
+	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
 

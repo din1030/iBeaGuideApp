@@ -17,17 +17,47 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.tapDismissKB = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKB)];
+	[self.view addGestureRecognizer:self.tapDismissKB];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	
+//	NSLog(@"self.view.frame.size.height: %f", self.view.frame.size.height);
+	
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	// 控制 page control 到對應位置
-	iBGItemPageParentViewController *pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
-	pageParentVC.itemPageControl.currentPage = 2;
+- (void)keyboardWasShown:(NSNotification *)notification {
+	
+	NSDictionary *userInfo = [notification userInfo];
+	NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+	CGRect keyboardRect = [aValue CGRectValue];
+	int height = keyboardRect.size.height;
+	[self.commentScrollView setFrame:CGRectMake(0, 0, 320.0, self.view.frame.size.height - height)];
+	NSLog(@"%f", self.view.frame.size.height - height);
+	
+	CGRect contentRect = CGRectZero;
+	for (UIView *view in self.commentScrollView.subviews) {
+		contentRect = CGRectUnion(contentRect, view.frame);
+	}
+	[self.commentScrollView setContentSize:contentRect.size];
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	
+	[self.commentScrollView setFrame:CGRectMake(0, 0, 320.0, self.view.frame.size.height)];
+//	NSLog(@"%f", self.view.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dismissKB {
+	[self.view endEditing:YES];
 }
 
 /*

@@ -17,9 +17,9 @@
 - (void)drawRect:(CGRect)rect {
 	
 	self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-	self.layer.shadowOffset = CGSizeMake(0.0f,3.0f);
+	self.layer.shadowOffset = CGSizeMake(1.0f,3.0f);
 	self.layer.masksToBounds = NO;
-	self.layer.shadowRadius = 4.5f;
+	self.layer.shadowRadius = 2.5f;
 	self.layer.shadowOpacity = 0.8;
 
 }

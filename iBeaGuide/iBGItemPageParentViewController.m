@@ -9,7 +9,7 @@
 #import "iBGItemPageParentViewController.h"
 #import "iBGItemInfoViewController.h"
 #import "iBGItemDetailViewController.h"
-#import "iBGItemCommentViewController.h"
+#import "iBGItemCommentTableViewController.h"
 
 @interface iBGItemPageParentViewController ()
 
@@ -21,11 +21,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
+	// 禁止 swipe back
+	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+	
 	// 建立 page view 的 child VC (item 的 3 個頁面)
 	iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
 	iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
-	iBGItemCommentViewController *iBGItemCommentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentVC"];
-	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentViewController];
+	iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
+	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
 
 	//	NSArray *startingItemVC= @[iBGItemInfoViewController];
 	

@@ -24,7 +24,8 @@
 }
 
 - (void)removeMaskView {
-	NSLog(@"remove");
+	
+	// 先 disable 按鈕然後讓 mask view fade out + remove
 	self.msgBtn.enabled = false;
 	self.addBtn.enabled = false;
 	self.shareBtn.enabled = false;
@@ -33,9 +34,7 @@
 	} completion:^(BOOL completion){
 		[self.view removeFromSuperview];
 	}];
-	
-	
-//	[self removeFromParentViewController];
+	//	[self removeFromParentViewController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,5 +51,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)clickMenuOptionBtn:(id)sender {
+	if (sender == self.msgBtn) {
+		[self.parentViewController performSegueWithIdentifier:@"itemComment" sender:self];
+	} else if (sender == self.addBtn) {
+		[self.parentViewController performSegueWithIdentifier:@"itemComment" sender:self];
+	} else if (sender == self.shareBtn) {
+		[self.parentViewController performSegueWithIdentifier:@"itemComment" sender:self];
+	}
+	
+}
 
 @end

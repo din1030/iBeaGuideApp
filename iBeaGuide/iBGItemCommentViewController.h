@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iBGItemPageParentViewController.h"
 
 @interface iBGItemCommentViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapDismissKB;
+@property (strong, nonatomic) IBOutlet UIScrollView *commentScrollView;
+@property (strong, nonatomic) IBOutlet UITextView *commentTextView;
 
 @end

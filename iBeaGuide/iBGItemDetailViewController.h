@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGItemPageParentViewController.h"
+#import <NYTPhotoViewer/NYTPhotosViewController.h>
+#import "iBGNYTPhoto.h"
 
-@interface iBGItemDetailViewController : UIViewController
+@interface iBGItemDetailViewController : UIViewController<NYTPhotosViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
+@property (nonatomic) NSArray *photos;
 
 @end
