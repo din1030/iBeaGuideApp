@@ -53,6 +53,8 @@
 		A6CE21C21BDFE1B100249226 /* setting_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21BC1BDFE1B100249226 /* setting_2@2x.png */; };
 		A6CE21CE1BE0732C00249226 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CE21CD1BE0732C00249226 /* CoreLocation.framework */; };
 		A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */; };
+		A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */; };
+		A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */; };
 		A6D09A8C1BECC31800E50EDC /* Sanpan@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */; };
 		A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */; };
 		A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */; };
@@ -144,6 +146,10 @@
 		A6CE21CD1BE0732C00249226 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A6CF599E1BEDD35D0025A26C /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
 		A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
+		A6CF59A11BEE02920025A26C /* iBGMyCollectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGMyCollectionTableViewController.h; sourceTree = "<group>"; };
+		A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGMyCollectionTableViewController.m; sourceTree = "<group>"; };
+		A6CF59A41BEE75C10025A26C /* iBGCollectionPageParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGCollectionPageParentViewController.h; sourceTree = "<group>"; };
+		A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGCollectionPageParentViewController.m; sourceTree = "<group>"; };
 		A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Sanpan@2x.jpg"; sourceTree = "<group>"; };
 		A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGNYTPhoto.h; sourceTree = "<group>"; };
 		A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGNYTPhoto.m; sourceTree = "<group>"; };
@@ -238,8 +244,6 @@
 				A6CE21B51BDFD97200249226 /* iBGExhInfoViewController.m */,
 				A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */,
 				A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */,
-				A6D2F6961BEA3DF600639707 /* iBGItemMaskViewController.h */,
-				A6D2F6971BEA3DF600639707 /* iBGItemMaskViewController.m */,
 				A6D2F6991BEA483500639707 /* iBGItemMenuButton.h */,
 				A6D2F69A1BEA483500639707 /* iBGItemMenuButton.m */,
 				A6D58BC21BE7863C00C4AFF4 /* iBGItemInfoViewController.h */,
@@ -254,6 +258,12 @@
 				A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */,
 				A6A7348B1BE8E64800772655 /* iBGItemCommentViewController.h */,
 				A6A7348C1BE8E64800772655 /* iBGItemCommentViewController.m */,
+				A6D2F6961BEA3DF600639707 /* iBGItemMaskViewController.h */,
+				A6D2F6971BEA3DF600639707 /* iBGItemMaskViewController.m */,
+				A6CF59A41BEE75C10025A26C /* iBGCollectionPageParentViewController.h */,
+				A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */,
+				A6CF59A11BEE02920025A26C /* iBGMyCollectionTableViewController.h */,
+				A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */,
 			);
 			path = iBeaGuide;
 			sourceTree = "<group>";
@@ -567,8 +577,10 @@
 				A6CE21B61BDFD97200249226 /* iBGExhInfoViewController.m in Sources */,
 				A63994461BDE4615003E1BCA /* iBeaGuide.xcdatamodeld in Sources */,
 				A6D58BC71BE78EA800C4AFF4 /* iBGItemPageParentViewController.m in Sources */,
+				A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */,
 				A639943D1BDE4615003E1BCA /* AppDelegate.m in Sources */,
 				A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */,
+				A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */,
 				A639943A1BDE4615003E1BCA /* main.m in Sources */,
 				A6A7348A1BE8DBA000772655 /* iBGItemDetailViewController.m in Sources */,
 				A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */,

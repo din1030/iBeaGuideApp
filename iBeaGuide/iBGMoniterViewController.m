@@ -49,6 +49,9 @@
 	[settingItem setImage:settingImg];
 	[settingItem setSelectedImage:settingSelectedImg];
 	
+	moniterItem.imageInsets = UIEdgeInsetsMake(5.5, 0, -5.5, 0);
+	collectItem.imageInsets = UIEdgeInsetsMake(5.5, 0, -5.5, 0);
+	settingItem.imageInsets = UIEdgeInsetsMake(5.5, 0, -5.5, 0);
 	
 	// Initialize location manager and set ourselves as the delegate
 	self.locationManager = [[CLLocationManager alloc] init];

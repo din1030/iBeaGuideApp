@@ -21,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *exhTime;
 @property (strong, nonatomic) IBOutlet UILabel *exhVenue;
 @property (strong, nonatomic) IBOutlet UITextView *exhSite;
-@property (strong, nonatomic) IBOutlet UITextView *exhDescription;
+@property (strong, nonatomic) IBOutlet UILabel *exhDescription;
 
 @property (strong, nonatomic) IBOutlet UIButton *enterExhBtn;
 

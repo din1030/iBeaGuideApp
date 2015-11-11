@@ -19,11 +19,36 @@
     // Do any additional setup after loading the view.
 	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
 	[self.view bringSubviewToFront:self.pageParentVC.itemMenuBtn];
-//	UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(235, 425, 60, 60)];
-//	UIImage *menuImg = [UIImage imageNamed:@"message.png"];
-//	[menuBtn setBackgroundImage:menuImg forState:UIControlStateNormal];
-//	[self.view addSubview:menuBtn];
-//	[self.view bringSubviewToFront:menuBtn];
+	
+
+	CGRect txtFrame = self.itemBrief.frame;
+	
+//	self.itemBrief.frame = CGRectMake(25, 368, 270,
+//							 txtFrame.size.height =[self.itemBrief.text boundingRectWithSize:
+//													CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
+//																			options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+//																		 attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height);
+//	self.itemBrief.frame = CGRectMake(25, 368, 270, txtFrame.size.height);
+	
+	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
+															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
+														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
+	self.itemBrief.frame = txtFrame;
+	
+	CGRect contentRect = CGRectZero;
+	for (UIView *view in self.itemInfoScrollView.subviews) {
+		contentRect = CGRectUnion(contentRect, view.frame);
+	}
+//	contentRect.size.height += 30;
+//	self.itemInfoScrollView.contentSize = contentRect.size;
+	
+	if (contentRect.size.height > self.itemInfoScrollView.frame.size.height) {
+		contentRect.size.height += 30;
+		self.itemInfoScrollView.contentSize = contentRect.size;
+	} else {
+		self.itemInfoScrollView.contentSize = CGSizeMake(320, 504
+);
+	}
 
 }
 

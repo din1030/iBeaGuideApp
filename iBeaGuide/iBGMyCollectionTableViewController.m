@@ -1,47 +1,38 @@
 //
-//  iBGItemCommentTableViewController.m
+//  iBGMyCollectionTableViewController.m
 //  iBeaGuide
 //
-//  Created by din1030 on 2015/11/6.
+//  Created by din1030 on 2015/11/7.
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import "UIView+Glow.h"
-#import "iBGItemCommentTableViewController.h"
+#import "iBGMyCollectionTableViewController.h"
 
-#define kItemCommentHeaderHeight 58
-#define kItemCommentCellHeight 176
+#define kItemHeaderHeight 250
+#define kItemCellHeight 60
 
-@interface iBGItemCommentTableViewController ()
+@interface iBGMyCollectionTableViewController ()
 
 @end
 
-@implementation iBGItemCommentTableViewController
+@implementation iBGMyCollectionTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-	// load true DB comments
-	//	self.commentsOfItem = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
-	self.commentsOfItem = [NSMutableArray array];
 	
-	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	// load true DB comments
+	 self.exhData = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
+//	self.exhData = [NSMutableArray array];
+	
+	self.collectPageParentVC = (iBGCollectionPageParentViewController*)self.parentViewController.parentViewController;
 	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	self.pageParentVC.itemPageControl.currentPage = 2;
-
-	if ([self.commentsOfItem count] == 0) {
-		[self.pageParentVC.itemMenuBtn startGlowing];
-	}
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	if ([self.pageParentVC.itemMenuBtn glowView]) {
-		[self.pageParentVC.itemMenuBtn stopGlowing];
-	}
+	self.collectPageParentVC.collectionPageControl.currentPage = self.pageIndex;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,57 +43,45 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if ([self.commentsOfItem count] > 0) {
-		return [self.commentsOfItem count] + 1; // plus 1 for header cell
-	} else {
-		return 2; // for header and "no comment" cell
-	}
+	
+	// self.exhData should replace into collected item array!!
+	return [self.exhData count] + 1; // plus 1 for header cell
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	UITableViewCell *cell;
 	
+	// self.exhData should replace into collected item array!!
 	if (indexPath.row == 0) {
-		cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCommentHeader" forIndexPath:indexPath];
+		cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionExhHeader" forIndexPath:indexPath];
 	} else {
-		
-		if ([self.commentsOfItem count] > 0) {
-			cell = [tableView dequeueReusableCellWithIdentifier:@"ItemComment" forIndexPath:indexPath];
-		} else {
-			cell = [tableView dequeueReusableCellWithIdentifier:@"ItemNoComment" forIndexPath:indexPath];
-		}
-		
+		cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionItem" forIndexPath:indexPath];
 	}
 	
-    return cell;
+	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (indexPath.row == 0) {
-		return kItemCommentHeaderHeight;
+		return kItemHeaderHeight;
 	} else {
-		if ([self.commentsOfItem count] > 0) {
-			return kItemCommentCellHeight;
-		} else {
-			return self.view.frame.size.height - kItemCommentHeaderHeight;
-		}
+		return kItemCellHeight;
 	}
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
 
 /*
 // Override to support editing the table view.

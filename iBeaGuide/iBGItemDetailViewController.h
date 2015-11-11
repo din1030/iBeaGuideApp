@@ -13,7 +13,9 @@
 
 @interface iBGItemDetailViewController : UIViewController<NYTPhotosViewControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UIScrollView *itemDetailScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (nonatomic) NSArray *photos;
+@property (strong, nonatomic) IBOutlet UILabel *itemDetail;
 
 @end

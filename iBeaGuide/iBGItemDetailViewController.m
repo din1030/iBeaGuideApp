@@ -22,8 +22,19 @@ static const NSUInteger NYTViewControllerCustomMaxZoomScalePhotoIndex = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//	iBGItemPageParentViewController *pageParentVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pageContainerVC"];
-//	pageParentVC.itemPageControl.currentPage = 1;
+	
+	CGRect txtFrame = self.itemDetail.frame;
+	txtFrame.size.height = [self.itemDetail.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
+															  options: NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+														   attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemDetail.font,NSFontAttributeName, nil] context:nil].size.height;
+	self.itemDetail.frame = txtFrame;
+	CGRect contentRect = CGRectZero;
+	for (UIView *view in self.itemDetailScrollView.subviews) {
+		contentRect = CGRectUnion(contentRect, view.frame);
+	}
+	contentRect.size.height += 30;
+	self.itemDetailScrollView.contentSize = contentRect.size;
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {

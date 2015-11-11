@@ -12,6 +12,9 @@
 @interface iBGItemInfoViewController : UIViewController
 
 @property (strong, nonatomic) iBGItemPageParentViewController *pageParentVC;
-- (IBAction)clickItemMenu:(id)sender;
+@property (strong, nonatomic) IBOutlet UIScrollView *itemInfoScrollView;
+@property (strong, nonatomic) IBOutlet UITextView *itemBrief123;
+@property (strong, nonatomic) IBOutlet UILabel *itemBrief;
+
 
 @end

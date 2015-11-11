@@ -29,13 +29,11 @@
 	iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
 	iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
-
-	//	NSArray *startingItemVC= @[iBGItemInfoViewController];
 	
 	// Create page view controller
-	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItempageParentVC"];
+	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemPageVC"];
 	self.pageViewController.dataSource = self;
-	self.pageViewController.delegate = self;
+//	self.pageViewController.delegate = self;
 	
 	[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 	
@@ -56,19 +54,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Page View Controller Data Delegate
-
-- (void)pageViewController:(UIPageViewController *)pageViewController
-willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-	
-}
-
-- (void)pageViewController:(UIPageViewController *)pageViewController
-		didFinishAnimating:(BOOL)finished
-   previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers
-	   transitionCompleted:(BOOL)completed {
-	
-}
+//#pragma mark - Page View Controller Data Delegate
+//
+//- (void)pageViewController:(UIPageViewController *)pageViewController
+//willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
+//	
+//}
+//
+//- (void)pageViewController:(UIPageViewController *)pageViewController
+//		didFinishAnimating:(BOOL)finished
+//   previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers
+//	   transitionCompleted:(BOOL)completed {
+//	
+//}
 
 #pragma mark - Page View Controller Data Source
 
