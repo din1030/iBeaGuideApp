@@ -27,6 +27,7 @@
     [self.moniterAnimation setAnimationDuration: 1.5];
     //    [self.moniterAnimation setAnimationRepeatCount:20];
     [self.moniterAnimation startAnimating];
+
 	
 	// 設定 tab bar 圖案
 	UIImage *moniterImg = [[UIImage imageNamed:@"guide_1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -110,14 +111,17 @@
 	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"哈囉～"
 																			 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", exhTitle]
 																	  preferredStyle:UIAlertControllerStyleAlert];
+	
 	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
 	UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"開始" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 		[self performSegueWithIdentifier: @"MoniterExh" sender: self];
 	}];
 	[alertController addAction:cancelAction];
 	[alertController addAction:okAction];
+
 	[self presentViewController:alertController animated:YES completion:nil];
-	
+
+
 //	[manager startRangingBeaconsInRegion:beaconRegion];
 
 }
@@ -191,11 +195,16 @@
 																			 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", exhTitle]
 																	  preferredStyle:UIAlertControllerStyleAlert];
 	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-	UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"開始" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+	UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"開始吧！" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 		[self performSegueWithIdentifier: @"MoniterExh" sender: self];
 	}];
 	[alertController addAction:cancelAction];
 	[alertController addAction:okAction];
+	
+	alertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
+	alertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
+	alertController.view.layer.cornerRadius = 5;
+	
 	[self presentViewController:alertController animated:YES completion:nil];
 }
 

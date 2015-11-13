@@ -55,6 +55,7 @@
 		A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */; };
 		A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */; };
 		A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */; };
+		A6CF59A91BF4A7E40025A26C /* iBGTextInputLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */; };
 		A6D09A8C1BECC31800E50EDC /* Sanpan@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */; };
 		A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */; };
 		A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */; };
@@ -150,6 +151,8 @@
 		A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGMyCollectionTableViewController.m; sourceTree = "<group>"; };
 		A6CF59A41BEE75C10025A26C /* iBGCollectionPageParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGCollectionPageParentViewController.h; sourceTree = "<group>"; };
 		A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGCollectionPageParentViewController.m; sourceTree = "<group>"; };
+		A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGTextInputLayer.h; sourceTree = "<group>"; };
+		A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGTextInputLayer.m; sourceTree = "<group>"; };
 		A6D09A8B1BECC31800E50EDC /* Sanpan@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Sanpan@2x.jpg"; sourceTree = "<group>"; };
 		A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGNYTPhoto.h; sourceTree = "<group>"; };
 		A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGNYTPhoto.m; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				A63994411BDE4615003E1BCA /* Main.storyboard */,
 				A639943B1BDE4615003E1BCA /* AppDelegate.h */,
 				A639943C1BDE4615003E1BCA /* AppDelegate.m */,
+				A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */,
+				A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */,
 				A6CE217A1BDF6AE600249226 /* iBGMoniterViewController.h */,
 				A6CE217B1BDF6AE600249226 /* iBGMoniterViewController.m */,
 				A6CE21B41BDFD97200249226 /* iBGExhInfoViewController.h */,
@@ -573,6 +578,7 @@
 			files = (
 				A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */,
 				A6D2F6981BEA3DF600639707 /* iBGItemMaskViewController.m in Sources */,
+				A6CF59A91BF4A7E40025A26C /* iBGTextInputLayer.m in Sources */,
 				A6A7348D1BE8E64800772655 /* iBGItemCommentViewController.m in Sources */,
 				A6CE21B61BDFD97200249226 /* iBGExhInfoViewController.m in Sources */,
 				A63994461BDE4615003E1BCA /* iBeaGuide.xcdatamodeld in Sources */,

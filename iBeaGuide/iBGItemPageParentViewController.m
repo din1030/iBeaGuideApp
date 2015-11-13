@@ -23,19 +23,28 @@
 	
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-	
-	// 建立 page view 的 child VC (item 的 3 個頁面)
-	iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
-	iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
-	iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
-	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
+	[[self navigationController] setNavigationBarHidden:NO];
 	
 	// Create page view controller
 	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemPageVC"];
 	self.pageViewController.dataSource = self;
-//	self.pageViewController.delegate = self;
+	//	self.pageViewController.delegate = self;
 	
-	[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+	if ([self.callerPage isEqualToString:@"collection"]) {
+		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
+		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
+		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController];
+		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+		self.itemPageControl.numberOfPages = 2;
+	} else {
+		// 建立 page view 的 child VC (item 的 3 個頁面)
+		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
+		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
+		iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
+		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
+		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+		self.itemPageControl.numberOfPages = 3;
+	}
 	
 	// 把 page VC 塞給目前的 VC	
 	[self addChildViewController:self.pageViewController];
@@ -43,9 +52,13 @@
 	[self.pageViewController didMoveToParentViewController:self];
 	
 	// 把固定顯示的物件拉到最前面
-	[self.view bringSubviewToFront:self.itemMenuBtn];
 	[self.view bringSubviewToFront:self.itemPageControlBG];
 	[self.view bringSubviewToFront:self.itemPageControl];
+	if (![self.callerPage isEqualToString:@"collection"]) {
+		[self.view bringSubviewToFront:self.itemMenuBtn];
+	} else {
+		self.itemMenuBtn.hidden = YES;
+	}
 }
 
 

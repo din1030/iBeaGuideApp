@@ -26,11 +26,10 @@
 	self.exhInMyCollection = [NSArray arrayWithObjects:@"A", @"A", @"A", @"A", nil];
 	
 	if ([self.exhInMyCollection count] == 0) {
-		self.noRecordLabel.hidden = NO;
 		self.collectionPageControlBG.hidden = YES;
 		self.collectionPageControl.hidden = YES;
 	} else {
-
+		self.noRecordLabel.hidden = YES;
 		self.collectionPageControl.numberOfPages = [self.exhInMyCollection count];
 		// Create page view controller
 		self.collectionPageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionPageVC"];

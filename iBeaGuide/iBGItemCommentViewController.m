@@ -24,7 +24,13 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
-//	NSLog(@"self.view.frame.size.height: %f", self.view.frame.size.height);
+	CALayer *inputLayer = [[iBGTextInputLayer alloc] init];
+	inputLayer.frame = self.commentTextView.bounds;
+	[self.commentTextView.layer addSublayer:inputLayer];
+
+	CALayer *inputTitleLayer = [[iBGTextInputLayer alloc] init];
+	inputTitleLayer.frame = self.commentTitleTextField.bounds;
+	[self.commentTitleTextField.layer addSublayer:inputTitleLayer];
 	
 }
 

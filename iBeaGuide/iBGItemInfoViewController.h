@@ -12,8 +12,14 @@
 @interface iBGItemInfoViewController : UIViewController
 
 @property (strong, nonatomic) iBGItemPageParentViewController *pageParentVC;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *itemInfoScrollView;
-@property (strong, nonatomic) IBOutlet UITextView *itemBrief123;
+@property (strong, nonatomic) IBOutlet UILabel *itemTitle;
+@property (strong, nonatomic) IBOutlet UILabel *itemSubtitle;
+@property (strong, nonatomic) IBOutlet UIImageView *itemMainPic;
+//@property (strong, nonatomic) IBOutlet UITextView *itemBrief123;
+@property (strong, nonatomic) IBOutlet UILabel *itemCreator;
+
 @property (strong, nonatomic) IBOutlet UILabel *itemBrief;
 
 

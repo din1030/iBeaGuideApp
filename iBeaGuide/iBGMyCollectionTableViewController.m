@@ -21,13 +21,17 @@
     [super viewDidLoad];
 	
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 	
-	// load true DB comments
+	// load real DB comments
 	 self.exhData = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
 //	self.exhData = [NSMutableArray array];
 	
 	self.collectPageParentVC = (iBGCollectionPageParentViewController*)self.parentViewController.parentViewController;
 	
+}
+- (void)viewWillAppear:(BOOL)animated {
+	[[self navigationController] setNavigationBarHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -109,14 +113,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+//	iBGItemPageParentViewController *desVC = [segue destinationViewController];
+	[[segue destinationViewController] setValue:@"collection" forKey:@"callerPage"];
 }
-*/
+
 
 @end

@@ -23,6 +23,9 @@ static const NSUInteger NYTViewControllerCustomMaxZoomScalePhotoIndex = 5;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
+	[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
+	[self.imageButton setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"] forState:UIControlStateNormal];
+	
 	CGRect txtFrame = self.itemDetail.frame;
 	txtFrame.size.height = [self.itemDetail.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
 															  options: NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading

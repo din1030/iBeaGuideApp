@@ -17,19 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	
+	[self.itemMainPic setContentMode:UIViewContentModeScaleAspectFill];
+	[self.itemMainPic setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"]];
+	
 	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
 	[self.view bringSubviewToFront:self.pageParentVC.itemMenuBtn];
 	
 
-	CGRect txtFrame = self.itemBrief.frame;
-	
-//	self.itemBrief.frame = CGRectMake(25, 368, 270,
-//							 txtFrame.size.height =[self.itemBrief.text boundingRectWithSize:
-//													CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-//																			options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-//																		 attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height);
-//	self.itemBrief.frame = CGRectMake(25, 368, 270, txtFrame.size.height);
-	
+	CGRect txtFrame = self.itemBrief.frame;	
 	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
 															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
 														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
@@ -46,8 +42,7 @@
 		contentRect.size.height += 30;
 		self.itemInfoScrollView.contentSize = contentRect.size;
 	} else {
-		self.itemInfoScrollView.contentSize = CGSizeMake(320, 504
-);
+		self.itemInfoScrollView.contentSize = CGSizeMake(320, 504);
 	}
 
 }

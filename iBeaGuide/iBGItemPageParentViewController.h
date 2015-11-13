@@ -10,6 +10,7 @@
 
 @interface iBGItemPageParentViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
+@property NSString *callerPage;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (nonatomic) NSArray *pageviewContentVCs;
 @property (strong, nonatomic) IBOutlet UIPageControl *itemPageControl;
