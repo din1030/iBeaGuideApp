@@ -31,19 +31,18 @@
 														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
 	self.itemBrief.frame = txtFrame;
 	
+	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
 	for (UIView *view in self.itemInfoScrollView.subviews) {
-		contentRect = CGRectUnion(contentRect, view.frame);
+		// 最後的捲軸 UIImageView 固定是 568 所以不要去算他
+		if (![view isKindOfClass:[UIImageView class]]) {
+			contentRect = CGRectUnion(contentRect, view.frame);
+		}
 	}
-//	contentRect.size.height += 30;
-//	self.itemInfoScrollView.contentSize = contentRect.size;
 	
-	if (contentRect.size.height > self.itemInfoScrollView.frame.size.height) {
-		contentRect.size.height += 30;
-		self.itemInfoScrollView.contentSize = contentRect.size;
-	} else {
-		self.itemInfoScrollView.contentSize = CGSizeMake(320, 504);
-	}
+	// 增加與底部按鈕距離
+	contentRect.size.height += 10.0;
+	self.itemInfoScrollView.contentSize = contentRect.size;
 
 }
 

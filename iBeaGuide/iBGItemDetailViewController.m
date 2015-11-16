@@ -21,7 +21,6 @@ static const NSUInteger NYTViewControllerCustomMaxZoomScalePhotoIndex = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 	
 	[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
 	[self.imageButton setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"] forState:UIControlStateNormal];
@@ -31,11 +30,18 @@ static const NSUInteger NYTViewControllerCustomMaxZoomScalePhotoIndex = 5;
 															  options: NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
 														   attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemDetail.font,NSFontAttributeName, nil] context:nil].size.height;
 	self.itemDetail.frame = txtFrame;
+	
+	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
 	for (UIView *view in self.itemDetailScrollView.subviews) {
-		contentRect = CGRectUnion(contentRect, view.frame);
+		// 最後的捲軸 UIImageView 固定是 568 所以不要去算他
+		if (![view isKindOfClass:[UIImageView class]]) {
+			contentRect = CGRectUnion(contentRect, view.frame);
+		}
 	}
-	contentRect.size.height += 30;
+	
+	// 增加與底部按鈕距離
+	contentRect.size.height += 10;
 	self.itemDetailScrollView.contentSize = contentRect.size;
 	
 }

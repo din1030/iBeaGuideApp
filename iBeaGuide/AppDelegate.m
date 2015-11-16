@@ -37,6 +37,9 @@
 	[[UINavigationBar appearance] setBackIndicatorImage:backNavBtn];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backNavBtn];
 	
+	[[UIPageControl appearance] setCurrentPageIndicatorTintColor:UIColorFromRGBWithAlpha(0xE24A46, 1)];
+	[[UIPageControl appearance] setTintColor:UIColorFromRGBWithAlpha(0x333333, 1)];
+	
 	if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
 		[[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge
 																											  categories:nil]];

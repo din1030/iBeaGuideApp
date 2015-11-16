@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iBGExhPageParentViewController.h"
 
 @interface iBGExhInfoViewController : UIViewController
 
+@property (strong, nonatomic) iBGExhPageParentViewController *pageParentVC;
 @property (strong, nonatomic) NSDictionary *exhInfo;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *exhNavItem;
@@ -23,8 +25,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *exhSite;
 @property (strong, nonatomic) IBOutlet UILabel *exhDescription;
 
-@property (strong, nonatomic) IBOutlet UIButton *enterExhBtn;
 
-- (IBAction)clickStartGuide:(id)sender;
 
 @end

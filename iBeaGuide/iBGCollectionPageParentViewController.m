@@ -93,9 +93,7 @@
 	}
 	
 	// Create a new view controller and pass suitable data.
-	iBGMyCollectionTableViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionExhWIthItemList"];
-//	pageContentViewController.imageFile = self.pageImages[index];
-//	pageContentViewController.titleText = self.pageTitles[index];
+	iBGMyCollectionTableViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionExhWithItemList"];
 	pageContentViewController.pageIndex = index;
 	
 	return pageContentViewController;

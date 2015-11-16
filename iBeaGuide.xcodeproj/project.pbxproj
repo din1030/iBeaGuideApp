@@ -68,6 +68,13 @@
 		A6D2F6A11BEA494100639707 /* share_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6D2F69E1BEA494100639707 /* share_full@2x.png */; };
 		A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D58BC31BE7863C00C4AFF4 /* iBGItemInfoViewController.m */; };
 		A6D58BC71BE78EA800C4AFF4 /* iBGItemPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */; };
+		A6DB85931BF8B46B00E40EEF /* iBGCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB85921BF8B46B00E40EEF /* iBGCommentTableViewCell.m */; };
+		A6DB85961BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */; };
+		A6DB85991BF8BF7400E40EEF /* iBGSectionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */; };
+		A6EED1691BF712DA001CB88A /* iBGRouteCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */; };
+		A6EED16C1BF743C5001CB88A /* iBGRouteCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */; };
+		A6EED16E1BF7A354001CB88A /* Listen_Emotion_Direct.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6EED16D1BF7A354001CB88A /* Listen_Emotion_Direct.jpg */; };
+		A6EED1711BF89F0A001CB88A /* iBGExhPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +178,19 @@
 		A6D58BC31BE7863C00C4AFF4 /* iBGItemInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGItemInfoViewController.m; sourceTree = "<group>"; };
 		A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGItemPageParentViewController.h; sourceTree = "<group>"; };
 		A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGItemPageParentViewController.m; sourceTree = "<group>"; };
+		A6DB85911BF8B46B00E40EEF /* iBGCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGCommentTableViewCell.h; sourceTree = "<group>"; };
+		A6DB85921BF8B46B00E40EEF /* iBGCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGCommentTableViewCell.m; sourceTree = "<group>"; };
+		A6DB85941BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGCommentTableViewHeaderCell.h; sourceTree = "<group>"; };
+		A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGCommentTableViewHeaderCell.m; sourceTree = "<group>"; };
+		A6DB85971BF8BF7400E40EEF /* iBGSectionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGSectionInfoViewController.h; sourceTree = "<group>"; };
+		A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGSectionInfoViewController.m; sourceTree = "<group>"; };
+		A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGRouteCollectionViewController.h; sourceTree = "<group>"; };
+		A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGRouteCollectionViewController.m; sourceTree = "<group>"; };
+		A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGRouteCollectionViewCell.h; sourceTree = "<group>"; };
+		A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGRouteCollectionViewCell.m; sourceTree = "<group>"; };
+		A6EED16D1BF7A354001CB88A /* Listen_Emotion_Direct.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Listen_Emotion_Direct.jpg; sourceTree = "<group>"; };
+		A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGExhPageParentViewController.h; sourceTree = "<group>"; };
+		A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGExhPageParentViewController.m; sourceTree = "<group>"; };
 		FC4E395D907E39011BDB568E /* libPods-iBeaGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iBeaGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -245,8 +265,16 @@
 				A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */,
 				A6CE217A1BDF6AE600249226 /* iBGMoniterViewController.h */,
 				A6CE217B1BDF6AE600249226 /* iBGMoniterViewController.m */,
+				A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */,
+				A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */,
 				A6CE21B41BDFD97200249226 /* iBGExhInfoViewController.h */,
 				A6CE21B51BDFD97200249226 /* iBGExhInfoViewController.m */,
+				A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */,
+				A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */,
+				A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */,
+				A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */,
+				A6DB85971BF8BF7400E40EEF /* iBGSectionInfoViewController.h */,
+				A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */,
 				A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */,
 				A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */,
 				A6D2F6991BEA483500639707 /* iBGItemMenuButton.h */,
@@ -259,6 +287,10 @@
 				A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */,
 				A6D09A901BECF27500E50EDC /* iBGItemCommentTableViewController.h */,
 				A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */,
+				A6DB85941BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.h */,
+				A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */,
+				A6DB85911BF8B46B00E40EEF /* iBGCommentTableViewCell.h */,
+				A6DB85921BF8B46B00E40EEF /* iBGCommentTableViewCell.m */,
 				A6CF599E1BEDD35D0025A26C /* UIView+Glow.h */,
 				A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */,
 				A6A7348B1BE8E64800772655 /* iBGItemCommentViewController.h */,
@@ -305,6 +337,7 @@
 		A6CE217D1BDFB2BE00249226 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A6EED16D1BF7A354001CB88A /* Listen_Emotion_Direct.jpg */,
 				A6CE217E1BDFB2BE00249226 /* back@2x.png */,
 				A6CE217F1BDFB2BE00249226 /* close@2x.png */,
 				A6D2F69C1BEA494100639707 /* message_full@2x.png */,
@@ -465,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6CE219F1BDFB2BE00249226 /* fblogin@2x.png in Resources */,
+				A6EED16E1BF7A354001CB88A /* Listen_Emotion_Direct.jpg in Resources */,
 				A6CE21A01BDFB2BE00249226 /* icon-1024px@2x.png in Resources */,
 				A6CE219E1BDFB2BE00249226 /* enter@2x.png in Resources */,
 				A6CE21A21BDFB2BE00249226 /* icon-60px@2x.png in Resources */,
@@ -581,14 +615,20 @@
 				A6CF59A91BF4A7E40025A26C /* iBGTextInputLayer.m in Sources */,
 				A6A7348D1BE8E64800772655 /* iBGItemCommentViewController.m in Sources */,
 				A6CE21B61BDFD97200249226 /* iBGExhInfoViewController.m in Sources */,
+				A6DB85961BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m in Sources */,
+				A6DB85991BF8BF7400E40EEF /* iBGSectionInfoViewController.m in Sources */,
 				A63994461BDE4615003E1BCA /* iBeaGuide.xcdatamodeld in Sources */,
 				A6D58BC71BE78EA800C4AFF4 /* iBGItemPageParentViewController.m in Sources */,
 				A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */,
 				A639943D1BDE4615003E1BCA /* AppDelegate.m in Sources */,
 				A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */,
 				A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */,
+				A6EED16C1BF743C5001CB88A /* iBGRouteCollectionViewCell.m in Sources */,
+				A6DB85931BF8B46B00E40EEF /* iBGCommentTableViewCell.m in Sources */,
+				A6EED1711BF89F0A001CB88A /* iBGExhPageParentViewController.m in Sources */,
 				A639943A1BDE4615003E1BCA /* main.m in Sources */,
 				A6A7348A1BE8DBA000772655 /* iBGItemDetailViewController.m in Sources */,
+				A6EED1691BF712DA001CB88A /* iBGRouteCollectionViewController.m in Sources */,
 				A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */,
 				A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */,
 				A6D2F69B1BEA483500639707 /* iBGItemMenuButton.m in Sources */,

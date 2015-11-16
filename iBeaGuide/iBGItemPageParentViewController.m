@@ -42,6 +42,7 @@
 		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
 		iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
+		iBGItemCommentTableViewController.commentType = @"item";
 		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 		self.itemPageControl.numberOfPages = 3;
 	}

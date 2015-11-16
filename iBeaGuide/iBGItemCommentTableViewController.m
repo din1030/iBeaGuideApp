@@ -8,6 +8,8 @@
 
 #import "UIView+Glow.h"
 #import "iBGItemCommentTableViewController.h"
+#import "iBGCommentTableViewHeaderCell.h"
+#import "iBGCommentTableViewCell.h"
 
 #define kItemCommentHeaderHeight 58
 #define kItemCommentCellHeight 176
@@ -24,23 +26,33 @@
 	// load true DB comments
 	//	self.commentsOfItem = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
 	self.commentsOfItem = [NSMutableArray array];
+	if ([self.commentType isEqualToString:@"exh"]) {
+		self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
+	} else {
+		self.itemPageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	}
 	
-	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	
 	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	self.pageParentVC.itemPageControl.currentPage = 2;
-
-	if ([self.commentsOfItem count] == 0) {
-		[self.pageParentVC.itemMenuBtn startGlowing];
+	if ([self.commentType isEqualToString:@"exh"]) {
+		self.exhPageParentVC.exhPageControl.currentPage = 1;
+	} else {
+		self.itemPageParentVC.itemPageControl.currentPage = 2;
+		if ([self.commentsOfItem count] == 0) {
+			[self.itemPageParentVC.itemMenuBtn startGlowing];
+		}
 	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	if ([self.pageParentVC.itemMenuBtn glowView]) {
-		[self.pageParentVC.itemMenuBtn stopGlowing];
+	if ([self.commentType isEqualToString:@"item"]) {
+		if ([self.itemPageParentVC.itemMenuBtn glowView]) {
+			[self.itemPageParentVC.itemMenuBtn stopGlowing];
+		}
 	}
 }
 
@@ -66,21 +78,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	UITableViewCell *cell;
+//	UITableViewCell *cell;
 	
 	if (indexPath.row == 0) {
-		cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCommentHeader" forIndexPath:indexPath];
+		
+		iBGCommentTableViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCommentHeader" forIndexPath:indexPath];
+		cell.title.text = self.commentObjTitle;
+		cell.subtitle.text = self.commentObjSubtitle;
+		
+		return cell;
+		
 	} else {
 		
 		if ([self.commentsOfItem count] > 0) {
-			cell = [tableView dequeueReusableCellWithIdentifier:@"ItemComment" forIndexPath:indexPath];
+			iBGCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemComment" forIndexPath:indexPath];
+			
+			// 塞資料給 cell
+			return cell;
 		} else {
-			cell = [tableView dequeueReusableCellWithIdentifier:@"ItemNoComment" forIndexPath:indexPath];
-		}
+			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemNoComment" forIndexPath:indexPath];
 		
+			return cell;
+		}
 	}
-	
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

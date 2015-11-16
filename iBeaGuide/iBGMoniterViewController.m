@@ -177,7 +177,7 @@
 }
 
 - (IBAction)clickExhTest:(id)sender {
-	NSString *urlString = @"http://140.119.189.154/iBeaGuide/App/get_iBeacon_link_obj/B9407F30-F5F8-466E-AFF9-25556B57FE6D/29122/24107";
+	NSString *urlString = @"http://140.119.189.154/iBeaGuide/App/get_iBeacon_link_obj/B9407F30-F5F8-466E-AFF9-25556B57FE6D/1560/3897";
 	NSLog(@"%@", urlString);
 	NSURL *url = [NSURL URLWithString: urlString];
 	NSData *data = [NSData dataWithContentsOfURL:url];

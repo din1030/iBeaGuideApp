@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGItemPageParentViewController.h"
+#import "iBGExhPageParentViewController.h"
 
 @interface iBGItemCommentTableViewController : UITableViewController
 
-@property (strong, nonatomic) iBGItemPageParentViewController *pageParentVC;
+@property NSString *commentType;
+@property (strong, nonatomic) iBGItemPageParentViewController *itemPageParentVC;
+@property (strong, nonatomic) iBGExhPageParentViewController *exhPageParentVC;
+
+@property NSString *commentObjTitle;
+@property NSString *commentObjSubtitle;
+
 @property (nonatomic) NSMutableArray *commentsOfItem;
+
 
 @end
