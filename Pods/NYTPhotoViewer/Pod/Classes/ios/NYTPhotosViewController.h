@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+@class NYTPhotoViewController;
 @class NYTPhotosOverlayView;
 
 @protocol NYTPhoto;
@@ -93,6 +94,10 @@ extern NSString * const NYTPhotosViewControllerDidDismissNotification;
  *  @param photo The photo for which to display the new image.
  */
 - (void)updateImageForPhoto:(id <NYTPhoto>)photo;
+
+
+- (NYTPhotoViewController *)currentPhotoViewController;
+- (void)updateOverlayInformation;
 
 @end
 

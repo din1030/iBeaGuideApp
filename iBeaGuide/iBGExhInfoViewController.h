@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGExhPageParentViewController.h"
+#import <NYTPhotoViewer/NYTPhotosViewController.h>
+#import "iBGNYTPhoto.h"
 
-@interface iBGExhInfoViewController : UIViewController
+@interface iBGExhInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
 
 @property (strong, nonatomic) iBGExhPageParentViewController *pageParentVC;
 @property (strong, nonatomic) NSDictionary *exhInfo;
@@ -17,14 +19,13 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *exhNavItem;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *exhScrollView;
-@property (strong, nonatomic) IBOutlet UIImageView *exhMainImg;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *exhDate;
 @property (strong, nonatomic) IBOutlet UILabel *exhTime;
 @property (strong, nonatomic) IBOutlet UILabel *exhVenue;
-@property (strong, nonatomic) IBOutlet UITextView *exhSite;
+@property (strong, nonatomic) IBOutlet UILabel *exhSiteLbl;
+@property (strong, nonatomic) IBOutlet UIButton *exhSiteBtn;
 @property (strong, nonatomic) IBOutlet UILabel *exhDescription;
-
-
 
 @end

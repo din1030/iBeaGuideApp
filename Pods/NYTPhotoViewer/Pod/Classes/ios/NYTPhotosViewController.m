@@ -41,7 +41,7 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtinImageInsets = {3, 0,
 @property (nonatomic) BOOL shouldHandleLongPress;
 @property (nonatomic) BOOL overlayWasHiddenBeforeTransition;
 
-@property (nonatomic, readonly) NYTPhotoViewController *currentPhotoViewController;
+//@property (nonatomic, readonly) NYTPhotoViewController *currentPhotoViewController;
 @property (nonatomic, readonly) UIView *referenceViewForCurrentPhoto;
 @property (nonatomic, readonly) CGPoint boundsCenterPoint;
 
@@ -87,6 +87,8 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtinImageInsets = {3, 0,
     
     self.view.tintColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor blackColor];
+    
+    self.pageViewController.delegate = self;
     self.pageViewController.view.backgroundColor = [UIColor clearColor];
     
     [self addChildViewController:self.pageViewController];
@@ -107,6 +109,8 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtinImageInsets = {3, 0,
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [self viewDidLoad];
     
     if (!self.overlayWasHiddenBeforeTransition) {
         [self setOverlayViewHidden:NO animated:YES];

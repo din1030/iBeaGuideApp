@@ -8,19 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGItemPageParentViewController.h"
+#import <NYTPhotoViewer/NYTPhotosViewController.h>
+//#import <NYTPhotoViewer/NYTPhotoViewController.h>
+#import "iBGNYTPhoto.h"
 
-@interface iBGItemInfoViewController : UIViewController
+@interface iBGItemInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
 
-@property (strong, nonatomic) iBGItemPageParentViewController *pageParentVC;
+@property NYTPhotosViewController *photosViewController;
+@property NSMutableArray *itemPicArray;
+@property (nonatomic) NSArray *photos;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *itemInfoScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *itemTitle;
 @property (strong, nonatomic) IBOutlet UILabel *itemSubtitle;
-@property (strong, nonatomic) IBOutlet UIImageView *itemMainPic;
+
+@property (strong, nonatomic) IBOutlet UIButton *itemInfoPicBtn;
+
 //@property (strong, nonatomic) IBOutlet UITextView *itemBrief123;
 @property (strong, nonatomic) IBOutlet UILabel *itemCreator;
 
 @property (strong, nonatomic) IBOutlet UILabel *itemBrief;
+
 
 
 @end

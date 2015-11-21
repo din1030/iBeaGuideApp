@@ -170,12 +170,6 @@
 
 #pragma mark - Testing Btn Click Action Methods
 
-- (IBAction)clickItemTest:(id)sender {
-	
-	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
-	
-}
-
 - (IBAction)clickExhTest:(id)sender {
 	NSString *urlString = @"http://140.119.189.154/iBeaGuide/App/get_iBeacon_link_obj/B9407F30-F5F8-466E-AFF9-25556B57FE6D/1560/3897";
 	NSLog(@"%@", urlString);
@@ -206,6 +200,18 @@
 	alertController.view.layer.cornerRadius = 5;
 	
 	[self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (IBAction)clickItemTest:(id)sender {
+	
+	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
+	
+}
+
+- (IBAction)clickSectionTest:(id)sender {
+	
+	[self performSegueWithIdentifier:@"MoniterSection" sender:self];
+	
 }
 
  #pragma mark - Navigation

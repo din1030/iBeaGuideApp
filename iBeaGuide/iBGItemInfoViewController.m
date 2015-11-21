@@ -18,12 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
-	[self.itemMainPic setContentMode:UIViewContentModeScaleAspectFill];
-	[self.itemMainPic setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"]];
+	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
+	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
+	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
+	self.photosViewController.delegate = self;
 	
-	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
-	[self.view bringSubviewToFront:self.pageParentVC.itemMenuBtn];
-	
+	[[self.itemInfoPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
+	[self.itemInfoPicBtn setImage:[UIImage imageNamed:@"Sanpan.jpg"] forState:UIControlStateNormal];
 
 	CGRect txtFrame = self.itemBrief.frame;	
 	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
@@ -41,15 +42,47 @@
 	}
 	
 	// 增加與底部按鈕距離
-	contentRect.size.height += 10.0;
+	contentRect.size.height += 30.0;
 	self.itemInfoScrollView.contentSize = contentRect.size;
-
+	
+	// 在背景 load 圖片
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+		// 從 url 取得圖片
+		UIImage *image1 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
+		UIImage *image2 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
+		UIImage *image3 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
+		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
+		
+		
+		// 把圖片給 iBGNYTPhoto obj
+		for (int i = 0; i < [self.itemPicArray count]; i++) {
+			
+			iBGNYTPhoto *photo = self.photos[i];
+			photo.image = [self.itemPicArray objectAtIndex:i];
+			
+//			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:@"展品名稱" attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
+		}
+		// 回到 main queue 更新 UI (圖片)
+		dispatch_async(dispatch_get_main_queue(), ^(void){
+			
+			for (int i = 0; i < [self.itemPicArray count]; i++) {
+				NSLog(@"updateImageForPhoto");
+				iBGNYTPhoto *photo = self.photos[i];
+				photo.image = self.itemPicArray[i];
+				[self.photosViewController updateImageForPhoto:photo];
+				[self.photosViewController updateOverlayInformation];
+			}
+		});
+	});
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
-	self.pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
-	self.pageParentVC.itemPageControl.currentPage = 0;
+	iBGItemPageParentViewController *pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+	pageParentVC.itemPageControl.currentPage = 1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,15 +90,101 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)clickItemMenu:(id)sender {
+
+- (UIImage *)urlStringToImage:(NSString *)urlString {
 	
-	UIPageViewController *PVC = (UIPageViewController*)self.parentViewController;
-	[PVC setViewControllers:@[self] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+	NSURL *url =  [NSURL URLWithString: urlString];
+	NSData *data = [NSData dataWithContentsOfURL:url];
+	UIImage *image = [UIImage imageWithData:data];
 	
-	UIViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
-	[self.parentViewController addChildViewController:maskVC];
-	[self.parentViewController.view addSubview:maskVC.view];	
-	//	[self.view bringSubviewToFront:maskVC.view];
+	return image;
+}
+
+#pragma mark - NYTPhotos
+
+- (IBAction)imageButtonTapped:(id)sender {
+	
+	[self presentViewController:self.photosViewController animated:YES completion:nil];
+//	[self updateImagesOnPhotosViewController:self.photosViewController afterDelayWithPhotos:self.photos];
+}
+
+// 在設定時間還讀不到圖片就直接替換成指定圖片
+- (void)updateImagesOnPhotosViewController:(NYTPhotosViewController *)photosViewController afterDelayWithPhotos:(NSArray *)photos {
+	CGFloat updateImageDelay = 5.0f;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(updateImageDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		for (iBGNYTPhoto *photo in photos) {
+			if (!photo.image) {
+				// 替代圖片
+				photo.image = [UIImage imageNamed:@"logo.png"];
+				[photosViewController updateImageForPhoto:photo];
+			}
+		}
+	});
+}
+
+#pragma mark - NYTPhotosViewControllerDelegate
+
+- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController referenceViewForPhoto:(id <NYTPhoto>)photo {
+	return self.itemInfoPicBtn;
+}
+
+// 客製化 loading
+- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController loadingViewForPhoto:(id <NYTPhoto>)photo {
+	
+	NSLog(@"loadingViewForPhoto");
+	CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+	UIView *loadingView = [[UIView alloc] initWithFrame:frame];
+
+	UIActivityIndicatorView *loadingActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	loadingActivityIndicatorView.center = loadingView.center;
+	[loadingActivityIndicatorView startAnimating];
+	
+	UILabel *loadingLabel = [[UILabel alloc] initWithFrame:(CGRect){0, loadingView.center.y + 30, frame.size.width, 30}];
+	[loadingView addSubview:loadingActivityIndicatorView];
+	[loadingView addSubview:loadingLabel];
+	loadingLabel.textAlignment = NSTextAlignmentCenter;
+	loadingLabel.textColor = [UIColor lightGrayColor];
+	loadingLabel.text = @"讀取圖片中...";
+
+	return loadingView;
+}
+
+// 設定置底物件
+//- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController captionViewForPhoto:(id <NYTPhoto>)photo {
+//	if (YES) {
+//		UILabel *label = [[UILabel alloc] init];
+//		label.text = @"Custom Caption View";
+//		label.textColor = [UIColor whiteColor];
+//		label.backgroundColor = [UIColor redColor];
+//		return label;
+//	}
+//	
+//	return nil;
+//}
+
+// 圖片可放大倍數
+- (CGFloat)photosViewController:(NYTPhotosViewController *)photosViewController maximumZoomScaleForPhoto:(id <NYTPhoto>)photo {
+	
+	NSLog(@"maximumZoomScaleForPhoto");
+	return 5.0f;
+}
+
+// 改變 title 樣式
+//- (NSDictionary *)photosViewController:(NYTPhotosViewController *)photosViewController overlayTitleTextAttributesForPhoto:(id <NYTPhoto>)photo {
+//	
+//	return @{NSForegroundColorAttributeName: [UIColor grayColor]};
+////	return nil;
+//}
+
+- (void)photosViewController:(NYTPhotosViewController *)photosViewController didDisplayPhoto:(id <NYTPhoto>)photo {
+	NSLog(@"Did Display Photo: %@ identifier: %@", photo, @([self.photos indexOfObject:photo]).stringValue);
+}
+- (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
+	NSLog(@"Action Completed With Activity Type: %@", activityType);
+}
+
+- (void)photosViewControllerDidDismiss:(NYTPhotosViewController *)photosViewController {
+	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
 }
 
 /*
@@ -77,4 +196,5 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 @end

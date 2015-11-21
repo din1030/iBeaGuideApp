@@ -30,7 +30,19 @@
 	NSString *closeTime = [[self.exhInfo objectForKey:@"daily_close_time"] substringWithRange:NSMakeRange(0, [[self.exhInfo objectForKey:@"daily_close_time"] length]-3)];
 	self.exhTime.text = [NSString stringWithFormat:@"%@ - %@", openTime, closeTime];
 	self.exhVenue.text = [self.exhInfo objectForKey:@"venue"];
-	self.exhSite.text = [self.exhInfo objectForKey:@"web_link"];
+	
+	// 如果沒有網址就不要顯示，把說明往上拉
+	NSString *webURL = [self.exhInfo objectForKey:@"web_link"];
+	if (webURL == (id)[NSNull null] || webURL.length == 0) {
+		self.exhSiteLbl.hidden = YES;
+		self.exhSiteBtn.hidden = YES;
+		CGRect newDesframe = self.exhDescription.frame;
+		newDesframe.origin = self.exhSiteLbl.frame.origin;
+		newDesframe.origin.y += 10;
+		self.exhDescription.frame = newDesframe;
+	}
+	
+	
 	self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
 //	self.exhDescription.text = @"想說最後一場了所以提早一個小時去排隊，所以大概有站到前三分之一的位置。但 50mm 拍起來還是稍嫌有點遠，旁邊大叔的大砲都可以拍到特寫哈哈。蠻喜歡當天的燈光的，看的時候不會被強光刺眼，拍起來的感覺也還不錯～過去看 live 鼓手總是很孤獨的在最後面，也許是短期內最後的巡迴了，春佑被拉到很前面，也是難得的舞台配置。不過因為鼓組的關係也是很難同時拍到他跟其他人。總之這是一場讓人蠻滿足的表演，而且沒想到後來還在 Instagram 上遇到了當天排隊認識的朋友，緣份就是如此的奇妙哈哈～好想聽被溺愛的渴望啊！！！";
 	
@@ -67,16 +79,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+	if ([[segue identifier] isEqualToString:@"openWebView"] && !self.exhSiteBtn.hidden) {
+		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"web_link"] forKey:@"urlString"];
+	}
 }
-*/
 
+
+- (IBAction)clickExhSiteBtn:(id)sender {
+}
 
 
 @end

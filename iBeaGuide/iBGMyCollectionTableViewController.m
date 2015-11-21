@@ -32,6 +32,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
 	[[self navigationController] setNavigationBarHidden:YES];
+	// 取消選擇原本的項目
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -79,6 +81,20 @@
 	}
 }
 
+#pragma mark - Table view delegate
+
+-(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	// fix for separators bug in iOS 7
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+}
+
+
+-(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	// fix for separators bug in iOS 7
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+}
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -86,6 +102,25 @@
     return YES;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	// Remove seperator inset
+	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+		[cell setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
+	// Prevent the cell from inheriting the Table View's margin settings
+	if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+		[cell setPreservesSuperviewLayoutMargins:NO];
+	}
+	
+	// Explictly set your cell's layout margins
+	if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+		[cell setLayoutMargins:UIEdgeInsetsZero];
+	}
+}
 
 /*
 // Override to support editing the table view.

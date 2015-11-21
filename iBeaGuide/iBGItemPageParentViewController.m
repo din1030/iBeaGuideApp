@@ -43,6 +43,9 @@
 		iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
 		iBGItemCommentTableViewController.commentType = @"item";
+		iBGItemCommentTableViewController.commentObjTitle = @"觀眾留言";
+		iBGItemCommentTableViewController.commentObjSubtitle = @"歡迎您看完展覽後留下寶貴的意見！";
+		
 		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 		self.itemPageControl.numberOfPages = 3;
 	}

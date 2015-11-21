@@ -12,6 +12,14 @@
 
 - (void)awakeFromNib {
     // Initialization code
+	
+	self.starArr = @[self.star1, self.star2, self.star3, self.star4, self.star5];
+	
+	self.rate = 3;
+	for (int i = 1; i < self.rate ; i++) {
+		[self.starArr[i] setImage:[UIImage imageNamed:@"star_on.png"]];
+	}
+	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

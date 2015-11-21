@@ -10,4 +10,13 @@
 
 @interface iBGCommentTableViewCell : UITableViewCell
 
+@property NSArray *starArr;
+@property (strong, nonatomic) IBOutlet UIImageView *star1;
+@property (strong, nonatomic) IBOutlet UIImageView *star2;
+@property (strong, nonatomic) IBOutlet UIImageView *star3;
+@property (strong, nonatomic) IBOutlet UIImageView *star4;
+@property (strong, nonatomic) IBOutlet UIImageView *star5;
+
+@property NSInteger rate;
+
 @end

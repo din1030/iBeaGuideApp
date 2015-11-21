@@ -24,7 +24,8 @@
 @property (strong, nonatomic) NSDictionary *result;
 @property (nonatomic) int exhID;
 
-- (IBAction)clickItemTest:(id)sender;
 - (IBAction)clickExhTest:(id)sender;
+- (IBAction)clickItemTest:(id)sender;
+- (IBAction)clickSectionTest:(id)sender;
 
 @end

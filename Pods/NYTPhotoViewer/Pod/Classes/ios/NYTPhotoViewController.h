@@ -55,6 +55,8 @@ extern NSString * const NYTPhotoViewControllerPhotoImageUpdatedNotification;
  */
 - (instancetype)initWithPhoto:(id <NYTPhoto>)photo loadingView:(UIView *)loadingView notificationCenter:(NSNotificationCenter *)notificationCenter NS_DESIGNATED_INITIALIZER;
 
+- (void)setupLoadingView:(UIView *)loadingView;
+
 @end
 
 @protocol NYTPhotoViewControllerDelegate <NSObject>

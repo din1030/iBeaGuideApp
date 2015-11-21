@@ -24,8 +24,8 @@
     [super viewDidLoad];
     
 	// load true DB comments
-	//	self.commentsOfItem = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
-	self.commentsOfItem = [NSMutableArray array];
+	self.commentsOfItem = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
+//	self.commentsOfItem = [NSMutableArray array];
 	if ([self.commentType isEqualToString:@"exh"]) {
 		self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
 	} else {
