@@ -21,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *moniterButton;
 @property (strong, nonatomic) IBOutlet UIImageView *moniterAnimation;
 
-@property (strong, nonatomic) NSDictionary *result;
+@property (strong, nonatomic) NSDictionary *objData;
 @property (nonatomic) int exhID;
 
 - (IBAction)clickExhTest:(id)sender;

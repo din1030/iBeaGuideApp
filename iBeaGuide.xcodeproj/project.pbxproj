@@ -52,6 +52,10 @@
 		A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */; };
 		A6CF59A91BF4A7E40025A26C /* iBGTextInputLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */; };
 		A6D003F31BFD0DDE0067CEF1 /* Jade_Cabbage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D003F21BFD0DDE0067CEF1 /* Jade_Cabbage@2x.jpg */; };
+		A6D003F71C00B7930067CEF1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D003F41C00B7930067CEF1 /* FBSDKCoreKit.framework */; };
+		A6D003F81C00B7930067CEF1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D003F51C00B7930067CEF1 /* FBSDKLoginKit.framework */; };
+		A6D003F91C00B7930067CEF1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D003F61C00B7930067CEF1 /* FBSDKShareKit.framework */; };
+		A6D003FC1C00CE230067CEF1 /* iBGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D003FB1C00CE230067CEF1 /* iBGHomeViewController.m */; };
 		A6D09A8C1BECC31800E50EDC /* Sanpan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6D09A8B1BECC31800E50EDC /* Sanpan.jpg */; };
 		A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */; };
 		A6D09A921BECF27500E50EDC /* iBGItemCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */; };
@@ -153,6 +157,11 @@
 		A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGTextInputLayer.h; sourceTree = "<group>"; };
 		A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGTextInputLayer.m; sourceTree = "<group>"; };
 		A6D003F21BFD0DDE0067CEF1 /* Jade_Cabbage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Jade_Cabbage@2x.jpg"; sourceTree = "<group>"; };
+		A6D003F41C00B7930067CEF1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		A6D003F51C00B7930067CEF1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../FacebookSDKs-iOS-20151111/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		A6D003F61C00B7930067CEF1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../FacebookSDKs-iOS-20151111/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		A6D003FA1C00CE230067CEF1 /* iBGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGHomeViewController.h; sourceTree = "<group>"; };
+		A6D003FB1C00CE230067CEF1 /* iBGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGHomeViewController.m; sourceTree = "<group>"; };
 		A6D09A8B1BECC31800E50EDC /* Sanpan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sanpan.jpg; sourceTree = "<group>"; };
 		A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGNYTPhoto.h; sourceTree = "<group>"; };
 		A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGNYTPhoto.m; sourceTree = "<group>"; };
@@ -196,6 +205,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6CE21CE1BE0732C00249226 /* CoreLocation.framework in Frameworks */,
+				A6D003F71C00B7930067CEF1 /* FBSDKCoreKit.framework in Frameworks */,
+				A6D003F91C00B7930067CEF1 /* FBSDKShareKit.framework in Frameworks */,
+				A6D003F81C00B7930067CEF1 /* FBSDKLoginKit.framework in Frameworks */,
 				92E750147A3FD306D67A0B81 /* libPods-iBeaGuide.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +269,8 @@
 				A63994411BDE4615003E1BCA /* Main.storyboard */,
 				A639943B1BDE4615003E1BCA /* AppDelegate.h */,
 				A639943C1BDE4615003E1BCA /* AppDelegate.m */,
+				A6D003FA1C00CE230067CEF1 /* iBGHomeViewController.h */,
+				A6D003FB1C00CE230067CEF1 /* iBGHomeViewController.m */,
 				A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */,
 				A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */,
 				A6CE217A1BDF6AE600249226 /* iBGMoniterViewController.h */,
@@ -394,6 +408,9 @@
 		E8E2E774552B0502F26E58B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6D003F41C00B7930067CEF1 /* FBSDKCoreKit.framework */,
+				A6D003F51C00B7930067CEF1 /* FBSDKLoginKit.framework */,
+				A6D003F61C00B7930067CEF1 /* FBSDKShareKit.framework */,
 				A6CE21CD1BE0732C00249226 /* CoreLocation.framework */,
 				FC4E395D907E39011BDB568E /* libPods-iBeaGuide.a */,
 			);
@@ -628,6 +645,7 @@
 				A6D0BD9F1BF9FDFD0007C13E /* iBGWebViewController.m in Sources */,
 				A6D58BC71BE78EA800C4AFF4 /* iBGItemPageParentViewController.m in Sources */,
 				A6CF59A61BEE75C10025A26C /* iBGCollectionPageParentViewController.m in Sources */,
+				A6D003FC1C00CE230067CEF1 /* iBGHomeViewController.m in Sources */,
 				A639943D1BDE4615003E1BCA /* AppDelegate.m in Sources */,
 				A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */,
 				A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */,
@@ -774,6 +792,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "/Users/din1030/Desktop/Projects/FacebookSDKs-iOS-20151111";
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -789,6 +808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "/Users/din1030/Desktop/Projects/FacebookSDKs-iOS-20151111";
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

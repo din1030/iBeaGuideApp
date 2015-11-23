@@ -8,7 +8,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Home View Controller" id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController title="Home View Controller" id="BYZ-38-t0r" customClass="iBGHomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,6 +48,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="FBLoginBtn" destination="9TC-zK-A27" id="t4i-RZ-SO0"/>
+                        <outlet property="registerBtn" destination="7Vm-fh-wga" id="co1-QC-ZdW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
