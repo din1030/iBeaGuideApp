@@ -19,7 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	// show id
+	NSLog(@"目前展覽 ID： %@", [self.exhInfo objectForKey:@"id"]);
+	
+	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 	[[self navigationController] setNavigationBarHidden:NO];
 	
@@ -116,10 +119,10 @@
 */
 
 - (IBAction)clickStartGuide:(id)sender {
-	iBGMoniterViewController *iBGMoniterViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-	[iBGMoniterViewController setValue:[self.exhInfo objectForKey:@"id"] forKeyPath:@"exhID"];
-	//	iBGMoniterViewController.exhID = [[self.exhInfo objectForKey:@"id"] integerValue];
-	[self.navigationController popViewControllerAnimated:NO];
+	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
+	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 1];
+	[moniterVC setValue:[self.exhInfo objectForKey:@"id"] forKeyPath:@"exhID"];
+//	[self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

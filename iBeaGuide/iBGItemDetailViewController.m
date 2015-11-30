@@ -68,7 +68,7 @@
 		dispatch_async(dispatch_get_main_queue(), ^(void){
 			
 			for (int i = 0; i < [self.itemPicArray count]; i++) {
-				NSLog(@"updateImageForPhoto");
+				NSLog(@"Item Detail / update Image For Photo %d", i);
 				iBGNYTPhoto *photo = self.photos[i];
 				photo.image = self.itemPicArray[i];
 				[self.photosViewController updateImageForPhoto:photo];

@@ -76,7 +76,12 @@
 	// Tell location manager to start monitoring for the beacon region
 	[self.locationManager startMonitoringForRegion:self.myBeaconRegion];
 	//	[self.locationManager startRangingBeaconsInRegion:self.myBeaconRegion];
-//		[self.locationManager startUpdatingLocation];
+	//	[self.locationManager startUpdatingLocation];
+	
+	// testing data
+	self.exhID = 18;
+	self.routeID = 1;
+	self.routeItems = @[@17];
 	
 }
 
@@ -107,29 +112,44 @@
 	NSURL *url = [NSURL URLWithString: urlString];
 	NSError *dataError, *jsonError;
 	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
+	NSLog(@"URL: %@", urlString);
 	if (dataError) {
-		NSLog(@"URL: %@", urlString);
-		NSLog(@"Error: %@",[dataError localizedDescription]);
+		NSLog(@"dataError: %@",[dataError localizedDescription]);
 		return NO;
 	}
 	
 	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
 	if (jsonError) {
-		NSLog(@"Error: %@",[jsonError localizedDescription]);
+		NSLog(@"jsonError: %@",[jsonError localizedDescription]);
 		return NO;
 	}
 	
-	// check if obj exists
-	if (result != NULL && [result count] > 0) {
-		NSString *exhTitle = [result objectForKey:@"title"];
-		NSLog(@"已取得 %@ 資料", exhTitle);
+	// if no data then return NO
+	if (result == NULL || [result count] == 0) {
+		NSLog(@"%@", @"偵測到未連結物件之 ibeacon");
+		return NO;
+	}
+	
+	// 有資料
+	NSString *objType = [result objectForKey:@"type"];
+	self.objData = [result objectForKey:@"data"] ;
+	NSInteger objID = [[self.objData objectForKey:@"id"] integerValue];
+	NSString *objTitle = [self.objData objectForKey:@"title"];
+	
+	NSLog(@"取得資料類型： %@", objType);
+	NSLog(@"資料ID/標題： %ld/%@", objID, objTitle);
+	
+	// 判斷物件類型，展覽跳出 alert
+	if ([objType isEqualToString:@"exh"]) {
+		
+		self.exhID = [[self.objData objectForKey:@"id"] integerValue];
 		
 		// send local notification
 		[self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [result objectForKey:@"push_content"]]];
 		
 		// Show alert with action btns
 		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"哈囉～"
-																				 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", exhTitle]
+																				 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", objTitle]
 																		  preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -144,11 +164,36 @@
 		alertController.view.layer.cornerRadius = 5;
 		
 		[self presentViewController:alertController animated:YES completion:nil];
+
+	// 若類型為展品，屬於當前展覽才需顯示
+	} else if ([objType isEqualToString:@"item"] && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
 		
-	} else {
-		NSLog(@"%@", @"偵測到未連結物件之 ibeacon");
+		NSLog(@"展品 %@ 屬於展覽 %@", @(objID), @(self.exhID));
+		
+		// 未選擇路線 || 有選擇路線且屬於當前路線
+		if (self.routeID == 0 || (self.routeID != 0 && [self.routeItems count] > 0 && [self.routeItems containsObject:@(objID)])) {
+			
+			NSLog(@"展品 %@ 在路線 %@ 中", @(objID), @(self.routeID));
+			
+			NSInteger secID = [[self.objData objectForKey:@"sec_id"] integerValue];
+			// 沒有設定展區直接前往展品頁面
+			if (secID == 0) {
+				
+				NSLog(@"展品未設定展區");
+				[self performSegueWithIdentifier:@"MoniterItem" sender:self];
+				
+			// 展區編號存在則前往展區頁面
+			} else {
+				
+				NSLog(@"展品 %@ 屬於展區 %@", @(objID), @(secID));
+				[self performSegueWithIdentifier:@"MoniterSec" sender:self];
+				
+			}
+		
+		}
+		
 	}
-	self.objData = result;
+	
 	return YES;
 }
 
@@ -183,16 +228,16 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	
-	NSLog(@"%d", self.exhID);
-
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
+	
+	[self.navigationController setNavigationBarHidden:NO animated:animated];
+	NSLog(@"exhID: %ld", (long)self.exhID);
+	NSLog(@"routeID: %ld", (long)self.routeID);
 }
 
 #pragma mark - Testing Btn Click Action Methods
@@ -207,13 +252,16 @@
 
 - (IBAction)clickItemTest:(id)sender {
 	
-	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:29122 minor:24107 identifier:kBeaconIdentifier];
+	[self getBeaconLinkedObjByRegion:region];
+//	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
 	
 }
 
 - (IBAction)clickSectionTest:(id)sender {
 	
-	[self performSegueWithIdentifier:@"MoniterSection" sender:self];
+	[self performSegueWithIdentifier:@"MoniterSec" sender:self];
 	
 }
 
@@ -226,8 +274,22 @@
 	 
 	 // 抓到展覽訊號去展覽資訊頁面
 	 if ([segue.identifier isEqualToString:@"MoniterExh"]) {
+		 NSLog(@"Go exhID: %ld", (long)self.exhID);
 		 [[segue destinationViewController] setValue:self.objData forKey:@"exhInfo"];
 	 }
+
+	 // 抓到有展區的展品訊號去展區資訊頁面
+	 else if ([segue.identifier isEqualToString:@"MoniterSec"]) {
+		 NSLog(@"Go routeID: %ld, secID: %@", (long)self.routeID, [self.objData objectForKey:@"sec_id"]);
+		 [[segue destinationViewController] setValue:self.objData forKey:@"prepareItemInfo"];
+	 }
+	 
+	 // 抓到沒有展區的展品訊號去展品資訊頁面
+	 else if ([segue.identifier isEqualToString:@"MoniterItem"]) {
+		 NSLog(@"Go itemID: %@", [self.objData objectForKey:@"id"]);
+		 [[segue destinationViewController] setValue:self.objData forKey:@"itemInfo"];
+	 }
+
  }
 
 

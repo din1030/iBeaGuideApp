@@ -7,6 +7,7 @@
 //
 
 #import "iBGRouteCollectionViewController.h"
+#import "iBGMoniterViewController.h"
 
 @interface iBGRouteCollectionViewController ()
 
@@ -51,6 +52,17 @@ static NSString * const reuseIdentifier = @"RouteCell";
 }
 */
 
+
+
+- (IBAction)clickRouteCheckBtn:(UIButton *)sender {
+	
+	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
+	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 2];
+	moniterVC.routeID = sender.tag;
+	[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:ownIndex - 2] animated:YES];
+	
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -70,14 +82,14 @@ static NSString * const reuseIdentifier = @"RouteCell";
 	CALayer *inputLayer = [[iBGTextInputLayer alloc] init];
 	inputLayer.frame = cell.bounds;
 	[cell.layer addSublayer:inputLayer];
-//	[cell.layer replaceSublayer:cell.layer.sublayers.firstObject with:inputLayer];
 	
-	cell.routeTitle.text = @"精選路線";
+	cell.routeID = indexPath.row;
+	cell.routeCheckBtn.tag = cell.routeID;
+	cell.routeTitle.text = [NSString stringWithFormat:@"精選路線 %ld", (long)cell.routeID];
 	[cell.routeMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
 	cell.routeDescription.text = @"精選路線說明";
-	
-	
-   return cell;
+
+	return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>

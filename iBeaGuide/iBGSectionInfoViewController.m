@@ -18,7 +18,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	
+	// show id
+	NSLog(@"目前展區 ID： %@", [self.prepareItemInfo objectForKey:@"sec_id"]);
+	NSLog(@"即將顯示展品 ID： %@", [self.prepareItemInfo objectForKey:@"id"]);
+	
+	self.secTitle.text = @"";
+	self.secDes.text = @"";
+	
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
@@ -51,8 +58,7 @@
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:@"https://placeimg.com/640/480/people"];
 		UIImage *image2 = [self urlStringToImage:@"https://placeimg.com/640/480/people"];
-		UIImage *image3 = [self urlStringToImage:@"https://placeimg.com/640/480/people"];
-		self.secPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
+		self.secPicArray = [NSMutableArray arrayWithObjects:image1, image2, nil];
 		
 		
 		// 把圖片給 iBGNYTPhoto obj
@@ -69,7 +75,7 @@
 		dispatch_async(dispatch_get_main_queue(), ^(void){
 			
 			for (int i = 0; i < [self.secPicArray count]; i++) {
-				NSLog(@"updateImageForPhoto");
+				NSLog(@"Section Info / update Image For Photo %d", i);
 				iBGNYTPhoto *photo = self.photos[i];
 				photo.image = self.secPicArray[i];
 				[self.photosViewController updateImageForPhoto:photo];
@@ -212,14 +218,16 @@
 	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+	if ([[segue identifier] isEqualToString:@"SecToItem"]) {
+		[[segue destinationViewController] setValue:self.prepareItemInfo forKey:@"itemInfo"];
+	}
 }
-*/
 
 @end

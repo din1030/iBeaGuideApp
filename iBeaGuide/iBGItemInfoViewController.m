@@ -69,7 +69,7 @@
 		dispatch_async(dispatch_get_main_queue(), ^(void){
 			
 			for (int i = 0; i < [self.itemPicArray count]; i++) {
-				NSLog(@"updateImageForPhoto");
+				NSLog(@"Item Info / update Image For Photo %d", i);
 				iBGNYTPhoto *photo = self.photos[i];
 				photo.image = self.itemPicArray[i];
 				[self.photosViewController updateImageForPhoto:photo];
@@ -82,7 +82,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	// 控制 page control 到對應位置
 	iBGItemPageParentViewController *pageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
-	pageParentVC.itemPageControl.currentPage = 1;
+	pageParentVC.itemPageControl.currentPage = 0;
 }
 
 - (void)didReceiveMemoryWarning {

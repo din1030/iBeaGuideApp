@@ -12,6 +12,8 @@
 
 @interface iBGSectionInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
 
+@property (strong, nonatomic) NSDictionary *prepareItemInfo;
+
 @property NYTPhotosViewController *photosViewController;
 @property NSMutableArray *secPicArray;
 @property (nonatomic) NSArray *photos;

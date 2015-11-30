@@ -15,4 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *routeDescription;
 @property (strong, nonatomic) IBOutlet UIButton *routeCheckBtn;
 
+@property NSInteger routeID;
+
 @end

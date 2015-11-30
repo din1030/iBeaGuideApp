@@ -22,7 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *moniterAnimation;
 
 @property (strong, nonatomic) NSDictionary *objData;
-@property (nonatomic) int exhID;
+@property (nonatomic) NSInteger exhID;
+@property (nonatomic) NSInteger routeID;
+@property (nonatomic) NSArray *routeItems;
 
 - (IBAction)clickExhTest:(id)sender;
 - (IBAction)clickItemTest:(id)sender;

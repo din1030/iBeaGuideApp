@@ -271,50 +271,20 @@
 				A639943C1BDE4615003E1BCA /* AppDelegate.m */,
 				A6D003FA1C00CE230067CEF1 /* iBGHomeViewController.h */,
 				A6D003FB1C00CE230067CEF1 /* iBGHomeViewController.m */,
-				A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */,
-				A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */,
 				A6CE217A1BDF6AE600249226 /* iBGMoniterViewController.h */,
 				A6CE217B1BDF6AE600249226 /* iBGMoniterViewController.m */,
-				A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */,
-				A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */,
-				A6CE21B41BDFD97200249226 /* iBGExhInfoViewController.h */,
-				A6CE21B51BDFD97200249226 /* iBGExhInfoViewController.m */,
-				A6D0BD9D1BF9FDFD0007C13E /* iBGWebViewController.h */,
-				A6D0BD9E1BF9FDFD0007C13E /* iBGWebViewController.m */,
-				A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */,
-				A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */,
-				A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */,
-				A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */,
-				A6DB85971BF8BF7400E40EEF /* iBGSectionInfoViewController.h */,
-				A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */,
-				A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */,
-				A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */,
-				A6D2F6991BEA483500639707 /* iBGItemMenuButton.h */,
-				A6D2F69A1BEA483500639707 /* iBGItemMenuButton.m */,
-				A6D58BC21BE7863C00C4AFF4 /* iBGItemInfoViewController.h */,
-				A6D58BC31BE7863C00C4AFF4 /* iBGItemInfoViewController.m */,
-				A6A734881BE8DBA000772655 /* iBGItemDetailViewController.h */,
-				A6A734891BE8DBA000772655 /* iBGItemDetailViewController.m */,
 				A6D09A8D1BECC95900E50EDC /* iBGNYTPhoto.h */,
 				A6D09A8E1BECC95900E50EDC /* iBGNYTPhoto.m */,
-				A6D09A901BECF27500E50EDC /* iBGItemCommentTableViewController.h */,
-				A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */,
-				A6DB85941BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.h */,
-				A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */,
-				A6DB85911BF8B46B00E40EEF /* iBGCommentTableViewCell.h */,
-				A6DB85921BF8B46B00E40EEF /* iBGCommentTableViewCell.m */,
+				A6EF62B61C08411D001E8ED2 /* Exh */,
+				A6EF62B71C08412B001E8ED2 /* Route */,
+				A6EF62BB1C084188001E8ED2 /* Section */,
+				A6EF62B81C08413A001E8ED2 /* Item */,
+				A6EF62BA1C084176001E8ED2 /* MyCollection */,
+				A6EF62B91C08414D001E8ED2 /* Comment */,
+				A6CF59A71BF4A7E40025A26C /* iBGTextInputLayer.h */,
+				A6CF59A81BF4A7E40025A26C /* iBGTextInputLayer.m */,
 				A6CF599E1BEDD35D0025A26C /* UIView+Glow.h */,
 				A6CF599F1BEDD35D0025A26C /* UIView+Glow.m */,
-				A6A7348B1BE8E64800772655 /* iBGItemCommentViewController.h */,
-				A6A7348C1BE8E64800772655 /* iBGItemCommentViewController.m */,
-				A6D2F6961BEA3DF600639707 /* iBGItemMaskViewController.h */,
-				A6D2F6971BEA3DF600639707 /* iBGItemMaskViewController.m */,
-				A6CF59A41BEE75C10025A26C /* iBGCollectionPageParentViewController.h */,
-				A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */,
-				A6CF59A11BEE02920025A26C /* iBGMyCollectionTableViewController.h */,
-				A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */,
-				A6D0C7221BFB4DE200D8EC7E /* iBGMyCollectionTableViewCell.h */,
-				A6D0C7231BFB4DE200D8EC7E /* iBGMyCollectionTableViewCell.m */,
 			);
 			path = iBeaGuide;
 			sourceTree = "<group>";
@@ -403,6 +373,84 @@
 				A6D003F21BFD0DDE0067CEF1 /* Jade_Cabbage@2x.jpg */,
 			);
 			name = Sample;
+			sourceTree = "<group>";
+		};
+		A6EF62B61C08411D001E8ED2 /* Exh */ = {
+			isa = PBXGroup;
+			children = (
+				A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */,
+				A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */,
+				A6CE21B41BDFD97200249226 /* iBGExhInfoViewController.h */,
+				A6CE21B51BDFD97200249226 /* iBGExhInfoViewController.m */,
+				A6D0BD9D1BF9FDFD0007C13E /* iBGWebViewController.h */,
+				A6D0BD9E1BF9FDFD0007C13E /* iBGWebViewController.m */,
+			);
+			name = Exh;
+			sourceTree = "<group>";
+		};
+		A6EF62B71C08412B001E8ED2 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */,
+				A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */,
+				A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */,
+				A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */,
+			);
+			name = Route;
+			sourceTree = "<group>";
+		};
+		A6EF62B81C08413A001E8ED2 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */,
+				A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */,
+				A6D2F6991BEA483500639707 /* iBGItemMenuButton.h */,
+				A6D2F69A1BEA483500639707 /* iBGItemMenuButton.m */,
+				A6D58BC21BE7863C00C4AFF4 /* iBGItemInfoViewController.h */,
+				A6D58BC31BE7863C00C4AFF4 /* iBGItemInfoViewController.m */,
+				A6A734881BE8DBA000772655 /* iBGItemDetailViewController.h */,
+				A6A734891BE8DBA000772655 /* iBGItemDetailViewController.m */,
+				A6D2F6961BEA3DF600639707 /* iBGItemMaskViewController.h */,
+				A6D2F6971BEA3DF600639707 /* iBGItemMaskViewController.m */,
+			);
+			name = Item;
+			sourceTree = "<group>";
+		};
+		A6EF62B91C08414D001E8ED2 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				A6A7348B1BE8E64800772655 /* iBGItemCommentViewController.h */,
+				A6A7348C1BE8E64800772655 /* iBGItemCommentViewController.m */,
+				A6D09A901BECF27500E50EDC /* iBGItemCommentTableViewController.h */,
+				A6D09A911BECF27500E50EDC /* iBGItemCommentTableViewController.m */,
+				A6DB85941BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.h */,
+				A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */,
+				A6DB85911BF8B46B00E40EEF /* iBGCommentTableViewCell.h */,
+				A6DB85921BF8B46B00E40EEF /* iBGCommentTableViewCell.m */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		A6EF62BA1C084176001E8ED2 /* MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				A6CF59A41BEE75C10025A26C /* iBGCollectionPageParentViewController.h */,
+				A6CF59A51BEE75C10025A26C /* iBGCollectionPageParentViewController.m */,
+				A6CF59A11BEE02920025A26C /* iBGMyCollectionTableViewController.h */,
+				A6CF59A21BEE02920025A26C /* iBGMyCollectionTableViewController.m */,
+				A6D0C7221BFB4DE200D8EC7E /* iBGMyCollectionTableViewCell.h */,
+				A6D0C7231BFB4DE200D8EC7E /* iBGMyCollectionTableViewCell.m */,
+			);
+			name = MyCollection;
+			sourceTree = "<group>";
+		};
+		A6EF62BB1C084188001E8ED2 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				A6DB85971BF8BF7400E40EEF /* iBGSectionInfoViewController.h */,
+				A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */,
+			);
+			name = Section;
 			sourceTree = "<group>";
 		};
 		E8E2E774552B0502F26E58B5 /* Frameworks */ = {

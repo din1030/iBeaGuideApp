@@ -19,7 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	
+	// show id
+	NSLog(@"目前展品 ID： %@", [self.itemInfo objectForKey:@"id"]);
 	
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;

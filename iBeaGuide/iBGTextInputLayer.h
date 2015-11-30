@@ -16,8 +16,4 @@
 
 @interface iBGTextInputLayer : CALayer
 
-//@property (nonatomic, assign) CGFloat   radius;
-//@property  CGFloat borderWidth;
-//@property (nonatomic, assign) CGFloat   cornerRadius;
-
 @end
