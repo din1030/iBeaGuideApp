@@ -10,6 +10,8 @@
 
 @interface iBGItemMaskViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *itemInfo;
+
 @property (strong, nonatomic) IBOutlet UIView *itemMaskView;
 @property (strong, nonatomic) IBOutlet UIButton *msgBtn;
 @property (strong, nonatomic) IBOutlet UIButton *addBtn;

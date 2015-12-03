@@ -21,7 +21,7 @@
     [super viewDidLoad];
 	// show id
 	NSLog(@"目前展覽 ID： %@", [self.exhInfo objectForKey:@"id"]);
-	
+    
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 	[[self navigationController] setNavigationBarHidden:NO];
@@ -49,18 +49,16 @@
 	[self.pageViewController didMoveToParentViewController:self];
 	
 	// 把固定顯示的物件拉到最前面
-//	[self.view bringSubviewToFront:self.itemPageControlBG];
 	[self.view bringSubviewToFront:self.enterExhBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	
+    // 設定 nav bar item，標題下面放 page control
 	self.exhPageControl = [[UIPageControl alloc] init];
 	self.exhPageControl.frame = (CGRect){0, 25, 320, 20};
 	self.exhPageControl.numberOfPages = 2;
 	self.exhPageControl.currentPage = 0;
-	//	self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-	//	self.pageControl.pageIndicatorTintColor = [UIColor greenColor];
 	
 	self.navTitleLabel = [[UILabel alloc] initWithFrame:(CGRect){0, -5, 320, 40}];
 	self.navTitleLabel.textColor = [UIColor whiteColor];
@@ -68,7 +66,6 @@
 	self.navTitleLabel.textAlignment = NSTextAlignmentCenter;
 	self.navTitleLabel.text = [self.exhInfo objectForKey:@"title"];
 	
-	//	self.navbarView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 320, 64}];
 	[self.navigationController.navigationBar addSubview:self.navTitleLabel];
 	[self.navigationController.navigationBar addSubview:self.exhPageControl];
 }
@@ -122,6 +119,8 @@
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
 	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 1];
 	[moniterVC setValue:[self.exhInfo objectForKey:@"id"] forKeyPath:@"exhID"];
+	[moniterVC setValue:[self.exhInfo objectForKey:@"title"] forKeyPath:@"exhTitle"];
+	[moniterVC setValue:moniterVC.objData forKeyPath:@"exhInfo"];
 //	[self.navigationController popViewControllerAnimated:NO];
 }
 

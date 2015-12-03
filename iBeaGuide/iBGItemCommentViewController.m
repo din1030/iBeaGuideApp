@@ -28,9 +28,9 @@
 	inputLayer.frame = self.commentTextView.bounds;
 	[self.commentTextView.layer addSublayer:inputLayer];
 
-	CALayer *inputTitleLayer = [[iBGTextInputLayer alloc] init];
-	inputTitleLayer.frame = self.commentTitleTextField.bounds;
-	[self.commentTitleTextField.layer addSublayer:inputTitleLayer];
+//	CALayer *inputTitleLayer = [[iBGTextInputLayer alloc] init];
+//	inputTitleLayer.frame = self.commentTitleTextField.bounds;
+//	[self.commentTitleTextField.layer addSublayer:inputTitleLayer];
 	
 }
 
@@ -64,6 +64,46 @@
 
 - (void)dismissKB {
 	[self.view endEditing:YES];
+}
+
+- (IBAction)clickSendComment:(id)sender {
+	
+	NSArray *commentObjArray = [NSArray arrayWithObjects: @"1", @"17", @"exh", @"3", self.commentTextView.text, nil];
+	NSArray *commentKeyArray = [NSArray arrayWithObjects: @"user_id", @"obj_id", @"type", @"rate", @"content", nil];
+	
+	NSDictionary *comment = [NSDictionary dictionaryWithObjects:commentObjArray forKeys:commentKeyArray];
+	
+	[self sendCommentData:comment url:@"http://114.34.1.57/iBeaGuide/App/post_comment_action"];
+
+}
+
+- (void)sendCommentData:(NSDictionary *)commentData url:(NSString *)urlString {
+
+	
+//	NSMutableString *postString = [NSMutableString stringWithString:urlString];
+//	
+//	[postString appendString:@"?ibg=111"];
+//	for (NSString *key in commentData) {
+//		[postString appendString:[NSString stringWithFormat:@"&%@=%@", key, [commentData objectForKey:key]]];
+//	}
+//	NSLog(@"%@", postString);
+	
+//	[postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	
+	NSError *error;
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:commentData
+													   options:0 // Pass 0 if you don't care about the readability of the generated string
+														 error:&error];
+	
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody:jsonData];
+	
+//	NSURLConnection *postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+	
+	//轉換為NSData傳送
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 }
 
 /*

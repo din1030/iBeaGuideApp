@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGItemPageParentViewController.h"
-#import <NYTPhotoViewer/NYTPhotosViewController.h>
-//#import <NYTPhotoViewer/NYTPhotoViewController.h>
+#import "NYTPhotosViewController.h"
 #import "iBGNYTPhoto.h"
 
 @interface iBGItemInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
@@ -17,6 +16,7 @@
 @property NYTPhotosViewController *photosViewController;
 @property NSMutableArray *itemPicArray;
 @property (nonatomic) NSArray *photos;
+@property NSDictionary *itemInfo;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *itemInfoScrollView;
 

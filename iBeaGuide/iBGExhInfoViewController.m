@@ -8,6 +8,7 @@
 
 #import "iBGExhInfoViewController.h"
 #import "iBGMoniterViewController.h"
+#import "UILabel+AutoHeight.h"
 
 @interface iBGExhInfoViewController ()
 
@@ -19,7 +20,6 @@
     [super viewDidLoad];
 	
 	// 取出展覽資料 assign 給對應的 label
-//	self.exhNavItem.title = [self.exhInfo objectForKey:@"title"];
 	// 如果展期只有一天只需顯示單一日期
 	if ([self.exhInfo objectForKey:@"start_date"] == [self.exhInfo objectForKey:@"end_date"]) {
 		self.exhDate.text = [NSString stringWithFormat:@"%@", [self.exhInfo objectForKey:@"start_date"]];
@@ -43,14 +43,8 @@
 		newDesframe.origin.y += 10;
 		self.exhDescription.frame = newDesframe;
 	}
-	
-	// 判斷說明文字的高度
-	CGRect txtFrame = self.exhDescription.frame;
-	txtFrame.size.height = [self.exhDescription.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-																  options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-															   attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.exhDescription.font,NSFontAttributeName, nil]
-																  context:nil].size.height;
-	self.exhDescription.frame = txtFrame;
+
+    [self.exhDescription autoHeight];
 	
 	// 取scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;

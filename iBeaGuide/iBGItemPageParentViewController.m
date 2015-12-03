@@ -10,6 +10,7 @@
 #import "iBGItemInfoViewController.h"
 #import "iBGItemDetailViewController.h"
 #import "iBGItemCommentTableViewController.h"
+#import "iBGItemMaskViewController.h"
 
 @interface iBGItemPageParentViewController ()
 
@@ -22,6 +23,7 @@
 	
 	// show id
 	NSLog(@"目前展品 ID： %@", [self.itemInfo objectForKey:@"id"]);
+//    self.navigationItem.title = @"";
 	
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -33,15 +35,22 @@
 	//	self.pageViewController.delegate = self;
 	
 	if ([self.callerPage isEqualToString:@"collection"]) {
+		
 		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
+		iBGItemInfoViewController.itemInfo = self.itemInfo;
 		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
+		iBGItemDetailViewController.itemInfo = self.itemInfo;
 		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController];
 		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 		self.itemPageControl.numberOfPages = 2;
+		
 	} else {
+		
 		// 建立 page view 的 child VC (item 的 3 個頁面)
 		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
+		iBGItemInfoViewController.itemInfo = self.itemInfo;
 		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
+		iBGItemDetailViewController.itemInfo = self.itemInfo;
 		iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
 		iBGItemCommentTableViewController.commentType = @"item";
@@ -50,6 +59,7 @@
 		
 		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 		self.itemPageControl.numberOfPages = 3;
+	
 	}
 	
 	// 把 page VC 塞給目前的 VC	
@@ -136,7 +146,8 @@
 
 - (IBAction)clickMenu:(id)sender {
 	
-	UIViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
+	iBGItemMaskViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
+	maskVC.itemInfo = self.itemInfo;
 	[self addChildViewController:maskVC];
 	[self.view addSubview:maskVC.view];
 	

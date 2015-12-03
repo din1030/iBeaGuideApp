@@ -7,6 +7,7 @@
 //
 
 #import "iBGItemInfoViewController.h"
+#import "UILabel+AutoHeight.h"
 
 @interface iBGItemInfoViewController ()
 
@@ -16,8 +17,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+	// 將資料傳給 label
+	self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
+	self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
+	self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
+    self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
+	self.itemBrief.translatesAutoresizingMaskIntoConstraints = NO;
 	
+    // 客製欄位動態判斷
+    NSArray *basicField = [self.itemInfo objectForKey:@"basic_field"];
+	NSArray *customFieldName = [NSArray arrayWithObjects:self.fieldName1, self.fieldName2, self.fieldName3, nil];
+	NSArray *customFieldValue = [NSArray arrayWithObjects:self.fieldValue1, self.fieldValue2, self.fieldValue3, nil];
+	for (int i = 0; i < [customFieldName count]; i++) {
+        // 有欄位資料就顯示，並動態調整高度
+        if (i < [basicField count]) {
+            
+            NSDictionary *tempField = basicField[i];
+            UILabel *currentNameLabel = (UILabel *)customFieldName[i];
+            UILabel *currentValueLabel = (UILabel *)customFieldValue[i];
+            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
+            currentValueLabel.text = [tempField objectForKey:@"field_value"];
+            [currentValueLabel autoHeight];
+			
+//			NSLayoutConstraint *nvConstraint = [NSLayoutConstraint constraintWithItem:currentValueLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:currentNameLabel attribute:NSLayoutAttributeRight multiplier:1.0 constant:5];
+//			[self.view addConstraints:@[nvConstraint]];
+			
+			if (i > 0) {
+				currentValueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+				currentNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+				
+//				UILabel *preNameLabel = (UILabel *)customFieldName[i-1];
+				UILabel *preValueLabel = (UILabel *)customFieldValue[i-1];
+                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 9, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
+                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
+                
+                currentValueLabel.frame = currentValueLabelNewFrame;
+                currentNameLabel.frame = currentNameLabelNewFrame;
+				
+//				NSLayoutConstraint *nConstraint = [NSLayoutConstraint constraintWithItem:currentNameLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:preNameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+//
+//				NSLayoutConstraint *nameTopConstraint = [NSLayoutConstraint constraintWithItem:currentNameLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:preValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
+//				NSLayoutConstraint *valueTopConstraint = [NSLayoutConstraint constraintWithItem:currentValueLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:preValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
+//				[self.view addConstraints:@[nConstraint, nameTopConstraint, valueTopConstraint]];
+            }
+			
+//			NSLayoutConstraint *briefLeftConstraint = [NSLayoutConstraint constraintWithItem:self.itemBrief attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:currentNameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+//			NSLayoutConstraint *briefTopConstraint = [NSLayoutConstraint constraintWithItem:self.itemBrief attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:currentValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
+//			[self.view addConstraints:@[briefLeftConstraint, briefTopConstraint]];
+			
+//            CGRect briefFrame = (CGRect){self.itemBrief.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
+//            self.itemBrief.frame = briefFrame;
+        // 沒有欄位資料隱藏 label
+        } else {
+            ((UILabel *)customFieldName[i]).hidden = YES;
+            ((UILabel *)customFieldValue[i]).hidden = YES;
+        }
+	}
+    [self.itemBrief autoHeight];
+    
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
@@ -26,11 +84,13 @@
 	[[self.itemInfoPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
 	[self.itemInfoPicBtn setImage:[UIImage imageNamed:@"Sanpan.jpg"] forState:UIControlStateNormal];
 
-	CGRect txtFrame = self.itemBrief.frame;	
-	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
-														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
-	self.itemBrief.frame = txtFrame;
+	
+	
+//	CGRect txtFrame = self.itemBrief.frame;	
+//	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
+//															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
+//														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
+//	self.itemBrief.frame = txtFrame;
 	
 	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
@@ -49,9 +109,9 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
-		UIImage *image2 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
-		UIImage *image3 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
+		UIImage *image1 = [self urlStringToImage:@"http://imgs.ntdtv.com/pic/2015/11-24/p7159475a688505343.jpg"];
+		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
+		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1.jpg"];
 		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
 		
 		
@@ -62,11 +122,11 @@
 			photo.image = [self.itemPicArray objectAtIndex:i];
 			
 //			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:@"展品名稱" attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
-			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
+			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+//			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
-		dispatch_async(dispatch_get_main_queue(), ^(void){
+		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			for (int i = 0; i < [self.itemPicArray count]; i++) {
 				NSLog(@"Item Info / update Image For Photo %d", i);
@@ -91,13 +151,14 @@
 }
 
 
+
 - (UIImage *)urlStringToImage:(NSString *)urlString {
 	
 	NSURL *url =  [NSURL URLWithString: urlString];
 	NSData *data = [NSData dataWithContentsOfURL:url];
-	UIImage *image = [UIImage imageWithData:data];
+	UIImage *urlImage = [UIImage imageWithData:data];
 	
-	return image;
+	return urlImage;
 }
 
 #pragma mark - NYTPhotos
@@ -165,7 +226,6 @@
 // 圖片可放大倍數
 - (CGFloat)photosViewController:(NYTPhotosViewController *)photosViewController maximumZoomScaleForPhoto:(id <NYTPhoto>)photo {
 	
-	NSLog(@"maximumZoomScaleForPhoto");
 	return 5.0f;
 }
 
@@ -176,9 +236,10 @@
 ////	return nil;
 //}
 
-- (void)photosViewController:(NYTPhotosViewController *)photosViewController didDisplayPhoto:(id <NYTPhoto>)photo {
-	NSLog(@"Did Display Photo: %@ identifier: %@", photo, @([self.photos indexOfObject:photo]).stringValue);
+- (void)photosViewController:(NYTPhotosViewController *)photosViewController didNavigateToPhoto:(id <NYTPhoto>)photo atIndex:(NSUInteger)photoIndex {
+	NSLog(@"Did Navigate To Photo: %@ identifier: %lu", photo, (unsigned long)photoIndex);
 }
+
 - (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
 	NSLog(@"Action Completed With Activity Type: %@", activityType);
 }

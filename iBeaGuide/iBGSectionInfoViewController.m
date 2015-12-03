@@ -22,9 +22,9 @@
 	// show id
 	NSLog(@"目前展區 ID： %@", [self.prepareItemInfo objectForKey:@"sec_id"]);
 	NSLog(@"即將顯示展品 ID： %@", [self.prepareItemInfo objectForKey:@"id"]);
-	
-	self.secTitle.text = @"";
-	self.secDes.text = @"";
+	NSDictionary *secInfo = [self.prepareItemInfo objectForKey:@"sec_info"];
+	self.secTitle.text = [secInfo objectForKey:@"title"];
+	self.secDes.text = [secInfo objectForKey:@"description"];
 	
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
@@ -56,8 +56,8 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"https://placeimg.com/640/480/people"];
-		UIImage *image2 = [self urlStringToImage:@"https://placeimg.com/640/480/people"];
+		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
+		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
 		self.secPicArray = [NSMutableArray arrayWithObjects:image1, image2, nil];
 		
 		
@@ -68,7 +68,7 @@
 			photo.image = [self.secPicArray objectAtIndex:i];
 			
 			//			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:@"展品名稱" attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.secTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
@@ -120,6 +120,12 @@
 		[self performSegueWithIdentifier:@"SecToItem" sender:self];
 		self.countDownLabel.text = [@(self.secondsLeft) stringValue];
 	}
+}
+
+- (IBAction)clickEnterBtn:(id)sender {
+
+    [self performSegueWithIdentifier:@"SecToItem" sender:self];
+
 }
 
 - (UIImage *)urlStringToImage:(NSString *)urlString {
@@ -207,9 +213,10 @@
 ////	return nil;
 //}
 
-- (void)photosViewController:(NYTPhotosViewController *)photosViewController didDisplayPhoto:(id <NYTPhoto>)photo {
-	NSLog(@"Did Display Photo: %@ identifier: %@", photo, @([self.photos indexOfObject:photo]).stringValue);
+- (void)photosViewController:(NYTPhotosViewController *)photosViewController didNavigateToPhoto:(id <NYTPhoto>)photo atIndex:(NSUInteger)photoIndex {
+	NSLog(@"Did Navigate To Photo: %@ identifier: %lu", photo, (unsigned long)photoIndex);
 }
+
 - (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
 	NSLog(@"Action Completed With Activity Type: %@", activityType);
 }
@@ -217,7 +224,6 @@
 - (void)photosViewControllerDidDismiss:(NYTPhotosViewController *)photosViewController {
 	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
 }
-
 
 #pragma mark - Navigation
 

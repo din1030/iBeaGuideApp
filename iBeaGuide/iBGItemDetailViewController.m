@@ -7,6 +7,8 @@
 //
 
 #import "iBGItemDetailViewController.h"
+#import "UILabel+AutoHeight.h"
+
 
 @interface iBGItemDetailViewController ()
 
@@ -16,7 +18,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+    // 將資料傳給 label
+    self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
+    self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
+    self.itemDetail.text = [self.itemInfo objectForKey:@"description"];
+    
+    // 客製欄位動態判斷
+    NSArray *detailField = [self.itemInfo objectForKey:@"detail_field"];
+    NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
+    NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
+    for (int i = 0; i < [customDetailFieldName count]; i++) {
+        // 有欄位資料就顯示，並動態調整高度
+        if (i < [detailField count]) {
+            
+            NSDictionary *tempField = detailField[i];
+            UILabel *currentNameLabel = (UILabel *)customDetailFieldName[i];
+            UILabel *currentValueLabel = (UILabel *)customDetailFieldValue[i];
+            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
+            currentValueLabel.text = [tempField objectForKey:@"field_value"];
+            [currentValueLabel autoHeight];
+            
+            if (i > 0) {
+                UILabel *preValueLabel =(UILabel *)customDetailFieldValue[i-1];
+                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 9, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
+                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
+                
+                currentValueLabel.frame = currentValueLabelNewFrame;
+                currentNameLabel.frame = currentNameLabelNewFrame;
+            }
+            CGRect detailFrame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+            self.itemDetail.frame = detailFrame;
+            // 沒有欄位資料隱藏 label
+        } else {
+            ((UILabel *)customDetailFieldName[i]).hidden = YES;
+            ((UILabel *)customDetailFieldValue[i]).hidden = YES;
+        }
+    }
+    [self.itemDetail autoHeight];
+    
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
@@ -24,12 +63,6 @@
 	
 	[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
 	[self.imageButton setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"] forState:UIControlStateNormal];
-	
-	CGRect txtFrame = self.itemDetail.frame;
-	txtFrame.size.height = [self.itemDetail.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-															  options: NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-														   attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemDetail.font,NSFontAttributeName, nil] context:nil].size.height;
-	self.itemDetail.frame = txtFrame;
 	
 	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
@@ -48,9 +81,9 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
-		UIImage *image2 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
-		UIImage *image3 = [self urlStringToImage:@"https://placeimg.com/640/480/animals"];
+		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
+		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
+		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1.jpg"];
 		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
 		
 		
@@ -172,8 +205,8 @@
 //	return nil;
 //}
 
-- (void)photosViewController:(NYTPhotosViewController *)photosViewController didDisplayPhoto:(id <NYTPhoto>)photo {
-	NSLog(@"Did Display Photo: %@ identifier: %@", photo, @([self.photos indexOfObject:photo]).stringValue);
+- (void)photosViewController:(NYTPhotosViewController *)photosViewController didNavigateToPhoto:(id <NYTPhoto>)photo atIndex:(NSUInteger)photoIndex {
+	NSLog(@"Did Navigate To Photo: %@ identifier: %lu", photo, (unsigned long)photoIndex);
 }
 
 - (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {

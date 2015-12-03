@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <NYTPhotoViewer/NYTPhoto.h>
+#import "NYTPhoto.h"
 
 @interface iBGNYTPhoto : NSObject <NYTPhoto>
 

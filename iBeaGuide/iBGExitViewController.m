@@ -1,48 +1,33 @@
 //
-//  iBGItemMaskViewController.m
+//  iBGExitViewController.m
 //  iBeaGuide
 //
-//  Created by din1030 on 2015/11/4.
+//  Created by din1030 on 2015/12/2.
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import "iBGItemMaskViewController.h"
+#import "iBGExitViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface iBGItemMaskViewController ()
+@interface iBGExitViewController ()
 
 @end
 
-@implementation iBGItemMaskViewController
+@implementation iBGExitViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.tapMaskView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
-	[self.itemMaskView addGestureRecognizer:self.tapMaskView];
-	
-	[self.shareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-
     // Do any additional setup after loading the view.
-	
 }
 
-- (void)removeMaskView {
-	
-	// 先 disable 按鈕然後讓 mask view fade out + remove
-	self.msgBtn.enabled = false;
-	self.addBtn.enabled = false;
-	self.shareBtn.enabled = false;
-	[UIView animateWithDuration:0.5f animations:^{
-		[self.view setAlpha:0.0f];
-	} completion:^(BOOL completion){
-		[self.view removeFromSuperview];
-	}];
-	//	[self removeFromParentViewController];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-- (void)share {
+- (IBAction)clickShareBtn:(id)sender {
 	if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
 		[self doShareOGACtion];
 	} else {
@@ -62,35 +47,33 @@
 }
 
 -(void)doShareOGACtion {
-	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
+	NSLog(@"exhID: %@", [self.exhInfo objectForKey:@"id"]);
+	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
-								 @"og:type": @"chengchiating:exhibit",
-								 @"og:title": [self.itemInfo objectForKey:@"title"],
-								 @"og:description": [self.itemInfo objectForKey:@"brief"],
+								 @"og:type": @"chengchiating:exhibition",
+								 @"og:title": [self.exhInfo objectForKey:@"title"],
+								 @"og:description": [self.exhInfo objectForKey:@"description"],
 								 @"og:url": @"http://www.dct.nccu.edu.tw/master/",
-								 @"og:image": @[photo]
+								 @"og:image": @[photo],
+								 @"chengchiating:dates": [NSString stringWithFormat:@"%@ - %@", [self.exhInfo objectForKey:@"start_date"], [self.exhInfo objectForKey:@"end_date"]],
+								 @"chengchiating:venue": [NSString stringWithFormat:@"%@", [self.exhInfo objectForKey:@"venue"]]
 								 };
 	FBSDKShareOpenGraphObject *object = [FBSDKShareOpenGraphObject objectWithProperties:properties];
 	FBSDKShareAPI *shareAPI = [[FBSDKShareAPI alloc] init];
 	[shareAPI createOpenGraphObject:object];
 	FBSDKShareOpenGraphAction *action = [[FBSDKShareOpenGraphAction alloc] init];
-	action.actionType = @"chengchiating:view";
-	[action setObject:object forKey:@"exhibit"];
+	action.actionType = @"chengchiating:visited";
+	[action setObject:object forKey:@"exhibition"];
 	FBSDKShareOpenGraphContent *ogcontent = [[FBSDKShareOpenGraphContent alloc] init];
 	ogcontent.action = action;
-	ogcontent.previewPropertyName = @"exhibit";
+	ogcontent.previewPropertyName = @"exhibition";
 	shareAPI.shareContent = ogcontent;
 	[shareAPI share];
 	
 	[FBSDKShareDialog showFromViewController:self
 								 withContent:ogcontent
 									delegate:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*
@@ -102,14 +85,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)clickMenuOptionBtn:(id)sender {
-	if (sender == self.msgBtn) {
-		[self.parentViewController performSegueWithIdentifier:@"itemComment" sender:self];
-	} else if (sender == self.addBtn) {
-		[self.parentViewController performSegueWithIdentifier:@"itemComment" sender:self];
-	}
-	
-}
 
 @end

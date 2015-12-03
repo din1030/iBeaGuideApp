@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGItemPageParentViewController.h"
-#import <NYTPhotoViewer/NYTPhotosViewController.h>
+#import "NYTPhotosViewController.h"
 #import "iBGNYTPhoto.h"
 
 @interface iBGItemDetailViewController : UIViewController<NYTPhotosViewControllerDelegate>
@@ -19,6 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (nonatomic) NSArray *photos;
 @property NSMutableArray *itemPicArray;
+@property NSDictionary *itemInfo;
+
+// item info ui outlets
+@property (strong, nonatomic) IBOutlet UILabel *itemTitle;
+@property (strong, nonatomic) IBOutlet UILabel *itemSubtitle;
 
 @property (strong, nonatomic) IBOutlet UILabel *detailFieldName1;
 @property (strong, nonatomic) IBOutlet UILabel *detailFieldValue1;

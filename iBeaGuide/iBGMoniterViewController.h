@@ -13,6 +13,7 @@
 				green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 				 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 				alpha:a]
+
 @interface iBGMoniterViewController : UIViewController <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLBeaconRegion *myBeaconRegion;
@@ -23,11 +24,15 @@
 
 @property (strong, nonatomic) NSDictionary *objData;
 @property (nonatomic) NSInteger exhID;
+@property (nonatomic) NSString *exhTitle;
+@property (strong, nonatomic) NSDictionary *exhInfo;
+@property (nonatomic) NSMutableArray *visitedSec;
 @property (nonatomic) NSInteger routeID;
 @property (nonatomic) NSArray *routeItems;
 
 - (IBAction)clickExhTest:(id)sender;
 - (IBAction)clickItemTest:(id)sender;
 - (IBAction)clickSectionTest:(id)sender;
+- (IBAction)clickExitTest:(id)sender;
 
 @end

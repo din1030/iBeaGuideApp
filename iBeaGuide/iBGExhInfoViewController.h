@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iBGExhPageParentViewController.h"
-#import <NYTPhotoViewer/NYTPhotosViewController.h>
+#import "NYTPhotosViewController.h"
 #import "iBGNYTPhoto.h"
 
 @interface iBGExhInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>

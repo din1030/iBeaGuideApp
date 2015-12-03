@@ -18,19 +18,21 @@
 @implementation iBGMoniterViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+	
+	self.visitedSec = [[NSMutableArray alloc] init];
 	
 	// 設定偵測動畫
-    NSMutableArray *animationImg = [NSMutableArray arrayWithObjects:
-                                    [UIImage imageNamed:@"detect_1.png"],
-                                    [UIImage imageNamed:@"detect_2.png"],
-                                    [UIImage imageNamed:@"detect_3.png"], nil];
-    [self.moniterAnimation setAnimationImages: animationImg];
-    [self.moniterAnimation setAnimationDuration: 1.5];
-    //    [self.moniterAnimation setAnimationRepeatCount:20];
-    [self.moniterAnimation startAnimating];
-
+	NSMutableArray *animationImg = [NSMutableArray arrayWithObjects:
+									[UIImage imageNamed:@"detect_1.png"],
+									[UIImage imageNamed:@"detect_2.png"],
+									[UIImage imageNamed:@"detect_3.png"], nil];
+	[self.moniterAnimation setAnimationImages: animationImg];
+	[self.moniterAnimation setAnimationDuration: 1.5];
+	//    [self.moniterAnimation setAnimationRepeatCount:20];
+	[self.moniterAnimation startAnimating];
+	
 	
 	// 設定 tab bar 圖案
 	UIImage *moniterImg = [[UIImage imageNamed:@"guide_1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -79,15 +81,15 @@
 	//	[self.locationManager startUpdatingLocation];
 	
 	// testing data
-	self.exhID = 18;
-	self.routeID = 1;
-	self.routeItems = @[@17];
+	self.exhID = 1;
+//	self.routeID = 1;
+//	self.routeItems = @[@17];
 	
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
 
 #pragma mark - location
@@ -99,8 +101,8 @@
 	// get obj data linked to the region
 	[self getBeaconLinkedObjByRegion:region];
 	
-//	[manager startRangingBeaconsInRegion:beaconRegion];
-
+	//	[manager startRangingBeaconsInRegion:beaconRegion];
+	
 }
 
 
@@ -137,16 +139,17 @@
 	NSString *objTitle = [self.objData objectForKey:@"title"];
 	
 	NSLog(@"取得資料類型： %@", objType);
-	NSLog(@"資料ID/標題： %ld/%@", objID, objTitle);
+	NSLog(@"資料ID/標題： %@/%@", @(objID), objTitle);
 	
 	// 判斷物件類型，展覽跳出 alert
 	if ([objType isEqualToString:@"exh"]) {
 		
-		self.exhID = [[self.objData objectForKey:@"id"] integerValue];
+//		self.exhID = [[self.objData objectForKey:@"id"] integerValue];
 		
-		// send local notification
-		[self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [result objectForKey:@"push_content"]]];
-		
+		// 如果 app 在背景用推播通知 user
+		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+			[self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [self.objData objectForKey:@"push_content"]]];
+		}
 		// Show alert with action btns
 		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"哈囉～"
 																				 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", objTitle]
@@ -164,9 +167,15 @@
 		alertController.view.layer.cornerRadius = 5;
 		
 		[self presentViewController:alertController animated:YES completion:nil];
-
-	// 若類型為展品，屬於當前展覽才需顯示
+		
+		// 若類型為展品，屬於當前展覽才需顯示
 	} else if ([objType isEqualToString:@"item"] && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
+		
+
+        // 如果 app 在背景用推播通知 user
+        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+            [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [self.objData objectForKey:@"push_content"]]];
+        }
 		
 		NSLog(@"展品 %@ 屬於展覽 %@", @(objID), @(self.exhID));
 		
@@ -174,22 +183,23 @@
 		if (self.routeID == 0 || (self.routeID != 0 && [self.routeItems count] > 0 && [self.routeItems containsObject:@(objID)])) {
 			
 			NSLog(@"展品 %@ 在路線 %@ 中", @(objID), @(self.routeID));
-			
-			NSInteger secID = [[self.objData objectForKey:@"sec_id"] integerValue];
+			id sec_id = [self.objData objectForKey:@"sec_id"];
+			NSInteger secID = ([sec_id isEqual:[NSNull null]]) ? 0 : [sec_id integerValue];
 			// 沒有設定展區直接前往展品頁面
-			if (secID == 0) {
+			if (secID == 0 || [self.visitedSec containsObject:@(secID)]) {
 				
-				NSLog(@"展品未設定展區");
+				NSLog(@"展品未設定展區或已顯示過展區資訊");
 				[self performSegueWithIdentifier:@"MoniterItem" sender:self];
 				
-			// 展區編號存在則前往展區頁面
+				// 展區編號存在則前往展區頁面
 			} else {
 				
 				NSLog(@"展品 %@ 屬於展區 %@", @(objID), @(secID));
+				[self.visitedSec addObject:@(secID)];
 				[self performSegueWithIdentifier:@"MoniterSec" sender:self];
 				
 			}
-		
+			
 		}
 		
 	}
@@ -228,12 +238,12 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+	[super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+	[super viewWillDisappear:animated];
 	
 	[self.navigationController setNavigationBarHidden:NO animated:animated];
 	NSLog(@"exhID: %ld", (long)self.exhID);
@@ -255,7 +265,7 @@
 	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
 	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:29122 minor:24107 identifier:kBeaconIdentifier];
 	[self getBeaconLinkedObjByRegion:region];
-//	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
+	//	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
 	
 }
 
@@ -265,32 +275,44 @@
 	
 }
 
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
-	 
-	 // 抓到展覽訊號去展覽資訊頁面
-	 if ([segue.identifier isEqualToString:@"MoniterExh"]) {
-		 NSLog(@"Go exhID: %ld", (long)self.exhID);
-		 [[segue destinationViewController] setValue:self.objData forKey:@"exhInfo"];
-	 }
+- (IBAction)clickExitTest:(id)sender {
+	
+	[self performSegueWithIdentifier:@"MoniterExit" sender:self];
+	
+}
 
-	 // 抓到有展區的展品訊號去展區資訊頁面
-	 else if ([segue.identifier isEqualToString:@"MoniterSec"]) {
-		 NSLog(@"Go routeID: %ld, secID: %@", (long)self.routeID, [self.objData objectForKey:@"sec_id"]);
-		 [[segue destinationViewController] setValue:self.objData forKey:@"prepareItemInfo"];
-	 }
-	 
-	 // 抓到沒有展區的展品訊號去展品資訊頁面
-	 else if ([segue.identifier isEqualToString:@"MoniterItem"]) {
-		 NSLog(@"Go itemID: %@", [self.objData objectForKey:@"id"]);
-		 [[segue destinationViewController] setValue:self.objData forKey:@"itemInfo"];
-	 }
+#pragma mark - Navigation
 
- }
-
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	// Get the new view controller using [segue destinationViewController].
+	// Pass the selected object to the new view controller.
+	
+	// 抓到展覽訊號去展覽資訊頁面
+	if ([segue.identifier isEqualToString:@"MoniterExh"]) {
+		NSLog(@"Go exhID: %ld", (long)self.exhID);
+		[[segue destinationViewController] setValue:self.objData forKey:@"exhInfo"];
+	
+	}
+	
+	// 出口訊號去出口頁面
+	else if ([segue.identifier isEqualToString:@"MoniterExit"]) {
+		NSLog(@"Exit for : %ld", (long)self.exhID);
+		[[segue destinationViewController] setValue:self.exhInfo forKey:@"exhInfo"];
+	}
+	
+	// 抓到有展區的展品訊號去展區資訊頁面
+	else if ([segue.identifier isEqualToString:@"MoniterSec"]) {
+		NSLog(@"Go routeID: %ld, secID: %@", (long)self.routeID, [self.objData objectForKey:@"sec_id"]);
+		[[segue destinationViewController] setValue:self.objData forKey:@"prepareItemInfo"];	}
+	
+	// 抓到沒有展區的展品訊號去展品資訊頁面
+	else if ([segue.identifier isEqualToString:@"MoniterItem"]) {
+		NSLog(@"Go itemID: %@", [self.objData objectForKey:@"id"]);
+		[segue destinationViewController].navigationItem.title = self.exhTitle;
+		[[segue destinationViewController] setValue:self.objData forKey:@"itemInfo"];
+	}
+	
+}
 
 @end

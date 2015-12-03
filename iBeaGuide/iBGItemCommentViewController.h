@@ -11,9 +11,13 @@
 
 @interface iBGItemCommentViewController : UIViewController
 
+@property NSString *type;
+@property NSInteger *objID;
+
+
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapDismissKB;
 @property (strong, nonatomic) IBOutlet UIScrollView *commentScrollView;
-@property (strong, nonatomic) IBOutlet UITextField *commentTitleTextField;
+//@property (strong, nonatomic) IBOutlet UITextField *commentTitleTextField;
 @property (strong, nonatomic) IBOutlet UITextView *commentTextView;
 
 @end

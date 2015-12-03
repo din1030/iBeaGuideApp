@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <NYTPhotoViewer/NYTPhotosViewController.h>
+#import "NYTPhotosViewController.h"
+
 #import "iBGNYTPhoto.h"
 
 @interface iBGSectionInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
