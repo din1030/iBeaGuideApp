@@ -10,4 +10,7 @@
 
 @interface iBGMyCollectionTableViewCell : UITableViewCell
 
+@property NSDictionary *itemInfo;
+@property (strong, nonatomic) IBOutlet UILabel *itemTitle;
+
 @end

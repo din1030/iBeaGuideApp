@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
-    <entity name="Exhibitions" syncable="YES"/>
+    <entity name="Exhibition" syncable="YES">
+        <attribute name="dates" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="venue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasExhibits" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="belongsExh" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Field" syncable="YES">
+        <attribute name="field_name" attributeType="String" syncable="YES"/>
+        <attribute name="field_value" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="item_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" attributeType="String" syncable="YES"/>
+        <relationship name="belongsItem" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="hasFields" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Item" syncable="YES">
+        <attribute name="creator" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exh_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemBrief" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="belongsExh" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exhibition" inverseName="hasExhibits" inverseEntity="Exhibition" syncable="YES"/>
+        <relationship name="hasFields" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Field" inverseName="belongsItem" inverseEntity="Field" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Exhibitions" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="Field" positionX="151" positionY="198" width="128" height="133"/>
+        <element name="Exhibition" positionX="259" positionY="-18" width="128" height="163"/>
     </elements>
 </model>

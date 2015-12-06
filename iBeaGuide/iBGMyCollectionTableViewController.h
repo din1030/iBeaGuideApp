@@ -14,6 +14,6 @@
 @property (strong, nonatomic) iBGCollectionPageParentViewController *collectPageParentVC;
 
 @property NSUInteger pageIndex;
-@property (nonatomic) NSMutableArray *exhData;
+@property (nonatomic) NSArray *itemData;
 
 @end

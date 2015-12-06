@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "iBGTextInputLayer.h"
 
-@interface iBGItemCommentViewController : UIViewController
+@interface iBGCommentViewController : UIViewController
 
 @property NSString *type;
-@property NSInteger *objID;
+@property NSString *objID;
+@property int rate;
 
+@property NSArray *starArr;
+@property (strong, nonatomic) IBOutlet UIButton *star1;
+@property (strong, nonatomic) IBOutlet UIButton *star2;
+@property (strong, nonatomic) IBOutlet UIButton *star3;
+@property (strong, nonatomic) IBOutlet UIButton *star4;
+@property (strong, nonatomic) IBOutlet UIButton *star5;
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapDismissKB;
 @property (strong, nonatomic) IBOutlet UIScrollView *commentScrollView;

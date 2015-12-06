@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "iBGCollectionPageParentViewController.h"
 #import "iBGMyCollectionTableViewController.h"
 
@@ -22,13 +23,17 @@
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 	
-	self.exhInMyCollection = [NSArray array];
-	self.exhInMyCollection = [NSArray arrayWithObjects:@"A", @"A", @"A", @"A", nil];
 	
-	if ([self.exhInMyCollection count] == 0) {
+	
+//	self.exhInMyCollection = [NSArray array];
+	self.exhInMyCollection = [self getCollectionData];
+	
+	if ([self.exhInMyCollection count] < 2) {
 		self.collectionPageControlBG.hidden = YES;
 		self.collectionPageControl.hidden = YES;
-	} else {
+	}
+	
+	if ([self.exhInMyCollection count] > 0) {
 		self.noRecordLabel.hidden = YES;
 		self.collectionPageControl.numberOfPages = [self.exhInMyCollection count];
 		// Create page view controller
@@ -57,6 +62,34 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(NSArray *)getCollectionData {
+	
+	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	NSManagedObjectContext *context = [appDelegate managedObjectContext];
+	// 取出指定 entity
+	NSEntityDescription *itemEntity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:appDelegate.managedObjectContext];
+	
+//	NSPredicate *predicate;
+//	predicate = [NSPredicate predicateWithFormat:@"creationDate > %@", date];
+	
+//	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:NO];
+//	NSArray *sortDescriptors = [NSArray arrayWithObject: sort];
+	
+	NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+	[fetch setEntity:itemEntity];
+//	[fetch setPredicate: predicate];
+//	[fetch setSortDescriptors: sortDescriptors];
+	NSError *fetchError;
+	NSArray *results = [context executeFetchRequest:fetch error:&fetchError];
+	
+	if (fetchError) {
+		NSLog(@"fetchError: %@",[fetchError localizedDescription]);
+		return Nil;
+	}
+	
+	return results;
 }
 
 #pragma mark - Page View Controller Data Source
@@ -93,10 +126,11 @@
 	}
 	
 	// Create a new view controller and pass suitable data.
-	iBGMyCollectionTableViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionExhWithItemList"];
-	pageContentViewController.pageIndex = index;
+	iBGMyCollectionTableViewController *iBGMyCollectionTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionExhWithItemList"];
+	iBGMyCollectionTableViewController.pageIndex = index;
+	iBGMyCollectionTableViewController.itemData = self.exhInMyCollection;
 	
-	return pageContentViewController;
+	return iBGMyCollectionTableViewController;
 }
 
 /*

@@ -81,7 +81,7 @@
 	//	[self.locationManager startUpdatingLocation];
 	
 	// testing data
-	self.exhID = 1;
+	self.exhID = 18;
 //	self.routeID = 1;
 //	self.routeItems = @[@17];
 	

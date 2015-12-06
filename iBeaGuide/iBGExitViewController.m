@@ -76,14 +76,19 @@
 									delegate:nil];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	
+	// 去留言頁面
+	if ([segue.identifier isEqualToString:@"CommentExh"]) {
+		[segue destinationViewController].navigationItem.title = [self.exhInfo objectForKey:@"title"];
+		[[segue destinationViewController] setValue:@"exh" forKey:@"type"];
+		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"id"] forKey:@"objID"];
+	}
 }
-*/
+
 
 @end

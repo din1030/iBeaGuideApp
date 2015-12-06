@@ -7,6 +7,7 @@
 //
 
 #import "iBGMyCollectionTableViewController.h"
+#import "iBGMyCollectionTableViewCell.h"
 
 #define kItemHeaderHeight 250
 #define kItemCellHeight 60
@@ -24,7 +25,7 @@
 
 	
 	// load real DB comments
-	 self.exhData = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
+//	 self.exhData = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
 //	self.exhData = [NSMutableArray array];
 	
 	self.collectPageParentVC = (iBGCollectionPageParentViewController*)self.parentViewController.parentViewController;
@@ -55,21 +56,25 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 	// self.exhData should replace into collected item array!!
-	return [self.exhData count] + 1; // plus 1 for header cell
+	return [self.itemData count] + 1; // plus 1 for header cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	UITableViewCell *cell;
-	
+
 	// self.exhData should replace into collected item array!!
 	if (indexPath.row == 0) {
+		
+		UITableViewCell *cell;
 		cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionExhHeader" forIndexPath:indexPath];
+		
+		return cell;
 	} else {
-		cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionItem" forIndexPath:indexPath];
+		
+		iBGMyCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionItem" forIndexPath:indexPath];
+		cell.itemTitle.text = [[self.itemData objectAtIndex:indexPath.row - 1] valueForKey:@"title"];
+		
+		return cell;
 	}
-	
-	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

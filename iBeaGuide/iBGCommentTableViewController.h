@@ -1,5 +1,5 @@
 //
-//  iBGItemCommentTableViewController.h
+//  iBGCommentTableViewController.h
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/6.
@@ -10,16 +10,20 @@
 #import "iBGItemPageParentViewController.h"
 #import "iBGExhPageParentViewController.h"
 
-@interface iBGItemCommentTableViewController : UITableViewController
+@interface iBGCommentTableViewController : UITableViewController
+
 
 @property NSString *commentType;
+@property NSString *commentObjID;
+
 @property (strong, nonatomic) iBGItemPageParentViewController *itemPageParentVC;
 @property (strong, nonatomic) iBGExhPageParentViewController *exhPageParentVC;
 
 @property NSString *commentObjTitle;
 @property NSString *commentObjSubtitle;
 
-@property (nonatomic) NSMutableArray *commentsOfItem;
+@property (nonatomic) NSArray *commentArray;
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

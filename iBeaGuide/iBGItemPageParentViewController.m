@@ -9,7 +9,7 @@
 #import "iBGItemPageParentViewController.h"
 #import "iBGItemInfoViewController.h"
 #import "iBGItemDetailViewController.h"
-#import "iBGItemCommentTableViewController.h"
+#import "iBGCommentTableViewController.h"
 #import "iBGItemMaskViewController.h"
 
 @interface iBGItemPageParentViewController ()
@@ -51,11 +51,16 @@
 		iBGItemInfoViewController.itemInfo = self.itemInfo;
 		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
 		iBGItemDetailViewController.itemInfo = self.itemInfo;
-		iBGItemCommentTableViewController *iBGItemCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
-		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGItemCommentTableViewController];
-		iBGItemCommentTableViewController.commentType = @"item";
-		iBGItemCommentTableViewController.commentObjTitle = @"觀眾留言";
-		iBGItemCommentTableViewController.commentObjSubtitle = @"歡迎您看完展覽後留下寶貴的意見！";
+		iBGCommentTableViewController *iBGCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
+		iBGCommentTableViewController.commentType = @"item";
+		iBGCommentTableViewController.commentObjID = [self.itemInfo objectForKey:@"id"];
+		iBGCommentTableViewController.commentObjTitle = [self.itemInfo objectForKey:@"title"];
+		iBGCommentTableViewController.commentObjSubtitle = [self.itemInfo objectForKey:@"subtitle"];
+		
+		NSLog(@"%@ %@", [self.itemInfo objectForKey:@"title"], [self.itemInfo objectForKey:@"subtitle"]);
+		
+		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGCommentTableViewController];
+
 		
 		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 		self.itemPageControl.numberOfPages = 3;
@@ -134,16 +139,6 @@
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)clickMenu:(id)sender {
 	
 	iBGItemMaskViewController *maskVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemMaskVC"];
@@ -152,4 +147,16 @@
 	[self.view addSubview:maskVC.view];
 	
 }
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	
+	// 去留言頁面
+	if ([segue.identifier isEqualToString:@"ItemComment"]) {
+//		[segue destinationViewController].navigationItem.title = [self.itemInfo objectForKey:@"title"];
+		[[segue destinationViewController] setValue:@"item" forKey:@"type"];
+		[[segue destinationViewController] setValue:[self.itemInfo objectForKey:@"id"] forKey:@"objID"];
+	}
+}
+
 @end

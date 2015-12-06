@@ -17,6 +17,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *addBtn;
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapMaskView;
-- (IBAction)clickMenuOptionBtn:(id)sender;
 
 @end

@@ -16,17 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//	self.webView.hidden = YES;
-//	self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	
-//	CGRect newDesframe = self.activityIndicator.frame;
-////	newDesframe.origin = self.exhSiteLbl.frame.origin;
-//	newDesframe.size = CGSizeMake(40, 40);
-//	self.activityIndicator.frame = newDesframe;
-//	self.activityIndicator.center = self.webView.center;
-//	[self.view addSubview:self.activityIndicator];
-////	[self.activityIndicator startAnimating];
-//	[self.view bringSubviewToFront:self.activityIndicator];
 	
 	self.webView.delegate = self;
 	self.firstRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]];

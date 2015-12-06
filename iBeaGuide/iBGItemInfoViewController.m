@@ -23,7 +23,7 @@
 	self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
 	self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
     self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
-	self.itemBrief.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.itemBrief.translatesAutoresizingMaskIntoConstraints = NO;
 	
     // 客製欄位動態判斷
     NSArray *basicField = [self.itemInfo objectForKey:@"basic_field"];
@@ -44,8 +44,8 @@
 //			[self.view addConstraints:@[nvConstraint]];
 			
 			if (i > 0) {
-				currentValueLabel.translatesAutoresizingMaskIntoConstraints = NO;
-				currentNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//				currentValueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//				currentNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
 				
 //				UILabel *preNameLabel = (UILabel *)customFieldName[i-1];
 				UILabel *preValueLabel = (UILabel *)customFieldValue[i-1];

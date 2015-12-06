@@ -28,7 +28,7 @@
 	
 	[self.registerBtn
 	 addTarget:self
-	 action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+	 action:@selector(loginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {

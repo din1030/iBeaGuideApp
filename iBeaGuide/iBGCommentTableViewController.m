@@ -1,5 +1,5 @@
 //
-//  iBGItemCommentTableViewController.m
+//  iBGCommentTableViewController.m
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/6.
@@ -7,44 +7,52 @@
 //
 
 #import "UIView+Glow.h"
-#import "iBGItemCommentTableViewController.h"
+#import "iBGCommentTableViewController.h"
 #import "iBGCommentTableViewHeaderCell.h"
 #import "iBGCommentTableViewCell.h"
+#import "UILabel+AutoHeight.h"
 
+#import "UITableView+FDTemplateLayoutCell.h"
+
+#define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 #define kItemCommentHeaderHeight 58
 #define kItemCommentCellHeight 176
 
-@interface iBGItemCommentTableViewController ()
+@interface iBGCommentTableViewController ()
+
+@property iBGCommentTableViewCell *hCell;
 
 @end
 
-@implementation iBGItemCommentTableViewController
+@implementation iBGCommentTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
+//	self.tableView.fd_debugLogEnabled = YES;
+
 	// load true DB comments
-	self.commentsOfItem = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
-//	self.commentsOfItem = [NSMutableArray array];
+	self.commentArray = [self getCommentData];
+	
 	if ([self.commentType isEqualToString:@"exh"]) {
 		self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
 	} else {
 		self.itemPageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
 	}
 	
-	
-	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+//	[self.tableView reloadData];
 	// 控制 page control 到對應位置
 	if ([self.commentType isEqualToString:@"exh"]) {
 		self.exhPageParentVC.exhPageControl.currentPage = 1;
 	} else {
 		self.itemPageParentVC.itemPageControl.currentPage = 2;
-		if ([self.commentsOfItem count] == 0) {
+		// 展品沒有留言的話閃爍按鈕
+		// if ([self.commentArray count] == 0) {
 			[self.itemPageParentVC.itemMenuBtn startGlowing];
-		}
+		// }
 	}
 }
 
@@ -61,6 +69,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSArray *)getCommentData{
+	
+	NSString *urlString = [NSString stringWithFormat:@"%@/get_comment_data/%@/%@", kWebAPIRoot, self.commentType, self.commentObjID];
+	NSURL *url = [NSURL URLWithString: urlString];
+	NSError *dataError, *jsonError;
+	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
+	NSLog(@"URL: %@", urlString);
+	if (dataError) {
+		NSLog(@"dataError: %@",[dataError localizedDescription]);
+		return nil;
+	}
+	
+	NSArray *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+	if (jsonError) {
+		NSLog(@"jsonError: %@",[jsonError localizedDescription]);
+		return nil;
+	}
+	
+	return result;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -68,8 +96,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if ([self.commentsOfItem count] > 0) {
-		return [self.commentsOfItem count] + 1; // plus 1 for header cell
+	if ([self.commentArray count] > 0) {
+		return [self.commentArray count] + 1; // plus 1 for header cell
 	} else {
 		return 2; // for header and "no comment" cell
 	}
@@ -78,22 +106,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-//	UITableViewCell *cell;
-	
 	if (indexPath.row == 0) {
 		
 		iBGCommentTableViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCommentHeader" forIndexPath:indexPath];
 		cell.title.text = self.commentObjTitle;
 		cell.subtitle.text = self.commentObjSubtitle;
-		
 		return cell;
 		
 	} else {
 		
-		if ([self.commentsOfItem count] > 0) {
+		if ([self.commentArray count] > 0) {
 			iBGCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemComment" forIndexPath:indexPath];
 			
 			// 塞資料給 cell
+			NSDictionary *commentData = self.commentArray[indexPath.row - 1];
+			cell.username.text = [commentData objectForKey:@"first_name"];
+			cell.rate = [commentData objectForKey:@"rate"];
+			cell.date.text = [commentData objectForKey:@"created"];
+			cell.commentContent.text = [commentData objectForKey:@"content"];
+			[cell.commentContent autoHeight];
+			
 			return cell;
 		} else {
 			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemNoComment" forIndexPath:indexPath];
@@ -108,9 +140,21 @@
 	if (indexPath.row == 0) {
 		return kItemCommentHeaderHeight;
 	} else {
-		if ([self.commentsOfItem count] > 0) {
-			return kItemCommentCellHeight;
+		if ([self.commentArray count] > 0) {
+			
+			return [tableView fd_heightForCellWithIdentifier:@"ItemComment" cacheByIndexPath:indexPath configuration:^(iBGCommentTableViewCell *cell) {
+				
+				cell.fd_enforceFrameLayout = YES;
+				// 塞資料給 cell
+				NSDictionary *commentData = self.commentArray[indexPath.row - 1];
+				cell.username.text = [commentData objectForKey:@"first_name"];
+				cell.rate = [commentData objectForKey:@"rate"];
+				cell.date.text = [commentData objectForKey:@"created"];
+				cell.commentContent.text = [commentData objectForKey:@"content"];
+				[cell.commentContent autoHeight];
+			}];
 		} else {
+			
 			return self.view.frame.size.height - kItemCommentHeaderHeight;
 		}
 	}

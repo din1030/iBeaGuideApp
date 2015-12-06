@@ -8,7 +8,7 @@
 
 #import "iBGExhPageParentViewController.h"
 #import "iBGExhInfoViewController.h"
-#import "iBGItemCommentTableViewController.h"
+#import "iBGCommentTableViewController.h"
 #import "iBGMoniterViewController.h"
 
 @interface iBGExhPageParentViewController ()
@@ -33,10 +33,11 @@
 	
 	iBGExhInfoViewController *iBGExhInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ExhInfoVC"];
 	iBGExhInfoViewController.exhInfo = self.exhInfo;
-	iBGItemCommentTableViewController *iBGExhCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
+	iBGCommentTableViewController *iBGExhCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 	iBGExhCommentTableViewController.commentType = @"exh";
-	iBGExhCommentTableViewController.commentObjTitle = @"觀眾留言";
-	iBGExhCommentTableViewController.commentObjSubtitle = @"歡迎您看完展覽後留下寶貴的意見！";
+	iBGExhCommentTableViewController.commentObjID = [self.exhInfo objectForKey:@"id"];
+	iBGExhCommentTableViewController.commentObjTitle = [self.exhInfo objectForKey:@"title"];
+	iBGExhCommentTableViewController.commentObjSubtitle = [self.exhInfo objectForKey:@"subtitle"];
 	
 	self.pageviewContentVCs = @[iBGExhInfoViewController, iBGExhCommentTableViewController];
 	[self.pageViewController setViewControllers:@[iBGExhInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

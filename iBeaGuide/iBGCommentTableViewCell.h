@@ -17,6 +17,11 @@
 @property (strong, nonatomic) IBOutlet UIImageView *star4;
 @property (strong, nonatomic) IBOutlet UIImageView *star5;
 
-@property NSInteger rate;
+@property NSString *rate;
+@property (strong, nonatomic) IBOutlet UILabel *username;
+@property (strong, nonatomic) IBOutlet UILabel *date;
+@property (strong, nonatomic) IBOutlet UILabel *commentContent;
+
+@property CGFloat rowHeight;
 
 @end
