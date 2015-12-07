@@ -50,8 +50,8 @@
 
 - (IBAction)clickCollectBtn:(UIButton *)sender {
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	
 	self.context = [appDelegate managedObjectContext];
+	
 	// 建立一個要 insert 的物件
 	NSEntityDescription *itemEntity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.context];
 	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:itemEntity insertIntoManagedObjectContext:self.context];

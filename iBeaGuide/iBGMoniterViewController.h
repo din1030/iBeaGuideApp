@@ -35,4 +35,6 @@
 - (IBAction)clickSectionTest:(id)sender;
 - (IBAction)clickExitTest:(id)sender;
 
+- (NSManagedObject *) saveExhCollectData;
+
 @end

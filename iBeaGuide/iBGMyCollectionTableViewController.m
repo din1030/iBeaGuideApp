@@ -32,6 +32,7 @@
 	
 }
 - (void)viewWillAppear:(BOOL)animated {
+	[self.tableView reloadData];
 	[[self navigationController] setNavigationBarHidden:YES];
 	// 取消選擇原本的項目
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];

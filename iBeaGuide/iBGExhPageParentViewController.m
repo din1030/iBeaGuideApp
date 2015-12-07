@@ -122,6 +122,34 @@
 	[moniterVC setValue:[self.exhInfo objectForKey:@"id"] forKeyPath:@"exhID"];
 	[moniterVC setValue:[self.exhInfo objectForKey:@"title"] forKeyPath:@"exhTitle"];
 	[moniterVC setValue:moniterVC.objData forKeyPath:@"exhInfo"];
+	
+	
+	
+	// 有路線則去路線頁面
+	if () {
+		NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beaconRegion.proximityUUID.UUIDString, beaconRegion.major, beaconRegion.minor];
+		NSURL *url = [NSURL URLWithString: urlString];
+		NSError *dataError, *jsonError;
+		NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
+		NSLog(@"URL: %@", urlString);
+		if (dataError) {
+			NSLog(@"dataError: %@",[dataError localizedDescription]);
+			return NO;
+		}
+		
+		NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+		if (jsonError) {
+			NSLog(@"jsonError: %@",[jsonError localizedDescription]);
+			return NO;
+		}
+		
+		[self performSegueWithIdentifier:@"ExhToRoute" sender:self];
+	// 沒有路線直接回 moniter，把展覽物件存進 core data
+	} else {
+		[moniterVC saveExhCollectData];
+		[self.navigationController popViewControllerAnimated:YES];
+	}
+	
 //	[self.navigationController popViewControllerAnimated:NO];
 }
 

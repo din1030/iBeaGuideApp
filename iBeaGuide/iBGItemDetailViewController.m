@@ -21,7 +21,12 @@
     // 將資料傳給 label
     self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
     self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
-    self.itemDetail.text = [self.itemInfo objectForKey:@"description"];
+	// 判斷是從 MySQL DB 還是 Core Data 來的資料， description 欄位名稱不同
+	if ([[self.itemInfo allKeys] containsObject:@"ibeacon_id"]) {
+		self.itemDetail.text = [self.itemInfo objectForKey:@"description"];
+	} else {
+		self.itemDetail.text = [self.itemInfo objectForKey:@"itemDescription"];
+	}
     
     // 客製欄位動態判斷
     NSArray *detailField = [self.itemInfo objectForKey:@"detail_field"];

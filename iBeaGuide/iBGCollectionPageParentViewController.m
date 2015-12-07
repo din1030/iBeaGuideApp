@@ -59,6 +59,10 @@
 	
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+	self.exhInMyCollection = [self getCollectionData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

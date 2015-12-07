@@ -31,7 +31,14 @@
 	NSString *closeTime = [[self.exhInfo objectForKey:@"daily_close_time"] substringWithRange:NSMakeRange(0, [[self.exhInfo objectForKey:@"daily_close_time"] length]-3)];
 	self.exhTime.text = [NSString stringWithFormat:@"%@ - %@", openTime, closeTime];
 	self.exhVenue.text = [self.exhInfo objectForKey:@"venue"];
-	self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
+	
+	// 判斷是從 MySQL DB 還是 Core Data 來的資料， description 欄位名稱不同
+	if ([[self.exhInfo allKeys] containsObject:@"ibeacon_id"]) {
+		self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
+	} else {
+		self.exhDescription.text = [self.exhInfo objectForKey:@"exhDescription"];
+	}
+	
 	
 	// 如果沒有網址就不要顯示，把說明往上拉
 	NSString *webURL = [self.exhInfo objectForKey:@"web_link"];

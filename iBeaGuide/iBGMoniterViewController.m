@@ -6,12 +6,16 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "iBGMoniterViewController.h"
 
 #define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 #define kBeaconIdentifier @"iBeaGuide"
 
 @interface iBGMoniterViewController ()
+
+@property NSManagedObjectContext *context;
+@property NSManagedObject *exhManegedObj;
 
 @end
 
@@ -92,6 +96,40 @@
 	// Dispose of any resources that can be recreated.
 }
 
+- (NSManagedObject *) saveExhCollectData {
+	
+	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	self.context = [appDelegate managedObjectContext];
+	// 建立一個要 insert 的物件
+	NSEntityDescription *exhEntity = [NSEntityDescription entityForName:@"Exibition" inManagedObjectContext:self.context];
+	self.exhManegedObj = [[NSManagedObject alloc] initWithEntity:exhEntity insertIntoManagedObjectContext:self.context];
+	
+	for (NSString *key in [[exhEntity attributesByName] allKeys]) {
+		if ([[self.exhInfo allKeys] containsObject:key]) {
+			if ([[exhEntity attributesByName] objectForKey:key].attributeType == NSInteger16AttributeType) {
+				[self.exhManegedObj setValue:@([[self.exhInfo objectForKey:key] intValue]) forKey:key];
+			} else {
+				[self.exhManegedObj setValue:[self.exhInfo objectForKey:key] forKey:key];
+			}
+			NSLog (@"%@ => %@", key, [self.exhManegedObj valueForKey:key]);
+		}
+	}
+	
+	[self.exhManegedObj setValue:[self.exhInfo objectForKey:@"description"] forKey:@"exhDescripition"];
+	
+	NSError *saveError = nil;
+	[self.context save:&saveError];
+	
+	if (saveError) {
+		NSLog(@"saveError: %@",[saveError description]);
+		
+		return nil;
+	} else {
+		NSLog(@"%@", @"已儲存展覽資訊。");
+		
+		return self.exhManegedObj;
+	}
+}
 #pragma mark - location
 
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion *)region
@@ -110,6 +148,7 @@
 	
 	// get ibeacon link obj info via url
 	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+	
 	NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beaconRegion.proximityUUID.UUIDString, beaconRegion.major, beaconRegion.minor];
 	NSURL *url = [NSURL URLWithString: urlString];
 	NSError *dataError, *jsonError;

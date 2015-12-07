@@ -1240,12 +1240,12 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jt4-Fm-1gm">
                                             <rect key="frame" x="25" y="65" width="275" height="73"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <mutableString key="text">It works great for multi line strings as well.
+                                            <string key="text">It works great for multi line strings as well.
 Basically its a function that lets you see how big a string is going to be when rendered with a font and line break mode.
 
 I use it in a few spots in my application when I have variable length text I want to display in a certain area.
 
-By default a UILabel will center the text vertically. To have the text top aligned you need to size the label to be only the height required by the string that's in it.</mutableString>
+By default a UILabel will center the text vertically. To have the text top aligned you need to size the label to be only the height required by the string that's in it.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1509,7 +1509,6 @@ By default a UILabel will center the text vertically. To have the text top align
                                 </state>
                                 <connections>
                                     <action selector="clickStartGuide:" destination="ZQG-hI-HcD" eventType="touchUpInside" id="dd5-Jl-cea"/>
-                                    <segue destination="niY-X2-WQS" kind="push" id="U5L-bV-fM4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1525,6 +1524,7 @@ By default a UILabel will center the text vertically. To have the text top align
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="enterExhBtn" destination="d1b-da-0oY" id="4jE-h2-Aju"/>
+                        <segue destination="niY-X2-WQS" kind="push" identifier="ExhToRoute" id="mKx-z5-cxo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysN-qU-sFo" userLabel="First Responder" sceneMemberID="firstResponder"/>

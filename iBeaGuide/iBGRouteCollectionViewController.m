@@ -59,6 +59,7 @@ static NSString * const reuseIdentifier = @"RouteCell";
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
 	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 2];
 	moniterVC.routeID = sender.tag;
+	[moniterVC saveExhCollectData];
 	[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:ownIndex - 2] animated:YES];
 	
 }
