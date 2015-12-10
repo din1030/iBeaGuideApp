@@ -20,60 +20,60 @@
     
 	// 將資料傳給 label
 	self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
-	self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
-	self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
+    self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
+    self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
+    self.itemFinishedTime.text = [self.itemInfo objectForKey:@"finished_time"];
     self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
-//	self.itemBrief.translatesAutoresizingMaskIntoConstraints = NO;
+
+#warning 圖片尚未填入
 	
-    // 客製欄位動態判斷
-    NSArray *basicField = [self.itemInfo objectForKey:@"basic_field"];
 	NSArray *customFieldName = [NSArray arrayWithObjects:self.fieldName1, self.fieldName2, self.fieldName3, nil];
 	NSArray *customFieldValue = [NSArray arrayWithObjects:self.fieldValue1, self.fieldValue2, self.fieldValue3, nil];
+	NSMutableArray *basicFields;
+	
+	// 抓取客製欄位
+	if (![self.callerPage isEqualToString:@"myCollection"]) {
+		basicFields = [NSMutableArray arrayWithArray:[self.itemInfo objectForKey:@"basic_field"]];
+	} else {
+		// 要從有relationship 的欄位找出要的 type
+		basicFields = [NSMutableArray array];
+		for (NSDictionary *field in [self.itemInfo objectForKey:@"hasFields"]) {
+			if ([[field valueForKey:@"type"] isEqualToString:@"basic"]) {
+				[basicFields addObject:field];
+			}
+		}
+	}
+    
+    int realFieldCount = (int)[basicFields count];
 	for (int i = 0; i < [customFieldName count]; i++) {
         // 有欄位資料就顯示，並動態調整高度
-        if (i < [basicField count]) {
+        if (i < realFieldCount) {
             
-            NSDictionary *tempField = basicField[i];
+            NSDictionary *tempField = basicFields[i];
             UILabel *currentNameLabel = (UILabel *)customFieldName[i];
             UILabel *currentValueLabel = (UILabel *)customFieldValue[i];
             currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
             currentValueLabel.text = [tempField objectForKey:@"field_value"];
             [currentValueLabel autoHeight];
 			
-//			NSLayoutConstraint *nvConstraint = [NSLayoutConstraint constraintWithItem:currentValueLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:currentNameLabel attribute:NSLayoutAttributeRight multiplier:1.0 constant:5];
-//			[self.view addConstraints:@[nvConstraint]];
-			
 			if (i > 0) {
-//				currentValueLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//				currentNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-				
-//				UILabel *preNameLabel = (UILabel *)customFieldName[i-1];
+
 				UILabel *preValueLabel = (UILabel *)customFieldValue[i-1];
-                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 9, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
+                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
                 CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
                 
                 currentValueLabel.frame = currentValueLabelNewFrame;
                 currentNameLabel.frame = currentNameLabelNewFrame;
-				
-//				NSLayoutConstraint *nConstraint = [NSLayoutConstraint constraintWithItem:currentNameLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:preNameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-//
-//				NSLayoutConstraint *nameTopConstraint = [NSLayoutConstraint constraintWithItem:currentNameLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:preValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
-//				NSLayoutConstraint *valueTopConstraint = [NSLayoutConstraint constraintWithItem:currentValueLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:preValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
-//				[self.view addConstraints:@[nConstraint, nameTopConstraint, valueTopConstraint]];
+
             }
-			
-//			NSLayoutConstraint *briefLeftConstraint = [NSLayoutConstraint constraintWithItem:self.itemBrief attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:currentNameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-//			NSLayoutConstraint *briefTopConstraint = [NSLayoutConstraint constraintWithItem:self.itemBrief attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:currentValueLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:9];
-//			[self.view addConstraints:@[briefLeftConstraint, briefTopConstraint]];
-			
-//            CGRect briefFrame = (CGRect){self.itemBrief.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
-//            self.itemBrief.frame = briefFrame;
+			self.itemBrief.frame = (CGRect){self.itemBrief.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
+
         // 沒有欄位資料隱藏 label
         } else {
             ((UILabel *)customFieldName[i]).hidden = YES;
             ((UILabel *)customFieldValue[i]).hidden = YES;
         }
-	}
+    }
     [self.itemBrief autoHeight];
     
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
@@ -122,7 +122,7 @@
 			photo.image = [self.itemPicArray objectAtIndex:i];
 			
 //			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.itemTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 //			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)

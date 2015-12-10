@@ -7,6 +7,7 @@
 //
 
 #import "UIView+Glow.h"
+#import "MBProgressHUD.h"
 #import "iBGCommentTableViewController.h"
 #import "iBGCommentTableViewHeaderCell.h"
 #import "iBGCommentTableViewCell.h"
@@ -18,7 +19,7 @@
 #define kItemCommentHeaderHeight 58
 #define kItemCommentCellHeight 176
 
-@interface iBGCommentTableViewController ()
+@interface iBGCommentTableViewController () <MBProgressHUDDelegate>
 
 @property iBGCommentTableViewCell *hCell;
 
@@ -29,10 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-//	self.tableView.fd_debugLogEnabled = YES;
-
-	// load true DB comments
-	self.commentArray = [self getCommentData];
+	MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+	
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	hud.delegate = self;
+	hud.labelText = @"讀取留言中...";
+	
+	// Show the HUD while the provided method executes in a new thread
+	[hud showWhileExecuting:@selector(loadTask) onTarget:self withObject:nil animated:YES];
+	
 	
 	if ([self.commentType isEqualToString:@"exh"]) {
 		self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
@@ -69,6 +75,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadTask {
+	self.commentArray = [self getCommentData];
+	[self.tableView reloadData];
+}
+
 - (NSArray *)getCommentData{
 	
 	NSString *urlString = [NSString stringWithFormat:@"%@/get_comment_data/%@/%@", kWebAPIRoot, self.commentType, self.commentObjID];
@@ -77,13 +88,13 @@
 	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
 	NSLog(@"URL: %@", urlString);
 	if (dataError) {
-		NSLog(@"dataError: %@",[dataError localizedDescription]);
+		NSLog(@"dataError: \n UserInfo => %@ \n Description => %@",[dataError userInfo], [dataError localizedDescription]);
 		return nil;
 	}
 	
 	NSArray *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
 	if (jsonError) {
-		NSLog(@"jsonError: %@",[jsonError localizedDescription]);
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@",[jsonError userInfo], [jsonError localizedDescription]);
 		return nil;
 	}
 	

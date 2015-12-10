@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "iBGGlobal.h"
 #import <CoreLocation/CoreLocation.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 

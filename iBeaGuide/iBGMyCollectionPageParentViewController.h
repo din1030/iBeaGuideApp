@@ -1,5 +1,5 @@
 //
-//  iBGCollectionPageParentViewController.h
+//  iBGMyCollectionPageParentViewController.h
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/8.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface iBGCollectionPageParentViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface iBGMyCollectionPageParentViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *noRecordLabel;
 

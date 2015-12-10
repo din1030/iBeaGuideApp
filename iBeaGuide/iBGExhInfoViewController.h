@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) iBGExhPageParentViewController *pageParentVC;
 @property (strong, nonatomic) NSDictionary *exhInfo;
+@property NSString *callerPage;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *exhNavItem;
 

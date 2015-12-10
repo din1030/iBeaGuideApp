@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface iBGMyCollectionTableViewCell : UITableViewCell
 
+@property (nonatomic) NSManagedObject *itemManagedObj;
 @property NSDictionary *itemInfo;
 @property (strong, nonatomic) IBOutlet UILabel *itemTitle;
 

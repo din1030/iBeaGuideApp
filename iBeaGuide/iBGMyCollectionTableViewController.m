@@ -6,13 +6,17 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "iBGMyCollectionTableViewController.h"
+#import "iBGMyCollectionTableViewHeaderCell.h"
 #import "iBGMyCollectionTableViewCell.h"
 
 #define kItemHeaderHeight 250
 #define kItemCellHeight 60
 
 @interface iBGMyCollectionTableViewController ()
+
+@property NSManagedObjectContext *context;
 
 @end
 
@@ -28,9 +32,28 @@
 //	 self.exhData = [NSMutableArray arrayWithObjects:@"A", @"A", @"A", @"A",nil];
 //	self.exhData = [NSMutableArray array];
 	
-	self.collectPageParentVC = (iBGCollectionPageParentViewController*)self.parentViewController.parentViewController;
-	
+	self.collectPageParentVC = (iBGMyCollectionPageParentViewController*)self.parentViewController.parentViewController;
+
+	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	self.context = [appDelegate managedObjectContext];
+
+//	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//	NSEntityDescription *itemEntity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.context];
+//	[fetchRequest setEntity:itemEntity];
+//	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY belongsExh = %@", [self.exhData objectID]];
+//	[fetchRequest setPredicate:predicate];
+
+//	NSError *error;
+//	self.itemList = [self.context executeFetchRequest:fetchRequest error:&error];
+//	if (self.itemList == nil) {
+//		// Handle the error.
+//		NSLog(@"NO ITEMS AVAILABLE");
+//	}
+	self.itemList = [self.exhInfo objectForKey:@"hasItems"];
+	NSLog(@"itemList count: %lu", (unsigned long)[self.itemList count]);
+
 }
+
 - (void)viewWillAppear:(BOOL)animated {
 	[self.tableView reloadData];
 	[[self navigationController] setNavigationBarHidden:YES];
@@ -57,22 +80,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 	// self.exhData should replace into collected item array!!
-	return [self.itemData count] + 1; // plus 1 for header cell
+	return [self.itemList count] + 1; // plus 1 for header cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-	// self.exhData should replace into collected item array!!
+	// header cell 為展覽標題跟圖片，塞 MngObj
 	if (indexPath.row == 0) {
 		
-		UITableViewCell *cell;
+		iBGMyCollectionTableViewHeaderCell *cell;
 		cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionExhHeader" forIndexPath:indexPath];
+		cell.exhInfo = self.exhInfo;
+		cell.exhTitle.text = [self.exhInfo valueForKey:@"title"];
+
+#warning 展覽圖片尚未填入
+//		NSData *imgData = [NSData data];
+//		cell.exhPic.image = [UIImage imageWithData:imgData];
 		
 		return cell;
+	
+	// 展品 cell 顯示標題然後把撈出來的 MngObj 塞進去，點選透過 obj 抓取 fields 再轉成 dictionary
 	} else {
 		
 		iBGMyCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CollectionItem" forIndexPath:indexPath];
-		cell.itemTitle.text = [[self.itemData objectAtIndex:indexPath.row - 1] valueForKey:@"title"];
+		cell.itemInfo = self.itemList[indexPath.row - 1];
+		cell.itemTitle.text = [self.itemList[indexPath.row - 1] valueForKey:@"title"];
 		
 		return cell;
 	}
@@ -161,8 +193,22 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-//	iBGItemPageParentViewController *desVC = [segue destinationViewController];
-	[[segue destinationViewController] setValue:@"collection" forKey:@"callerPage"];
+	
+	[segue destinationViewController].navigationItem.title = [self.exhInfo valueForKey:@"title"];
+	[[segue destinationViewController] setValue:@"myCollection" forKey:@"callerPage"];
+	
+
+	if ([segue.identifier isEqualToString:@"ShowCollectExh"]) {
+		
+		iBGMyCollectionTableViewHeaderCell *senderCell = (iBGMyCollectionTableViewHeaderCell *)sender;
+		[[segue destinationViewController] setValue:senderCell.exhInfo forKey:@"exhInfo"];
+		
+	} else if ([segue.identifier isEqualToString:@"ShowCollectItem"]) {
+		
+		iBGMyCollectionTableViewCell *senderCell = (iBGMyCollectionTableViewCell *)sender;
+		[[segue destinationViewController] setValue:senderCell.itemInfo forKey:@"itemInfo"];
+		
+	}
 }
 
 

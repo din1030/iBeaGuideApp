@@ -9,7 +9,6 @@
 #import "iBGHomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface iBGHomeViewController ()
 
@@ -40,17 +39,24 @@
 -(void)loginButtonClicked
 {
 	FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-	[login logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
-				 fromViewController:self
-							handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-								if (error) {
-									NSLog(@"Process error");
-								} else if (result.isCancelled) {
-									NSLog(@"Cancelled");
-								} else {
-									NSLog(@"Logged in");
-								}
-							}];
+	[login logInWithReadPermissions: @[@"public_profile", @"email", @"user_birthday"]
+				fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *FBLoginError) {
+					if (FBLoginError) {
+						NSLog(@"FBLoginError: \n UserInfo => %@ \n Description => %@",[FBLoginError userInfo], [FBLoginError localizedDescription]);
+					} else if (result.isCancelled) {
+						 NSLog(@"使用者取消 FB 登入");
+					} else {
+						NSLog(@"Logged in");
+						if ([FBSDKAccessToken currentAccessToken]) {
+							[[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, email, birthday, gender"}]
+							 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+								 if (!error) {
+									 NSLog(@"fetched user:%@", result);
+								 }
+							 }];
+						}
+					}
+				}];
 }
 
 

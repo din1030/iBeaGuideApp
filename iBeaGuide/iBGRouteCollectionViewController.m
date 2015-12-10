@@ -33,7 +33,7 @@ static NSString * const reuseIdentifier = @"RouteCell";
 	self.routeCollectionView.decelerationRate = UIScrollViewDecelerationRateFast;
 	
 //	self.routeList = [NSMutableArray array];
-	self.routeList = [NSMutableArray arrayWithObjects:@"routeA", @"routeB", @"routeC", @"routeD", nil];
+//	self.routeList = [NSMutableArray arrayWithObjects:@"routeA", @"routeB", @"routeC", @"routeD", nil];
 	
 }
 
@@ -72,24 +72,37 @@ static NSString * const reuseIdentifier = @"RouteCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return [self.routeList count];
+	// puls 1 for route with all item
+	return [self.routeList count] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
 	iBGRouteCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-	
 	cell.layer.cornerRadius = 5.0;
 	CALayer *inputLayer = [[iBGTextInputLayer alloc] init];
 	inputLayer.frame = cell.bounds;
 	[cell.layer addSublayer:inputLayer];
 	
-	cell.routeID = indexPath.row;
-	cell.routeCheckBtn.tag = cell.routeID;
-	cell.routeTitle.text = [NSString stringWithFormat:@"精選路線 %ld", (long)cell.routeID];
-	[cell.routeMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
-	cell.routeDescription.text = @"精選路線說明";
+	if (indexPath.row == 0) {
+		
+		cell.routeID = 0;
+		cell.routeCheckBtn.tag = cell.routeID;
+		cell.routeTitle.text = @"所有展品";
+		[cell.routeMainPic setImage:[UIImage imageNamed:@"Jade_Cabbage.jpg"]];
+		cell.routeDescription.text = @"顯示所有具有導覽資訊的展品。";
+		
+	} else {
+	
+		NSDictionary *routeInfo = self.routeList[indexPath.row - 1];
+		cell.routeID = [[routeInfo objectForKey:@"id"] integerValue];
+		cell.routeCheckBtn.tag = cell.routeID;
+		cell.routeTitle.text = [routeInfo objectForKey:@"title"];
+		[cell.routeMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
+		cell.routeDescription.text = [routeInfo objectForKey:@"description"];
 
+	}
+	
 	return cell;
 }
 

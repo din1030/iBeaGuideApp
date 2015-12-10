@@ -33,12 +33,11 @@
 	self.exhVenue.text = [self.exhInfo objectForKey:@"venue"];
 	
 	// 判斷是從 MySQL DB 還是 Core Data 來的資料， description 欄位名稱不同
-	if ([[self.exhInfo allKeys] containsObject:@"ibeacon_id"]) {
-		self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
-	} else {
+	if ([self.callerPage isEqualToString:@"myCollection"]) {
 		self.exhDescription.text = [self.exhInfo objectForKey:@"exhDescription"];
+	} else {
+		self.exhDescription.text = [self.exhInfo objectForKey:@"description"];
 	}
-	
 	
 	// 如果沒有網址就不要顯示，把說明往上拉
 	NSString *webURL = [self.exhInfo objectForKey:@"web_link"];

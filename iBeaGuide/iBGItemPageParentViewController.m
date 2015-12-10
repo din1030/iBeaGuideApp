@@ -34,23 +34,17 @@
 	self.pageViewController.dataSource = self;
 	//	self.pageViewController.delegate = self;
 	
-	if ([self.callerPage isEqualToString:@"collection"]) {
-		
-		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
-		iBGItemInfoViewController.itemInfo = self.itemInfo;
-		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
-		iBGItemDetailViewController.itemInfo = self.itemInfo;
-		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController];
-		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-		self.itemPageControl.numberOfPages = 2;
-		
-	} else {
-		
-		// 建立 page view 的 child VC (item 的 3 個頁面)
-		iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
-		iBGItemInfoViewController.itemInfo = self.itemInfo;
-		iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
-		iBGItemDetailViewController.itemInfo = self.itemInfo;
+	iBGItemInfoViewController *iBGItemInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemInfoVC"];
+	iBGItemInfoViewController.itemInfo = self.itemInfo;
+	iBGItemInfoViewController.callerPage = self.callerPage;
+	iBGItemDetailViewController *iBGItemDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemDetailVC"];
+	iBGItemDetailViewController.itemInfo = self.itemInfo;
+	iBGItemDetailViewController.callerPage = self.callerPage;
+	self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController];
+	
+	if (![self.callerPage isEqualToString:@"myCollection"]) {
+
+		// 建立 page view 的 child VC (item 的 comment 頁面)
 		iBGCommentTableViewController *iBGCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 		iBGCommentTableViewController.commentType = @"item";
 		iBGCommentTableViewController.commentObjID = [self.itemInfo objectForKey:@"id"];
@@ -60,12 +54,11 @@
 		NSLog(@"%@ %@", [self.itemInfo objectForKey:@"title"], [self.itemInfo objectForKey:@"subtitle"]);
 		
 		self.pageviewContentVCs = @[iBGItemInfoViewController, iBGItemDetailViewController, iBGCommentTableViewController];
-
-		
-		[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-		self.itemPageControl.numberOfPages = 3;
 	
 	}
+	
+	[self.pageViewController setViewControllers:@[iBGItemInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+	self.itemPageControl.numberOfPages = [self.pageviewContentVCs count];
 	
 	// 把 page VC 塞給目前的 VC	
 	[self addChildViewController:self.pageViewController];
@@ -75,7 +68,7 @@
 	// 把固定顯示的物件拉到最前面
 	[self.view bringSubviewToFront:self.itemPageControlBG];
 	[self.view bringSubviewToFront:self.itemPageControl];
-	if (![self.callerPage isEqualToString:@"collection"]) {
+	if (![self.callerPage isEqualToString:@"myCollection"]) {
 		[self.view bringSubviewToFront:self.itemMenuBtn];
 	} else {
 		self.itemMenuBtn.hidden = YES;

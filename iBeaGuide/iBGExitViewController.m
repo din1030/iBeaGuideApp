@@ -33,12 +33,11 @@
 	} else {
 		FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
 		[loginManager logInWithPublishPermissions:@[@"publish_actions"]
-							   fromViewController:self
-										  handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-											  if (error) {
-												  // Process error
+							   fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *FBLoginError) {
+											  if (FBLoginError) {
+												  NSLog(@"FBLoginError: \n UserInfo => %@ \n Description => %@",[FBLoginError userInfo], [FBLoginError localizedDescription]);
 											  } else if (result.isCancelled) {
-												  // Handle cancellations
+												  NSLog(@"使用者取消 FB 登入");
 											  } else {
 												  [self doShareOGACtion];
 											  }

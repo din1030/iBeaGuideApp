@@ -10,7 +10,7 @@
 
 @interface iBGExhPageParentViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-//@property NSString *callerPage;
+@property NSString *callerPage;
 @property (strong, nonatomic) NSDictionary *exhInfo;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (nonatomic) NSArray *pageviewContentVCs;

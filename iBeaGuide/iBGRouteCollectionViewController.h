@@ -13,6 +13,6 @@
 @interface iBGRouteCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *routeCollectionView;
-@property (nonatomic) NSMutableArray *routeList;
+@property (nonatomic) NSArray *routeList;
 
 @end

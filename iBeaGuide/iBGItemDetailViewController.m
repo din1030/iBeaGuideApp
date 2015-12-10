@@ -27,16 +27,32 @@
 	} else {
 		self.itemDetail.text = [self.itemInfo objectForKey:@"itemDescription"];
 	}
-    
-    // 客製欄位動態判斷
-    NSArray *detailField = [self.itemInfo objectForKey:@"detail_field"];
-    NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
-    NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
+
+#warning 主要圖片尚未填入
+	
+	NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
+	NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
+	NSMutableArray *detailFields;
+	
+	// 抓取客製欄位
+	if (![self.callerPage isEqualToString:@"myCollection"]) {
+		detailFields = [NSMutableArray arrayWithArray:[self.itemInfo objectForKey:@"detail_field"]];
+	} else {
+		// 要從有relationship 的欄位找出要的 type
+		detailFields = [NSMutableArray array];
+		for (NSDictionary *field in [self.itemInfo objectForKey:@"hasFields"]) {
+			if ([[field valueForKey:@"type"] isEqualToString:@"detail"]) {
+				[detailFields addObject:field];
+			}
+		}
+	}
+	
+    int realFieldCount = (int)[detailFields count];
     for (int i = 0; i < [customDetailFieldName count]; i++) {
         // 有欄位資料就顯示，並動態調整高度
-        if (i < [detailField count]) {
+        if (i < realFieldCount) {
             
-            NSDictionary *tempField = detailField[i];
+            NSDictionary *tempField = detailFields[i];
             UILabel *currentNameLabel = (UILabel *)customDetailFieldName[i];
             UILabel *currentValueLabel = (UILabel *)customDetailFieldValue[i];
             currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
@@ -45,14 +61,13 @@
             
             if (i > 0) {
                 UILabel *preValueLabel =(UILabel *)customDetailFieldValue[i-1];
-                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 9, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
+                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
                 CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
                 
                 currentValueLabel.frame = currentValueLabelNewFrame;
                 currentNameLabel.frame = currentNameLabelNewFrame;
             }
-            CGRect detailFrame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
-            self.itemDetail.frame = detailFrame;
+            self.itemDetail.frame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
             // 沒有欄位資料隱藏 label
         } else {
             ((UILabel *)customDetailFieldName[i]).hidden = YES;
@@ -85,6 +100,7 @@
 	// 在背景 load 圖片
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
+#warning 圖片尚未填入
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
 		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];

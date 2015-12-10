@@ -13,13 +13,14 @@
 
 @interface iBGItemDetailViewController : UIViewController<NYTPhotosViewControllerDelegate>
 
+@property NSString *callerPage;
 @property NYTPhotosViewController *photosViewController;
-
-@property (strong, nonatomic) IBOutlet UIScrollView *itemDetailScrollView;
-@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (nonatomic) NSArray *photos;
 @property NSMutableArray *itemPicArray;
 @property NSDictionary *itemInfo;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *itemDetailScrollView;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
 // item info ui outlets
 @property (strong, nonatomic) IBOutlet UILabel *itemTitle;

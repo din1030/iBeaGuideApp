@@ -1,5 +1,5 @@
 //
-//  iBGCollectionPageParentViewController.m
+//  iBGMyCollectionPageParentViewController.m
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/8.
@@ -7,25 +7,28 @@
 //
 
 #import "AppDelegate.h"
-#import "iBGCollectionPageParentViewController.h"
+#import "NSManagedObject+Serialization.h"
+#import "iBGMyCollectionPageParentViewController.h"
 #import "iBGMyCollectionTableViewController.h"
 
-@interface iBGCollectionPageParentViewController ()
+@interface iBGMyCollectionPageParentViewController ()
+
+@property NSManagedObjectContext *context;
 
 @end
 
-@implementation iBGCollectionPageParentViewController
+@implementation iBGMyCollectionPageParentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
 	// 禁止 swipe back
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
 	
-	
-	
-//	self.exhInMyCollection = [NSArray array];
 	self.exhInMyCollection = [self getCollectionData];
 	
 	if ([self.exhInMyCollection count] < 2) {
@@ -55,12 +58,6 @@
 		[self.view bringSubviewToFront:self.collectionPageControlBG];
 		[self.view bringSubviewToFront:self.collectionPageControl];
 	}
-	
-	
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-	self.exhInMyCollection = [self getCollectionData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,29 +68,25 @@
 -(NSArray *)getCollectionData {
 	
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-	// 取出指定 entity
-	NSEntityDescription *itemEntity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:appDelegate.managedObjectContext];
+	self.context = [appDelegate managedObjectContext];
 	
-//	NSPredicate *predicate;
-//	predicate = [NSPredicate predicateWithFormat:@"creationDate > %@", date];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exhibition"];
 	
-//	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:NO];
-//	NSArray *sortDescriptors = [NSArray arrayWithObject: sort];
+	NSError *fetchExhError = nil;
+	NSArray *exhResults = [self.context executeFetchRequest:fetchRequest error:&fetchExhError];
 	
-	NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-	[fetch setEntity:itemEntity];
-//	[fetch setPredicate: predicate];
-//	[fetch setSortDescriptors: sortDescriptors];
-	NSError *fetchError;
-	NSArray *results = [context executeFetchRequest:fetch error:&fetchError];
-	
-	if (fetchError) {
-		NSLog(@"fetchError: %@",[fetchError localizedDescription]);
-		return Nil;
+	if (fetchExhError) {
+		NSLog(@"fetchExhError: \n UserInfo => %@ \n Description => %@",[fetchExhError userInfo], [fetchExhError localizedDescription]);
+		return nil;
 	}
 	
-	return results;
+	NSMutableArray *resultArr = [NSMutableArray array];
+	
+	for (NSManagedObject *exh in exhResults) {
+		[resultArr addObject:[exh toDictionary]];
+	}
+	
+	return resultArr;
 }
 
 #pragma mark - Page View Controller Data Source
@@ -106,7 +99,7 @@
 		return nil;
 	}
 	
-	return [self viewControllerAtIndex:currentIndex-1];
+	return [self viewControllerAtIndex:currentIndex - 1];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
@@ -120,7 +113,7 @@
 	if (currentIndex == [self.exhInMyCollection count] - 1) {
 		return nil;
 	}
-	return [self viewControllerAtIndex:currentIndex+1];
+	return [self viewControllerAtIndex:currentIndex + 1];
 }
 
 - (iBGMyCollectionTableViewController *)viewControllerAtIndex:(NSUInteger)index
@@ -132,7 +125,7 @@
 	// Create a new view controller and pass suitable data.
 	iBGMyCollectionTableViewController *iBGMyCollectionTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectionExhWithItemList"];
 	iBGMyCollectionTableViewController.pageIndex = index;
-	iBGMyCollectionTableViewController.itemData = self.exhInMyCollection;
+	iBGMyCollectionTableViewController.exhInfo = self.exhInMyCollection[index];
 	
 	return iBGMyCollectionTableViewController;
 }

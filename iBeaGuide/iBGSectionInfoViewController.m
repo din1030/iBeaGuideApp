@@ -232,6 +232,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 	if ([[segue identifier] isEqualToString:@"SecToItem"]) {
+		[segue destinationViewController].navigationItem.title = self.navigationItem.title;
 		[[segue destinationViewController] setValue:self.prepareItemInfo forKey:@"itemInfo"];
 	}
 }

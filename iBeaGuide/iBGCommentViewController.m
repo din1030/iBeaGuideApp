@@ -6,6 +6,8 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
+#import "MBProgressHUD.h"
 #import "iBGCommentViewController.h"
 
 @interface iBGCommentViewController ()
@@ -43,7 +45,7 @@
 	int index = (int)[self.starArr indexOfObject:sender];
 	self.rate = index+1;
 	for (int i = 0; i < [self.starArr count]; i++) {
-		// 小於評分的星星亮起來
+		// 評分的星星亮起來
 		if (i < self.rate) {
 			UIButton *currentBtn = (UIButton *)self.starArr[i];
 			[currentBtn setBackgroundImage:[UIImage imageNamed:@"star_on.png"] forState:UIControlStateNormal];
@@ -68,36 +70,57 @@
 		[self.navigationController popViewControllerAnimated:YES];
 	
 	} else {
+		
+		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		hud.mode = MBProgressHUDModeCustomView;
+		hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Warning.png"]];
+		hud.labelText = @"尚未評分";
+		hud.removeFromSuperViewOnHide = YES;
+		[hud hide:YES afterDelay:2];
+		
 		// Show alert with action btns
-		UIAlertController *noRateAlertController = [UIAlertController alertControllerWithTitle:@"尚未評分"
-																				 message:@"請先點選評分再將留言送出，謝謝！"
-																		  preferredStyle:UIAlertControllerStyleAlert];
-		
-		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"我要評分" style:UIAlertActionStyleCancel handler:nil];
-
-		[noRateAlertController addAction:okAction];
-		
-		noRateAlertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
-		noRateAlertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
-		noRateAlertController.view.layer.cornerRadius = 5;
-		
-		[self presentViewController:noRateAlertController animated:YES completion:nil];
+//		UIAlertController *noRateAlertController = [UIAlertController alertControllerWithTitle:@"尚未評分"
+//																				 message:@"請先點選評分再將留言送出，謝謝！"
+//																		  preferredStyle:UIAlertControllerStyleAlert];
+//		
+//		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"我要評分" style:UIAlertActionStyleCancel handler:nil];
+//
+//		[noRateAlertController addAction:okAction];
+//		
+//		noRateAlertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
+//		noRateAlertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
+//		noRateAlertController.view.layer.cornerRadius = 5;
+//		
+//		[self presentViewController:noRateAlertController animated:YES completion:nil];
 	}
 }
 
 - (void)sendCommentData:(NSDictionary *)commentData url:(NSString *)urlString {
 	
-	NSError *error;
+	NSError *jsonError, *requestError;
 	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:commentData
 													   options:0 // Pass 0 if you don't care about the readability of the generated string
-														 error:&error];
+														 error:&jsonError];
+	if (jsonError) {
+		NSLog(@"留言資料轉換錯誤");
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@",[jsonError userInfo], [jsonError localizedDescription]);
+	
+		return;
+	}
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
 	[request setHTTPMethod:@"POST"];
 	[request setHTTPBody:jsonData];
 	
 	//轉換為NSData傳送
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
+	if (requestError) {
+		NSLog(@"留言資料傳送錯誤");
+		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+	
+		return;
+	}
+	
 	NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 
 }

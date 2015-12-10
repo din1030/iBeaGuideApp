@@ -13,6 +13,8 @@
 
 @interface iBGItemInfoViewController : UIViewController <NYTPhotosViewControllerDelegate>
 
+@property NSString *callerPage;
+
 @property NYTPhotosViewController *photosViewController;
 @property NSMutableArray *itemPicArray;
 @property (nonatomic) NSArray *photos;
@@ -20,13 +22,13 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *itemInfoScrollView;
 
-// item info ui outlets
 @property (strong, nonatomic) IBOutlet UILabel *itemTitle;
 @property (strong, nonatomic) IBOutlet UILabel *itemSubtitle;
 
 @property (strong, nonatomic) IBOutlet UIButton *itemInfoPicBtn;
 
 @property (strong, nonatomic) IBOutlet UILabel *itemCreator;
+@property (strong, nonatomic) IBOutlet UILabel *itemFinishedTime;
 @property (strong, nonatomic) IBOutlet UILabel *fieldName1;
 @property (strong, nonatomic) IBOutlet UILabel *fieldValue1;
 @property (strong, nonatomic) IBOutlet UILabel *fieldName2;

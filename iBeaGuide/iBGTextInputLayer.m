@@ -6,16 +6,18 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGTextInputLayer.h"
 
 @implementation iBGTextInputLayer
 
-- (instancetype)init
-{
+- (instancetype)init {
+	
 	self = [super init];
 	if (self) {
 		[self setNeedsDisplay];
 	}
+	
 	return self;
 }
 
@@ -24,4 +26,5 @@
 	self.borderWidth = 0.5;
 	self.cornerRadius = 5.0;
 }
+
 @end

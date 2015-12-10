@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iBGCollectionPageParentViewController.h"
+#import "iBGMyCollectionPageParentViewController.h"
 
 @interface iBGMyCollectionTableViewController : UITableViewController
 
-@property (strong, nonatomic) iBGCollectionPageParentViewController *collectPageParentVC;
+@property (strong, nonatomic) iBGMyCollectionPageParentViewController *collectPageParentVC;
 
 @property NSUInteger pageIndex;
-@property (nonatomic) NSArray *itemData;
+//@property (nonatomic) NSManagedObject *exhData;
+@property (nonatomic) NSDictionary *exhInfo;
+@property (nonatomic) NSArray *itemList;
 
 @end

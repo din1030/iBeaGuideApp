@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "iBGGlobal.h"
 #import "iBGMoniterViewController.h"
 
 #define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
@@ -96,12 +97,28 @@
 	// Dispose of any resources that can be recreated.
 }
 
-- (NSManagedObject *) saveExhCollectData {
+- (void) saveExhCollectData {
 	
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	self.context = [appDelegate managedObjectContext];
+	
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Exhibition"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"id = %@", [self.exhInfo valueForKey:@"id"]]];
+	[request setFetchLimit:1];
+	
+	NSError *fetchError;
+	NSUInteger count = [self.context countForFetchRequest:request error:&fetchError];
+	if (count > 0) {
+		NSLog(@"展覽已在使用者收藏中。");
+		return;
+	} else if (count == NSNotFound) {
+		if (fetchError) {
+			NSLog(@"fetchError: \n UserInfo => %@ \n Description => %@",[fetchError userInfo], [fetchError localizedDescription]);
+		}
+	}
+		
 	// 建立一個要 insert 的物件
-	NSEntityDescription *exhEntity = [NSEntityDescription entityForName:@"Exibition" inManagedObjectContext:self.context];
+	NSEntityDescription *exhEntity = [NSEntityDescription entityForName:@"Exhibition" inManagedObjectContext:self.context];
 	self.exhManegedObj = [[NSManagedObject alloc] initWithEntity:exhEntity insertIntoManagedObjectContext:self.context];
 	
 	for (NSString *key in [[exhEntity attributesByName] allKeys]) {
@@ -116,18 +133,15 @@
 	}
 	
 	[self.exhManegedObj setValue:[self.exhInfo objectForKey:@"description"] forKey:@"exhDescripition"];
+	[self.exhManegedObj setValue:[NSDate date] forKey:@"collect_date"];
 	
 	NSError *saveError = nil;
 	[self.context save:&saveError];
 	
 	if (saveError) {
-		NSLog(@"saveError: %@",[saveError description]);
-		
-		return nil;
+		NSLog(@"saveError: \n UserInfo => %@ \n Description => %@", [saveError userInfo], [saveError localizedDescription]);
 	} else {
-		NSLog(@"%@", @"已儲存展覽資訊。");
-		
-		return self.exhManegedObj;
+		NSLog(@"已儲存展覽資訊。");
 	}
 }
 #pragma mark - location
@@ -155,13 +169,13 @@
 	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
 	NSLog(@"URL: %@", urlString);
 	if (dataError) {
-		NSLog(@"dataError: %@",[dataError localizedDescription]);
+		NSLog(@"dataError: \n UserInfo => %@ \n Description => %@", [dataError userInfo], [dataError localizedDescription]);
 		return NO;
 	}
 	
 	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
 	if (jsonError) {
-		NSLog(@"jsonError: %@",[jsonError localizedDescription]);
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@", [jsonError userInfo], [jsonError localizedDescription]);
 		return NO;
 	}
 	
@@ -327,6 +341,9 @@
 	// Get the new view controller using [segue destinationViewController].
 	// Pass the selected object to the new view controller.
 	
+	// 設定 nav bar 標題
+	[segue destinationViewController].navigationItem.title = self.exhTitle;
+	
 	// 抓到展覽訊號去展覽資訊頁面
 	if ([segue.identifier isEqualToString:@"MoniterExh"]) {
 		NSLog(@"Go exhID: %ld", (long)self.exhID);
@@ -348,7 +365,6 @@
 	// 抓到沒有展區的展品訊號去展品資訊頁面
 	else if ([segue.identifier isEqualToString:@"MoniterItem"]) {
 		NSLog(@"Go itemID: %@", [self.objData objectForKey:@"id"]);
-		[segue destinationViewController].navigationItem.title = self.exhTitle;
 		[[segue destinationViewController] setValue:self.objData forKey:@"itemInfo"];
 	}
 	

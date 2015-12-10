@@ -33,16 +33,45 @@
 	
 	iBGExhInfoViewController *iBGExhInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ExhInfoVC"];
 	iBGExhInfoViewController.exhInfo = self.exhInfo;
-	iBGCommentTableViewController *iBGExhCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
-	iBGExhCommentTableViewController.commentType = @"exh";
-	iBGExhCommentTableViewController.commentObjID = [self.exhInfo objectForKey:@"id"];
-	iBGExhCommentTableViewController.commentObjTitle = [self.exhInfo objectForKey:@"title"];
-	iBGExhCommentTableViewController.commentObjSubtitle = [self.exhInfo objectForKey:@"subtitle"];
+	iBGExhInfoViewController.callerPage = self.callerPage;
+	self.pageviewContentVCs = @[iBGExhInfoViewController];
 	
-	self.pageviewContentVCs = @[iBGExhInfoViewController, iBGExhCommentTableViewController];
-	[self.pageViewController setViewControllers:@[iBGExhInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-	self.exhPageControl.numberOfPages = 2;
+	if (![self.callerPage isEqualToString:@"myCollection"]) {
+		
+		iBGCommentTableViewController *iBGExhCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
+		iBGExhCommentTableViewController.commentType = @"exh";
+		iBGExhCommentTableViewController.commentObjID = [self.exhInfo objectForKey:@"id"];
+		iBGExhCommentTableViewController.commentObjTitle = [self.exhInfo objectForKey:@"title"];
+		iBGExhCommentTableViewController.commentObjSubtitle = [self.exhInfo objectForKey:@"subtitle"];
+		
+		self.pageviewContentVCs = @[iBGExhInfoViewController, iBGExhCommentTableViewController];
+		self.exhPageControl.numberOfPages = 2;
+		
+		// 設定 nav bar item，標題下面放 page control
+		self.exhPageControl = [[UIPageControl alloc] init];
+		self.exhPageControl.frame = (CGRect){0, 25, 320, 20};
+		self.exhPageControl.numberOfPages = 2;
+		self.exhPageControl.currentPage = 0;
+		
+		self.navTitleLabel = [[UILabel alloc] initWithFrame:(CGRect){0, -5, 320, 40}];
+		self.navTitleLabel.textColor = [UIColor whiteColor];
+		self.navTitleLabel.font = [self.navTitleLabel.font fontWithSize:18];
+		self.navTitleLabel.textAlignment = NSTextAlignmentCenter;
+		self.navTitleLabel.text = [self.exhInfo objectForKey:@"title"];
+		
+		[self.navigationController.navigationBar addSubview:self.navTitleLabel];
+		[self.navigationController.navigationBar addSubview:self.exhPageControl];
+	
+	} else {
 
+//		self.exhPageControl.hidden = YES;
+//		self.navTitleLabel.hidden = YES;
+		self.navigationItem.title = [self.exhInfo objectForKey:@"title"];
+		self.enterExhBtn.hidden = YES;
+		
+	}
+	
+	[self.pageViewController setViewControllers:@[iBGExhInfoViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 	
 	// 把 page VC 塞給目前的 VC
 	[self addChildViewController:self.pageViewController];
@@ -55,20 +84,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	
-    // 設定 nav bar item，標題下面放 page control
-	self.exhPageControl = [[UIPageControl alloc] init];
-	self.exhPageControl.frame = (CGRect){0, 25, 320, 20};
-	self.exhPageControl.numberOfPages = 2;
-	self.exhPageControl.currentPage = 0;
 	
-	self.navTitleLabel = [[UILabel alloc] initWithFrame:(CGRect){0, -5, 320, 40}];
-	self.navTitleLabel.textColor = [UIColor whiteColor];
-	self.navTitleLabel.font = [self.navTitleLabel.font fontWithSize:18];
-	self.navTitleLabel.textAlignment = NSTextAlignmentCenter;
-	self.navTitleLabel.text = [self.exhInfo objectForKey:@"title"];
-	
-	[self.navigationController.navigationBar addSubview:self.navTitleLabel];
-	[self.navigationController.navigationBar addSubview:self.exhPageControl];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -106,16 +122,6 @@
 	}
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)clickStartGuide:(id)sender {
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
 	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 1];
@@ -123,34 +129,27 @@
 	[moniterVC setValue:[self.exhInfo objectForKey:@"title"] forKeyPath:@"exhTitle"];
 	[moniterVC setValue:moniterVC.objData forKeyPath:@"exhInfo"];
 	
-	
-	
+	NSArray *routes = [self.exhInfo objectForKey:@"routes"];
 	// 有路線則去路線頁面
-	if () {
-		NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beaconRegion.proximityUUID.UUIDString, beaconRegion.major, beaconRegion.minor];
-		NSURL *url = [NSURL URLWithString: urlString];
-		NSError *dataError, *jsonError;
-		NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
-		NSLog(@"URL: %@", urlString);
-		if (dataError) {
-			NSLog(@"dataError: %@",[dataError localizedDescription]);
-			return NO;
-		}
-		
-		NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-		if (jsonError) {
-			NSLog(@"jsonError: %@",[jsonError localizedDescription]);
-			return NO;
-		}
-		
+	if ([routes count] > 0) {
 		[self performSegueWithIdentifier:@"ExhToRoute" sender:self];
 	// 沒有路線直接回 moniter，把展覽物件存進 core data
 	} else {
 		[moniterVC saveExhCollectData];
 		[self.navigationController popViewControllerAnimated:YES];
 	}
-	
-//	[self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	// Get the new view controller using [segue destinationViewController].
+	// Pass the selected object to the new view controller.
+	// 抓到展覽訊號去展覽資訊頁面
+	if ([segue.identifier isEqualToString:@"ExhToRoute"]) {
+		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"routes"] forKey:@"routeList"];
+	}
 }
 
 @end
