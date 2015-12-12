@@ -27,11 +27,12 @@
 	} else {
 		self.itemDetail.text = [self.itemInfo objectForKey:@"itemDescription"];
 	}
-
+    [self.itemDetail autoHeight];
+    
 #warning 主要圖片尚未填入
 	
-	NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
-	NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
+//	NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
+//	NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
 	NSMutableArray *detailFields;
 	
 	// 抓取客製欄位
@@ -47,34 +48,71 @@
 		}
 	}
 	
-    int realFieldCount = (int)[detailFields count];
-    for (int i = 0; i < [customDetailFieldName count]; i++) {
-        // 有欄位資料就顯示，並動態調整高度
-        if (i < realFieldCount) {
+    CGRect refNameFrame = self.detailFieldName1.frame;
+    CGRect refValueFrame = self.detailFieldValue1.frame;
+    for (int i = 0; i < [detailFields count]; i++) {
+        
+        if (i == 0) {
             
-            NSDictionary *tempField = detailFields[i];
-            UILabel *currentNameLabel = (UILabel *)customDetailFieldName[i];
-            UILabel *currentValueLabel = (UILabel *)customDetailFieldValue[i];
-            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
-            currentValueLabel.text = [tempField objectForKey:@"field_value"];
-            [currentValueLabel autoHeight];
+            self.detailFieldName1.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
+            self.detailFieldName1.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y , self.detailFieldName1.intrinsicContentSize.width, refNameFrame.size.height};
+            refNameFrame = self.detailFieldName1.frame;
             
-            if (i > 0) {
-                UILabel *preValueLabel =(UILabel *)customDetailFieldValue[i-1];
-                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
-                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
-                
-                currentValueLabel.frame = currentValueLabelNewFrame;
-                currentNameLabel.frame = currentNameLabelNewFrame;
-            }
-            self.itemDetail.frame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
-            // 沒有欄位資料隱藏 label
+            self.detailFieldValue1.text = detailFields[i][@"field_value"];
+            self.detailFieldValue1.frame = (CGRect){refNameFrame.origin.x + refNameFrame.size.width, refNameFrame.origin.y , self.view.frame.size.width - 50 - refNameFrame.size.width, refNameFrame.size.height};
+            [self.detailFieldValue1 autoHeight];
+            refValueFrame = self.detailFieldValue1.frame;
+            
         } else {
-            ((UILabel *)customDetailFieldName[i]).hidden = YES;
-            ((UILabel *)customDetailFieldValue[i]).hidden = YES;
+            
+            UILabel *curNameLabel = [[UILabel alloc] init];
+            curNameLabel.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
+            curNameLabel.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y , curNameLabel.intrinsicContentSize.width, refNameFrame.size.height};
+            NSLog(@"%f", refNameFrame.size.height);
+            
+            UILabel *curValueLabel = [[UILabel alloc] init];
+            curValueLabel.text = detailFields[i][@"field_value"];
+            curValueLabel.frame = (CGRect){curNameLabel.frame.origin.x + curNameLabel.frame.size.width, curNameLabel.frame.origin.y , self.view.frame.size.width - 50 - curNameLabel.frame.size.width, refNameFrame.size.height};
+            [curValueLabel autoHeight];
+            [self.itemDetailScrollView addSubview:curNameLabel];
+            [self.itemDetailScrollView addSubview:curValueLabel];
+            
+            refNameFrame = curNameLabel.frame;
+            refValueFrame = curValueLabel.frame;
+            
         }
+        
     }
-    [self.itemDetail autoHeight];
+    self.itemDetail.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+    
+//    int realFieldCount = (int)[detailFields count];
+//    for (int i = 0; i < [customDetailFieldName count]; i++) {
+//        // 有欄位資料就顯示，並動態調整高度
+//        if (i < realFieldCount) {
+//            
+//            NSDictionary *tempField = detailFields[i];
+//            UILabel *currentNameLabel = (UILabel *)customDetailFieldName[i];
+//            UILabel *currentValueLabel = (UILabel *)customDetailFieldValue[i];
+//            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
+//            currentValueLabel.text = [tempField objectForKey:@"field_value"];
+//            [currentValueLabel autoHeight];
+//            
+//            if (i > 0) {
+//                UILabel *preValueLabel =(UILabel *)customDetailFieldValue[i-1];
+//                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
+//                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
+//                
+//                currentValueLabel.frame = currentValueLabelNewFrame;
+//                currentNameLabel.frame = currentNameLabelNewFrame;
+//            }
+//            self.itemDetail.frame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+//            // 沒有欄位資料隱藏 label
+//        } else {
+//            ((UILabel *)customDetailFieldName[i]).hidden = YES;
+//            ((UILabel *)customDetailFieldValue[i]).hidden = YES;
+//        }
+//    }
+
     
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];

@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
 	
 	// Handle clicks on the button
 	[self.FBLoginBtn

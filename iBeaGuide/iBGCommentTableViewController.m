@@ -29,6 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([self.commentType isEqualToString:@"exh"]) {
+        self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
+    } else {
+        self.itemPageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
+    }
 	
 	MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	
@@ -38,14 +44,8 @@
 	
 	// Show the HUD while the provided method executes in a new thread
 	[hud showWhileExecuting:@selector(loadTask) onTarget:self withObject:nil animated:YES];
-	
-	
-	if ([self.commentType isEqualToString:@"exh"]) {
-		self.exhPageParentVC = (iBGExhPageParentViewController*)self.parentViewController.parentViewController;
-	} else {
-		self.itemPageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
-	}
-	
+
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -78,6 +78,13 @@
 - (void)loadTask {
 	self.commentArray = [self getCommentData];
 	[self.tableView reloadData];
+	
+	// 超過頁面長要避免最後一個留言被 page ctrl 遮到，加上 bottom inset 多捲動一個 page ctrl 的高度
+	[self.tableView endUpdates];
+	self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
+	if (self.tableView.contentSize.height > self.tableView.frame.size.height) {
+		[self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 20, 0)];
+	}
 }
 
 - (NSArray *)getCommentData{
@@ -133,7 +140,7 @@
 			NSDictionary *commentData = self.commentArray[indexPath.row - 1];
 			cell.username.text = [commentData objectForKey:@"first_name"];
 			cell.rate = [commentData objectForKey:@"rate"];
-			cell.date.text = [commentData objectForKey:@"created"];
+			cell.date.text = [[commentData objectForKey:@"created"] substringWithRange:NSMakeRange(0, [[commentData objectForKey:@"created"] length]-3)];
 			cell.commentContent.text = [commentData objectForKey:@"content"];
 			[cell.commentContent autoHeight];
 			

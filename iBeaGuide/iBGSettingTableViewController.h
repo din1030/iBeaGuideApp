@@ -10,4 +10,7 @@
 
 @interface iBGSettingTableViewController : UITableViewController
 
+@property (strong, nonatomic) IBOutlet UISwitch *facPushSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *autoPlaySwitch;
+
 @end

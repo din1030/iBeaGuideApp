@@ -28,10 +28,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *detailFieldName1;
 @property (strong, nonatomic) IBOutlet UILabel *detailFieldValue1;
-@property (strong, nonatomic) IBOutlet UILabel *detailFieldName2;
-@property (strong, nonatomic) IBOutlet UILabel *detailFieldValue2;
-@property (strong, nonatomic) IBOutlet UILabel *detailFieldName3;
-@property (strong, nonatomic) IBOutlet UILabel *detailFieldValue3;
 @property (strong, nonatomic) IBOutlet UILabel *itemDetail;
 
 

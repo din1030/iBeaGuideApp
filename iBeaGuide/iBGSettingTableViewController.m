@@ -7,6 +7,7 @@
 //
 
 #import "iBGGlobal.h"
+#import "iBGGlobalData.h"
 #import "iBGSettingTableViewController.h"
 #import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -23,9 +24,15 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	// 抓 global data 判斷設備推播的設定
+	self.autoPlaySwitch.on = [iBGGlobalData sharedInstance].facilityPushIsOn;
+	[self.autoPlaySwitch addTarget:self action:@selector(changeFacPushSwitch:) forControlEvents:UIControlEventValueChanged];
+	
+	// 抓 global data 判斷自動播放的設定
+	self.autoPlaySwitch.on = [iBGGlobalData sharedInstance].autoPlayIsOn;
+	[self.autoPlaySwitch addTarget:self action:@selector(changeAutoPlaySwitch:) forControlEvents:UIControlEventValueChanged];
+	
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,12 +40,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)changeFacPushSwitch:(id)sender{
+	if([sender isOn]){
+		NSLog(@"Autoplay ON");
+		[iBGGlobalData sharedInstance].facilityPushIsOn = YES;
+	} else{
+		NSLog(@"Autoplay OFF");
+		[iBGGlobalData sharedInstance].facilityPushIsOn = NO;
+	}
+}
+
+- (void)changeAutoPlaySwitch:(id)sender{
+	if([sender isOn]){
+		NSLog(@"Autoplay ON");
+		[iBGGlobalData sharedInstance].autoPlayIsOn = YES;
+	} else{
+		NSLog(@"Autoplay OFF");
+		[iBGGlobalData sharedInstance].autoPlayIsOn = NO;
+	}
+}
+
 - (IBAction)clickFBLogout:(UIButton *)sender {
+	
 	FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
 	[loginManager logOut];
 	
 	MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	hud.mode = MBProgressHUDModeCustomView;
+	// hud.margin = 10.f;
 	hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 	hud.labelText = @"已登出";
 	hud.removeFromSuperViewOnHide = YES;
@@ -49,13 +78,12 @@
 #pragma mark - Table view data source
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Incomplete implementation, return the number of sections
-//    return 0;
+//    return 2;
 //}
 //
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of rows
-//    return 0;
+//	
+//	return 2;
 //}
 
 /*

@@ -11,7 +11,8 @@
 @implementation UILabel (AutoHeight)
 
 - (void)autoHeight {
-    
+	
+	self.numberOfLines = 0;    
     CGRect txtFrame = self.frame;
     txtFrame.size.height = [self.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
                                                              options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine

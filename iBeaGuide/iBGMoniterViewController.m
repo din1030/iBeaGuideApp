@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 #import "iBGGlobal.h"
+#import "iBGGlobalData.h"
 #import "iBGMoniterViewController.h"
+#import "MBProgressHUD.h"
 
 #define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 #define kBeaconIdentifier @"iBeaGuide"
@@ -25,7 +27,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
-	
+
 	self.visitedSec = [[NSMutableArray alloc] init];
 	
 	// 設定偵測動畫
@@ -86,7 +88,7 @@
 	//	[self.locationManager startUpdatingLocation];
 	
 	// testing data
-	self.exhID = 18;
+//	self.exhID = 18;
 //	self.routeID = 1;
 //	self.routeItems = @[@17];
 	
@@ -97,7 +99,7 @@
 	// Dispose of any resources that can be recreated.
 }
 
-- (void) saveExhCollectData {
+- (void)saveExhCollectData {
 	
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	self.context = [appDelegate managedObjectContext];
@@ -144,6 +146,7 @@
 		NSLog(@"已儲存展覽資訊。");
 	}
 }
+
 #pragma mark - location
 
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion *)region
@@ -221,7 +224,7 @@
 		
 		[self presentViewController:alertController animated:YES completion:nil];
 		
-		// 若類型為展品，屬於當前展覽才需顯示
+	// 若類型為展品，屬於當前展覽才需顯示
 	} else if ([objType isEqualToString:@"item"] && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
 		
 
@@ -254,22 +257,39 @@
 			}
 			
 		}
+	
+	//  若是設備且推播設定為開啟，立刻推播或顯示提示訊息
+	} else if ([objType isEqualToString:@"fac"] && [iBGGlobalData sharedInstance].facilityPushIsOn) {
+		
+		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+			
+			[self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [self.objData objectForKey:@"push_content"]]];
+			
+		} else {
+			
+			MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+			hud.mode = MBProgressHUDModeCustomView;
+			// hud.margin = 10.f;
+			hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Info.png"]];
+			hud.labelText = [self.objData valueForKey:@"push_content"];
+			hud.removeFromSuperViewOnHide = YES;
+			[hud hide:YES afterDelay:2];
+			
+		}
 		
 	}
 	
 	return YES;
 }
 
--(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
 	// Exited the region
 	[self.locationManager stopRangingBeaconsInRegion:self.myBeaconRegion];
 }
 
--(void)locationManager:(CLLocationManager *)manager
+- (void)locationManager:(CLLocationManager *)manager
 	   didRangeBeacons:(NSArray *)beacons
-			  inRegion:(CLBeaconRegion *)region
-{
+			  inRegion:(CLBeaconRegion *)region {
 	
 	//	CLBeacon *foundBeacon = [beacons firstObject];
 	
@@ -282,9 +302,10 @@
 }
 
 
--(void)sendLocalNotificationWithMessage:(NSString *)message {
+- (void)sendLocalNotificationWithMessage:(NSString *)message {
 	UILocalNotification *notification = [[UILocalNotification alloc] init];
 	notification.alertBody = message;
+	notification.soundName = UILocalNotificationDefaultSoundName;
 	[[UIApplication sharedApplication] scheduleLocalNotification:notification];
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
@@ -329,6 +350,10 @@
 }
 
 - (IBAction)clickExitTest:(id)sender {
+	
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:17822 minor:61969 identifier:kBeaconIdentifier];
+	[self getBeaconLinkedObjByRegion:region];
 	
 	[self performSegueWithIdentifier:@"MoniterExit" sender:self];
 	

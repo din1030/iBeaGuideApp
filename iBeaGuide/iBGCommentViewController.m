@@ -67,12 +67,22 @@
 		NSArray *commentKeyArray = [NSArray arrayWithObjects: @"user_id", @"obj_id", @"type", @"rate", @"content", nil];
 		NSDictionary *comment = [NSDictionary dictionaryWithObjects:commentObjArray forKeys:commentKeyArray];
 		[self sendCommentData:comment url:@"http://114.34.1.57/iBeaGuide/App/post_comment_action"];
+
+		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		hud.mode = MBProgressHUDModeCustomView;
+		// hud.margin = 10.f;
+		hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+		hud.labelText = @"已送出";
+		hud.removeFromSuperViewOnHide = YES;
+		[hud hide:YES afterDelay:2];
+		
 		[self.navigationController popViewControllerAnimated:YES];
 	
 	} else {
 		
 		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		hud.mode = MBProgressHUDModeCustomView;
+		// hud.margin = 10.f;
 		hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Warning.png"]];
 		hud.labelText = @"尚未評分";
 		hud.removeFromSuperViewOnHide = YES;

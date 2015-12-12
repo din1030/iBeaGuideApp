@@ -28,7 +28,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *itemInfoPicBtn;
 
 @property (strong, nonatomic) IBOutlet UILabel *itemCreator;
-@property (strong, nonatomic) IBOutlet UILabel *itemFinishedTime;
+@property (strong, nonatomic) IBOutlet UILabel *itemFinishedTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *itemFinishedTimeValue;
 @property (strong, nonatomic) IBOutlet UILabel *fieldName1;
 @property (strong, nonatomic) IBOutlet UILabel *fieldValue1;
 @property (strong, nonatomic) IBOutlet UILabel *fieldName2;

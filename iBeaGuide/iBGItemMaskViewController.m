@@ -52,6 +52,30 @@
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	self.context = [appDelegate managedObjectContext];
 	
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"id = %@", [self.itemInfo valueForKey:@"id"]]];
+	[request setFetchLimit:1];
+	
+	NSError *fetchError;
+	NSUInteger count = [self.context countForFetchRequest:request error:&fetchError];
+	if (count > 0) {
+		
+		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		hud.mode = MBProgressHUDModeCustomView;
+		hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Warning.png"]];
+		hud.labelText = @"您已收藏過本展品";
+		// hud.margin = 10.f;
+		hud.removeFromSuperViewOnHide = YES;
+		[hud hide:YES afterDelay:2];
+		NSLog(@"展品已在使用者收藏中。");
+		
+		return;
+	} else if (count == NSNotFound) {
+		if (fetchError) {
+			NSLog(@"Collected item fetchError: \n UserInfo => %@ \n Description => %@",[fetchError userInfo], [fetchError localizedDescription]);
+		}
+	}
+	
 	// 建立一個要 insert 的物件
 	NSEntityDescription *itemEntity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.context];
 	NSManagedObject *item = [[NSManagedObject alloc] initWithEntity:itemEntity insertIntoManagedObjectContext:self.context];
@@ -112,16 +136,15 @@
 	
 	MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	hud.mode = MBProgressHUDModeCustomView;
+	// hud.margin = 10.f;
 	
-//	NSString *alertTitle, *alertMsg, *alertActionTitle;
-	NSError *fetchError = nil;
+	fetchError = nil;
 	NSArray *results = [self.context executeFetchRequest:fetchRequest error:&fetchError];
 	if (fetchError) {
 		
 		hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Warning.png"]];
 		hud.labelText = @"加入我的收藏失敗";
 		hud.detailsLabelText = @"請稍後再試。";
-//		alertActionTitle = @"好";
 		NSLog(@"fetchError: \n UserInfo => %@ \n Description => %@", [fetchError userInfo], [fetchError localizedDescription]);
 		
 	} else {
@@ -138,7 +161,6 @@
 			hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Warning.png"]];
 			hud.labelText = @"加入我的收藏失敗";
 			hud.detailsLabelText = @"請稍後再試。";
-//			alertActionTitle = @"好";
 			NSLog(@"saveError: \n UserInfo => %@ \n Description => %@", [saveError userInfo],[saveError localizedDescription]);
 		
 		} else {
@@ -146,7 +168,6 @@
 			hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Collect.png"]];
 			hud.labelText = @"已加入我的收藏";
 			hud.detailsLabelText = @"您可以在收藏頁面隨時觀看收藏的展品。";
-//			alertActionTitle = @"好";
 		
 		}
 	}
@@ -154,21 +175,7 @@
 //	hud.delegate = self;
 	[hud show:YES];
 	[hud hide:YES afterDelay:2];
-	
 
-	
-//	UIAlertController *collectAlertController = [UIAlertController alertControllerWithTitle:alertTitle
-//																				   message:alertMsg
-//																			preferredStyle:UIAlertControllerStyleAlert];
-//	UIAlertAction *okAction = [UIAlertAction actionWithTitle:alertActionTitle style:UIAlertActionStyleCancel handler:nil];
-//	
-//	[collectAlertController addAction:okAction];
-//	
-//	collectAlertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
-//	collectAlertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
-//	collectAlertController.view.layer.cornerRadius = 5;
-//	
-//	[self presentViewController:collectAlertController animated:YES completion:nil];
 
 }
 
@@ -185,6 +192,14 @@
 									   NSLog(@"使用者取消 FB 登入");
 								   } else {
 									   NSLog(@"Logged in");
+									   if ([FBSDKAccessToken currentAccessToken]) {
+										   [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, email, birthday, gender"}]
+											startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+												if (!error) {
+													NSLog(@"fetched user:%@", result);
+												}
+											}];
+									   }
 								   }
 							   }];
 	}

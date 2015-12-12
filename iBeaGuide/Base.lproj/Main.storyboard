@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jco-Kx-OV3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="gKR-J5-Sld">
-            <objects>
-                <navigationController id="jco-Kx-OV3" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v0s-vB-I3K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4Nu-db-SVV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mcj-Gf-4OH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-937" y="613"/>
-        </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -74,27 +58,16 @@
             </objects>
             <point key="canvasLocation" x="-462" y="613"/>
         </scene>
-        <!--iBeaGuide-->
+        <!--Moniter View Controller-->
         <scene sceneID="ihT-uZ-Oim">
             <objects>
-                <viewController storyboardIdentifier="moniterVC" autoresizesArchivedViewToFullSize="NO" id="aQ3-lz-vsg" customClass="iBGMoniterViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="moniterVC" title="Moniter View Controller" id="aQ3-lz-vsg" customClass="iBGMoniterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sk3-eB-UMN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detect_3.png" id="G94-2e-4a2">
-                                <rect key="frame" x="115" y="235" width="90" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
-                                <rect key="frame" x="115" y="300" width="90" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
-                                <rect key="frame" x="34" y="379" width="106" height="30"/>
+                                <rect key="frame" x="34" y="302" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="測試展覽訊號">
@@ -105,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
-                                <rect key="frame" x="181" y="378" width="106" height="31"/>
+                                <rect key="frame" x="181" y="301" width="106" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="測試展品訊號">
@@ -116,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
-                                <rect key="frame" x="34" y="437" width="106" height="33"/>
+                                <rect key="frame" x="34" y="360" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="測試展區">
@@ -127,7 +100,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
-                                <rect key="frame" x="181" y="437" width="106" height="33"/>
+                                <rect key="frame" x="181" y="360" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="測試出口">
@@ -137,13 +110,27 @@
                                     <action selector="clickExitTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="sch-bD-AGA"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detect_3.png" id="G94-2e-4a2">
+                                <rect key="frame" x="115" y="185" width="90" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
+                                <rect key="frame" x="115" y="250" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" id="PqJ-xX-w32"/>
-                    <navigationItem key="navigationItem" title="iBeaGuide" prompt="" id="FyA-Vr-gpF">
-                        <barButtonItem key="backBarButtonItem" title=" " id="aCb-a3-phL"/>
+                    <navigationItem key="navigationItem" title="iBeaGuide" id="eId-MM-ofe">
+                        <barButtonItem key="backBarButtonItem" title=" " id="tmu-eJ-xha"/>
+                        <barButtonItem key="rightBarButtonItem" title=" 22" id="thg-b2-023"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="moniterAnimation" destination="G94-2e-4a2" id="AFo-5T-66V"/>
                         <outlet property="moniterButton" destination="2M1-Oa-HIE" id="4Xo-SI-TZf"/>
@@ -182,7 +169,7 @@
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="upr-UH-0cZ">
-                                <rect key="frame" x="0.0" y="477" width="320" height="37"/>
+                                <rect key="frame" x="56" y="477" width="208" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="pageIndicatorTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.8862745098" green="0.2901960784" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -202,6 +189,9 @@
                     <navigationItem key="navigationItem" id="Zfp-Al-v3a">
                         <barButtonItem key="backBarButtonItem" title=" " id="7L1-xo-ZSw">
                             <color key="tintColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="play.png" id="hAt-9e-eEg">
+                            <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -256,48 +246,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄二：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y4j-O7-Ten">
-                                        <rect key="frame" x="25" y="378" width="51" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄一資料" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VKf-Cl-yc2">
-                                        <rect key="frame" x="73" y="348" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄二資料" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E3g-wd-lTo">
-                                        <rect key="frame" x="73" y="378" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄三：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Osc-A2-hBK">
-                                        <rect key="frame" x="25" y="408" width="51" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄三資料" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OY5-1n-ojo">
-                                        <rect key="frame" x="73" y="408" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欄一：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KHo-Yz-KFd">
-                                        <rect key="frame" x="25" y="348" width="51" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xg0-iZ-dv1">
                                         <rect key="frame" x="0.0" y="60" width="320" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -305,14 +253,6 @@
                                             <action selector="imageButtonTapped:" destination="qEw-I5-78k" eventType="touchUpInside" id="feP-gQ-iKq"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ws-1t-TZt">
-                                        <rect key="frame" x="25" y="438" width="270" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">國立政治大學數位內容碩士學位學程，是國內第一個融合傳播學院與理學院資訊科學系的碩士學程。本學程自 2008 年 6 月開始籌備，2009 年秋正式成立。旨在提供數位內容的專業學習管道，以建立學生在人文內涵、資訊設計及科技實作的跨領域融合能力，並培育數位內容之創造、設計、企劃及系統研發之專業領導人才。培養學生具人文社會與世界觀的敘事能力、資訊科技能力、數位內容應用能力，亦即「數位內容的創新力與整合執行力」。</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="創作時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PMC-S4-eFF">
                                         <rect key="frame" x="25" y="318" width="85" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -327,6 +267,14 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3ws-1t-TZt">
+                                        <rect key="frame" x="25" y="348" width="270" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">國立政治大學數位內容碩士學位學程，是國內第一個融合傳播學院與理學院資訊科學系的碩士學程。本學程自 2008 年 6 月開始籌備，2009 年秋正式成立。旨在提供數位內容的專業學習管道，以建立學生在人文內涵、資訊設計及科技實作的跨領域融合能力，並培育數位內容之創造、設計、企劃及系統研發之專業領導人才。培養學生具人文社會與世界觀的敘事能力、資訊科技能力、數位內容應用能力，亦即「數位內容的創新力與整合執行力」。</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -334,18 +282,14 @@
                         <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="fieldName1" destination="KHo-Yz-KFd" id="UxR-RD-E2Q"/>
-                        <outlet property="fieldName2" destination="y4j-O7-Ten" id="bu5-dt-zy8"/>
-                        <outlet property="fieldName3" destination="Osc-A2-hBK" id="OMW-L7-tu4"/>
-                        <outlet property="fieldValue1" destination="VKf-Cl-yc2" id="QH3-oV-g66"/>
-                        <outlet property="fieldValue2" destination="E3g-wd-lTo" id="21C-Ms-6xF"/>
-                        <outlet property="fieldValue3" destination="OY5-1n-ojo" id="D4u-VT-jmg"/>
                         <outlet property="itemBrief" destination="3ws-1t-TZt" id="9v2-M3-lqo"/>
                         <outlet property="itemCreator" destination="dUP-DH-CI6" id="UkL-Vt-meb"/>
-                        <outlet property="itemFinishedTime" destination="Wha-Pu-zUf" id="bSc-Pl-vDh"/>
+                        <outlet property="itemFinishedTimeLabel" destination="PMC-S4-eFF" id="Ki0-vs-AA6"/>
+                        <outlet property="itemFinishedTimeValue" destination="Wha-Pu-zUf" id="nVK-9e-oK6"/>
                         <outlet property="itemInfoPicBtn" destination="xg0-iZ-dv1" id="Wip-GI-fjw"/>
                         <outlet property="itemInfoScrollView" destination="0jg-6g-JCZ" id="BCv-Od-aqc"/>
                         <outlet property="itemSubtitle" destination="LyV-Yw-DMg" id="QEI-uN-lhm"/>
@@ -706,49 +650,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qdN-0P-Lbd">
-                                        <rect key="frame" x="25" y="289" width="51" height="20"/>
+                                        <rect key="frame" x="25" y="288" width="51" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者資料" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8jB-NR-4aH">
-                                        <rect key="frame" x="73" y="289" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展場：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XuV-TM-6jV">
-                                        <rect key="frame" x="25" y="349" width="51" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間資料" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Y5-8o-R2n">
-                                        <rect key="frame" x="73" y="319" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展場資料" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Za-1F-Zs2">
-                                        <rect key="frame" x="73" y="349" width="222" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="官網：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVn-5v-xNQ">
-                                        <rect key="frame" x="25" y="319" width="51" height="20"/>
+                                        <rect key="frame" x="73" y="288" width="222" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8xB-hQ-TOX">
-                                        <rect key="frame" x="25" y="378" width="270" height="31"/>
+                                        <rect key="frame" x="25" y="318" width="270" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">國立政治大學數位內容碩士學位學程，是國內第一個融合傳播學院與理學院資訊科學系的碩士學程。本學程自 2008 年 6 月開始籌備，2009 年秋正式成立。旨在提供數位內容的專業學習管道，以建立學生在人文內涵、資訊設計及科技實作的跨領域融合能力，並培育數位內容之創造、設計、企劃及系統研發之專業領導人才。培養學生具人文社會與世界觀的敘事能力、資訊科技能力、數位內容應用能力，亦即「數位內容的創新力與整合執行力」。</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -765,11 +681,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="detailFieldName1" destination="qdN-0P-Lbd" id="s3i-kQ-H59"/>
-                        <outlet property="detailFieldName2" destination="KVn-5v-xNQ" id="NXJ-e1-a2o"/>
-                        <outlet property="detailFieldName3" destination="XuV-TM-6jV" id="1qH-r1-pJp"/>
                         <outlet property="detailFieldValue1" destination="8jB-NR-4aH" id="jvl-uX-9YN"/>
-                        <outlet property="detailFieldValue2" destination="1Y5-8o-R2n" id="hNE-EK-ZB8"/>
-                        <outlet property="detailFieldValue3" destination="7Za-1F-Zs2" id="CF7-Tp-oaE"/>
                         <outlet property="imageButton" destination="gDd-KJ-7ND" id="VcC-0O-lS4"/>
                         <outlet property="itemDetail" destination="8xB-hQ-TOX" id="cvq-Yq-BeE"/>
                         <outlet property="itemDetailScrollView" destination="nD5-xs-9uE" id="jhs-Jg-NGq"/>
@@ -920,19 +832,22 @@
         <!--Moniter Nav View Controller-->
         <scene sceneID="oKP-Uk-SUq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jCf-Np-Q5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Moniter Nav View Controller" id="o3d-My-F3G" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="NWZ-jV-sOF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="p2L-fT-JHj">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="p2L-fT-JHj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.2156862745" green="0.72156862749999995" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Iyj-8v-1Io">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="aQ3-lz-vsg" kind="relationship" relationship="rootViewController" id="sJr-2a-cnx"/>
+                        <segue destination="aQ3-lz-vsg" kind="relationship" relationship="rootViewController" id="a2c-5k-1gE"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jCf-Np-Q5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="689" y="-278"/>
         </scene>
@@ -1025,7 +940,6 @@
         <!--My Collection Nav View Controller-->
         <scene sceneID="Fyl-np-qMl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2g9-vQ-ajV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="My Collection Nav View Controller" navigationBarHidden="YES" id="c6Q-FJ-XQJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="pcA-qD-Qvp"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -1037,6 +951,7 @@
                         <segue destination="XDo-dL-PSd" kind="relationship" relationship="rootViewController" id="mLC-lc-edf"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2g9-vQ-ajV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="651" y="1447"/>
         </scene>
@@ -1044,76 +959,86 @@
         <scene sceneID="xjd-Cb-6fq">
             <objects>
                 <tableViewController title="Setting Table View Controller" id="GfC-I6-2S9" customClass="iBGSettingTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cLL-Tc-KAm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cLL-Tc-KAm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="設定" id="E8g-Yy-NsH">
+                            <tableViewSection id="Osr-2f-j5D">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="LFu-sb-8OX">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="fPY-Qk-FJb">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFu-sb-8OX" id="ZQJ-8V-o5D">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPY-Qk-FJb" id="5u0-nM-hDd">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="143"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通知設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0WP-UU-ZwG">
-                                                    <rect key="frame" x="25" y="11" width="262" height="21"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="GVi-aN-liY">
+                                                    <rect key="frame" x="110" y="18" width="100" height="108"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="bH9-Vl-kiB">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bH9-Vl-kiB" id="b3h-Qy-56J">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="語音播放設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YGi-m3-oR8">
-                                                    <rect key="frame" x="25" y="11" width="262" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="3Cp-1E-cHg">
-                                        <rect key="frame" x="0.0" y="116" width="320" height="58"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Cp-1E-cHg" id="oau-Ua-yJB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nK9-Sh-VCI">
-                                                    <rect key="frame" x="90" y="10" width="140" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="fblogout.png"/>
-                                                    <connections>
-                                                        <action selector="clickFBLogout:" destination="GfC-I6-2S9" eventType="touchUpInside" id="jcf-eB-NP8"/>
-                                                    </connections>
-                                                </button>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="關於" id="gRn-pX-kQL">
+                            <tableViewSection id="E8g-Yy-NsH">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LFu-sb-8OX">
+                                        <rect key="frame" x="0.0" y="144" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFu-sb-8OX" id="ZQJ-8V-o5D">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展場設備推播通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0WP-UU-ZwG">
+                                                    <rect key="frame" x="25" y="12" width="262" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="37x-Checkmark.png" id="Q2K-8c-Xqb">
+                                                    <rect key="frame" x="258" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" red="0.16078431900000001" green="0.67058825489999996" blue="0.88627451660000001" alpha="0.89999997620000005" colorSpace="calibratedRGB"/>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bH9-Vl-kiB">
+                                        <rect key="frame" x="0.0" y="188" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bH9-Vl-kiB" id="b3h-Qy-56J">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配戴耳機自動播放語音導覽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YGi-m3-oR8">
+                                                    <rect key="frame" x="25" y="11" width="204" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="37x-Checkmark.png" id="sId-08-XDx">
+                                                    <rect key="frame" x="258" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" red="0.16078431900000001" green="0.67058825489999996" blue="0.88627451660000001" alpha="0.89999997620000005" colorSpace="calibratedRGB"/>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="gRn-pX-kQL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="q79-OX-hgd">
-                                        <rect key="frame" x="0.0" y="202" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="232" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q79-OX-hgd" id="7b4-md-9ya">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1133,20 +1058,21 @@
                                             <segue destination="Zlh-zw-s8u" kind="push" id="Cbb-TV-Qur"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="hhb-nY-QWW">
-                                        <rect key="frame" x="0.0" y="246" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="3Cp-1E-cHg">
+                                        <rect key="frame" x="0.0" y="276" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hhb-nY-QWW" id="yne-ht-SM7">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Cp-1E-cHg" id="oau-Ua-yJB">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版權資訊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vik-HZ-Na4">
-                                                    <rect key="frame" x="25" y="11" width="262" height="21"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nK9-Sh-VCI">
+                                                    <rect key="frame" x="90" y="10" width="140" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <state key="normal" backgroundImage="fblogout.png"/>
+                                                    <connections>
+                                                        <action selector="clickFBLogout:" destination="GfC-I6-2S9" eventType="touchUpInside" id="jcf-eB-NP8"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1160,7 +1086,11 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" id="mMt-u7-y5r"/>
-                    <navigationItem key="navigationItem" title="系統設定" id="Zkb-p8-IQ3"/>
+                    <navigationItem key="navigationItem" title="iBeaGuide" id="Zkb-p8-IQ3"/>
+                    <connections>
+                        <outlet property="autoPlaySwitch" destination="sId-08-XDx" id="WDg-fu-Lgu"/>
+                        <outlet property="facPushSwitch" destination="Q2K-8c-Xqb" id="CGK-AP-UPT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUs-hQ-o5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1173,6 +1103,29 @@
                     <view key="view" contentMode="scaleToFill" id="qeT-Lb-CHc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="din.jpg" id="8Cz-26-VCr">
+                                <rect key="frame" x="88" y="44" width="144" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="鄭嘉鼎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aqL-VK-Xv4">
+                                <rect key="frame" x="122" y="213" width="75" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUB-cI-4qj">
+                                <rect key="frame" x="30" y="249" width="260" height="197"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">鄭嘉鼎，畢業於台灣大學資管系，政治大學數位內容碩士學位學程在學。喜愛獨立音樂與攝影，擅長網頁與手機程式設計。
+
+雖為資訊領域出身，卻對傳播與文化研究甚有濃厚興趣，希望可以跨出舒適圈，結合自己的專長、將技術與不同內容串連創造各種可能。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.97647058959999999" green="0.96862745289999996" blue="0.9529411793" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="1q0-G6-YPz"/>
@@ -1184,10 +1137,10 @@
         <!--Setting Nav View Controller-->
         <scene sceneID="d8j-wF-zko">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HVZ-Yk-Zhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Setting Nav View Controller" navigationBarHidden="YES" id="3Si-wZ-PGW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="mmS-Df-cPC"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="sJi-Vb-YPA">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="sJi-Vb-YPA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1199,6 +1152,7 @@
                         <segue destination="GfC-I6-2S9" kind="relationship" relationship="rootViewController" id="Baw-Pl-nBA"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HVZ-Yk-Zhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="108" y="2174"/>
         </scene>
@@ -1207,13 +1161,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="ItemCommentTableVC" id="HSi-oY-AEq" customClass="iBGCommentTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="x9Y-Fc-K1O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCommentHeader" rowHeight="58" id="XLj-a4-4ru" customClass="iBGCommentTableViewHeaderCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="58"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="XLj-a4-4ru" id="gHo-8P-qKS">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
@@ -1242,7 +1196,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="ItemComment" rowHeight="153" id="YMi-l1-lHq" customClass="iBGCommentTableViewCell">
-                                <rect key="frame" x="0.0" y="150" width="320" height="153"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="153"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YMi-l1-lHq" id="Ioj-pf-tEZ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
@@ -1318,7 +1272,7 @@ By default a UILabel will center the text vertically. To have the text top align
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemNoComment" rowHeight="67" id="mca-Ao-qJu">
-                                <rect key="frame" x="0.0" y="303" width="320" height="67"/>
+                                <rect key="frame" x="0.0" y="239" width="320" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mca-Ao-qJu" id="zW8-Xb-76c">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
@@ -1343,6 +1297,7 @@ By default a UILabel will center the text vertically. To have the text top align
                             <outlet property="delegate" destination="HSi-oY-AEq" id="7FV-nK-9Vo"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qN1-9C-E4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1526,7 +1481,7 @@ By default a UILabel will center the text vertically. To have the text top align
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="展覽名稱" id="JF0-ot-Mju">
-                        <barButtonItem key="backBarButtonItem" title=" " id="3IO-wO-pW2"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="ddK-Oh-20X"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1586,8 +1541,10 @@ By default a UILabel will center the text vertically. To have the text top align
         </scene>
     </scenes>
     <resources>
+        <image name="37x-Checkmark.png" width="37" height="37"/>
         <image name="Mona_Lisa.jpg" width="320" height="270"/>
         <image name="detect_3.png" width="90" height="40"/>
+        <image name="din.jpg" width="380" height="380"/>
         <image name="enter.png" width="15" height="28"/>
         <image name="fblogin.png" width="130" height="34"/>
         <image name="fblogout.png" width="130" height="34"/>
@@ -1596,6 +1553,7 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="message_2.png" width="75" height="75"/>
         <image name="message_full.png" width="60" height="60"/>
         <image name="message_menu.png" width="84" height="84"/>
+        <image name="play.png" width="32" height="32"/>
         <image name="plus_full.png" width="60" height="60"/>
         <image name="register.png" width="55" height="34"/>
         <image name="share_2.png" width="75" height="75"/>
@@ -1604,8 +1562,8 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NdZ-Oq-4S9"/>
+        <segue reference="NzM-zW-bFY"/>
         <segue reference="7xK-sO-LCw"/>
-        <segue reference="ZFZ-PG-2jr"/>
+        <segue reference="NdZ-Oq-4S9"/>
     </inferredMetricsTieBreakers>
 </document>

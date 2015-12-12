@@ -6,13 +6,19 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobalData.h"
 #import "iBGItemPageParentViewController.h"
 #import "iBGItemInfoViewController.h"
 #import "iBGItemDetailViewController.h"
 #import "iBGCommentTableViewController.h"
 #import "iBGItemMaskViewController.h"
+#import <AVFoundation/AVAudioPlayer.h>
+#import <AVFoundation/AVAudioSession.h>
 
-@interface iBGItemPageParentViewController ()
+@interface iBGItemPageParentViewController () <AVAudioPlayerDelegate>
+
+@property AVAudioPlayer *theAudio;
+@property AVAudioPlayer *theAudio2;
 
 @end
 
@@ -73,12 +79,107 @@
 	} else {
 		self.itemMenuBtn.hidden = YES;
 	}
+	
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
+	self.theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+	self.theAudio.delegate = self;
+	
+	path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
+	self.theAudio2 = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+	self.theAudio2.delegate = self;
+	
+	// 設定 category 讓聲音從 聽筒 播放
+	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+	
+	NSArray *availableOutputs = [[AVAudioSession sharedInstance] currentRoute].outputs;
+	for (AVAudioSessionPortDescription *portDescription in availableOutputs) {
+		if ([portDescription.portType isEqual:AVAudioSessionPortHeadphones]) {
+			NSLog(@"耳機連接中");
+			[[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+			if ([iBGGlobalData sharedInstance].autoPlayIsOn) {
+				[self playAudioGuide];
+			}
+			break;
+		}
+	}
+	
+	// 啟動 proximity 偵測，設定狀態改變的行為
+	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:)
+												 name:UIDeviceProximityStateDidChangeNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioSessionRoute:)
+												 name:AVAudioSessionRouteChangeNotification object:nil];
 }
 
+- (void)sensorStateChange:(NSNotificationCenter *)notification
+{
+	if ([[UIDevice currentDevice] proximityState] == YES) {
+		NSLog(@"Device is close to user.");
+		[self playAudioGuide];
+	} else {
+		NSLog(@"Device is away from user.");
+		[self pauseAudioGuide];
+	}
+}
+
+- (void)didChangeAudioSessionRoute:(NSNotification *)notification
+{
+	NSLog(@"AVAudioSessionRoute has changed.");
+	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+	NSArray *availableOutputs = [[AVAudioSession sharedInstance] currentRoute].outputs;
+	for (AVAudioSessionPortDescription *portDescription in availableOutputs) {
+		if ([portDescription.portType isEqual:AVAudioSessionPortHeadphones]) {
+			NSLog(@"耳機連接中");
+			[[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+			break;
+		}
+	}
+	
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+	if ([iBGGlobalData sharedInstance].autoPlayIsOn) {
+		[self playAudioGuide];
+	}
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[self stopAudioGuide];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)playAudioGuide {
+	
+	[self.theAudio play];
+//	[self.theAudio2 play];
+	
+//	//取得播放檔案的位置
+//	NSURL *url = [NSURL URLWithString:@"http://FileName.mp3"];
+//	NSData *myNetworkData = [NSData dataWithContentsOfURL:url];
+// 
+//	//與音樂檔案做連結
+//	NSError* error = nil;
+//	myPlayer = [[AVAudioPlayer alloc] initWithData:myNetworkData error:&error];
+// 
+//	if (!url || error) {
+//		//錯誤處理常式
+//	}
+	
+}
+
+- (IBAction)stopAudioGuide {
+	[self.theAudio stop];
+}
+
+- (IBAction)pauseAudioGuide {
+	[self.theAudio pause];
 }
 
 //#pragma mark - Page View Controller Data Delegate
@@ -97,7 +198,7 @@
 
 #pragma mark - Page View Controller Data Source
 
--(UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
 	 viewControllerBeforeViewController:(UIViewController *)viewController {
 	// 從 page content array 取出目前 VC 的 index
 	NSUInteger currentIndex = [self.pageviewContentVCs indexOfObject:viewController];

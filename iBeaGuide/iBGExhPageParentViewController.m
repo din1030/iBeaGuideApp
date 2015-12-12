@@ -62,12 +62,13 @@
 		[self.navigationController.navigationBar addSubview:self.navTitleLabel];
 		[self.navigationController.navigationBar addSubview:self.exhPageControl];
 	
+    // 從收藏頁面過來
 	} else {
-
-//		self.exhPageControl.hidden = YES;
-//		self.navTitleLabel.hidden = YES;
-		self.navigationItem.title = [self.exhInfo objectForKey:@"title"];
-		self.enterExhBtn.hidden = YES;
+        
+		self.exhPageControl.hidden = YES;
+		self.navTitleLabel.hidden = YES;
+        self.enterExhBtn.hidden = YES;
+        self.navigationItem.title = [self.exhInfo objectForKey:@"title"];
 		
 	}
 	

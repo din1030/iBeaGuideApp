@@ -30,6 +30,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	
 	self.exhInMyCollection = [self getCollectionData];
+	NSLog(@"Exh => %@", self.exhInMyCollection);
 	
 	if ([self.exhInMyCollection count] < 2) {
 		self.collectionPageControlBG.hidden = YES;

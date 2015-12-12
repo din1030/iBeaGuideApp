@@ -22,13 +22,15 @@
 	self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
     self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
     self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
-    self.itemFinishedTime.text = [self.itemInfo objectForKey:@"finished_time"];
+    self.itemFinishedTimeValue.text = [self.itemInfo objectForKey:@"finished_time"];
+    [self.itemFinishedTimeValue autoHeight];
     self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
-
+    [self.itemBrief autoHeight];
+    
 #warning 圖片尚未填入
 	
-	NSArray *customFieldName = [NSArray arrayWithObjects:self.fieldName1, self.fieldName2, self.fieldName3, nil];
-	NSArray *customFieldValue = [NSArray arrayWithObjects:self.fieldValue1, self.fieldValue2, self.fieldValue3, nil];
+//	NSArray *customFieldName = [NSArray arrayWithObjects:self.fieldName1, self.fieldName2, self.fieldName3, nil];
+//	NSArray *customFieldValue = [NSArray arrayWithObjects:self.fieldValue1, self.fieldValue2, self.fieldValue3, nil];
 	NSMutableArray *basicFields;
 	
 	// 抓取客製欄位
@@ -44,7 +46,31 @@
 		}
 	}
     
-    int realFieldCount = (int)[basicFields count];
+//    int realFieldCount = (int)[basicFields count];
+    
+    CGRect refNameFrame = self.itemFinishedTimeLabel.frame;
+    CGRect refValueFrame = self.itemFinishedTimeValue.frame;
+    int i;
+    for (i = 0; i < [basicFields count]; i++) {
+        
+        UILabel *curNameLabel = [[UILabel alloc] init];
+        curNameLabel.text =  [NSString stringWithFormat:@"%@：", basicFields[i][@"field_name"]];
+        curNameLabel.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, curNameLabel.intrinsicContentSize.width, refNameFrame.size.height};
+        
+        UILabel *curValueLabel = [[UILabel alloc] init];
+        curValueLabel.text = basicFields[i][@"field_value"];
+        curValueLabel.frame = (CGRect){curNameLabel.frame.origin.x + curNameLabel.frame.size.width, curNameLabel.frame.origin.y , self.view.frame.size.width - 50 - curNameLabel.frame.size.width, refNameFrame.size.height};
+        [curValueLabel autoHeight];
+        [self.itemInfoScrollView addSubview:curNameLabel];
+        [self.itemInfoScrollView addSubview:curValueLabel];
+        
+        refNameFrame = curNameLabel.frame;
+        refValueFrame = curValueLabel.frame;
+    
+    }
+    self.itemBrief.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
+    
+/*
 	for (int i = 0; i < [customFieldName count]; i++) {
         // 有欄位資料就顯示，並動態調整高度
         if (i < realFieldCount) {
@@ -73,8 +99,9 @@
             ((UILabel *)customFieldName[i]).hidden = YES;
             ((UILabel *)customFieldValue[i]).hidden = YES;
         }
-    }
-    [self.itemBrief autoHeight];
+    } 
+ */
+    
     
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
