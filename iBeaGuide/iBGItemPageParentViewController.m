@@ -35,6 +35,8 @@
 	self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 	[[self navigationController] setNavigationBarHidden:NO];
 	
+	self.audioCtrl.image = [[UIImage imageNamed:@"play.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	
 	// Create page view controller
 	self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemPageVC"];
 	self.pageViewController.dataSource = self;
@@ -80,17 +82,38 @@
 		self.itemMenuBtn.hidden = YES;
 	}
 	
+#warning 語音尚未填入
+
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
 	self.theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
 	self.theAudio.delegate = self;
 	
-	path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
-	self.theAudio2 = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
-	self.theAudio2.delegate = self;
+	//	//取得播放檔案的位置
+	//	NSURL *url = [NSURL URLWithString:@"http://FileName.mp3"];
+	//	NSData *myNetworkData = [NSData dataWithContentsOfURL:url];
+	//
+	//	//與音樂檔案做連結
+	//	NSError* error = nil;
+	//	myPlayer = [[AVAudioPlayer alloc] initWithData:myNetworkData error:&error];
+	//
+	//	if (!url || error) {
+	//		//錯誤處理常式
+	//	}
 	
 	// 設定 category 讓聲音從 聽筒 播放
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
 	
+	// 啟動 proximity 偵測，偵測使用者靠近或遠離決定播放或暫停
+	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
+	
+	// 判斷聲音 outputs 改變（插耳機
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioSessionRoute:) name:AVAudioSessionRouteChangeNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	
+	// 若使用者有接耳機，判斷是否打開自動播放
 	NSArray *availableOutputs = [[AVAudioSession sharedInstance] currentRoute].outputs;
 	for (AVAudioSessionPortDescription *portDescription in availableOutputs) {
 		if ([portDescription.portType isEqual:AVAudioSessionPortHeadphones]) {
@@ -102,18 +125,18 @@
 			break;
 		}
 	}
-	
-	// 啟動 proximity 偵測，設定狀態改變的行為
-	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:)
-												 name:UIDeviceProximityStateDidChangeNotification object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioSessionRoute:)
-												 name:AVAudioSessionRouteChangeNotification object:nil];
 }
 
-- (void)sensorStateChange:(NSNotificationCenter *)notification
-{
+- (void)viewDidDisappear:(BOOL)animated {
+	[self stopAudioGuide];
+}
+
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
+}
+
+- (void)sensorStateChange:(NSNotificationCenter *)notification {
 	if ([[UIDevice currentDevice] proximityState] == YES) {
 		NSLog(@"Device is close to user.");
 		[self playAudioGuide];
@@ -123,8 +146,7 @@
 	}
 }
 
-- (void)didChangeAudioSessionRoute:(NSNotification *)notification
-{
+- (void)didChangeAudioSessionRoute:(NSNotification *)notification {
 	NSLog(@"AVAudioSessionRoute has changed.");
 	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
 	NSArray *availableOutputs = [[AVAudioSession sharedInstance] currentRoute].outputs;
@@ -138,47 +160,21 @@
 	
 }
 
-
-- (void)viewDidAppear:(BOOL)animated {
-	if ([iBGGlobalData sharedInstance].autoPlayIsOn) {
-		[self playAudioGuide];
-	}
-}
-
-
-- (void)viewDidDisappear:(BOOL)animated {
-	[self stopAudioGuide];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)playAudioGuide {
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
 	
+	self.audioCtrl.image = [[UIImage imageNamed:@"play.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	
+}
+
+- (void)playAudioGuide {
 	[self.theAudio play];
-//	[self.theAudio2 play];
-	
-//	//取得播放檔案的位置
-//	NSURL *url = [NSURL URLWithString:@"http://FileName.mp3"];
-//	NSData *myNetworkData = [NSData dataWithContentsOfURL:url];
-// 
-//	//與音樂檔案做連結
-//	NSError* error = nil;
-//	myPlayer = [[AVAudioPlayer alloc] initWithData:myNetworkData error:&error];
-// 
-//	if (!url || error) {
-//		//錯誤處理常式
-//	}
-	
 }
 
-- (IBAction)stopAudioGuide {
+- (void)stopAudioGuide {
 	[self.theAudio stop];
 }
 
-- (IBAction)pauseAudioGuide {
+- (void)pauseAudioGuide {
 	[self.theAudio pause];
 }
 
@@ -240,6 +236,17 @@
 	[self addChildViewController:maskVC];
 	[self.view addSubview:maskVC.view];
 	
+}
+
+- (IBAction)clickAudioCtrl:(UIBarButtonItem *)sender {
+	if (!self.theAudio.isPlaying) {
+		sender.image = [[UIImage imageNamed:@"pause.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+		[self playAudioGuide];
+		
+	} else {
+		[self pauseAudioGuide];
+		sender.image = [[UIImage imageNamed:@"play.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	}
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

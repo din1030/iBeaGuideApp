@@ -92,10 +92,9 @@
 
 #pragma mark - Page View Controller Data Source
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
-{
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+
 	NSUInteger currentIndex = ((iBGMyCollectionTableViewController*) viewController).pageIndex;
-	
 	if ((currentIndex == 0) || (currentIndex == NSNotFound)) {
 		return nil;
 	}
@@ -103,22 +102,18 @@
 	return [self viewControllerAtIndex:currentIndex - 1];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+	
 	NSUInteger currentIndex = ((iBGMyCollectionTableViewController*) viewController).pageIndex;
-	
-	if (currentIndex == NSNotFound) {
+	if (currentIndex == NSNotFound || currentIndex == ([self.exhInMyCollection count] - 1)) {
 		return nil;
 	}
-	
-	if (currentIndex == [self.exhInMyCollection count] - 1) {
-		return nil;
-	}
+
 	return [self viewControllerAtIndex:currentIndex + 1];
 }
 
-- (iBGMyCollectionTableViewController *)viewControllerAtIndex:(NSUInteger)index
-{
+- (iBGMyCollectionTableViewController *)viewControllerAtIndex:(NSUInteger)index {
+	
 	if (([self.exhInMyCollection count] == 0) || (index >= [self.exhInMyCollection count])) {
 		return nil;
 	}
@@ -130,15 +125,5 @@
 	
 	return iBGMyCollectionTableViewController;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

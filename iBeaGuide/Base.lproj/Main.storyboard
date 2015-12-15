@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="9xP-Bo-2DW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -17,15 +17,12 @@
                                 <rect key="frame" x="90" y="122" width="140" height="151"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bKz-SN-IK6">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bKz-SN-IK6">
                                 <rect key="frame" x="170" y="320" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="login.png"/>
-                                <connections>
-                                    <segue destination="VFv-4v-27e" kind="modal" modalTransitionStyle="crossDissolve" id="FTN-Nb-yLk"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Vm-fh-wga">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Vm-fh-wga">
                                 <rect key="frame" x="90" y="320" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="register.png"/>
@@ -52,24 +49,42 @@
                     <connections>
                         <outlet property="FBLoginBtn" destination="9TC-zK-A27" id="t4i-RZ-SO0"/>
                         <outlet property="registerBtn" destination="7Vm-fh-wga" id="co1-QC-ZdW"/>
+                        <segue destination="VFv-4v-27e" kind="push" identifier="HomeToMoniter" id="BX4-y2-68w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-462" y="613"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3yR-eQ-fQ2">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="9xP-Bo-2DW" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gfk-5x-c4U">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9L2-Qm-6rA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CMj-SC-kVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-944" y="613"/>
+        </scene>
         <!--Moniter View Controller-->
         <scene sceneID="ihT-uZ-Oim">
             <objects>
                 <viewController storyboardIdentifier="moniterVC" title="Moniter View Controller" id="aQ3-lz-vsg" customClass="iBGMoniterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sk3-eB-UMN">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
-                                <rect key="frame" x="34" y="302" width="106" height="30"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
+                                <rect key="frame" x="34" y="423" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展覽訊號">
                                     <color key="titleColor" red="0.8862745098" green="0.2901960784" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -77,10 +92,10 @@
                                     <action selector="clickExhTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="3yJ-Xn-lNp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
-                                <rect key="frame" x="181" y="301" width="106" height="31"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
+                                <rect key="frame" x="181" y="423" width="106" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展品訊號">
                                     <color key="titleColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -88,10 +103,10 @@
                                     <action selector="clickItemTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="V4W-IF-49d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
-                                <rect key="frame" x="34" y="360" width="106" height="33"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
+                                <rect key="frame" x="34" y="462" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展區">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -99,10 +114,10 @@
                                     <action selector="clickSectionTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="O18-Ss-yNx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
-                                <rect key="frame" x="181" y="360" width="106" height="33"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
+                                <rect key="frame" x="181" y="462" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試出口">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -110,16 +125,16 @@
                                     <action selector="clickExitTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="sch-bD-AGA"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detect_3.png" id="G94-2e-4a2">
-                                <rect key="frame" x="115" y="185" width="90" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_2.png" id="nq7-fh-sBY">
+                                <rect key="frame" x="101" y="183" width="117" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
-                                <rect key="frame" x="115" y="250" width="90" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測導覽訊號中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
+                                <rect key="frame" x="82" y="334" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,9 +145,9 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="tmu-eJ-xha"/>
                         <barButtonItem key="rightBarButtonItem" title=" 22" id="thg-b2-023"/>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="moniterAnimation" destination="G94-2e-4a2" id="AFo-5T-66V"/>
+                        <outlet property="hintLabel" destination="mJv-uF-zLG" id="Y2I-QO-4cL"/>
+                        <outlet property="moniterAnimation" destination="nq7-fh-sBY" id="2lQ-5l-OK1"/>
                         <outlet property="moniterButton" destination="2M1-Oa-HIE" id="4Xo-SI-TZf"/>
                         <segue destination="AQ9-wQ-PX7" kind="push" identifier="MoniterItem" id="7xK-sO-LCw"/>
                         <segue destination="ZQG-hI-HcD" kind="push" identifier="MoniterExh" id="NzM-zW-bFY"/>
@@ -160,7 +175,7 @@
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" title="Item Page Parent View Controller" hidesBottomBarWhenPushed="YES" id="AQ9-wQ-PX7" customClass="iBGItemPageParentViewController" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="cSR-fd-Da4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.64999997615814209" contentMode="scaleToFill" id="PLC-8c-Qmt">
@@ -190,12 +205,16 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="7L1-xo-ZSw">
                             <color key="tintColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="play.png" id="hAt-9e-eEg">
-                            <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="play.png" style="plain" id="hAt-9e-eEg">
+                            <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="clickAudioCtrl:" destination="AQ9-wQ-PX7" id="5R4-0J-yLg"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="audioCtrl" destination="hAt-9e-eEg" id="PxM-sR-PdC"/>
                         <outlet property="itemMenuBtn" destination="8CO-5b-kNJ" id="I04-Ek-jw0"/>
                         <outlet property="itemPageControl" destination="upr-UH-0cZ" id="i3i-2v-5QA"/>
                         <outlet property="itemPageControlBG" destination="PLC-8c-Qmt" id="e2n-4s-iZZ"/>
@@ -361,7 +380,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="zsS-vP-Yqa" customClass="iBGCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KFQ-Qx-2Nd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="sWl-Y9-wQj">
@@ -697,6 +716,7 @@
         <scene sceneID="fVB-ZQ-nKO">
             <objects>
                 <tabBarController title="Root Tab Bar View Controller" id="VFv-4v-27e" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="F79-w0-nWB"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="lUh-sC-M2v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -706,7 +726,7 @@
                     <connections>
                         <segue destination="o3d-My-F3G" kind="relationship" relationship="viewControllers" id="6hX-AE-6NV"/>
                         <segue destination="c6Q-FJ-XQJ" kind="relationship" relationship="viewControllers" id="4HG-vA-WpG"/>
-                        <segue destination="3Si-wZ-PGW" kind="relationship" relationship="viewControllers" id="3u5-tN-mZH"/>
+                        <segue destination="GfC-I6-2S9" kind="relationship" relationship="viewControllers" id="Ylb-pT-hbt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ZH-WZ-Cp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -784,7 +804,6 @@
                                             <color key="titleColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="clickExhSiteBtn:" destination="o0X-yi-Kue" eventType="touchUpInside" id="iXV-r5-n0e"/>
                                             <segue destination="Wm3-H7-w0T" kind="push" identifier="openWebView" id="IkH-Ou-uYn"/>
                                         </connections>
                                     </button>
@@ -832,9 +851,9 @@
         <!--Moniter Nav View Controller-->
         <scene sceneID="oKP-Uk-SUq">
             <objects>
-                <navigationController title="Moniter Nav View Controller" id="o3d-My-F3G" sceneMemberID="viewController">
+                <navigationController title="Moniter Nav View Controller" navigationBarHidden="YES" id="o3d-My-F3G" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="NWZ-jV-sOF"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="p2L-fT-JHj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1108,17 +1127,10 @@
                                 <rect key="frame" x="88" y="44" width="144" height="144"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="鄭嘉鼎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aqL-VK-Xv4">
-                                <rect key="frame" x="122" y="213" width="75" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUB-cI-4qj">
-                                <rect key="frame" x="30" y="249" width="260" height="197"/>
+                                <rect key="frame" x="30" y="214" width="260" height="217"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">鄭嘉鼎，畢業於台灣大學資管系，政治大學數位內容碩士學位學程在學。喜愛獨立音樂與攝影，擅長網頁與手機程式設計。
+                                <string key="text">鄭嘉鼎，畢業於台灣大學資管系，政治大學數位內容碩士學位學程研究生。喜歡聽獨立音樂、拿著相機亂拍還有觀察天文現象，擅長網頁與手機程式設計。
 
 雖為資訊領域出身，卻對傳播與文化研究甚有濃厚興趣，希望可以跨出舒適圈，結合自己的專長、將技術與不同內容串連創造各種可能。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1543,13 +1555,13 @@ By default a UILabel will center the text vertically. To have the text top align
     <resources>
         <image name="37x-Checkmark.png" width="37" height="37"/>
         <image name="Mona_Lisa.jpg" width="320" height="270"/>
-        <image name="detect_3.png" width="90" height="40"/>
         <image name="din.jpg" width="380" height="380"/>
         <image name="enter.png" width="15" height="28"/>
         <image name="fblogin.png" width="130" height="34"/>
         <image name="fblogout.png" width="130" height="34"/>
         <image name="login.png" width="55" height="34"/>
         <image name="logo.png" width="100" height="108"/>
+        <image name="logo_2.png" width="100" height="108"/>
         <image name="message_2.png" width="75" height="75"/>
         <image name="message_full.png" width="60" height="60"/>
         <image name="message_menu.png" width="84" height="84"/>
@@ -1562,6 +1574,7 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Ylb-pT-hbt"/>
         <segue reference="NzM-zW-bFY"/>
         <segue reference="7xK-sO-LCw"/>
         <segue reference="NdZ-Oq-4S9"/>

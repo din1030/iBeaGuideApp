@@ -45,7 +45,6 @@
 	// Show the HUD while the provided method executes in a new thread
 	[hud showWhileExecuting:@selector(loadTask) onTarget:self withObject:nil animated:YES];
 
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,7 +86,7 @@
 	}
 }
 
-- (NSArray *)getCommentData{
+- (NSArray *)getCommentData {
 	
 	NSString *urlString = [NSString stringWithFormat:@"%@/get_comment_data/%@/%@", kWebAPIRoot, self.commentType, self.commentObjID];
 	NSURL *url = [NSURL URLWithString: urlString];
@@ -107,6 +106,7 @@
 	
 	return result;
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,7 +121,6 @@
 	}
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	if (indexPath.row == 0) {
@@ -129,6 +128,7 @@
 		iBGCommentTableViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCommentHeader" forIndexPath:indexPath];
 		cell.title.text = self.commentObjTitle;
 		cell.subtitle.text = self.commentObjSubtitle;
+		
 		return cell;
 		
 	} else {
@@ -209,16 +209,6 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 */
 

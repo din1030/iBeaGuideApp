@@ -10,17 +10,17 @@
 #import <objc/runtime.h>
 
 // Used to identify the associating glowing view
-static char* GLOWVIEW_KEY = "GLOWVIEW";
+static char *GLOWVIEW_KEY = "GLOWVIEW";
 
 @implementation UIView (Glow)
 
 // Get the glowing view attached to this one.
-- (UIView*)glowView {
+- (UIView *)glowView {
     return objc_getAssociatedObject(self, GLOWVIEW_KEY);
 }
 
 // Attach a view to this one, which we'll use as the glowing view.
-- (void)setGlowView:(UIView*)glowView {
+- (void)setGlowView:(UIView *)glowView {
     objc_setAssociatedObject(self, GLOWVIEW_KEY, glowView, OBJC_ASSOCIATION_RETAIN);
 }
 
@@ -28,7 +28,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
     [self startGlowingWithColor:color fromIntensity:0.1 toIntensity:intensity repeat:YES];
 }
 
-- (void)startGlowingWithColor:(UIColor*)color fromIntensity:(CGFloat)fromIntensity toIntensity:(CGFloat)toIntensity repeat:(BOOL)repeat {
+- (void)startGlowingWithColor:(UIColor *)color fromIntensity:(CGFloat)fromIntensity toIntensity:(CGFloat)toIntensity repeat:(BOOL)repeat {
     
     // If we're already glowing, don't bother
     if ([self glowView])
@@ -37,20 +37,19 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
     // The glow image is taken from the current view's appearance.
     // As a side effect, if the view's content, size or shape changes, 
     // the glow won't update.
-    UIImage* image;
+    UIImage *image;
     
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, [UIScreen mainScreen].scale); {
-        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-        
-        UIBezierPath* path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
-        
-        [color setFill];
-        
-        [path fillWithBlendMode:kCGBlendModeSourceAtop alpha:1.0];
-        
-        
-        image = UIGraphicsGetImageFromCurrentImageContext();
-    } UIGraphicsEndImageContext();
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, [UIScreen mainScreen].scale);
+	
+	[self.layer renderInContext:UIGraphicsGetCurrentContext()];
+	
+	UIBezierPath* path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+    [color setFill];
+    [path fillWithBlendMode:kCGBlendModeSourceAtop alpha:1.0];
+                
+    image = UIGraphicsGetImageFromCurrentImageContext();
+	
+	UIGraphicsEndImageContext();
     
     // Make the glowing view itself, and position it at the same
     // point as ourself. Overlay it over ourself.
@@ -72,7 +71,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
     animation.fromValue = @(fromIntensity);
     animation.toValue = @(toIntensity);
     animation.repeatCount = repeat ? HUGE_VAL : 0;
-    animation.duration = 1.0;
+    animation.duration = 1.5;
     animation.autoreverses = YES;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
@@ -83,6 +82,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
 }
 
 - (void)glowOnceAtLocation:(CGPoint)point inView:(UIView*)view {
+	
     [self startGlowingWithColor:[UIColor whiteColor] fromIntensity:0 toIntensity:0.6 repeat:NO];
     
     [self glowView].center = point;
@@ -93,6 +93,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self stopGlowing];
     });
+	
 }
 
 - (void)glowOnce {

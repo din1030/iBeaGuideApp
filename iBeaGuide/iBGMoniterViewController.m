@@ -10,6 +10,7 @@
 #import "iBGGlobal.h"
 #import "iBGGlobalData.h"
 #import "iBGMoniterViewController.h"
+#import "UIView+Glow.h"
 #import "MBProgressHUD.h"
 
 #define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
@@ -32,14 +33,19 @@
 	
 	// 設定偵測動畫
 	NSMutableArray *animationImg = [NSMutableArray arrayWithObjects:
-									[UIImage imageNamed:@"detect_1.png"],
-									[UIImage imageNamed:@"detect_2.png"],
-									[UIImage imageNamed:@"detect_3.png"], nil];
+									[UIImage imageNamed:@"logo.png"],
+									[UIImage imageNamed:@"logo_1.png"],
+									[UIImage imageNamed:@"logo_2.png"],
+									[UIImage imageNamed:@"logo_1.png"], nil];
+//	[UIImage imageNamed:@"detect_1.png"],
+//	[UIImage imageNamed:@"detect_2.png"],
+//	[UIImage imageNamed:@"detect_3.png"], nil];
 	[self.moniterAnimation setAnimationImages: animationImg];
-	[self.moniterAnimation setAnimationDuration: 1.5];
+	[self.moniterAnimation setAnimationDuration: 2.0];
 	//    [self.moniterAnimation setAnimationRepeatCount:20];
 	[self.moniterAnimation startAnimating];
 	
+	[self.hintLabel startGlowing];
 	
 	// 設定 tab bar 圖案
 	UIImage *moniterImg = [[UIImage imageNamed:@"guide_1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -92,6 +98,19 @@
 //	self.routeID = 1;
 //	self.routeItems = @[@17];
 	
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[self.navigationController setNavigationBarHidden:NO animated:animated];
+	NSLog(@"exhID: %ld", (long)self.exhID);
+	NSLog(@"routeID: %ld", (long)self.routeID);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,7 +179,6 @@
 	
 }
 
-
 -(BOOL)getBeaconLinkedObjByRegion:(CLRegion *)region{
 	
 	// get ibeacon link obj info via url
@@ -199,16 +217,14 @@
 	
 	// 判斷物件類型，展覽跳出 alert
 	if ([objType isEqualToString:@"exh"]) {
-		
-//		self.exhID = [[self.objData objectForKey:@"id"] integerValue];
-		
+				
 		// 如果 app 在背景用推播通知 user
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
 			[self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [self.objData objectForKey:@"push_content"]]];
 		}
 		// Show alert with action btns
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"哈囉～"
-																				 message:[NSString stringWithFormat:@"偵測到「%@」展覽資訊，是否開始導覽？", objTitle]
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"偵測到展覽！"
+																				 message:[NSString stringWithFormat:@"您正在靠近「%@」，是否開始導覽？", objTitle]
 																		  preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -226,7 +242,6 @@
 		
 	// 若類型為展品，屬於當前展覽才需顯示
 	} else if ([objType isEqualToString:@"item"] && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
-		
 
         // 如果 app 在背景用推播通知 user
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
@@ -310,20 +325,6 @@
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	[self.navigationController setNavigationBarHidden:YES animated:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-	[self.navigationController setNavigationBarHidden:NO animated:animated];
-	NSLog(@"exhID: %ld", (long)self.exhID);
-	NSLog(@"routeID: %ld", (long)self.routeID);
-}
-
 #pragma mark - Testing Btn Click Action Methods
 
 - (IBAction)clickExhTest:(id)sender {
@@ -363,8 +364,6 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	// Get the new view controller using [segue destinationViewController].
-	// Pass the selected object to the new view controller.
 	
 	// 設定 nav bar 標題
 	[segue destinationViewController].navigationItem.title = self.exhTitle;

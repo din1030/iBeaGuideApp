@@ -19,7 +19,7 @@
 
 - (void)startGlowing;
 - (void)startGlowingWithColor:(UIColor*)color intensity:(CGFloat)intensity;
-
+- (void)startGlowingWithColor:(UIColor*)color fromIntensity:(CGFloat)fromIntensity toIntensity:(CGFloat)toIntensity repeat:(BOOL)repeat;
 - (void)stopGlowing;
 
 @end

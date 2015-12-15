@@ -52,8 +52,6 @@ static NSString * const reuseIdentifier = @"RouteCell";
 }
 */
 
-
-
 - (IBAction)clickRouteCheckBtn:(UIButton *)sender {
 	
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];

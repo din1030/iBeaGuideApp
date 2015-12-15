@@ -85,35 +85,6 @@
     }
     self.itemDetail.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
     
-//    int realFieldCount = (int)[detailFields count];
-//    for (int i = 0; i < [customDetailFieldName count]; i++) {
-//        // 有欄位資料就顯示，並動態調整高度
-//        if (i < realFieldCount) {
-//            
-//            NSDictionary *tempField = detailFields[i];
-//            UILabel *currentNameLabel = (UILabel *)customDetailFieldName[i];
-//            UILabel *currentValueLabel = (UILabel *)customDetailFieldValue[i];
-//            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
-//            currentValueLabel.text = [tempField objectForKey:@"field_value"];
-//            [currentValueLabel autoHeight];
-//            
-//            if (i > 0) {
-//                UILabel *preValueLabel =(UILabel *)customDetailFieldValue[i-1];
-//                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
-//                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
-//                
-//                currentValueLabel.frame = currentValueLabelNewFrame;
-//                currentNameLabel.frame = currentNameLabelNewFrame;
-//            }
-//            self.itemDetail.frame = (CGRect){self.itemDetail.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
-//            // 沒有欄位資料隱藏 label
-//        } else {
-//            ((UILabel *)customDetailFieldName[i]).hidden = YES;
-//            ((UILabel *)customDetailFieldValue[i]).hidden = YES;
-//        }
-//    }
-
-    
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
@@ -139,12 +110,12 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 #warning 圖片尚未填入
+		
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
 		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
 		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1.jpg"];
 		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
-		
 		
 		// 把圖片給 iBGNYTPhoto obj
 		for (int i = 0; i < [self.itemPicArray count]; i++) {
@@ -275,15 +246,5 @@
 - (void)photosViewControllerDidDismiss:(NYTPhotosViewController *)photosViewController {
 	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

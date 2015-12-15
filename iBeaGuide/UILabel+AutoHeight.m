@@ -15,8 +15,9 @@
 	self.numberOfLines = 0;    
     CGRect txtFrame = self.frame;
     txtFrame.size.height = [self.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-                                                             options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
-                                                          attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.font,NSFontAttributeName, nil] context:nil].size.height;
+												   options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
+												attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.font,NSFontAttributeName, nil]
+												   context:nil].size.height;
     self.frame = txtFrame;
 }
 

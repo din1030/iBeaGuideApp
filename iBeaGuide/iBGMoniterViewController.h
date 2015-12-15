@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *moniterButton;
 @property (strong, nonatomic) IBOutlet UIImageView *moniterAnimation;
+@property (strong, nonatomic) IBOutlet UILabel *hintLabel;
 
 @property (strong, nonatomic) NSDictionary *objData;
 @property (nonatomic) NSInteger exhID;

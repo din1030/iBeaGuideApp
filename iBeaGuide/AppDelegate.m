@@ -50,18 +50,6 @@
 																											  categories:nil]];
 	}
 
-	
-//	UIPageControl *pageControl = [UIPageControl appearance];
-//	[pageControl drawRect:CGRectMake(0, 484, 320, 100)];
-//	pageControl.pageIndicatorTintColor = UIColorFromRGBWithAlpha(0x333333, 1);
-//	pageControl.currentPageIndicatorTintColor = UIColorFromRGBWithAlpha(0x39A2AE, 1);
-//	pageControl.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
-	
-//	pageControl.opaque = false;
-//	pageControl.alpha = 0.5f;
-//	pageControl.clearsContextBeforeDrawing = false;
-	
-	
 	return YES;
 }
 

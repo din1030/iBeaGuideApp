@@ -83,12 +83,7 @@
 	[self.view bringSubviewToFront:self.enterExhBtn];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	
-	
-}
-
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
 	[self.navTitleLabel removeFromSuperview];
 	[self.exhPageControl removeFromSuperview];
 }

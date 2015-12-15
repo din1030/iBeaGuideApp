@@ -22,9 +22,11 @@
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
+	
 	self.borderColor = [UIColorFromRGBWithAlpha(0x29ABE2, 1) CGColor];
 	self.borderWidth = 0.5;
 	self.cornerRadius = 5.0;
+	
 }
 
 @end

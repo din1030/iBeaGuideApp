@@ -27,6 +27,15 @@
 	[self.registerBtn
 	 addTarget:self
 	 action:@selector(loginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	
+	if ([FBSDKAccessToken currentAccessToken]) {
+		[self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
+	}
+	
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,40 +44,31 @@
 }
 
 // Once the button is clicked, show the login dialog
--(void)loginButtonClicked
-{
-	FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-	[login logInWithReadPermissions: @[@"public_profile", @"email", @"user_birthday"]
-				fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *FBLoginError) {
-					if (FBLoginError) {
-						NSLog(@"FBLoginError: \n UserInfo => %@ \n Description => %@",[FBLoginError userInfo], [FBLoginError localizedDescription]);
-					} else if (result.isCancelled) {
-						 NSLog(@"使用者取消 FB 登入");
-					} else {
-						NSLog(@"Logged in");
-						if ([FBSDKAccessToken currentAccessToken]) {
-							[[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, email, birthday, gender"}]
-							 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-								 if (!error) {
-									 NSLog(@"fetched user:%@", result);
-								 }
-							 }];
+-(void)loginButtonClicked {
+	
+	if (![FBSDKAccessToken currentAccessToken]) {
+		FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+		[login logInWithReadPermissions: @[@"public_profile", @"email", @"user_birthday"]
+					fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *FBLoginError) {
+						if (FBLoginError) {
+							NSLog(@"FBLoginError: \n UserInfo => %@ \n Description => %@",[FBLoginError userInfo], [FBLoginError localizedDescription]);
+						} else if (result.isCancelled) {
+							 NSLog(@"使用者取消 FB 登入");
+						} else {
+							NSLog(@"Logged in");
+							if ([FBSDKAccessToken currentAccessToken]) {
+								[[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, email, birthday, gender"}]
+								 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+									 if (!error) {
+										 NSLog(@"fetched user:%@", result);
+										 [self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
+									 }
+								 }];
+							}
 						}
-					}
-				}];
+					}];
+	}
+	
 }
-
-
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

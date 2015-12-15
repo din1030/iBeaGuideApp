@@ -30,6 +30,11 @@
 
 }
 
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
+}
+
 - (void)removeMaskView {
 	
 	// 先 disable 按鈕然後讓 mask view fade out + remove
@@ -176,10 +181,10 @@
 	[hud show:YES];
 	[hud hide:YES afterDelay:2];
 
-
 }
 
 - (IBAction)clickShareBtn:(UIButton *)sender {
+	
 	if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
 		[self doShareOGACtion];
 	} else {
@@ -203,6 +208,7 @@
 								   }
 							   }];
 	}
+	
 }
 
 -(void)doShareOGACtion {
@@ -232,11 +238,6 @@
 	[FBSDKShareDialog showFromViewController:self
 								 withContent:ogcontent
 									delegate:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

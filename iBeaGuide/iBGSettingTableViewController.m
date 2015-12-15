@@ -73,6 +73,8 @@
 	hud.removeFromSuperViewOnHide = YES;
 	[hud hide:YES afterDelay:2];
 	
+	[self.navigationController popToRootViewControllerAnimated:YES];
+	
 }
 
 #pragma mark - Table view data source

@@ -17,8 +17,10 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *itemPageControl;
 @property (strong, nonatomic) IBOutlet UIView *itemPageControlBG;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *audioCtrl;
 @property (strong, nonatomic) IBOutlet UIButton *itemMenuBtn;
 - (IBAction)clickMenu:(id)sender;
+- (IBAction)clickAudioCtrl:(UIBarButtonItem *)sender;
 
 
 @end

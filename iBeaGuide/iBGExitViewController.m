@@ -28,6 +28,7 @@
 }
 
 - (IBAction)clickShareBtn:(id)sender {
+	
 	if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
 		[self doShareOGACtion];
 	} else {
@@ -51,9 +52,10 @@
 								   }
 							   }];
 	}
+	
 }
 
--(void)doShareOGACtion {
+- (void)doShareOGACtion {
 	NSLog(@"exhID: %@", [self.exhInfo objectForKey:@"id"]);
 	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
@@ -83,10 +85,8 @@
 									delegate:nil];
 }
 
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	
 	// 去留言頁面
