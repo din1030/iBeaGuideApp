@@ -93,7 +93,8 @@
 		cell.exhInfo = self.exhInfo;
 		cell.exhTitle.text = [self.exhInfo valueForKey:@"title"];
 
-#warning 展覽圖片尚未填入
+#warning Fill real pic
+
 //		NSData *imgData = [NSData data];
 //		cell.exhPic.image = [UIImage imageWithData:imgData];
 		
@@ -125,19 +126,6 @@
 	// fix for separators bug in iOS 7
 	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-}
-
-
--(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	// fix for separators bug in iOS 7
-	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-}
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

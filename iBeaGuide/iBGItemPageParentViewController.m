@@ -82,7 +82,7 @@
 		self.itemMenuBtn.hidden = YES;
 	}
 	
-#warning 語音尚未填入
+#warning Link real audio
 
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
 	self.theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
@@ -103,15 +103,15 @@
 	// 設定 category 讓聲音從 聽筒 播放
 	[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
 	
-	// 啟動 proximity 偵測，偵測使用者靠近或遠離決定播放或暫停
-	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
-	
 	// 判斷聲音 outputs 改變（插耳機
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioSessionRoute:) name:AVAudioSessionRouteChangeNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	
+	// 啟動 proximity 偵測，偵測使用者靠近或遠離決定播放或暫停
+	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
 	
 	// 若使用者有接耳機，判斷是否打開自動播放
 	NSArray *availableOutputs = [[AVAudioSession sharedInstance] currentRoute].outputs;
@@ -129,6 +129,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[self stopAudioGuide];
+	[[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning {

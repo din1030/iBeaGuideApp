@@ -57,10 +57,24 @@
 						} else {
 							NSLog(@"Logged in");
 							if ([FBSDKAccessToken currentAccessToken]) {
-								[[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, email, birthday, gender"}]
+								[[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, first_name, last_name, name, email, birthday, gender"}]
 								 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 									 if (!error) {
 										 NSLog(@"fetched user:%@", result);
+										 
+										 NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithDictionary:(NSMutableDictionary *)result];
+										 [userData setObject:[userData objectForKey: @"id"] forKey: @"fb_id"];
+										 [userData removeObjectForKey: @"id"];
+										 [userData setObject:@"visitor" forKey: @"user_type"];
+										 
+										 NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+										 [dateFormater setDateFormat:@"MM/dd/yyyy"];
+										 NSDate *birthday = [dateFormater dateFromString:userData[@"birthday"]];
+										 
+										 [dateFormater setDateFormat:@"yyyy-MM-dd"];
+										 userData[@"birthday"] = [dateFormater stringFromDate:birthday];
+										 
+										 [self sendUserData:userData url:@"http://114.34.1.57/iBeaGuide/App/post_user_action"];
 										 [self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
 									 }
 								 }];
@@ -68,6 +82,36 @@
 						}
 					}];
 	}
+	
+}
+
+- (void)sendUserData:(NSDictionary *)userData url:(NSString *)urlString {
+	
+	NSError *jsonError, *requestError;
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userData
+													   options:0 // Pass 0 if you don't care about the readability of the generated string
+														 error:&jsonError];
+	if (jsonError) {
+		NSLog(@"使用者資料轉換錯誤");
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@",[jsonError userInfo], [jsonError localizedDescription]);
+		
+		return;
+	}
+	
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody:jsonData];
+	
+	//轉換為NSData傳送
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
+	if (requestError) {
+		NSLog(@"使用者資料傳送錯誤");
+		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+		
+		return;
+	}
+	
+	NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 	
 }
 

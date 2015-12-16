@@ -88,20 +88,6 @@
 		hud.removeFromSuperViewOnHide = YES;
 		[hud hide:YES afterDelay:2];
 		
-		// Show alert with action btns
-//		UIAlertController *noRateAlertController = [UIAlertController alertControllerWithTitle:@"尚未評分"
-//																				 message:@"請先點選評分再將留言送出，謝謝！"
-//																		  preferredStyle:UIAlertControllerStyleAlert];
-//		
-//		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"我要評分" style:UIAlertActionStyleCancel handler:nil];
-//
-//		[noRateAlertController addAction:okAction];
-//		
-//		noRateAlertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
-//		noRateAlertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
-//		noRateAlertController.view.layer.cornerRadius = 5;
-//		
-//		[self presentViewController:noRateAlertController animated:YES completion:nil];
 	}
 }
 

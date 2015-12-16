@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="9xP-Bo-2DW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="9xP-Bo-2DW">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -46,6 +46,7 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="3tM-dq-rxp"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="FBLoginBtn" destination="9TC-zK-A27" id="t4i-RZ-SO0"/>
                         <outlet property="registerBtn" destination="7Vm-fh-wga" id="co1-QC-ZdW"/>
@@ -61,7 +62,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="9xP-Bo-2DW" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gfk-5x-c4U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Gfk-5x-c4U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -139,12 +140,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" id="PqJ-xX-w32"/>
                     <navigationItem key="navigationItem" title="iBeaGuide" id="eId-MM-ofe">
                         <barButtonItem key="backBarButtonItem" title=" " id="tmu-eJ-xha"/>
                         <barButtonItem key="rightBarButtonItem" title=" 22" id="thg-b2-023"/>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="hintLabel" destination="mJv-uF-zLG" id="Y2I-QO-4cL"/>
                         <outlet property="moniterAnimation" destination="nq7-fh-sBY" id="2lQ-5l-OK1"/>
@@ -205,7 +207,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="7L1-xo-ZSw">
                             <color key="tintColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="play.png" style="plain" id="hAt-9e-eEg">
+                        <barButtonItem key="rightBarButtonItem" image="play.png" style="done" id="hAt-9e-eEg">
                             <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="clickAudioCtrl:" destination="AQ9-wQ-PX7" id="5R4-0J-yLg"/>
@@ -717,6 +719,7 @@
             <objects>
                 <tabBarController title="Root Tab Bar View Controller" id="VFv-4v-27e" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="F79-w0-nWB"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="lUh-sC-M2v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -724,9 +727,9 @@
                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="o3d-My-F3G" kind="relationship" relationship="viewControllers" id="6hX-AE-6NV"/>
-                        <segue destination="c6Q-FJ-XQJ" kind="relationship" relationship="viewControllers" id="4HG-vA-WpG"/>
-                        <segue destination="GfC-I6-2S9" kind="relationship" relationship="viewControllers" id="Ylb-pT-hbt"/>
+                        <segue destination="o3d-My-F3G" kind="relationship" relationship="viewControllers" id="NJu-Ns-INx"/>
+                        <segue destination="c6Q-FJ-XQJ" kind="relationship" relationship="viewControllers" id="O6F-2U-vTy"/>
+                        <segue destination="7aw-rT-EgV" kind="relationship" relationship="viewControllers" id="XUJ-cg-fB5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ZH-WZ-Cp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -863,7 +866,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="aQ3-lz-vsg" kind="relationship" relationship="rootViewController" id="a2c-5k-1gE"/>
+                        <segue destination="aQ3-lz-vsg" kind="relationship" relationship="rootViewController" id="XVy-Oa-f7y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCf-Np-Q5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -961,25 +964,46 @@
             <objects>
                 <navigationController title="My Collection Nav View Controller" navigationBarHidden="YES" id="c6Q-FJ-XQJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="pcA-qD-Qvp"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="XJ8-U9-3Hr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="XDo-dL-PSd" kind="relationship" relationship="rootViewController" id="mLC-lc-edf"/>
+                        <segue destination="XDo-dL-PSd" kind="relationship" relationship="rootViewController" id="YWQ-Ng-Zs4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2g9-vQ-ajV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="651" y="1447"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zUj-6E-GOD">
+            <objects>
+                <navigationController id="7aw-rT-EgV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="HZK-Ue-hEu"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="eji-Xe-xeF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="UDS-ng-pC5">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="GfC-I6-2S9" kind="relationship" relationship="rootViewController" id="FbO-cl-toP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3dR-zH-Ogq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="108" y="2174"/>
+        </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="xjd-Cb-6fq">
             <objects>
                 <tableViewController title="Setting Table View Controller" id="GfC-I6-2S9" customClass="iBGSettingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cLL-Tc-KAm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -987,10 +1011,10 @@
                         <sections>
                             <tableViewSection id="Osr-2f-j5D">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="fPY-Qk-FJb">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="144" id="fPY-Qk-FJb">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPY-Qk-FJb" id="5u0-nM-hDd">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="fPY-Qk-FJb" id="5u0-nM-hDd">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="143"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -1006,7 +1030,7 @@
                             </tableViewSection>
                             <tableViewSection id="E8g-Yy-NsH">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LFu-sb-8OX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="LFu-sb-8OX">
                                         <rect key="frame" x="0.0" y="144" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFu-sb-8OX" id="ZQJ-8V-o5D">
@@ -1029,7 +1053,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.96862745100000003" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bH9-Vl-kiB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bH9-Vl-kiB">
                                         <rect key="frame" x="0.0" y="188" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bH9-Vl-kiB" id="b3h-Qy-56J">
@@ -1077,7 +1101,7 @@
                                             <segue destination="Zlh-zw-s8u" kind="push" id="Cbb-TV-Qur"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="3Cp-1E-cHg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="58" id="3Cp-1E-cHg">
                                         <rect key="frame" x="0.0" y="276" width="320" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Cp-1E-cHg" id="oau-Ua-yJB">
@@ -1104,8 +1128,11 @@
                             <outlet property="delegate" destination="GfC-I6-2S9" id="ky8-m3-G4r"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="" id="mMt-u7-y5r"/>
-                    <navigationItem key="navigationItem" title="iBeaGuide" id="Zkb-p8-IQ3"/>
+                    <navigationItem key="navigationItem" id="Zkb-p8-IQ3">
+                        <barButtonItem key="backBarButtonItem" title=" " id="SmD-Sf-RH8"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="autoPlaySwitch" destination="sId-08-XDx" id="WDg-fu-Lgu"/>
                         <outlet property="facPushSwitch" destination="Q2K-8c-Xqb" id="CGK-AP-UPT"/>
@@ -1115,58 +1142,44 @@
             </objects>
             <point key="canvasLocation" x="651" y="2174"/>
         </scene>
-        <!--View Controller-->
+        <!--作者資訊-->
         <scene sceneID="rQ4-mM-ODO">
             <objects>
                 <viewController id="Zlh-zw-s8u" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qeT-Lb-CHc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="din.jpg" id="8Cz-26-VCr">
-                                <rect key="frame" x="88" y="44" width="144" height="144"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="din.png" id="8Cz-26-VCr">
+                                <rect key="frame" x="88" y="29" width="144" height="144"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUB-cI-4qj">
-                                <rect key="frame" x="30" y="214" width="260" height="217"/>
+                                <rect key="frame" x="30" y="218" width="260" height="217"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">鄭嘉鼎，畢業於台灣大學資管系，政治大學數位內容碩士學位學程研究生。喜歡聽獨立音樂、拿著相機亂拍還有觀察天文現象，擅長網頁與手機程式設計。
+                                <string key="text">政治大學數位內容碩士學位學程研究生，大學就讀台灣大學資管系。喜歡聽獨立音樂、拿著相機亂拍還有觀察天文現象，擅長網頁與手機程式設計。
 
-雖為資訊領域出身，卻對傳播與文化研究甚有濃厚興趣，希望可以跨出舒適圈，結合自己的專長、將技術與不同內容串連創造各種可能。</string>
+雖為資訊領域出身，卻對傳播與文化研究有濃厚興趣，希望可以跨出舒適圈，結合自己的專長、將技術與不同內容串連創造各種可能。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="鄭嘉鼎" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tXi-aM-czK">
+                                <rect key="frame" x="126" y="194" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058959999999" green="0.96862745289999996" blue="0.9529411793" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1q0-G6-YPz"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="作者資訊" id="1q0-G6-YPz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JtI-2h-LmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1194" y="2174"/>
-        </scene>
-        <!--Setting Nav View Controller-->
-        <scene sceneID="d8j-wF-zko">
-            <objects>
-                <navigationController title="Setting Nav View Controller" navigationBarHidden="YES" id="3Si-wZ-PGW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" id="mmS-Df-cPC"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="sJi-Vb-YPA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qlf-ts-rcY">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="GfC-I6-2S9" kind="relationship" relationship="rootViewController" id="Baw-Pl-nBA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HVZ-Yk-Zhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="108" y="2174"/>
         </scene>
         <!--Comment Table View Controller-->
         <scene sceneID="wvg-K4-hB9">
@@ -1410,6 +1423,7 @@ By default a UILabel will center the text vertically. To have the text top align
                     <navigationItem key="navigationItem" title="展覽名稱" id="uYr-zQ-AGd">
                         <barButtonItem key="backBarButtonItem" title=" " id="2El-F0-BmO"/>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="NoRecordLabel" destination="Ozd-pb-GlG" id="Tmx-1d-NrF"/>
                         <outlet property="collectionPageControl" destination="7Fp-kz-Yda" id="ELk-Ol-q3c"/>
@@ -1540,7 +1554,7 @@ By default a UILabel will center the text vertically. To have the text top align
                             <color key="tintColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="enterExhBtn" destination="d1b-da-0oY" id="4jE-h2-Aju"/>
@@ -1555,7 +1569,7 @@ By default a UILabel will center the text vertically. To have the text top align
     <resources>
         <image name="37x-Checkmark.png" width="37" height="37"/>
         <image name="Mona_Lisa.jpg" width="320" height="270"/>
-        <image name="din.jpg" width="380" height="380"/>
+        <image name="din.png" width="792" height="792"/>
         <image name="enter.png" width="15" height="28"/>
         <image name="fblogin.png" width="130" height="34"/>
         <image name="fblogout.png" width="130" height="34"/>
@@ -1574,7 +1588,6 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ylb-pT-hbt"/>
         <segue reference="NzM-zW-bFY"/>
         <segue reference="7xK-sO-LCw"/>
         <segue reference="NdZ-Oq-4S9"/>

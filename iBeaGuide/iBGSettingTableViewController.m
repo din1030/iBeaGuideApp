@@ -23,11 +23,12 @@
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+//     self.clearsSelectionOnViewWillAppear = YES;
+	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	
 	// 抓 global data 判斷設備推播的設定
-	self.autoPlaySwitch.on = [iBGGlobalData sharedInstance].facilityPushIsOn;
-	[self.autoPlaySwitch addTarget:self action:@selector(changeFacPushSwitch:) forControlEvents:UIControlEventValueChanged];
+	self.facPushSwitch.on = [iBGGlobalData sharedInstance].facilityPushIsOn;
+	[self.facPushSwitch addTarget:self action:@selector(changeFacPushSwitch:) forControlEvents:UIControlEventValueChanged];
 	
 	// 抓 global data 判斷自動播放的設定
 	self.autoPlaySwitch.on = [iBGGlobalData sharedInstance].autoPlayIsOn;
@@ -35,22 +36,30 @@
 	
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)changeFacPushSwitch:(id)sender{
+- (void)changeFacPushSwitch:(UISwitch *)sender{
 	if([sender isOn]){
-		NSLog(@"Autoplay ON");
+		NSLog(@"FacPush ON");
 		[iBGGlobalData sharedInstance].facilityPushIsOn = YES;
 	} else{
-		NSLog(@"Autoplay OFF");
+		NSLog(@"FacPush OFF");
 		[iBGGlobalData sharedInstance].facilityPushIsOn = NO;
 	}
 }
 
-- (void)changeAutoPlaySwitch:(id)sender{
+- (void)changeAutoPlaySwitch:(UISwitch *)sender{
 	if([sender isOn]){
 		NSLog(@"Autoplay ON");
 		[iBGGlobalData sharedInstance].autoPlayIsOn = YES;
@@ -73,8 +82,43 @@
 	hud.removeFromSuperViewOnHide = YES;
 	[hud hide:YES afterDelay:2];
 	
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	[self.navigationController.navigationController popToRootViewControllerAnimated:YES];
 	
+}
+
+#pragma mark - Table view delegate
+
+-(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	// fix for separators bug in iOS 7
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+}
+
+
+-(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	// fix for separators bug in iOS 7
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	// Remove seperator inset
+	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+		[cell setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
+	// Prevent the cell from inheriting the Table View's margin settings
+	if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+		[cell setPreservesSuperviewLayoutMargins:NO];
+	}
+	
+	// Explictly set your cell's layout margins
+	if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+		[cell setLayoutMargins:UIEdgeInsetsZero];
+	}
 }
 
 #pragma mark - Table view data source
@@ -132,14 +176,13 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	
 }
-*/
+
 
 @end

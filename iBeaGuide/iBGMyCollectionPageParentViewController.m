@@ -72,6 +72,8 @@
 	self.context = [appDelegate managedObjectContext];
 	
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exhibition"];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hasItems.@count != 0"];
+	[fetchRequest setPredicate: predicate];
 	
 	NSError *fetchExhError = nil;
 	NSArray *exhResults = [self.context executeFetchRequest:fetchRequest error:&fetchExhError];

@@ -27,10 +27,6 @@
     self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
     [self.itemBrief autoHeight];
     
-#warning 圖片尚未填入
-	
-//	NSArray *customFieldName = [NSArray arrayWithObjects:self.fieldName1, self.fieldName2, self.fieldName3, nil];
-//	NSArray *customFieldValue = [NSArray arrayWithObjects:self.fieldValue1, self.fieldValue2, self.fieldValue3, nil];
 	NSMutableArray *basicFields;
 	
 	// 抓取客製欄位
@@ -70,39 +66,6 @@
     }
     self.itemBrief.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
     
-/*
-	for (int i = 0; i < [customFieldName count]; i++) {
-        // 有欄位資料就顯示，並動態調整高度
-        if (i < realFieldCount) {
-            
-            NSDictionary *tempField = basicFields[i];
-            UILabel *currentNameLabel = (UILabel *)customFieldName[i];
-            UILabel *currentValueLabel = (UILabel *)customFieldValue[i];
-            currentNameLabel.text = [NSString stringWithFormat:@"%@：",[tempField objectForKey:@"field_name"]];
-            currentValueLabel.text = [tempField objectForKey:@"field_value"];
-            [currentValueLabel autoHeight];
-			
-			if (i > 0) {
-
-				UILabel *preValueLabel = (UILabel *)customFieldValue[i-1];
-                CGRect currentValueLabelNewFrame = (CGRect){currentValueLabel.frame.origin.x, preValueLabel.frame.origin.y + preValueLabel.frame.size.height + 10, currentValueLabel.frame.size.width, currentValueLabel.frame.size.height};
-                CGRect currentNameLabelNewFrame = (CGRect){currentNameLabel.frame.origin.x, currentValueLabelNewFrame.origin.y, currentNameLabel.frame.size.width, currentNameLabel.frame.size.height};
-                
-                currentValueLabel.frame = currentValueLabelNewFrame;
-                currentNameLabel.frame = currentNameLabelNewFrame;
-
-            }
-			self.itemBrief.frame = (CGRect){self.itemBrief.frame.origin.x, currentValueLabel.frame.origin.y + currentValueLabel.frame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
-
-        // 沒有欄位資料隱藏 label
-        } else {
-            ((UILabel *)customFieldName[i]).hidden = YES;
-            ((UILabel *)customFieldValue[i]).hidden = YES;
-        }
-    } 
- */
-    
-    
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
@@ -111,14 +74,6 @@
 	[[self.itemInfoPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
 	[self.itemInfoPicBtn setImage:[UIImage imageNamed:@"Sanpan.jpg"] forState:UIControlStateNormal];
 
-	
-	
-//	CGRect txtFrame = self.itemBrief.frame;	
-//	txtFrame.size.height = [self.itemBrief.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-//															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
-//														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.itemBrief.font,NSFontAttributeName, nil] context:nil].size.height;
-//	self.itemBrief.frame = txtFrame;
-	
 	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
 	for (UIView *view in self.itemInfoScrollView.subviews) {
@@ -134,6 +89,8 @@
 	
 	// 在背景 load 圖片
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+#warning Link real pic
 		
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:@"http://imgs.ntdtv.com/pic/2015/11-24/p7159475a688505343.jpg"];

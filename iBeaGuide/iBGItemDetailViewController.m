@@ -29,7 +29,7 @@
 	}
     [self.itemDetail autoHeight];
     
-#warning 主要圖片尚未填入
+
 	
 //	NSArray *customDetailFieldName = [NSArray arrayWithObjects:self.detailFieldName1, self.detailFieldName2, self.detailFieldName3, nil];
 //	NSArray *customDetailFieldValue = [NSArray arrayWithObjects:self.detailFieldValue1, self.detailFieldValue2, self.detailFieldValue3, nil];
@@ -109,7 +109,7 @@
 	// 在背景 load 圖片
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
-#warning 圖片尚未填入
+#warning Link real pic
 		
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
