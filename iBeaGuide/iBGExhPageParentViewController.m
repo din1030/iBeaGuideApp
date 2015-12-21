@@ -125,11 +125,11 @@
 	[moniterVC setValue:[self.exhInfo objectForKey:@"title"] forKeyPath:@"exhTitle"];
 	[moniterVC setValue:moniterVC.objData forKeyPath:@"exhInfo"];
 	
-	NSArray *routes = [self.exhInfo objectForKey:@"routes"];
-	// 有路線則去路線頁面
-	if ([routes count] > 0) {
-		[self performSegueWithIdentifier:@"ExhToRoute" sender:self];
-	// 沒有路線直接回 moniter，把展覽物件存進 core data
+	NSArray *topics = [self.exhInfo objectForKey:@"topics"];
+	// 有主題則去主題頁面
+	if ([topics count] > 0) {
+		[self performSegueWithIdentifier:@"ExhToTopic" sender:self];
+	// 沒有主題直接回 moniter，把展覽物件存進 core data
 	} else {
 		[moniterVC saveExhCollectData];
 		[self.navigationController popViewControllerAnimated:YES];
@@ -142,9 +142,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	// Get the new view controller using [segue destinationViewController].
 	// Pass the selected object to the new view controller.
-	// 抓到展覽訊號去展覽資訊頁面
-	if ([segue.identifier isEqualToString:@"ExhToRoute"]) {
-		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"routes"] forKey:@"routeList"];
+	// 抓到主題訊號去主題頁面
+	if ([segue.identifier isEqualToString:@"ExhToTopic"]) {
+		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"topics"] forKey:@"topicList"];
 	}
 }
 

@@ -110,8 +110,8 @@
 		A6ED0A9B1C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonXLandscape@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6ED0A951C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonXLandscape@3x.png */; };
 		A6ED0A9E1C0DD20D009BD030 /* UILabel+AutoHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ED0A9D1C0DD20D009BD030 /* UILabel+AutoHeight.m */; };
 		A6ED0AA11C0F1A71009BD030 /* iBGExitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ED0AA01C0F1A71009BD030 /* iBGExitViewController.m */; };
-		A6EED1691BF712DA001CB88A /* iBGRouteCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */; };
-		A6EED16C1BF743C5001CB88A /* iBGRouteCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */; };
+		A6EED1691BF712DA001CB88A /* iBGTopicCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED1681BF712DA001CB88A /* iBGTopicCollectionViewController.m */; };
+		A6EED16C1BF743C5001CB88A /* iBGTopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED16B1BF743C5001CB88A /* iBGTopicCollectionViewCell.m */; };
 		A6EED16E1BF7A354001CB88A /* Listen_Emotion_Direct@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A6EED16D1BF7A354001CB88A /* Listen_Emotion_Direct@2x.jpg */; };
 		A6EED1711BF89F0A001CB88A /* iBGExhPageParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */; };
 /* End PBXBuildFile section */
@@ -289,10 +289,10 @@
 		A6ED0A9D1C0DD20D009BD030 /* UILabel+AutoHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AutoHeight.m"; sourceTree = "<group>"; };
 		A6ED0A9F1C0F1A71009BD030 /* iBGExitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGExitViewController.h; sourceTree = "<group>"; };
 		A6ED0AA01C0F1A71009BD030 /* iBGExitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGExitViewController.m; sourceTree = "<group>"; };
-		A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGRouteCollectionViewController.h; sourceTree = "<group>"; };
-		A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGRouteCollectionViewController.m; sourceTree = "<group>"; };
-		A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGRouteCollectionViewCell.h; sourceTree = "<group>"; };
-		A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGRouteCollectionViewCell.m; sourceTree = "<group>"; };
+		A6EED1671BF712DA001CB88A /* iBGTopicCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGTopicCollectionViewController.h; sourceTree = "<group>"; };
+		A6EED1681BF712DA001CB88A /* iBGTopicCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGTopicCollectionViewController.m; sourceTree = "<group>"; };
+		A6EED16A1BF743C5001CB88A /* iBGTopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGTopicCollectionViewCell.h; sourceTree = "<group>"; };
+		A6EED16B1BF743C5001CB88A /* iBGTopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGTopicCollectionViewCell.m; sourceTree = "<group>"; };
 		A6EED16D1BF7A354001CB88A /* Listen_Emotion_Direct@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Listen_Emotion_Direct@2x.jpg"; sourceTree = "<group>"; };
 		A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGExhPageParentViewController.h; sourceTree = "<group>"; };
 		A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGExhPageParentViewController.m; sourceTree = "<group>"; };
@@ -598,10 +598,10 @@
 		A6EF62B71C08412B001E8ED2 /* Route */ = {
 			isa = PBXGroup;
 			children = (
-				A6EED1671BF712DA001CB88A /* iBGRouteCollectionViewController.h */,
-				A6EED1681BF712DA001CB88A /* iBGRouteCollectionViewController.m */,
-				A6EED16A1BF743C5001CB88A /* iBGRouteCollectionViewCell.h */,
-				A6EED16B1BF743C5001CB88A /* iBGRouteCollectionViewCell.m */,
+				A6EED1671BF712DA001CB88A /* iBGTopicCollectionViewController.h */,
+				A6EED1681BF712DA001CB88A /* iBGTopicCollectionViewController.m */,
+				A6EED16A1BF743C5001CB88A /* iBGTopicCollectionViewCell.h */,
+				A6EED16B1BF743C5001CB88A /* iBGTopicCollectionViewCell.m */,
 			);
 			name = Route;
 			sourceTree = "<group>";
@@ -881,7 +881,7 @@
 				A639943D1BDE4615003E1BCA /* AppDelegate.m in Sources */,
 				A6D58BC41BE7863C00C4AFF4 /* iBGItemInfoViewController.m in Sources */,
 				A6CF59A31BEE02920025A26C /* iBGMyCollectionTableViewController.m in Sources */,
-				A6EED16C1BF743C5001CB88A /* iBGRouteCollectionViewCell.m in Sources */,
+				A6EED16C1BF743C5001CB88A /* iBGTopicCollectionViewCell.m in Sources */,
 				A6CA5D671C19CC6D002640FB /* MBProgressHUD.m in Sources */,
 				A6DB85931BF8B46B00E40EEF /* iBGCommentTableViewCell.m in Sources */,
 				A6EED1711BF89F0A001CB88A /* iBGExhPageParentViewController.m in Sources */,
@@ -891,7 +891,7 @@
 				A6B9D50F1C16250900654815 /* iBGSettingTableViewController.m in Sources */,
 				A6B309151C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m in Sources */,
 				A6B3090D1C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m in Sources */,
-				A6EED1691BF712DA001CB88A /* iBGRouteCollectionViewController.m in Sources */,
+				A6EED1691BF712DA001CB88A /* iBGTopicCollectionViewController.m in Sources */,
 				A6B3090B1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				A6B309121C140FC700DDA89E /* NYTPhotoTransitionController.m in Sources */,
 				A6B309091C140FC700DDA89E /* UITableView+FDKeyedHeightCache.m in Sources */,

@@ -37,12 +37,9 @@
 									[UIImage imageNamed:@"logo_1.png"],
 									[UIImage imageNamed:@"logo_2.png"],
 									[UIImage imageNamed:@"logo_1.png"], nil];
-//	[UIImage imageNamed:@"detect_1.png"],
-//	[UIImage imageNamed:@"detect_2.png"],
-//	[UIImage imageNamed:@"detect_3.png"], nil];
+
 	[self.moniterAnimation setAnimationImages: animationImg];
 	[self.moniterAnimation setAnimationDuration: 2.0];
-	//    [self.moniterAnimation setAnimationRepeatCount:20];
 	[self.moniterAnimation startAnimating];
 	
 	[self.hintLabel startGlowing];
@@ -95,8 +92,8 @@
 	
 	// testing data
 //	self.exhID = 18;
-//	self.routeID = 1;
-//	self.routeItems = @[@17];
+//	self.topicID = 1;
+//	self.topicItems = @[@17];
 	
 }
 
@@ -110,7 +107,7 @@
 	
 	[self.navigationController setNavigationBarHidden:NO animated:animated];
 	NSLog(@"exhID: %ld", (long)self.exhID);
-	NSLog(@"routeID: %ld", (long)self.routeID);
+	NSLog(@"topicID: %ld", (long)self.topicID);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -250,10 +247,10 @@
 		
 		NSLog(@"展品 %@ 屬於展覽 %@", @(objID), @(self.exhID));
 		
-		// 未選擇路線 || 有選擇路線且屬於當前路線
-		if (self.routeID == 0 || (self.routeID != 0 && [self.routeItems count] > 0 && [self.routeItems containsObject:@(objID)])) {
+		// 未選擇精選主題 || 有選擇精選主題且屬於當前精選主題
+		if (self.topicID == 0 || (self.topicID != 0 && [self.topicItems count] > 0 && [self.topicItems containsObject:@(objID)])) {
 			
-			NSLog(@"展品 %@ 在路線 %@ 中", @(objID), @(self.routeID));
+			NSLog(@"展品 %@ 在精選主題 %@ 中", @(objID), @(self.topicID));
 			id sec_id = [self.objData objectForKey:@"sec_id"];
 			NSInteger secID = ([sec_id isEqual:[NSNull null]]) ? 0 : [sec_id integerValue];
 			// 沒有設定展區直接前往展品頁面
@@ -383,7 +380,7 @@
 	
 	// 抓到有展區的展品訊號去展區資訊頁面
 	else if ([segue.identifier isEqualToString:@"MoniterSec"]) {
-		NSLog(@"Go routeID: %ld, secID: %@", (long)self.routeID, [self.objData objectForKey:@"sec_id"]);
+		NSLog(@"Go topicID: %ld, secID: %@", (long)self.topicID, [self.objData objectForKey:@"sec_id"]);
 		[[segue destinationViewController] setValue:self.objData forKey:@"prepareItemInfo"];	}
 	
 	// 抓到沒有展區的展品訊號去展品資訊頁面

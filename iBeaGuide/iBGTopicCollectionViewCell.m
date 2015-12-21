@@ -1,13 +1,13 @@
 //
-//  iBGRouteCollectionViewCell.m
+//  iBGTopicCollectionViewCell.m
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/14.
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import "iBGRouteCollectionViewCell.h"
+#import "iBGTopicCollectionViewCell.h"
 
-@implementation iBGRouteCollectionViewCell
+@implementation iBGTopicCollectionViewCell
 
 @end

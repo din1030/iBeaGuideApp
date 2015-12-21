@@ -1,21 +1,19 @@
 //
-//  iBGRouteCollectionViewController.m
+//  iBGTopicCollectionViewController.m
 //  iBeaGuide
 //
 //  Created by din1030 on 2015/11/14.
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import "iBGRouteCollectionViewController.h"
+#import "iBGTopicCollectionViewController.h"
 #import "iBGMoniterViewController.h"
 
-@interface iBGRouteCollectionViewController ()
+@interface iBGTopicCollectionViewController ()
 
 @end
 
-@implementation iBGRouteCollectionViewController
-
-static NSString * const reuseIdentifier = @"RouteCell";
+@implementation iBGTopicCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,16 +22,15 @@ static NSString * const reuseIdentifier = @"RouteCell";
     // self.clearsSelectionOnViewWillAppear = NO;
 	
     // Register cell classes
-    // [self.routeCollectionView registerClass:[iBGRouteCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    // [self.topicCollectionView registerClass:[iBGTopicCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 	
 	// This is important. The normal deceleration rate would mean that swiping slowly would make the page snapping
 	// animate slowly, which isn't how the default paging works. Fast deceleration makes the pages snap just like
 	// they would in if you turned on paging.
 	
-	self.routeCollectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+	self.topicCollectionView.decelerationRate = UIScrollViewDecelerationRateFast;
 	
-//	self.routeList = [NSMutableArray array];
-//	self.routeList = [NSMutableArray arrayWithObjects:@"routeA", @"routeB", @"routeC", @"routeD", nil];
+//	self.topicList = [NSMutableArray array];
 	
 }
 
@@ -52,11 +49,11 @@ static NSString * const reuseIdentifier = @"RouteCell";
 }
 */
 
-- (IBAction)clickRouteCheckBtn:(UIButton *)sender {
+- (IBAction)clickTopicCheckBtn:(UIButton *)sender {
 	
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
 	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 2];
-	moniterVC.routeID = sender.tag;
+	moniterVC.topicID = sender.tag;
 	[moniterVC saveExhCollectData];
 	[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:ownIndex - 2] animated:YES];
 	
@@ -70,13 +67,13 @@ static NSString * const reuseIdentifier = @"RouteCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	// puls 1 for route with all item
-	return [self.routeList count] + 1;
+	// puls 1 for topic with all item
+	return [self.topicList count] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
-	iBGRouteCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+	iBGTopicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopicCell" forIndexPath:indexPath];
 	cell.layer.cornerRadius = 5.0;
 	CALayer *inputLayer = [[iBGTextInputLayer alloc] init];
 	inputLayer.frame = cell.bounds;
@@ -84,20 +81,20 @@ static NSString * const reuseIdentifier = @"RouteCell";
 	
 	if (indexPath.row == 0) {
 		
-		cell.routeID = 0;
-		cell.routeCheckBtn.tag = cell.routeID;
-		cell.routeTitle.text = @"所有展品";
-		[cell.routeMainPic setImage:[UIImage imageNamed:@"Jade_Cabbage.jpg"]];
-		cell.routeDescription.text = @"顯示所有具有導覽資訊的展品。";
+		cell.topicID = 0;
+		cell.topicCheckBtn.tag = cell.topicID;
+		cell.topicTitle.text = @"所有展品";
+		[cell.topicMainPic setImage:[UIImage imageNamed:@"Jade_Cabbage.jpg"]];
+		cell.topicDescription.text = @"顯示所有具有導覽資訊的展品。";
 		
 	} else {
 	
-		NSDictionary *routeInfo = self.routeList[indexPath.row - 1];
-		cell.routeID = [[routeInfo objectForKey:@"id"] integerValue];
-		cell.routeCheckBtn.tag = cell.routeID;
-		cell.routeTitle.text = [routeInfo objectForKey:@"title"];
-		[cell.routeMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
-		cell.routeDescription.text = [routeInfo objectForKey:@"description"];
+		NSDictionary *topicInfo = self.topicList[indexPath.row - 1];
+		cell.topicID = [[topicInfo objectForKey:@"id"] integerValue];
+		cell.topicCheckBtn.tag = cell.topicID;
+		cell.topicTitle.text = [topicInfo objectForKey:@"title"];
+		[cell.topicMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
+		cell.topicDescription.text = [topicInfo objectForKey:@"description"];
 
 	}
 	
@@ -108,11 +105,11 @@ static NSString * const reuseIdentifier = @"RouteCell";
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
 	// Get the size of the page, adjusting for the content insets.
-	CGRect insetFrame = UIEdgeInsetsInsetRect( self.routeCollectionView.frame, self.routeCollectionView.contentInset );
+	CGRect insetFrame = UIEdgeInsetsInsetRect( self.topicCollectionView.frame, self.topicCollectionView.contentInset );
 //	NSLog(@"insetFrame.size.width = %f", insetFrame.size.width);
 	
 	// Determine the page index to fall on based on scroll position.
-	CGFloat pageIndex = self.routeCollectionView.contentOffset.x / insetFrame.size.width;
+	CGFloat pageIndex = self.topicCollectionView.contentOffset.x / insetFrame.size.width;
 	
 	// Going forward, we round to the next page.
 	if( velocity.x > 0 ) {
@@ -135,13 +132,13 @@ static NSString * const reuseIdentifier = @"RouteCell";
 	// If we don't have enough for a full page at the end, snap to the end point.
 	// This means the penultimate page will have some content crossover with the
 	// last page, and mirrors the default paging behaviour.
-	if( newOffset > self.routeCollectionView.contentSize.width - insetFrame.size.width ) {
-		newOffset = self.routeCollectionView.contentSize.width - insetFrame.size.width;
+	if( newOffset > self.topicCollectionView.contentSize.width - insetFrame.size.width ) {
+		newOffset = self.topicCollectionView.contentSize.width - insetFrame.size.width;
 	}
 	
 	// Set our target content offset.
 	// We multiply the target page index by the page width, and adjust for the content inset.
-	targetContentOffset->x = newOffset - self.routeCollectionView.contentInset.left;
+	targetContentOffset->x = newOffset - self.topicCollectionView.contentInset.left;
 }
 
 /*

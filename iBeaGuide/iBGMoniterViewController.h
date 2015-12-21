@@ -23,8 +23,8 @@
 @property (nonatomic) NSString *exhTitle;
 @property (strong, nonatomic) NSDictionary *exhInfo;
 @property (nonatomic) NSMutableArray *visitedSec;
-@property (nonatomic) NSInteger routeID;
-@property (nonatomic) NSArray *routeItems;
+@property (nonatomic) NSInteger topicID;
+@property (nonatomic) NSArray *topicItems;
 
 - (IBAction)clickExhTest:(id)sender;
 - (IBAction)clickItemTest:(id)sender;
