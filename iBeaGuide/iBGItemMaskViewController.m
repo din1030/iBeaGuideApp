@@ -212,7 +212,7 @@
 }
 
 -(void)doShareOGACtion {
-	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
+	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
 									@"og:type": @"chengchiating:exhibit",
@@ -221,7 +221,7 @@
 									@"og:url": @"http://www.dct.nccu.edu.tw/master/",
 									@"og:image": @[photo],
 									@"chengchiating:creator": [self.itemInfo objectForKey:@"creator"],
-									@"chengchiating:finished_time": [self.itemInfo objectForKey:@"finished_time"]
+									@"chengchiating:work_time": [self.itemInfo objectForKey:@"work_time"]
 								};
 	FBSDKShareOpenGraphObject *object = [FBSDKShareOpenGraphObject objectWithProperties:properties];
 	FBSDKShareAPI *shareAPI = [[FBSDKShareAPI alloc] init];

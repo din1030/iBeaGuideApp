@@ -22,7 +22,7 @@
 	self.itemTitle.text = [self.itemInfo objectForKey:@"title"];
     self.itemSubtitle.text = [self.itemInfo objectForKey:@"subtitle"];
     self.itemCreator.text = [self.itemInfo objectForKey:@"creator"];
-    self.itemFinishedTimeValue.text = [self.itemInfo objectForKey:@"finished_time"];
+    self.itemFinishedTimeValue.text = [self.itemInfo objectForKey:@"work_time"];
     [self.itemFinishedTimeValue autoHeight];
     self.itemBrief.text = [self.itemInfo objectForKey:@"brief"];
     [self.itemBrief autoHeight];
@@ -72,7 +72,7 @@
 	self.photosViewController.delegate = self;
 	
 	[[self.itemInfoPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
-	[self.itemInfoPicBtn setImage:[UIImage imageNamed:@"Sanpan.jpg"] forState:UIControlStateNormal];
+//	[self.itemInfoPicBtn setImage:[UIImage imageNamed:@"Sanpan.jpg"] forState:UIControlStateNormal];
 
 	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
@@ -92,21 +92,28 @@
 		
 #warning Link real pic
 		
+		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"http://imgs.ntdtv.com/pic/2015/11-24/p7159475a688505343.jpg"];
-		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
-		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1.jpg"];
-		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
+		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, nil];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.itemInfoPicBtn setImage:image1 forState:UIControlStateNormal];
+		});
+		
+//		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_3.jpg"];
+//		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_1.jpg"];
+//		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
 		
 		
 		// 把圖片給 iBGNYTPhoto obj
 		for (int i = 0; i < [self.itemPicArray count]; i++) {
 			
-			iBGNYTPhoto *photo = self.photos[i];
-			photo.image = [self.itemPicArray objectAtIndex:i];
+//			iBGNYTPhoto *photo = self.photos[i];
+//			photo.image = self.itemPicArray[i];
 			
 //			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.itemTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+//			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.itemTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 //			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
@@ -116,6 +123,7 @@
 				NSLog(@"Item Info / update Image For Photo %d", i);
 				iBGNYTPhoto *photo = self.photos[i];
 				photo.image = self.itemPicArray[i];
+				photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 				[self.photosViewController updateImageForPhoto:photo];
 				[self.photosViewController updateOverlayInformation];
 			}

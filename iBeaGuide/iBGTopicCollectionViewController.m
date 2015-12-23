@@ -9,6 +9,8 @@
 #import "iBGTopicCollectionViewController.h"
 #import "iBGMoniterViewController.h"
 
+#define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
+
 @interface iBGTopicCollectionViewController ()
 
 @end
@@ -54,9 +56,32 @@
 	NSUInteger ownIndex = [self.navigationController.viewControllers indexOfObject:self];
 	iBGMoniterViewController *moniterVC = (iBGMoniterViewController *)[self.navigationController.viewControllers objectAtIndex:ownIndex - 2];
 	moniterVC.topicID = sender.tag;
+	moniterVC.topicItems = [self getTopicItems:(int)sender.tag];
 	[moniterVC saveExhCollectData];
+	
 	[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:ownIndex - 2] animated:YES];
 	
+}
+
+- (NSArray *)getTopicItems:(int)topicID {
+	
+	NSString *urlString = [NSString stringWithFormat:@"%@/get_in_topic_items/%d", kWebAPIRoot, topicID];
+	NSURL *url = [NSURL URLWithString: urlString];
+	NSError *dataError, *jsonError;
+	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
+	NSLog(@"URL: %@", urlString);
+	if (dataError) {
+		NSLog(@"dataError: \n UserInfo => %@ \n Description => %@",[dataError userInfo], [dataError localizedDescription]);
+		return nil;
+	}
+	
+	NSArray *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+	if (jsonError) {
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@",[jsonError userInfo], [jsonError localizedDescription]);
+		return nil;
+	}
+	
+	return result;
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -84,7 +109,8 @@
 		cell.topicID = 0;
 		cell.topicCheckBtn.tag = cell.topicID;
 		cell.topicTitle.text = @"所有展品";
-		[cell.topicMainPic setImage:[UIImage imageNamed:@"Jade_Cabbage.jpg"]];
+		[cell.topicMainPic setImage:[UIImage imageNamed:@"dct.jpg"]];
+		[cell.topicMainPic setContentMode:UIViewContentModeScaleAspectFit];
 		cell.topicDescription.text = @"顯示所有具有導覽資訊的展品。";
 		
 	} else {
@@ -92,8 +118,10 @@
 		NSDictionary *topicInfo = self.topicList[indexPath.row - 1];
 		cell.topicID = [[topicInfo objectForKey:@"id"] integerValue];
 		cell.topicCheckBtn.tag = cell.topicID;
+		NSLog(@"cell.topicCheckBtn.tag = %ld", (long)cell.topicCheckBtn.tag);
 		cell.topicTitle.text = [topicInfo objectForKey:@"title"];
-		[cell.topicMainPic setImage:[UIImage imageNamed:@"Sanpan.jpg"]];
+		[cell.topicMainPic setContentMode:UIViewContentModeScaleAspectFit];
+		[cell.topicMainPic setImage:[UIImage imageNamed:@"dct.jpg"]];
 		cell.topicDescription.text = [topicInfo objectForKey:@"description"];
 
 	}

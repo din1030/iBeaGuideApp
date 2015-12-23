@@ -57,7 +57,7 @@
 
 - (void)doShareOGACtion {
 	NSLog(@"exhID: %@", [self.exhInfo objectForKey:@"id"]);
-	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
+	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
 								 @"og:type": @"chengchiating:exhibition",

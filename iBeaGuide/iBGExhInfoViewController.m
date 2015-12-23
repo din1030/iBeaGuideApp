@@ -19,6 +19,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+#warning Link real pic
+	// 在背景 load 圖片
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+		// 從 url 取得圖片
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
+//		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, nil];
+		
+		// 回到 main queue 更新 UI (圖片)
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
+			[self.imageButton setImage:image1 forState:UIControlStateNormal];
+
+		});
+	});
+	
 	// 取出展覽資料 assign 給對應的 label
 	// 如果展期只有一天只需顯示單一日期
 	if ([self.exhInfo objectForKey:@"start_date"] == [self.exhInfo objectForKey:@"end_date"]) {
@@ -62,7 +78,7 @@
 	}
 	
 	// 增加與底部按鈕距離
-	contentRect.size.height += 10.0;
+	contentRect.size.height += 60.0;
 	self.exhScrollView.contentSize = contentRect.size;
 }
 
@@ -77,6 +93,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIImage *)urlStringToImage:(NSString *)urlString {
+	
+	NSURL *url =  [NSURL URLWithString: urlString];
+	NSData *data = [NSData dataWithContentsOfURL:url];
+	UIImage *urlImage = [UIImage imageWithData:data];
+	
+	return urlImage;
+}
 
 #pragma mark - Navigation
 

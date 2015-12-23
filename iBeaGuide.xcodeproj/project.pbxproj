@@ -14,6 +14,7 @@
 		A63994481BDE4615003E1BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A63994471BDE4615003E1BCA /* Assets.xcassets */; };
 		A63994561BDE4615003E1BCA /* iBeaGuideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A63994551BDE4615003E1BCA /* iBeaGuideTests.m */; };
 		A63994611BDE4615003E1BCA /* iBeaGuideUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A63994601BDE4615003E1BCA /* iBeaGuideUITests.m */; };
+		A65AE1981C29FD2E00BDAAE3 /* dct.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A65AE1971C29FD2E00BDAAE3 /* dct.jpg */; };
 		A6A7348A1BE8DBA000772655 /* iBGItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A734891BE8DBA000772655 /* iBGItemDetailViewController.m */; };
 		A6A7348D1BE8E64800772655 /* iBGCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7348C1BE8E64800772655 /* iBGCommentViewController.m */; };
 		A6B309081C140FC700DDA89E /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308E71C140FC700DDA89E /* UITableView+FDIndexPathHeightCache.m */; };
@@ -148,6 +149,7 @@
 		A639945C1BDE4615003E1BCA /* iBeaGuideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iBeaGuideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A63994601BDE4615003E1BCA /* iBeaGuideUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iBeaGuideUITests.m; sourceTree = "<group>"; };
 		A63994621BDE4615003E1BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A65AE1971C29FD2E00BDAAE3 /* dct.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dct.jpg; sourceTree = "<group>"; };
 		A6A734881BE8DBA000772655 /* iBGItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGItemDetailViewController.h; sourceTree = "<group>"; };
 		A6A734891BE8DBA000772655 /* iBGItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGItemDetailViewController.m; sourceTree = "<group>"; };
 		A6A7348B1BE8E64800772655 /* iBGCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGCommentViewController.h; sourceTree = "<group>"; };
@@ -375,8 +377,6 @@
 				A6B9D50D1C16250900654815 /* iBGSettingTableViewController.h */,
 				A6B9D50E1C16250900654815 /* iBGSettingTableViewController.m */,
 				A6EF62B61C08411D001E8ED2 /* Exh */,
-				A6EF62B71C08412B001E8ED2 /* Route */,
-				A6EF62BB1C084188001E8ED2 /* Section */,
 				A6EF62B81C08413A001E8ED2 /* Item */,
 				A6EF62BA1C084176001E8ED2 /* MyCollection */,
 				A6EF62B91C08414D001E8ED2 /* Comment */,
@@ -501,6 +501,7 @@
 		A6CE217D1BDFB2BE00249226 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A65AE1971C29FD2E00BDAAE3 /* dct.jpg */,
 				A6E2251A1C21F9B400C9B8F8 /* din.png */,
 				A6ED0A8F1C0DA5D5009BD030 /* NYT */,
 				A6D0C7201BFB2A1000D8EC7E /* Tab Bar Item BG */,
@@ -583,6 +584,7 @@
 		A6EF62B61C08411D001E8ED2 /* Exh */ = {
 			isa = PBXGroup;
 			children = (
+				A6EF62B71C08412B001E8ED2 /* Topic */,
 				A6EED16F1BF89F0A001CB88A /* iBGExhPageParentViewController.h */,
 				A6EED1701BF89F0A001CB88A /* iBGExhPageParentViewController.m */,
 				A6CE21B41BDFD97200249226 /* iBGExhInfoViewController.h */,
@@ -595,7 +597,7 @@
 			name = Exh;
 			sourceTree = "<group>";
 		};
-		A6EF62B71C08412B001E8ED2 /* Route */ = {
+		A6EF62B71C08412B001E8ED2 /* Topic */ = {
 			isa = PBXGroup;
 			children = (
 				A6EED1671BF712DA001CB88A /* iBGTopicCollectionViewController.h */,
@@ -603,12 +605,13 @@
 				A6EED16A1BF743C5001CB88A /* iBGTopicCollectionViewCell.h */,
 				A6EED16B1BF743C5001CB88A /* iBGTopicCollectionViewCell.m */,
 			);
-			name = Route;
+			name = Topic;
 			sourceTree = "<group>";
 		};
 		A6EF62B81C08413A001E8ED2 /* Item */ = {
 			isa = PBXGroup;
 			children = (
+				A6EF62BB1C084188001E8ED2 /* Section */,
 				A6D58BC51BE78EA800C4AFF4 /* iBGItemPageParentViewController.h */,
 				A6D58BC61BE78EA800C4AFF4 /* iBGItemPageParentViewController.m */,
 				A6D58BC21BE7863C00C4AFF4 /* iBGItemInfoViewController.h */,
@@ -805,6 +808,7 @@
 				A6CE21A11BDFB2BE00249226 /* icon-120px@2x.png in Resources */,
 				A6ED0A961C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX.png in Resources */,
 				A6CE21A51BDFB2BE00249226 /* logo@2x.png in Resources */,
+				A65AE1981C29FD2E00BDAAE3 /* dct.jpg in Resources */,
 				A6CE21A31BDFB2BE00249226 /* launch_image@2x.png in Resources */,
 				A6CE21B01BDFB2BE00249226 /* star_on@2x.png in Resources */,
 				A6ED0A9A1C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonXLandscape@2x.png in Resources */,

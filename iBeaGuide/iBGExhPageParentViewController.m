@@ -38,6 +38,8 @@
 	
 	if (![self.callerPage isEqualToString:@"myCollection"]) {
 		
+		self.navigationItem.title = @"";
+		
 		iBGCommentTableViewController *iBGExhCommentTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemCommentTableVC"];
 		iBGExhCommentTableViewController.commentType = @"exh";
 		iBGExhCommentTableViewController.commentObjID = [self.exhInfo objectForKey:@"id"];
@@ -145,6 +147,7 @@
 	// 抓到主題訊號去主題頁面
 	if ([segue.identifier isEqualToString:@"ExhToTopic"]) {
 		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"topics"] forKey:@"topicList"];
+		[segue destinationViewController].navigationItem.title = [self.exhInfo objectForKey:@"title"];
 	}
 }
 

@@ -112,20 +112,23 @@
 #warning Link real pic
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1_sec_1.jpg"];
-		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_3.jpg"];
-		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/User_1/User_1_exh_1.jpg"];
-		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_1.jpg", [self.itemInfo objectForKey:@"id"]]];
+		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, nil];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.imageButton setImage:image1 forState:UIControlStateNormal];
+		});
+		//		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
 		
 		// 把圖片給 iBGNYTPhoto obj
 		for (int i = 0; i < [self.itemPicArray count]; i++) {
 			
-			iBGNYTPhoto *photo = self.photos[i];
-			photo.image = [self.itemPicArray objectAtIndex:i];
+//			iBGNYTPhoto *photo = self.photos[i];
+//			photo.image = self.itemPicArray[i];
 			
 			//			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:@"展品名稱" attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
-			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
+//			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+//			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
 		dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -134,6 +137,7 @@
 				NSLog(@"Item Detail / update Image For Photo %d", i);
 				iBGNYTPhoto *photo = self.photos[i];
 				photo.image = self.itemPicArray[i];
+				photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 				[self.photosViewController updateImageForPhoto:photo];
 				[self.photosViewController updateOverlayInformation];
 			}
