@@ -101,10 +101,6 @@
 			[self.itemInfoPicBtn setImage:image1 forState:UIControlStateNormal];
 		});
 		
-//		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_3.jpg"];
-//		UIImage *image3 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_1.jpg"];
-//		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, image2, image3, nil];
-		
 		
 		// 把圖片給 iBGNYTPhoto obj
 		for (int i = 0; i < [self.itemPicArray count]; i++) {

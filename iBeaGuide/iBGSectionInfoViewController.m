@@ -32,7 +32,7 @@
 	self.photosViewController.delegate = self;
 	
 	[[self.secMainPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
-	[self.secMainPicBtn setImage:[UIImage imageNamed:@"Jade_Cabbage.jpg"] forState:UIControlStateNormal];
+	[self.secMainPicBtn setImage:[self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [secInfo objectForKey:@"id"]]] forState:UIControlStateNormal];
 
 	CGRect txtFrame = self.secDes.frame;
 	txtFrame.size.height = [self.secDes.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
@@ -56,9 +56,9 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_1_sec_1.jpg"];
-		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_3.jpg"];
-		self.secPicArray = [NSMutableArray arrayWithObjects:image1, image2, nil];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [secInfo objectForKey:@"id"]]];
+//		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_3.jpg"];
+		self.secPicArray = [NSMutableArray arrayWithObjects:image1, nil];
 		
 		
 		// 把圖片給 iBGNYTPhoto obj
@@ -69,7 +69,7 @@
 			
 			//			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
 			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.secTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
-			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
+			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:[secInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
 		dispatch_async(dispatch_get_main_queue(), ^(void){

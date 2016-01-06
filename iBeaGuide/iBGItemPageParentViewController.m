@@ -84,7 +84,7 @@
 	
 #warning Link real audio
 
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"soda" ofType:@"mp3"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"audioguide" ofType:@"mp3"];
 	self.theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
 	self.theAudio.delegate = self;
 	

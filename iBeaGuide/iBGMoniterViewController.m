@@ -22,12 +22,15 @@
 
 @property NSManagedObjectContext *context;
 @property NSManagedObject *exhManegedObj;
+@property CLBeacon *nowBeacon;
 
 @end
 
 @implementation iBGMoniterViewController
 
 - (void)viewDidLoad {
+	
+
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
 
@@ -79,36 +82,35 @@
 	if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
 		[self.locationManager requestAlwaysAuthorization];
 	}
-	
-	// Set up Beacon UUID and region
-	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:23235 minor:64899 identifier:kBeaconIdentifier(1)];
-
-	NSMutableArray *regionArr = [[NSMutableArray alloc] initWithObjects:self.myBeaconRegion, nil];
-	
-//	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:28256 minor:20775 identifier:kBeaconIdentifier];
-	[regionArr addObject:[[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:28256 minor:20775 identifier:kBeaconIdentifier(2)]];
-	
-//	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:1560 minor:3897 identifier:kBeaconIdentifier];
-	[regionArr addObject:[[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:1560 minor:3897 identifier:kBeaconIdentifier(3)]];
-	
-//	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:56991 minor:7238 identifier:kBeaconIdentifier];
-	[regionArr addObject:[[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:56991 minor:7238 identifier:kBeaconIdentifier(4)]];
-	
-	NSLog(@"%ld", [regionArr count]);
-	
-	// Tell location manager to start monitoring for the beacon region
-	for (CLBeaconRegion *region in regionArr) {
+	int i = 1;
+	for (NSDictionary *iBeacon in [self getiBeacons]) {
+		NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: [iBeacon objectForKey:@"uuid"]];
+		CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:[[iBeacon objectForKey:@"major"] integerValue] minor:[[iBeacon objectForKey:@"minor"] integerValue] identifier:kBeaconIdentifier(i++)];
+		NSLog(@"region: %@", region);
 		[self.locationManager startMonitoringForRegion:region];
 	}
+	NSLog(@"Regions monitering: %d", --i);
+	
+	// Set up Beacon UUID and region
+//	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+//	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID identifier:kBeaconIdentifier(1)];
+//	
+//	NSMutableArray *regionArr = [[NSMutableArray alloc] initWithObjects:self.myBeaconRegion, nil];
+////	NSMutableArray *regionArr = [[NSMutableArray alloc] init];
+//	
+//	NSUUID *SPOTbeaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
+//	[regionArr addObject:[[CLBeaconRegion alloc] initWithProximityUUID:SPOTbeaconUUID identifier:kBeaconIdentifier(2)]];
+//	
+//	NSLog(@"Regions monitering: %ld", [regionArr count]);
+	
+	// Tell location manager to start monitoring for the beacon region
+//	for (CLBeaconRegion *region in regionArr) {
+//		[self.locationManager startMonitoringForRegion:region];
+////		[self.locationManager startRangingBeaconsInRegion:region];
+//	}
 	
 	//	[self.locationManager startRangingBeaconsInRegion:self.myBeaconRegion];
-	//	[self.locationManager startUpdatingLocation];
-	
-	// testing data
-//	self.exhID = 18;
-//	self.topicID = 1;
-//	self.topicItems = @[@17];
+//		[self.locationManager startUpdatingLocation];
 	
 }
 
@@ -128,6 +130,27 @@
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+- (NSArray *)getiBeacons {
+	
+	NSString *urlString = [NSString stringWithFormat:@"%@/get_ibeacons/", kWebAPIRoot];
+	NSURL *url = [NSURL URLWithString: urlString];
+	NSError *dataError, *jsonError;
+	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
+	NSLog(@"URL: %@", urlString);
+	if (dataError) {
+		NSLog(@"dataError: \n UserInfo => %@ \n Description => %@",[dataError userInfo], [dataError localizedDescription]);
+		return nil;
+	}
+	
+	NSArray *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+	if (jsonError) {
+		NSLog(@"jsonError: \n UserInfo => %@ \n Description => %@",[jsonError userInfo], [jsonError localizedDescription]);
+		return nil;
+	}
+	
+	return result;
 }
 
 - (void)saveExhCollectData {
@@ -182,20 +205,43 @@
 
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion *)region
 {
+	NSLog(@"region: %@", region);
 	[self.locationManager startUpdatingLocation];
-	
+	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
 	// get obj data linked to the region
-	[self getBeaconLinkedObjByRegion:region];
+	[self getBeaconLinkedObjByRegion:beaconRegion];
 	
 	//	[manager startRangingBeaconsInRegion:beaconRegion];
 	
 }
 
--(BOOL)getBeaconLinkedObjByRegion:(CLRegion *)region{
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+	
+	NSLog(@"exit region: %@", region);
+	// Exited the region
+	
+//	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+//	[self.locationManager stopRangingBeaconsInRegion:beaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+		didRangeBeacons:(NSArray *)beacons
+			   inRegion:(CLBeaconRegion *)region {
+	
+//	CLBeacon *foundBeacon = [beacons firstObject];
+//	
+//	//	 You can retrieve the beacon data from its properties
+//	NSString *uuid = foundBeacon.proximityUUID.UUIDString;
+//	NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
+//	NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
+//	NSLog(@"%@/%@/%@", uuid, major ,minor);
+	
+}
+
+-(BOOL)getBeaconLinkedObjByRegion:(CLRegion *)region {
 	
 	// get ibeacon link obj info via url
 	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-	
 	NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beaconRegion.proximityUUID.UUIDString, beaconRegion.major, beaconRegion.minor];
 	NSURL *url = [NSURL URLWithString: urlString];
 	NSError *dataError, *jsonError;
@@ -227,8 +273,8 @@
 	NSLog(@"取得資料類型： %@", objType);
 	NSLog(@"資料ID/標題： %@/%@", @(objID), objTitle);
 	
-	// 判斷物件類型，展覽跳出 alert
-	if ([objType isEqualToString:@"exh"]) {
+	// 判斷物件類型，若不在展覽內跳出 alert
+	if ([objType isEqualToString:@"exh"] && objID != self.exhID) {
 				
 		// 如果 app 在背景用推播通知 user
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
@@ -305,30 +351,14 @@
 			
 		}
 		
+	} else if ([objType isEqualToString:@"exit"] && self.exhID != 0) {
+		
+		[self performSegueWithIdentifier:@"MoniterExit" sender:self];
+	
 	}
 	
 	return YES;
 }
-
--(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-	// Exited the region
-	[self.locationManager stopRangingBeaconsInRegion:self.myBeaconRegion];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	   didRangeBeacons:(NSArray *)beacons
-			  inRegion:(CLBeaconRegion *)region {
-	
-	//	CLBeacon *foundBeacon = [beacons firstObject];
-	
-	// You can retrieve the beacon data from its properties
-	// NSString *uuid = foundBeacon.proximityUUID.UUIDString;
-	// NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
-	// NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
-	//	NSLog(@"major %@", major);
-	
-}
-
 
 - (void)sendLocalNotificationWithMessage:(NSString *)message {
 	UILocalNotification *notification = [[UILocalNotification alloc] init];
@@ -342,8 +372,8 @@
 
 - (IBAction)clickExhTest:(id)sender {
 	
-	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:23235 minor:64899 identifier:kBeaconIdentifier(1)];
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:20431 minor:18650 identifier:kBeaconIdentifier(1)];
 	// get obj data linked to the region
 	[self getBeaconLinkedObjByRegion:region];
 }

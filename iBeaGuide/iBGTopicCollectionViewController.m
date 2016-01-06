@@ -121,12 +121,21 @@
 		NSLog(@"cell.topicCheckBtn.tag = %ld", (long)cell.topicCheckBtn.tag);
 		cell.topicTitle.text = [topicInfo objectForKey:@"title"];
 		[cell.topicMainPic setContentMode:UIViewContentModeScaleAspectFit];
-		[cell.topicMainPic setImage:[UIImage imageNamed:@"dct.jpg"]];
+		[cell.topicMainPic setImage:[self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/topic_%@.jpg", [topicInfo objectForKey:@"id"]]]];
 		cell.topicDescription.text = [topicInfo objectForKey:@"description"];
 
 	}
 	
 	return cell;
+}
+
+- (UIImage *)urlStringToImage:(NSString *)urlString {
+	
+	NSURL *url =  [NSURL URLWithString: urlString];
+	NSData *data = [NSData dataWithContentsOfURL:url];
+	UIImage *urlImage = [UIImage imageWithData:data];
+	
+	return urlImage;
 }
 
 #pragma mark <UICollectionViewDelegate>

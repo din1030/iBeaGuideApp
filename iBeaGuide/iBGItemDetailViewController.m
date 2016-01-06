@@ -50,40 +50,48 @@
 	
     CGRect refNameFrame = self.detailFieldName1.frame;
     CGRect refValueFrame = self.detailFieldValue1.frame;
-    for (int i = 0; i < [detailFields count]; i++) {
-        
-        if (i == 0) {
-            
-            self.detailFieldName1.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
-            self.detailFieldName1.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y , self.detailFieldName1.intrinsicContentSize.width, refNameFrame.size.height};
-            refNameFrame = self.detailFieldName1.frame;
-            
-            self.detailFieldValue1.text = detailFields[i][@"field_value"];
-            self.detailFieldValue1.frame = (CGRect){refNameFrame.origin.x + refNameFrame.size.width, refNameFrame.origin.y , self.view.frame.size.width - 50 - refNameFrame.size.width, refNameFrame.size.height};
-            [self.detailFieldValue1 autoHeight];
-            refValueFrame = self.detailFieldValue1.frame;
-            
-        } else {
-            
-            UILabel *curNameLabel = [[UILabel alloc] init];
-            curNameLabel.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
-            curNameLabel.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y , curNameLabel.intrinsicContentSize.width, refNameFrame.size.height};
-            NSLog(@"%f", refNameFrame.size.height);
-            
-            UILabel *curValueLabel = [[UILabel alloc] init];
-            curValueLabel.text = detailFields[i][@"field_value"];
-            curValueLabel.frame = (CGRect){curNameLabel.frame.origin.x + curNameLabel.frame.size.width, curNameLabel.frame.origin.y , self.view.frame.size.width - 50 - curNameLabel.frame.size.width, refNameFrame.size.height};
-            [curValueLabel autoHeight];
-            [self.itemDetailScrollView addSubview:curNameLabel];
-            [self.itemDetailScrollView addSubview:curValueLabel];
-            
-            refNameFrame = curNameLabel.frame;
-            refValueFrame = curValueLabel.frame;
-            
-        }
-        
-    }
-    self.itemDetail.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+	if ([detailFields count] == 0) {
+		self.itemDetail.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+		self.detailFieldName1.hidden = YES;
+		self.detailFieldValue1.hidden = YES;
+		
+	} else {
+		for (int i = 0; i < [detailFields count]; i++) {
+			
+			if (i == 0) {
+				
+				self.detailFieldName1.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
+				self.detailFieldName1.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y , self.detailFieldName1.intrinsicContentSize.width, refNameFrame.size.height};
+				refNameFrame = self.detailFieldName1.frame;
+				
+				self.detailFieldValue1.text = detailFields[i][@"field_value"];
+				self.detailFieldValue1.frame = (CGRect){refNameFrame.origin.x + refNameFrame.size.width, refNameFrame.origin.y , self.view.frame.size.width - 50 - refNameFrame.size.width, refNameFrame.size.height};
+				[self.detailFieldValue1 autoHeight];
+				refValueFrame = self.detailFieldValue1.frame;
+				
+			} else {
+				
+				UILabel *curNameLabel = [[UILabel alloc] init];
+				curNameLabel.text = [NSString stringWithFormat:@"%@：", detailFields[i][@"field_name"]];
+				curNameLabel.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, curNameLabel.intrinsicContentSize.width, refNameFrame.size.height};
+				NSLog(@"%f", refNameFrame.size.height);
+				
+				UILabel *curValueLabel = [[UILabel alloc] init];
+				curValueLabel.text = detailFields[i][@"field_value"];
+				curValueLabel.frame = (CGRect){curNameLabel.frame.origin.x + curNameLabel.frame.size.width, curNameLabel.frame.origin.y, self.view.frame.size.width - 50 - curNameLabel.frame.size.width, refNameFrame.size.height};
+				[curValueLabel autoHeight];
+				[self.itemDetailScrollView addSubview:curNameLabel];
+				[self.itemDetailScrollView addSubview:curValueLabel];
+				
+				refNameFrame = curNameLabel.frame;
+				refValueFrame = curValueLabel.frame;
+				
+			}
+			
+		}
+		self.itemDetail.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemDetail.frame.size.width, self.itemDetail.frame.size.height};
+	}
+	
     
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
 	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
@@ -91,7 +99,6 @@
 	self.photosViewController.delegate = self;
 	
 	[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
-	[self.imageButton setImage:[UIImage imageNamed:@"Mona_Lisa.jpg"] forState:UIControlStateNormal];
 	
 	// 取 scrollview 所有 subview 的 frame 的聯集
 	CGRect contentRect = CGRectZero;
@@ -131,7 +138,7 @@
 //			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:@"照片說明" attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
 		}
 		// 回到 main queue 更新 UI (圖片)
-		dispatch_async(dispatch_get_main_queue(), ^(void){
+		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			for (int i = 0; i < [self.itemPicArray count]; i++) {
 				NSLog(@"Item Detail / update Image For Photo %d", i);
