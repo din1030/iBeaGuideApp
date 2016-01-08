@@ -82,7 +82,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
+                            <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
                                 <rect key="frame" x="20" y="145" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -93,7 +93,7 @@
                                     <action selector="clickExhTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="3yJ-Xn-lNp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
+                            <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
                                 <rect key="frame" x="194" y="144" width="106" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -104,7 +104,7 @@
                                     <action selector="clickItemTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="V4W-IF-49d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
+                            <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
                                 <rect key="frame" x="20" y="363" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -126,7 +126,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
+                            <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
                                 <rect key="frame" x="194" y="363" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1457,28 +1457,19 @@ By default a UILabel will center the text vertically. To have the text top align
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展區標題" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MiQ-n5-dDT">
-                                        <rect key="frame" x="0.0" y="17" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="43" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.88627450980392153" green="0.29019607843137252" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="它可以說是世界上最著名的油畫作品，很少有其他作品能像它一樣，常常被人審查、研究或是演繹。它的擁有者，" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tCx-Lg-9Ph">
-                                        <rect key="frame" x="20" y="301" width="280" height="118"/>
+                                        <rect key="frame" x="20" y="327" width="280" height="118"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Yj-gf-fCW">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="226"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button" backgroundImage="poster2.png"/>
-                                        <connections>
-                                            <action selector="imageButtonTapped:" destination="ddP-iI-dQO" eventType="touchUpInside" id="VPf-jK-pKf"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fts-7H-wRa">
                                         <rect key="frame" x="0.0" y="458" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1498,6 +1489,17 @@ By default a UILabel will center the text vertically. To have the text top align
                                         <color key="textColor" red="0.8862745098" green="0.2901960784" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="M3f-4F-hTD">
+                                        <rect key="frame" x="0.0" y="81" width="320" height="226"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您進入了新展區：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4nd-rG-FS1">
+                                        <rect key="frame" x="20" y="14" width="128" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -1515,7 +1517,7 @@ By default a UILabel will center the text vertically. To have the text top align
                         <outlet property="secDes" destination="tCx-Lg-9Ph" id="rcy-gB-CpA"/>
                         <outlet property="secEnterBtn" destination="fts-7H-wRa" id="uUF-8f-ePR"/>
                         <outlet property="secInfoScrollView" destination="0yN-Ou-Ck1" id="Kyh-SB-lP5"/>
-                        <outlet property="secMainPicBtn" destination="1Yj-gf-fCW" id="6Ba-m4-2WL"/>
+                        <outlet property="secPic" destination="M3f-4F-hTD" id="xuY-Aq-Znf"/>
                         <outlet property="secTitle" destination="MiQ-n5-dDT" id="tpL-Xz-f3t"/>
                         <segue destination="AQ9-wQ-PX7" kind="push" identifier="SecToItem" id="Hdi-Mo-LdH"/>
                     </connections>
@@ -1587,8 +1589,8 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7xK-sO-LCw"/>
         <segue reference="NzM-zW-bFY"/>
+        <segue reference="Hdi-Mo-LdH"/>
         <segue reference="NdZ-Oq-4S9"/>
     </inferredMetricsTieBreakers>
 </document>

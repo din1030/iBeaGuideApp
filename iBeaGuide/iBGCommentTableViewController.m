@@ -36,6 +36,12 @@
         self.itemPageParentVC = (iBGItemPageParentViewController*)self.parentViewController.parentViewController;
     }
 	
+
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	
 	MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	
 	// Regiser for HUD callbacks so we can remove it from the window at the right time
@@ -44,11 +50,11 @@
 	
 	// Show the HUD while the provided method executes in a new thread
 	[hud showWhileExecuting:@selector(loadTask) onTarget:self withObject:nil animated:YES];
-
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//	[self.tableView reloadData];
+	//	[self.tableView reloadData];
 	// 控制 page control 到對應位置
 	if ([self.commentType isEqualToString:@"exh"]) {
 		self.exhPageParentVC.exhPageControl.currentPage = 1;

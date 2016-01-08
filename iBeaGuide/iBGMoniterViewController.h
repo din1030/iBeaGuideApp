@@ -23,6 +23,7 @@
 @property (nonatomic) NSString *exhTitle;
 @property (strong, nonatomic) NSDictionary *exhInfo;
 @property (nonatomic) NSMutableArray *visitedSec;
+@property (nonatomic) NSInteger currentItemID;
 @property (nonatomic) NSInteger topicID;
 @property (nonatomic) NSArray *topicItems;
 

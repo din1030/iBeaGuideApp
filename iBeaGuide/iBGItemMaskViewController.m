@@ -202,6 +202,7 @@
 											startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 												if (!error) {
 													NSLog(@"fetched user:%@", result);
+													[self doShareOGACtion];
 												}
 											}];
 									   }
@@ -212,13 +213,14 @@
 }
 
 -(void)doShareOGACtion {
-	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
+	NSString *URLString = [NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]];
+	NSURL *imageURL = [NSURL URLWithString:URLString];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
 									@"og:type": @"chengchiating:exhibit",
 									@"og:title": [self.itemInfo objectForKey:@"title"],
 									@"og:description": [self.itemInfo objectForKey:@"brief"],
-									@"og:url": @"http://www.dct.nccu.edu.tw/master/",
+									@"og:url": URLString,
 									@"og:image": @[photo],
 									@"chengchiating:creator": [self.itemInfo objectForKey:@"creator"],
 									@"chengchiating:work_time": [self.itemInfo objectForKey:@"work_time"]

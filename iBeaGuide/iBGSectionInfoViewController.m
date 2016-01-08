@@ -19,6 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	// 在背景 load 圖片
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+	
+		// 從 url 取得圖片
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [self.prepareItemInfo objectForKey:@"sec_id"]]];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			self.secPic.image = image1;
+			self.secPic.contentMode = UIViewContentModeScaleAspectFit;
+		});
+	
+	});
+
 	// show id
 	NSLog(@"目前展區 ID： %@", [self.prepareItemInfo objectForKey:@"sec_id"]);
 	NSLog(@"即將顯示展品 ID： %@", [self.prepareItemInfo objectForKey:@"id"]);
@@ -26,17 +39,10 @@
 	self.secTitle.text = [secInfo objectForKey:@"title"];
 	self.secDes.text = [secInfo objectForKey:@"description"];
 	
-	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
-	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
-	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
-	self.photosViewController.delegate = self;
-	
-	[[self.secMainPicBtn imageView] setContentMode:UIViewContentModeScaleAspectFit];
-	[self.secMainPicBtn setImage:[self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [secInfo objectForKey:@"id"]]] forState:UIControlStateNormal];
 
 	CGRect txtFrame = self.secDes.frame;
 	txtFrame.size.height = [self.secDes.text boundingRectWithSize:CGSizeMake(txtFrame.size.width, CGFLOAT_MAX)
-															 options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
+															 options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
 														  attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.secDes.font,NSFontAttributeName, nil] context:nil].size.height;
 	self.secDes.frame = txtFrame;
 	
@@ -52,37 +58,6 @@
 	// 增加與底部按鈕距離
 	contentRect.size.height += 10.0;
 	self.secInfoScrollView.contentSize = contentRect.size;
-	// 在背景 load 圖片
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		
-		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [secInfo objectForKey:@"id"]]];
-//		UIImage *image2 = [self urlStringToImage:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_3.jpg"];
-		self.secPicArray = [NSMutableArray arrayWithObjects:image1, nil];
-		
-		
-		// 把圖片給 iBGNYTPhoto obj
-		for (int i = 0; i < [self.secPicArray count]; i++) {
-			
-			iBGNYTPhoto *photo = self.photos[i];
-			photo.image = [self.secPicArray objectAtIndex:i];
-			
-			//			photo.attributedCaptionTitle = [[NSAttributedString alloc] initWithString:@(i + 1).stringValue attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-			photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:self.secTitle.text attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
-			photo.attributedCaptionCredit = [[NSAttributedString alloc] initWithString:[secInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
-		}
-		// 回到 main queue 更新 UI (圖片)
-		dispatch_async(dispatch_get_main_queue(), ^(void){
-			
-			for (int i = 0; i < [self.secPicArray count]; i++) {
-				NSLog(@"Section Info / update Image For Photo %d", i);
-				iBGNYTPhoto *photo = self.photos[i];
-				photo.image = self.secPicArray[i];
-				[self.photosViewController updateImageForPhoto:photo];
-				[self.photosViewController updateOverlayInformation];
-			}
-		});
-	});
 	
 	// 設定倒數自動跳轉
 	self.secondsLeft = 5;
@@ -146,45 +121,45 @@
 }
 
 // 在設定時間還讀不到圖片就直接替換成指定圖片
-- (void)updateImagesOnPhotosViewController:(NYTPhotosViewController *)photosViewController afterDelayWithPhotos:(NSArray *)photos {
-	CGFloat updateImageDelay = 5.0f;
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(updateImageDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		for (iBGNYTPhoto *photo in photos) {
-			if (!photo.image) {
-				// 替代圖片
-				photo.image = [UIImage imageNamed:@"logo.png"];
-				[photosViewController updateImageForPhoto:photo];
-			}
-		}
-	});
-}
+//- (void)updateImagesOnPhotosViewController:(NYTPhotosViewController *)photosViewController afterDelayWithPhotos:(NSArray *)photos {
+//	CGFloat updateImageDelay = 5.0f;
+//	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(updateImageDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//		for (iBGNYTPhoto *photo in photos) {
+//			if (!photo.image) {
+//				// 替代圖片
+//				photo.image = [UIImage imageNamed:@"logo.png"];
+//				[photosViewController updateImageForPhoto:photo];
+//			}
+//		}
+//	});
+//}
 
 #pragma mark - NYTPhotosViewControllerDelegate
 
-- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController referenceViewForPhoto:(id <NYTPhoto>)photo {
-	return self.secMainPicBtn;
-}
+//- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController referenceViewForPhoto:(id <NYTPhoto>)photo {
+//	return self.secMainPicBtn;
+//}
 
 // 客製化 loading
-- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController loadingViewForPhoto:(id <NYTPhoto>)photo {
-	
-	NSLog(@"loadingViewForPhoto");
-	CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
-	UIView *loadingView = [[UIView alloc] initWithFrame:frame];
-	
-	UIActivityIndicatorView *loadingActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	loadingActivityIndicatorView.center = loadingView.center;
-	[loadingActivityIndicatorView startAnimating];
-	
-	UILabel *loadingLabel = [[UILabel alloc] initWithFrame:(CGRect){0, loadingView.center.y + 30, frame.size.width, 30}];
-	[loadingView addSubview:loadingActivityIndicatorView];
-	[loadingView addSubview:loadingLabel];
-	loadingLabel.textAlignment = NSTextAlignmentCenter;
-	loadingLabel.textColor = [UIColor lightGrayColor];
-	loadingLabel.text = @"讀取圖片中...";
-	
-	return loadingView;
-}
+//- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController loadingViewForPhoto:(id <NYTPhoto>)photo {
+//	
+//	NSLog(@"loadingViewForPhoto");
+//	CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+//	UIView *loadingView = [[UIView alloc] initWithFrame:frame];
+//	
+//	UIActivityIndicatorView *loadingActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//	loadingActivityIndicatorView.center = loadingView.center;
+//	[loadingActivityIndicatorView startAnimating];
+//	
+//	UILabel *loadingLabel = [[UILabel alloc] initWithFrame:(CGRect){0, loadingView.center.y + 30, frame.size.width, 30}];
+//	[loadingView addSubview:loadingActivityIndicatorView];
+//	[loadingView addSubview:loadingLabel];
+//	loadingLabel.textAlignment = NSTextAlignmentCenter;
+//	loadingLabel.textColor = [UIColor lightGrayColor];
+//	loadingLabel.text = @"讀取圖片中...";
+//	
+//	return loadingView;
+//}
 
 // 設定置底物件
 //- (UIView *)photosViewController:(NYTPhotosViewController *)photosViewController captionViewForPhoto:(id <NYTPhoto>)photo {
@@ -200,11 +175,11 @@
 //}
 
 // 圖片可放大倍數
-- (CGFloat)photosViewController:(NYTPhotosViewController *)photosViewController maximumZoomScaleForPhoto:(id <NYTPhoto>)photo {
-	
-	NSLog(@"maximumZoomScaleForPhoto");
-	return 5.0f;
-}
+//- (CGFloat)photosViewController:(NYTPhotosViewController *)photosViewController maximumZoomScaleForPhoto:(id <NYTPhoto>)photo {
+//	
+//	NSLog(@"maximumZoomScaleForPhoto");
+//	return 5.0f;
+//}
 
 // 改變 title 樣式
 //- (NSDictionary *)photosViewController:(NYTPhotosViewController *)photosViewController overlayTitleTextAttributesForPhoto:(id <NYTPhoto>)photo {
@@ -212,18 +187,18 @@
 //	return @{NSForegroundColorAttributeName: [UIColor grayColor]};
 ////	return nil;
 //}
-
-- (void)photosViewController:(NYTPhotosViewController *)photosViewController didNavigateToPhoto:(id <NYTPhoto>)photo atIndex:(NSUInteger)photoIndex {
-	NSLog(@"Did Navigate To Photo: %@ identifier: %lu", photo, (unsigned long)photoIndex);
-}
-
-- (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
-	NSLog(@"Action Completed With Activity Type: %@", activityType);
-}
-
-- (void)photosViewControllerDidDismiss:(NYTPhotosViewController *)photosViewController {
-	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
-}
+//
+//- (void)photosViewController:(NYTPhotosViewController *)photosViewController didNavigateToPhoto:(id <NYTPhoto>)photo atIndex:(NSUInteger)photoIndex {
+//	NSLog(@"Did Navigate To Photo: %@ identifier: %lu", photo, (unsigned long)photoIndex);
+//}
+//
+//- (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
+//	NSLog(@"Action Completed With Activity Type: %@", activityType);
+//}
+//
+//- (void)photosViewControllerDidDismiss:(NYTPhotosViewController *)photosViewController {
+//	NSLog(@"Did Dismiss Photo Viewer: %@", photosViewController);
+//}
 
 #pragma mark - Navigation
 

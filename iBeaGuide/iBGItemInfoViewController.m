@@ -67,7 +67,7 @@
     self.itemBrief.frame = (CGRect){refNameFrame.origin.x, refNameFrame.origin.y + refValueFrame.size.height + 10, self.itemBrief.frame.size.width, self.itemBrief.frame.size.height};
     
 	// (根據圖片數量)先塞空的 iBGNYTPhoto obj，才會有 loading view。
-	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], [iBGNYTPhoto new], [iBGNYTPhoto new], nil];
+	self.photos = [NSArray arrayWithObjects:[iBGNYTPhoto new], nil];
 	self.photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:self.photos];
 	self.photosViewController.delegate = self;
 	
@@ -91,7 +91,6 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 #warning Link real pic
-		
 		
 		// 從 url 取得圖片
 		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];

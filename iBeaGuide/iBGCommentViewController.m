@@ -9,6 +9,7 @@
 #import "iBGGlobal.h"
 #import "MBProgressHUD.h"
 #import "iBGCommentViewController.h"
+#import "iBGGlobalData.h"
 
 @interface iBGCommentViewController ()
 
@@ -62,8 +63,8 @@
 - (IBAction)clickSendComment:(id)sender {
 	// 檢查有評分才可以送出
 	if (self.rate) {
-	
-		NSArray *commentObjArray = [NSArray arrayWithObjects: @"1", self.objID, self.type, @(self.rate), self.commentTextView.text, nil];
+		NSLog(@"%@", [iBGGlobalData sharedInstance].loggedUserID);
+		NSArray *commentObjArray = [NSArray arrayWithObjects: [iBGGlobalData sharedInstance].loggedUserID, self.objID, self.type, @(self.rate), self.commentTextView.text, nil];
 		NSArray *commentKeyArray = [NSArray arrayWithObjects: @"user_id", @"obj_id", @"type", @"rate", @"content", nil];
 		NSDictionary *comment = [NSDictionary dictionaryWithObjects:commentObjArray forKeys:commentKeyArray];
 		[self sendCommentData:comment url:@"http://114.34.1.57/iBeaGuide/App/post_comment_action"];

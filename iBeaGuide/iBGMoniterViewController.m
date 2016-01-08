@@ -86,7 +86,7 @@
 	for (NSDictionary *iBeacon in [self getiBeacons]) {
 		NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: [iBeacon objectForKey:@"uuid"]];
 		CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:[[iBeacon objectForKey:@"major"] integerValue] minor:[[iBeacon objectForKey:@"minor"] integerValue] identifier:kBeaconIdentifier(i++)];
-		NSLog(@"region: %@", region);
+//		NSLog(@"region: %@", region);
 		[self.locationManager startMonitoringForRegion:region];
 	}
 	NSLog(@"Regions monitering: %d", --i);
@@ -299,8 +299,8 @@
 		[self presentViewController:alertController animated:YES completion:nil];
 		
 	// 若類型為展品，屬於當前展覽才需顯示
-	} else if ([objType isEqualToString:@"item"] && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
-
+	} else if ([objType isEqualToString:@"item"] && objID != self.currentItemID &&[[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
+		self.currentItemID = objID;
         // 如果 app 在背景用推播通知 user
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
             [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"%@", [self.objData objectForKey:@"push_content"]]];
@@ -352,8 +352,23 @@
 		}
 		
 	} else if ([objType isEqualToString:@"exit"] && self.exhID != 0) {
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您要離開了嗎？"
+																				 message:[NSString stringWithFormat:@"您正在靠近「%@」之出口，確定要結束導覽了嗎？", objTitle]
+																		  preferredStyle:UIAlertControllerStyleAlert];
 		
-		[self performSegueWithIdentifier:@"MoniterExit" sender:self];
+		UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"繼續導覽" style:UIAlertActionStyleCancel handler:nil];
+		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"結束導覽" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self performSegueWithIdentifier:@"MoniterExit" sender:self];
+		}];
+		[alertController addAction:cancelAction];
+		[alertController addAction:okAction];
+		
+		alertController.view.backgroundColor = UIColorFromRGBWithAlpha(0xF9F7F3, 1);
+		alertController.view.tintColor = UIColorFromRGBWithAlpha(0x29ABE2, 1);
+		alertController.view.layer.cornerRadius = 5;
+		
+		[self presentViewController:alertController animated:YES completion:nil];
+		
 	
 	}
 	
@@ -406,11 +421,10 @@
 
 - (IBAction)clickExitTest:(id)sender {
 	
-	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
-	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:17822 minor:61969 identifier:kBeaconIdentifier(1)];
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:23235 minor:64899 identifier:kBeaconIdentifier(15)];
 	[self getBeaconLinkedObjByRegion:region];
 	
-	[self performSegueWithIdentifier:@"MoniterExit" sender:self];
 	
 }
 
@@ -424,7 +438,7 @@
 	
 	// 抓到展覽訊號去展覽資訊頁面
 	if ([segue.identifier isEqualToString:@"MoniterExh"]) {
-		NSLog(@"Go exhID: %ld", (long)self.exhID);
+//		NSLog(@"Go exhID: %ld", (long)self.exhID);
 		[[segue destinationViewController] setValue:self.objData forKey:@"exhInfo"];
 	
 	}
@@ -432,6 +446,7 @@
 	// 出口訊號去出口頁面
 	else if ([segue.identifier isEqualToString:@"MoniterExit"]) {
 		NSLog(@"Exit for : %ld", (long)self.exhID);
+		self.exhID = 0;
 		[[segue destinationViewController] setValue:self.exhInfo forKey:@"exhInfo"];
 	}
 	

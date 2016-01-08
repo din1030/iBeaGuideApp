@@ -14,6 +14,7 @@
 
 @property BOOL facilityPushIsOn;
 @property BOOL autoPlayIsOn;
+@property NSNumber *loggedUserID;
 
 + (iBGGlobalData *)sharedInstance;
 

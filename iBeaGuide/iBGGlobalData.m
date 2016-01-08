@@ -26,6 +26,7 @@
 	if (self = [super init]) {
 		self.autoPlayIsOn = YES;
 		self.facilityPushIsOn = YES;
+		self.loggedUserID = @1;
 	}
 	
 	return self;

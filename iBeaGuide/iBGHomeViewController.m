@@ -9,6 +9,7 @@
 #import "iBGHomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "iBGGlobalData.h"
 
 @interface iBGHomeViewController ()
 
@@ -106,12 +107,14 @@
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 	if (requestError) {
 		NSLog(@"使用者資料傳送錯誤");
-		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@", [requestError userInfo], [requestError localizedDescription]);
 		
 		return;
 	}
 	
-	NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	NSNumber *userID = @([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].intValue);
+	[iBGGlobalData sharedInstance].loggedUserID = userID;
+	NSLog(@"user ID: %@", userID);
 	
 }
 

@@ -21,7 +21,8 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *secInfoScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *secTitle;
-@property (strong, nonatomic) IBOutlet UIButton *secMainPicBtn;
+@property (strong, nonatomic) IBOutlet UIButton *secPicBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *secPic;
 
 @property (strong, nonatomic) IBOutlet UILabel *secDes;
 @property (strong, nonatomic) IBOutlet UIButton *secEnterBtn;
