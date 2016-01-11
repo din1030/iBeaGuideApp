@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>iBeaGuide copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>iBeaGuide.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>A639945B1BDE4615003E1BCA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A6CBE9051C4044100007E762</key>
 		<dict>
 			<key>primary</key>
 			<true/>

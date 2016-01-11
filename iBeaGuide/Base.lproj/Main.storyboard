@@ -382,7 +382,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="zsS-vP-Yqa" customClass="iBGCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KFQ-Qx-2Nd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="sWl-Y9-wQj">
@@ -1591,6 +1591,6 @@ By default a UILabel will center the text vertically. To have the text top align
     <inferredMetricsTieBreakers>
         <segue reference="NzM-zW-bFY"/>
         <segue reference="Hdi-Mo-LdH"/>
-        <segue reference="NdZ-Oq-4S9"/>
+        <segue reference="Pgx-L2-UGe"/>
     </inferredMetricsTieBreakers>
 </document>

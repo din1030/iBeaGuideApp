@@ -12,28 +12,32 @@
 #import "iBGMoniterViewController.h"
 #import "UIView+Glow.h"
 #import "MBProgressHUD.h"
+ #import <CoreBluetooth/CoreBluetooth.h>
 
 #define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 //#define kBeaconIdentifier @"iBeaGuide"
 #define kBeaconIdentifier(i) \
 [NSString stringWithFormat:@"iBeaGuide%d", i]
 
-@interface iBGMoniterViewController ()
+@interface iBGMoniterViewController () <CBCentralManagerDelegate>
 
 @property NSManagedObjectContext *context;
 @property NSManagedObject *exhManegedObj;
 @property CLBeacon *nowBeacon;
+@property CBCentralManager *centralManager;
 
 @end
 
 @implementation iBGMoniterViewController
 
 - (void)viewDidLoad {
-	
 
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
-
+	
+	self.nowBeacon = [CLBeacon alloc];
+	self.exhID = -1;
+	self.currentItemID = -1;
+	self.topicID = -1;
 	self.visitedSec = [[NSMutableArray alloc] init];
 	
 	// 設定偵測動畫
@@ -82,38 +86,44 @@
 	if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
 		[self.locationManager requestAlwaysAuthorization];
 	}
+	
+	/*
 	int i = 1;
 	for (NSDictionary *iBeacon in [self getiBeacons]) {
 		NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: [iBeacon objectForKey:@"uuid"]];
 		CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:[[iBeacon objectForKey:@"major"] integerValue] minor:[[iBeacon objectForKey:@"minor"] integerValue] identifier:kBeaconIdentifier(i++)];
-//		NSLog(@"region: %@", region);
 		[self.locationManager startMonitoringForRegion:region];
 	}
 	NSLog(@"Regions monitering: %d", --i);
+	*/
 	
 	// Set up Beacon UUID and region
-//	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-//	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID identifier:kBeaconIdentifier(1)];
-//	
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+	self.myBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID identifier:kBeaconIdentifier(1)];
+//
 //	NSMutableArray *regionArr = [[NSMutableArray alloc] initWithObjects:self.myBeaconRegion, nil];
-////	NSMutableArray *regionArr = [[NSMutableArray alloc] init];
-//	
+//	NSMutableArray *regionArr = [[NSMutableArray alloc] init];
+	
 //	NSUUID *SPOTbeaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
 //	[regionArr addObject:[[CLBeaconRegion alloc] initWithProximityUUID:SPOTbeaconUUID identifier:kBeaconIdentifier(2)]];
-//	
+//
 //	NSLog(@"Regions monitering: %ld", [regionArr count]);
 	
 	// Tell location manager to start monitoring for the beacon region
 //	for (CLBeaconRegion *region in regionArr) {
-//		[self.locationManager startMonitoringForRegion:region];
-////		[self.locationManager startRangingBeaconsInRegion:region];
+		[self.locationManager startMonitoringForRegion:self.myBeaconRegion];
+		[self.locationManager startRangingBeaconsInRegion:self.myBeaconRegion];
 //	}
 	
 	//	[self.locationManager startRangingBeaconsInRegion:self.myBeaconRegion];
-//		[self.locationManager startUpdatingLocation];
+		[self.locationManager startUpdatingLocation];
 	
 }
-
+- (void)viewDidAppear:(BOOL)animated {
+	
+	self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+	
+}
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -130,6 +140,14 @@
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+	if (central.state == CBCentralManagerStatePoweredOn) {
+		//Do what you intend to do
+	} else if(central.state == CBCentralManagerStatePoweredOff) {
+		//Bluetooth is disabled. ios pops-up an alert automatically
+	}
 }
 
 - (NSArray *)getiBeacons {
@@ -206,12 +224,12 @@
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion *)region
 {
 	NSLog(@"region: %@", region);
-	[self.locationManager startUpdatingLocation];
-	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-	// get obj data linked to the region
-	[self getBeaconLinkedObjByRegion:beaconRegion];
-	
-	//	[manager startRangingBeaconsInRegion:beaconRegion];
+
+//	[self.locationManager startUpdatingLocation];
+//	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+//	[self getBeaconLinkedObjByBeacon:beaconRegion];
+
+//	[manager startRangingBeaconsInRegion:beaconRegion];
 	
 }
 
@@ -220,17 +238,33 @@
 	NSLog(@"exit region: %@", region);
 	// Exited the region
 	
-//	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-//	[self.locationManager stopRangingBeaconsInRegion:beaconRegion];
+	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+	[self.locationManager stopRangingBeaconsInRegion:beaconRegion];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
 		didRangeBeacons:(NSArray *)beacons
 			   inRegion:(CLBeaconRegion *)region {
+	NSLog(@"%@", region);
 	
-//	CLBeacon *foundBeacon = [beacons firstObject];
-//	
-//	//	 You can retrieve the beacon data from its properties
+	CLBeacon *foundBeacon = [beacons firstObject];
+	NSLog(@"Same Beacon: %d", ![foundBeacon.major isEqual:self.nowBeacon.major]);
+//	for (CLBeacon *foundBeacon in beacons) {
+//		NSLog(@"%@", foundBeacon);
+//		if (foundBeacon.proximity == CLProximityNear) {
+			NSString *uuid = foundBeacon.proximityUUID.UUIDString;
+			NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
+			NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
+			NSLog(@"foundBeacon %@/%@/%@/%ld", uuid, major ,minor, (long)foundBeacon.proximity);
+//		}
+//	}
+		if (![foundBeacon.major isEqual:self.nowBeacon.major] && foundBeacon.proximity == CLProximityNear) {
+			[self getBeaconLinkedObjByBeacon:foundBeacon];
+			self.nowBeacon = foundBeacon;
+			NSLog(@"Same Beacon: %d", ![foundBeacon.major isEqual:self.nowBeacon.major]);
+		}
+	
+	//	 You can retrieve the beacon data from its properties
 //	NSString *uuid = foundBeacon.proximityUUID.UUIDString;
 //	NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
 //	NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
@@ -238,11 +272,11 @@
 	
 }
 
--(BOOL)getBeaconLinkedObjByRegion:(CLRegion *)region {
+-(BOOL)getBeaconLinkedObjByBeacon:(CLBeacon *)beacon {
 	
 	// get ibeacon link obj info via url
-	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-	NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beaconRegion.proximityUUID.UUIDString, beaconRegion.major, beaconRegion.minor];
+//	CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+	NSString *urlString = [NSString stringWithFormat:@"%@/get_iBeacon_link_obj/%@/%@/%@", kWebAPIRoot, beacon.proximityUUID.UUIDString, beacon.major, beacon.minor];
 	NSURL *url = [NSURL URLWithString: urlString];
 	NSError *dataError, *jsonError;
 	NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&dataError];
@@ -274,7 +308,7 @@
 	NSLog(@"資料ID/標題： %@/%@", @(objID), objTitle);
 	
 	// 判斷物件類型，若不在展覽內跳出 alert
-	if ([objType isEqualToString:@"exh"] && objID != self.exhID) {
+	if ([objType isEqualToString:@"exh"] && self.exhID < 0 && objID != self.exhID) {
 				
 		// 如果 app 在背景用推播通知 user
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
@@ -299,7 +333,7 @@
 		[self presentViewController:alertController animated:YES completion:nil];
 		
 	// 若類型為展品，屬於當前展覽才需顯示
-	} else if ([objType isEqualToString:@"item"] && objID != self.currentItemID &&[[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
+	} else if ([objType isEqualToString:@"item"] && objID != self.currentItemID && [[self.objData objectForKey:@"exh_id"] integerValue] == self.exhID) {
 		self.currentItemID = objID;
         // 如果 app 在背景用推播通知 user
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
@@ -351,13 +385,14 @@
 			
 		}
 		
-	} else if ([objType isEqualToString:@"exit"] && self.exhID != 0) {
+	} else if ([objType isEqualToString:@"exit"] && self.exhID > 0) {
 		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您要離開了嗎？"
 																				 message:[NSString stringWithFormat:@"您正在靠近「%@」之出口，確定要結束導覽了嗎？", objTitle]
 																		  preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"繼續導覽" style:UIAlertActionStyleCancel handler:nil];
 		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"結束導覽" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			self.exhID = -1;
 			[self performSegueWithIdentifier:@"MoniterExit" sender:self];
 		}];
 		[alertController addAction:cancelAction];
@@ -390,7 +425,7 @@
 	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
 	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:20431 minor:18650 identifier:kBeaconIdentifier(1)];
 	// get obj data linked to the region
-	[self getBeaconLinkedObjByRegion:region];
+//	[self getBeaconLinkedObjByBeacon:region];
 }
 
 - (IBAction)clickItemTest:(id)sender {
@@ -406,9 +441,7 @@
 	region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:56991 minor:7238 identifier:kBeaconIdentifier(1)];
 	[regionArr addObject:region];
 	
-	
-	
-	[self getBeaconLinkedObjByRegion:regionArr[arc4random() % 3]];
+	[self getBeaconLinkedObjByBeacon:regionArr[arc4random() % 3]];
 	//	[self performSegueWithIdentifier:@"MoniterItem" sender:self];
 	
 }
@@ -423,7 +456,7 @@
 	
 	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
 	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:23235 minor:64899 identifier:kBeaconIdentifier(15)];
-	[self getBeaconLinkedObjByRegion:region];
+//	[self getBeaconLinkedObjByBeacon:region];
 	
 	
 }

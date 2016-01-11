@@ -83,8 +83,35 @@
 	}
 	
 #warning Link real audio
+	
+	NSString *path = nil;
 
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"audioguide" ofType:@"mp3"];
+	switch ([[self.itemInfo objectForKey:@"id"] intValue]) {
+		case 50:
+			path = [[NSBundle mainBundle] pathForResource:@"013" ofType:@"mp3"];
+			break;
+			
+		case 51:
+			path = [[NSBundle mainBundle] pathForResource:@"afra" ofType:@"mp3"];
+			break;
+			
+		case 52:
+			path = [[NSBundle mainBundle] pathForResource:@"cintin" ofType:@"mp3"];
+			break;
+			
+		case 54:
+			path = [[NSBundle mainBundle] pathForResource:@"grandpa" ofType:@"mp3"];
+			break;
+			
+		case 59:
+			path = [[NSBundle mainBundle] pathForResource:@"Europe" ofType:@"mp3"];
+			break;
+
+		default:
+			path = [[NSBundle mainBundle] pathForResource:@"audioguide" ofType:@"mp3"];
+			break;
+	}
+
 	self.theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
 	self.theAudio.delegate = self;
 	
