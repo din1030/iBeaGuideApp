@@ -319,7 +319,7 @@
 		A6CA5D791C1CCAE0002640FB /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
 		A6CA5D7A1C1CCAE0002640FB /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		A6CA5D7F1C1CD556002640FB /* 37x-Info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Info@2x.png"; sourceTree = "<group>"; };
-		A6CBE9761C4044100007E762 /* iBeaGuide2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeaGuide2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6CBE9761C4044100007E762 /* iBeaGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeaGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6CBE9771C4044100007E762 /* iBeaGuide copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "iBeaGuide copy-Info.plist"; path = "/Users/din1030/Desktop/Projects/iBeaGuide/iBeaGuide copy-Info.plist"; sourceTree = "<absolute>"; };
 		A6CBE9831C407A200007E762 /* 013.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 013.mp3; sourceTree = "<group>"; };
 		A6CBE9841C407A200007E762 /* afra.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = afra.mp3; sourceTree = "<group>"; };
@@ -482,7 +482,7 @@
 				A63994351BDE4614003E1BCA /* iBeaGuide.app */,
 				A63994511BDE4615003E1BCA /* iBeaGuideTests.xctest */,
 				A639945C1BDE4615003E1BCA /* iBeaGuideUITests.xctest */,
-				A6CBE9761C4044100007E762 /* iBeaGuide2.app */,
+				A6CBE9761C4044100007E762 /* iBeaGuide.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -895,7 +895,7 @@
 			);
 			name = iBeaGuide2;
 			productName = iBeaGuide;
-			productReference = A6CBE9761C4044100007E762 /* iBeaGuide2.app */;
+			productReference = A6CBE9761C4044100007E762 /* iBeaGuide.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1419,7 +1419,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuide2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iBeaGuide;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1436,7 +1436,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuide2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iBeaGuide;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
