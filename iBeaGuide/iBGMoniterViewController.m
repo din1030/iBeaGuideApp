@@ -387,8 +387,8 @@
 
 - (IBAction)clickExhTest:(id)sender {
 	
-	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"D3556E50-C856-11E3-8408-0221A885EF40"];
-	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:20431 minor:18650 identifier:kBeaconIdentifier(1)];
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:58190 minor:40704 identifier:kBeaconIdentifier(1)];
 	// get obj data linked to the region
 	[self getBeaconLinkedObjByRegion:region];
 }
@@ -400,10 +400,10 @@
 	
 	NSMutableArray *regionArr = [NSMutableArray arrayWithObject:region];
 	
-	region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:1560 minor:3897 identifier:kBeaconIdentifier(1)];
+	region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:1560 minor:3897 identifier:kBeaconIdentifier(2)];
 	[regionArr addObject:region];
 	
-	region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:56991 minor:7238 identifier:kBeaconIdentifier(1)];
+	region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:46650 minor:7005 identifier:kBeaconIdentifier(3)];
 	[regionArr addObject:region];
 	
 	
@@ -415,11 +415,17 @@
 
 - (IBAction)clickSectionTest:(id)sender {
 	
+	[self.visitedSec removeAllObjects];
+	
+	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:28256 minor:20775 identifier:kBeaconIdentifier(1)];
+	[self getBeaconLinkedObjByRegion:region];
 	[self performSegueWithIdentifier:@"MoniterSec" sender:self];
 	
 }
 
 - (IBAction)clickExitTest:(id)sender {
+	
 	
 	NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: @"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
 	CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:23235 minor:64899 identifier:kBeaconIdentifier(15)];

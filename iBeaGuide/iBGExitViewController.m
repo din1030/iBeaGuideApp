@@ -57,13 +57,14 @@
 
 - (void)doShareOGACtion {
 	NSLog(@"exhID: %@", [self.exhInfo objectForKey:@"id"]);
-	NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
+	NSString *URLString = [NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]];
+	NSURL *imageURL = [NSURL URLWithString:URLString];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
 								 @"og:type": @"chengchiating:exhibition",
 								 @"og:title": [self.exhInfo objectForKey:@"title"],
 								 @"og:description": [self.exhInfo objectForKey:@"description"],
-								 @"og:url": @"http://www.dct.nccu.edu.tw/master/",
+								 @"og:url": URLString,
 								 @"og:image": @[photo],
 								 @"chengchiating:dates": [NSString stringWithFormat:@"%@ - %@", [self.exhInfo objectForKey:@"start_date"], [self.exhInfo objectForKey:@"end_date"]],
 								 @"chengchiating:venue": [self.exhInfo objectForKey:@"venue"]
@@ -90,7 +91,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	
 	// 去留言頁面
-	if ([segue.identifier isEqualToString:@"CommentExh"]) {
+	if ([segue.identifier isEqualToString:@"ExhComment"]) {
 		[segue destinationViewController].navigationItem.title = [self.exhInfo objectForKey:@"title"];
 		[[segue destinationViewController] setValue:@"exh" forKey:@"type"];
 		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"id"] forKey:@"objID"];

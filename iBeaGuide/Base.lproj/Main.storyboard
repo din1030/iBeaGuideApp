@@ -382,7 +382,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="zsS-vP-Yqa" customClass="iBGCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KFQ-Qx-2Nd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="sWl-Y9-wQj">
@@ -403,7 +403,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您對「展品名稱」有什麼想法嗎？歡迎留言與我們分享！" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SQx-nO-TGG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您對展品有什麼想法嗎？歡迎留言與我們分享！" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SQx-nO-TGG">
                                         <rect key="frame" x="35" y="0.0" width="259" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1590,7 +1590,7 @@ By default a UILabel will center the text vertically. To have the text top align
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="NzM-zW-bFY"/>
+        <segue reference="Pgx-L2-UGe"/>
         <segue reference="Hdi-Mo-LdH"/>
-        <segue reference="NdZ-Oq-4S9"/>
     </inferredMetricsTieBreakers>
 </document>
