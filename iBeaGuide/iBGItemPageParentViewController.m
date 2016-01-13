@@ -135,7 +135,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	
+	//
+	if ([self.theAudio isPlaying]) {
+		[self stopAudioGuide];
+	}
 	// 啟動 proximity 偵測，偵測使用者靠近或遠離決定播放或暫停
 	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];

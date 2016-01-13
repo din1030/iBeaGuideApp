@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="IiE-5F-Ses">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_0.png" id="IiE-5F-Ses">
                                 <rect key="frame" x="90" y="122" width="140" height="151"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -115,10 +115,6 @@
                                     <action selector="clickSectionTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="O18-Ss-yNx"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_2.png" id="nq7-fh-sBY">
-                                <rect key="frame" x="101" y="183" width="117" height="125"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測導覽訊號中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
                                 <rect key="frame" x="82" y="334" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,6 +133,14 @@
                                     <action selector="clickExitTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="sch-bD-AGA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lIc-0W-HTX">
+                                <rect key="frame" x="102" y="197" width="117" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="logo_0.png"/>
+                                <connections>
+                                    <action selector="moniterBtn:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="R9Z-Nc-f8k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -149,8 +153,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="hintLabel" destination="mJv-uF-zLG" id="Y2I-QO-4cL"/>
-                        <outlet property="moniterAnimation" destination="nq7-fh-sBY" id="2lQ-5l-OK1"/>
                         <outlet property="moniterButton" destination="2M1-Oa-HIE" id="4Xo-SI-TZf"/>
+                        <outlet property="refreshBtn" destination="lIc-0W-HTX" id="295-bF-23R"/>
                         <segue destination="AQ9-wQ-PX7" kind="push" identifier="MoniterItem" id="7xK-sO-LCw"/>
                         <segue destination="ZQG-hI-HcD" kind="push" identifier="MoniterExh" id="NzM-zW-bFY"/>
                         <segue destination="ddP-iI-dQO" kind="push" identifier="MoniterSec" id="1aj-Pu-l1i"/>
@@ -1017,7 +1021,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="143"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="GVi-aN-liY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_0.png" id="GVi-aN-liY">
                                                     <rect key="frame" x="110" y="18" width="100" height="108"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1574,8 +1578,7 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="fblogin.png" width="130" height="34"/>
         <image name="fblogout.png" width="130" height="34"/>
         <image name="login.png" width="55" height="34"/>
-        <image name="logo.png" width="100" height="108"/>
-        <image name="logo_2.png" width="100" height="108"/>
+        <image name="logo_0.png" width="100" height="108"/>
         <image name="message_2.png" width="75" height="75"/>
         <image name="message_full.png" width="60" height="60"/>
         <image name="message_menu.png" width="84" height="84"/>
@@ -1589,8 +1592,8 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="7xK-sO-LCw"/>
         <segue reference="NzM-zW-bFY"/>
-        <segue reference="Hdi-Mo-LdH"/>
         <segue reference="Pgx-L2-UGe"/>
     </inferredMetricsTieBreakers>
 </document>
