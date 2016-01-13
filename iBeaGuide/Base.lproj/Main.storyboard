@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="IiE-5F-Ses">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_0.png" id="IiE-5F-Ses">
                                 <rect key="frame" x="90" y="122" width="140" height="151"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -83,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2M1-Oa-HIE">
-                                <rect key="frame" x="20" y="145" width="106" height="30"/>
+                                <rect key="frame" x="20" y="187" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展覽訊號">
@@ -94,7 +94,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MSH-7k-Kvn">
-                                <rect key="frame" x="194" y="144" width="106" height="31"/>
+                                <rect key="frame" x="194" y="186" width="106" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展品訊號">
@@ -105,7 +105,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Suv-8N-0Hc">
-                                <rect key="frame" x="20" y="363" width="106" height="33"/>
+                                <rect key="frame" x="20" y="405" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試展區">
@@ -116,18 +116,18 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_2.png" id="nq7-fh-sBY">
-                                <rect key="frame" x="101" y="183" width="117" height="125"/>
+                                <rect key="frame" x="101" y="225" width="117" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偵測導覽訊號中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJv-uF-zLG">
-                                <rect key="frame" x="82" y="334" width="156" height="21"/>
+                                <rect key="frame" x="82" y="376" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
                             <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LyP-MW-PwQ">
-                                <rect key="frame" x="194" y="363" width="106" height="33"/>
+                                <rect key="frame" x="194" y="405" width="106" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="測試出口">
@@ -135,6 +135,14 @@
                                 </state>
                                 <connections>
                                     <action selector="clickExitTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="sch-bD-AGA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rDZ-wC-mcl">
+                                <rect key="frame" x="102" y="37" width="117" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="logo_0.png"/>
+                                <connections>
+                                    <action selector="moniterBtn:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="tyo-Kk-Kjh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -150,7 +158,7 @@
                     <connections>
                         <outlet property="hintLabel" destination="mJv-uF-zLG" id="Y2I-QO-4cL"/>
                         <outlet property="moniterAnimation" destination="nq7-fh-sBY" id="2lQ-5l-OK1"/>
-                        <outlet property="moniterButton" destination="2M1-Oa-HIE" id="4Xo-SI-TZf"/>
+                        <outlet property="moniterBtn" destination="rDZ-wC-mcl" id="5Yq-Cu-hEr"/>
                         <segue destination="AQ9-wQ-PX7" kind="push" identifier="MoniterItem" id="7xK-sO-LCw"/>
                         <segue destination="ZQG-hI-HcD" kind="push" identifier="MoniterExh" id="NzM-zW-bFY"/>
                         <segue destination="ddP-iI-dQO" kind="push" identifier="MoniterSec" id="1aj-Pu-l1i"/>
@@ -1575,6 +1583,7 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="fblogout.png" width="130" height="34"/>
         <image name="login.png" width="55" height="34"/>
         <image name="logo.png" width="100" height="108"/>
+        <image name="logo_0.png" width="100" height="108"/>
         <image name="logo_2.png" width="100" height="108"/>
         <image name="message_2.png" width="75" height="75"/>
         <image name="message_full.png" width="60" height="60"/>
@@ -1589,8 +1598,8 @@ By default a UILabel will center the text vertically. To have the text top align
         <image name="star_on.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="7xK-sO-LCw"/>
         <segue reference="NzM-zW-bFY"/>
         <segue reference="Pgx-L2-UGe"/>
-        <segue reference="Hdi-Mo-LdH"/>
     </inferredMetricsTieBreakers>
 </document>

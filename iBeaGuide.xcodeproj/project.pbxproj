@@ -58,7 +58,7 @@
 		A6CE21A21BDFB2BE00249226 /* icon-60px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21881BDFB2BE00249226 /* icon-60px@2x.png */; };
 		A6CE21A31BDFB2BE00249226 /* launch_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21891BDFB2BE00249226 /* launch_image@2x.png */; };
 		A6CE21A41BDFB2BE00249226 /* login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE218A1BDFB2BE00249226 /* login@2x.png */; };
-		A6CE21A51BDFB2BE00249226 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE218B1BDFB2BE00249226 /* logo@2x.png */; };
+		A6CE21A51BDFB2BE00249226 /* logo_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE218B1BDFB2BE00249226 /* logo_0@2x.png */; };
 		A6CE21A71BDFB2BE00249226 /* message_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE218D1BDFB2BE00249226 /* message_2@2x.png */; };
 		A6CE21AA1BDFB2BE00249226 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21901BDFB2BE00249226 /* plus@2x.png */; };
 		A6CE21AB1BDFB2BE00249226 /* register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CE21911BDFB2BE00249226 /* register@2x.png */; };
@@ -219,7 +219,7 @@
 		A6CE21881BDFB2BE00249226 /* icon-60px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60px@2x.png"; sourceTree = "<group>"; };
 		A6CE21891BDFB2BE00249226 /* launch_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch_image@2x.png"; sourceTree = "<group>"; };
 		A6CE218A1BDFB2BE00249226 /* login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login@2x.png"; sourceTree = "<group>"; };
-		A6CE218B1BDFB2BE00249226 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		A6CE218B1BDFB2BE00249226 /* logo_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_0@2x.png"; sourceTree = "<group>"; };
 		A6CE218D1BDFB2BE00249226 /* message_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_2@2x.png"; sourceTree = "<group>"; };
 		A6CE21901BDFB2BE00249226 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
 		A6CE21911BDFB2BE00249226 /* register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register@2x.png"; sourceTree = "<group>"; };
@@ -513,7 +513,7 @@
 				A6CA5D791C1CCAE0002640FB /* pause@2x.png */,
 				A6CA5D7A1C1CCAE0002640FB /* play@2x.png */,
 				A6CE21891BDFB2BE00249226 /* launch_image@2x.png */,
-				A6CE218B1BDFB2BE00249226 /* logo@2x.png */,
+				A6CE218B1BDFB2BE00249226 /* logo_0@2x.png */,
 				A6CC49A61C1E041F0072A17C /* logo_1@2x.png */,
 				A6CC49A71C1E041F0072A17C /* logo_2@2x.png */,
 				A6CE21881BDFB2BE00249226 /* icon-60px@2x.png */,
@@ -806,7 +806,7 @@
 				A63994431BDE4615003E1BCA /* Main.storyboard in Resources */,
 				A6CE21A11BDFB2BE00249226 /* icon-120px@2x.png in Resources */,
 				A6ED0A961C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX.png in Resources */,
-				A6CE21A51BDFB2BE00249226 /* logo@2x.png in Resources */,
+				A6CE21A51BDFB2BE00249226 /* logo_0@2x.png in Resources */,
 				A65AE1981C29FD2E00BDAAE3 /* dct.jpg in Resources */,
 				A6CE21A31BDFB2BE00249226 /* launch_image@2x.png in Resources */,
 				A6CE21B01BDFB2BE00249226 /* star_on@2x.png in Resources */,
@@ -1043,7 +1043,7 @@
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuideMoniter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1058,7 +1058,7 @@
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuideMoniter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -23,6 +23,9 @@
 @property NSManagedObjectContext *context;
 @property NSManagedObject *exhManegedObj;
 @property CLBeacon *nowBeacon;
+@property (strong, nonatomic) IBOutlet UIButton *moniterBtn;
+- (IBAction)moniterBtn:(UIButton *)sender;
+@property NSArray *beacons;
 
 @end
 
@@ -35,10 +38,11 @@
 	// Do any additional setup after loading the view.
 
 	self.visitedSec = [[NSMutableArray alloc] init];
-	
+
+	self.moniterBtn.imageView.image = [UIImage animatedImageNamed:@"logo_" duration:0.5];
 	// 設定偵測動畫
 	NSMutableArray *animationImg = [NSMutableArray arrayWithObjects:
-									[UIImage imageNamed:@"logo.png"],
+									[UIImage imageNamed:@"logo_0.png"],
 									[UIImage imageNamed:@"logo_1.png"],
 									[UIImage imageNamed:@"logo_2.png"],
 									[UIImage imageNamed:@"logo_1.png"], nil];
@@ -82,8 +86,9 @@
 	if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
 		[self.locationManager requestAlwaysAuthorization];
 	}
+	self.beacons = [self getiBeacons];
 	int i = 1;
-	for (NSDictionary *iBeacon in [self getiBeacons]) {
+	for (NSDictionary *iBeacon in self.beacons) {
 		NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: [iBeacon objectForKey:@"uuid"]];
 		CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:[[iBeacon objectForKey:@"major"] integerValue] minor:[[iBeacon objectForKey:@"minor"] integerValue] identifier:kBeaconIdentifier(i++)];
 //		NSLog(@"region: %@", region);
@@ -469,4 +474,19 @@
 	
 }
 
+- (IBAction)moniterBtn:(UIButton *)sender {
+	NSLog(@"Refresh!");
+	int i = 1;
+	for (NSDictionary *iBeacon in self.beacons) {
+		NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString: [iBeacon objectForKey:@"uuid"]];
+		CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID major:[[iBeacon objectForKey:@"major"] integerValue] minor:[[iBeacon objectForKey:@"minor"] integerValue] identifier:kBeaconIdentifier(i++)];
+		//		NSLog(@"region: %@", region);
+		[self.locationManager stopMonitoringForRegion:region];
+		[self.locationManager startMonitoringForRegion:region];
+	}
+//    [self.locationManager stopRangingBeaconsInRegion:self.myBeaconRegion];
+//	[self.locationManager stopMonitoringForRegion:self.myBeaconRegion];
+//	[self.locationManager startRangingBeaconsInRegion:self.myBeaconRegion];
+//    [self.locationManager startMonitoringForRegion:self.myBeaconRegion];
+}
 @end
