@@ -137,14 +137,6 @@
                                     <action selector="clickExitTest:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="sch-bD-AGA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rDZ-wC-mcl">
-                                <rect key="frame" x="102" y="37" width="117" height="125"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="logo_0.png"/>
-                                <connections>
-                                    <action selector="moniterBtn:" destination="aQ3-lz-vsg" eventType="touchUpInside" id="tyo-Kk-Kjh"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -158,7 +150,6 @@
                     <connections>
                         <outlet property="hintLabel" destination="mJv-uF-zLG" id="Y2I-QO-4cL"/>
                         <outlet property="moniterAnimation" destination="nq7-fh-sBY" id="2lQ-5l-OK1"/>
-                        <outlet property="moniterBtn" destination="rDZ-wC-mcl" id="5Yq-Cu-hEr"/>
                         <segue destination="AQ9-wQ-PX7" kind="push" identifier="MoniterItem" id="7xK-sO-LCw"/>
                         <segue destination="ZQG-hI-HcD" kind="push" identifier="MoniterExh" id="NzM-zW-bFY"/>
                         <segue destination="ddP-iI-dQO" kind="push" identifier="MoniterSec" id="1aj-Pu-l1i"/>
