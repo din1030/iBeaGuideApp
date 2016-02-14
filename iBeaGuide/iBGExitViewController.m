@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGExitViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -57,7 +58,7 @@
 
 - (void)doShareOGACtion {
 	NSLog(@"exhID: %@", [self.exhInfo objectForKey:@"id"]);
-	NSString *URLString = [NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]];
+	NSString *URLString = [NSString stringWithFormat:@"%@/user_uploads/user_1/exh_%@.jpg", kWebRoot, [self.exhInfo objectForKey:@"id"]];
 	NSURL *imageURL = [NSURL URLWithString:URLString];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{
@@ -89,12 +90,12 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	
 	// 去留言頁面
 	if ([segue.identifier isEqualToString:@"ExhComment"]) {
 		[segue destinationViewController].navigationItem.title = [self.exhInfo objectForKey:@"title"];
 		[[segue destinationViewController] setValue:@"exh" forKey:@"type"];
 		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"id"] forKey:@"objID"];
+		[[segue destinationViewController] setValue:[self.exhInfo objectForKey:@"title"] forKey:@"objTitle"];
 	}
 }
 

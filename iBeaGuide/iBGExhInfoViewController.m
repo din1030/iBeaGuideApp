@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGExhInfoViewController.h"
 #import "iBGMoniterViewController.h"
 #import "UILabel+AutoHeight.h"
@@ -24,7 +25,7 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/exh_%@.jpg", [self.exhInfo objectForKey:@"id"]]];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"%@/user_uploads/user_1/exh_%@.jpg", kWebRoot, [self.exhInfo objectForKey:@"id"]]];
 //		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, nil];
 		
 		// 回到 main queue 更新 UI (圖片)

@@ -19,8 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-	self.tapDismissKB = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKB)];
+	if ([self.type isEqualToString:@"exh"]) {
+		self.commentHint.text = [NSString stringWithFormat:@"謝謝您參觀「%@」！歡迎留言與我們分享您的意見！", self.objTitle];
+	} else {
+		self.commentHint.text = [NSString stringWithFormat:@"您對「%@」有什麼想法嗎？歡迎留言與我們分享！", self.objTitle];
+	}
+    
+    self.tapDismissKB = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKB)];
 	[self.view addGestureRecognizer:self.tapDismissKB];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
@@ -67,7 +72,7 @@
 		NSArray *commentObjArray = [NSArray arrayWithObjects: [iBGGlobalData sharedInstance].loggedUserID, self.objID, self.type, @(self.rate), self.commentTextView.text, nil];
 		NSArray *commentKeyArray = [NSArray arrayWithObjects: @"user_id", @"obj_id", @"type", @"rate", @"content", nil];
 		NSDictionary *comment = [NSDictionary dictionaryWithObjects:commentObjArray forKeys:commentKeyArray];
-		[self sendCommentData:comment url:@"http://114.34.1.57/iBeaGuide/App/post_comment_action"];
+		[self sendCommentData:comment url:[NSString stringWithFormat:@"%@/post_comment_action", kWebAPIRoot]];
 
 		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 		hud.mode = MBProgressHUDModeCustomView;
@@ -110,15 +115,22 @@
 	[request setHTTPBody:jsonData];
 	
 	//轉換為NSData傳送
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
-	if (requestError) {
-		NSLog(@"留言資料傳送錯誤");
-		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+//	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 	
-		return;
-	}
+	NSURLSession *session = [NSURLSession sharedSession];
+	NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+		
+		NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+		if (requestError) {
+			NSLog(@"留言資料傳送錯誤");
+			NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+			
+			return;
+		}
+		
+	}];
 	
-	NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	[task resume];
 
 }
 

@@ -13,6 +13,7 @@
 
 @property NSString *type;
 @property NSString *objID;
+@property NSString *objTitle;
 @property int rate;
 
 @property NSArray *starArr;

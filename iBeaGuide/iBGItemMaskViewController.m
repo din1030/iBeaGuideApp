@@ -213,7 +213,7 @@
 }
 
 -(void)doShareOGACtion {
-	NSString *URLString = [NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]];
+	NSString *URLString = [NSString stringWithFormat:@"%@/user_uploads/user_1/item_%@_main.jpg", kWebRoot, [self.itemInfo objectForKey:@"id"]];
 	NSURL *imageURL = [NSURL URLWithString:URLString];
 	FBSDKSharePhoto *photo = [FBSDKSharePhoto photoWithImageURL:imageURL userGenerated:NO];
 	NSDictionary *properties = @{

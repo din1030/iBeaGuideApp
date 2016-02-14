@@ -6,13 +6,15 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NYTPhoto.h"
+@import Foundation;
+
+#import "NYTPhotoViewer/Protocols/NYTPhoto.h"
 
 @interface iBGNYTPhoto : NSObject <NYTPhoto>
 
 // Redeclare all the properties as readwrite for sample/testing purposes.
 @property (nonatomic) UIImage *image;
+@property (nonatomic) NSData *imageData;
 @property (nonatomic) UIImage *placeholderImage;
 @property (nonatomic) NSAttributedString *attributedCaptionTitle;
 @property (nonatomic) NSAttributedString *attributedCaptionSummary;

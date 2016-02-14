@@ -8,6 +8,7 @@
 
 #import "UIView+Glow.h"
 #import "MBProgressHUD.h"
+#import "iBGGlobal.h"
 #import "iBGCommentTableViewController.h"
 #import "iBGCommentTableViewHeaderCell.h"
 #import "iBGCommentTableViewCell.h"
@@ -15,7 +16,6 @@
 
 #import "UITableView+FDTemplateLayoutCell.h"
 
-#define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 #define kItemCommentHeaderHeight 58
 #define kItemCommentCellHeight 176
 

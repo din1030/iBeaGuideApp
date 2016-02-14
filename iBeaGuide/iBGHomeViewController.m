@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGHomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -75,7 +76,7 @@
 										 [dateFormater setDateFormat:@"yyyy-MM-dd"];
 										 userData[@"birthday"] = [dateFormater stringFromDate:birthday];
 										 
-										 [self sendUserData:userData url:@"http://114.34.1.57/iBeaGuide/App/post_user_action"];
+										 [self sendUserData:userData url:[NSString stringWithFormat:@"%@/post_user_action", kWebAPIRoot]];
 										 [self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
 									 }
 								 }];
@@ -104,17 +105,27 @@
 	[request setHTTPBody:jsonData];
 	
 	//轉換為NSData傳送
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
-	if (requestError) {
-		NSLog(@"使用者資料傳送錯誤");
-		NSLog(@"requestError: \n UserInfo => %@ \n Description => %@", [requestError userInfo], [requestError localizedDescription]);
-		
-		return;
-	}
+//	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 	
-	NSNumber *userID = @([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].intValue);
-	[iBGGlobalData sharedInstance].loggedUserID = userID;
-	NSLog(@"user ID: %@", userID);
+	NSURLSession *session = [NSURLSession sharedSession];
+	NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+		if (requestError) {
+			NSLog(@"使用者資料傳送錯誤");
+			NSLog(@"requestError: \n UserInfo => %@ \n Description => %@",[requestError userInfo], [requestError localizedDescription]);
+			
+			return;
+		}
+		
+		// 接收回傳 ID
+		NSNumber *userID = @([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].intValue);
+		[iBGGlobalData sharedInstance].loggedUserID = userID;
+		NSLog(@"user ID: %@", userID);
+		
+	}];
+	
+	[task resume];
+	
+
 	
 }
 

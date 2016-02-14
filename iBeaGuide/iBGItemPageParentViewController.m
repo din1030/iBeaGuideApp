@@ -135,10 +135,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	//
-	if ([self.theAudio isPlaying]) {
-		[self stopAudioGuide];
-	}
+	
+//	if ([self.theAudio isPlaying]) {
+//		[self stopAudioGuide];
+//	}
 	// 啟動 proximity 偵測，偵測使用者靠近或遠離決定播放或暫停
 	[[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];
@@ -288,6 +288,7 @@
 //		[segue destinationViewController].navigationItem.title = [self.itemInfo objectForKey:@"title"];
 		[[segue destinationViewController] setValue:@"item" forKey:@"type"];
 		[[segue destinationViewController] setValue:[self.itemInfo objectForKey:@"id"] forKey:@"objID"];
+		[[segue destinationViewController] setValue:[self.itemInfo objectForKey:@"title"] forKey:@"objTitle"];
 	}
 }
 

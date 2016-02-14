@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGItemInfoViewController.h"
 #import "UILabel+AutoHeight.h"
 
@@ -93,7 +94,7 @@
 #warning Link real pic
 		
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/item_%@_main.jpg", [self.itemInfo objectForKey:@"id"]]];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"%@/user_uploads/user_1/item_%@_main.jpg", kWebRoot, [self.itemInfo objectForKey:@"id"]]];
 		self.itemPicArray = [NSMutableArray arrayWithObjects:image1, nil];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -120,7 +121,7 @@
 				photo.image = self.itemPicArray[i];
 				photo.attributedCaptionSummary = [[NSAttributedString alloc] initWithString:[self.itemInfo objectForKey:@"title"] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
 				[self.photosViewController updateImageForPhoto:photo];
-				[self.photosViewController updateOverlayInformation];
+//				[self.photosViewController updateOverlayInformation];
 			}
 		});
 	});

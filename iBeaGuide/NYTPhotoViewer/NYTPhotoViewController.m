@@ -10,6 +10,10 @@
 #import "NYTPhoto.h"
 #import "NYTScalingImageView.h"
 
+#ifdef ANIMATED_GIF_SUPPORT
+#import <FLAnimatedImage/FLAnimatedImage.h>
+#endif
+
 NSString * const NYTPhotoViewControllerPhotoImageUpdatedNotification = @"NYTPhotoViewControllerPhotoImageUpdatedNotification";
 
 @interface NYTPhotoViewController () <UIScrollViewDelegate>
@@ -90,15 +94,20 @@ NSString * const NYTPhotoViewControllerPhotoImageUpdatedNotification = @"NYTPhot
 
 - (void)commonInitWithPhoto:(id <NYTPhoto>)photo loadingView:(UIView *)loadingView notificationCenter:(NSNotificationCenter *)notificationCenter {
     _photo = photo;
-
-    UIImage *photoImage = photo.image ?: photo.placeholderImage;
-
-    _scalingImageView = [[NYTScalingImageView alloc] initWithImage:photoImage frame:CGRectZero];
-    _scalingImageView.delegate = self;
-
-    if (!photo.image) {
-        [self setupLoadingView:loadingView];
+    
+    if (photo.imageData) {
+        _scalingImageView = [[NYTScalingImageView alloc] initWithImageData:photo.imageData frame:CGRectZero];
     }
+    else {
+        UIImage *photoImage = photo.image ?: photo.placeholderImage;
+        _scalingImageView = [[NYTScalingImageView alloc] initWithImage:photoImage frame:CGRectZero];
+        
+        if (!photoImage) {
+            [self setupLoadingView:loadingView];
+        }
+    }
+    
+    _scalingImageView.delegate = self;
 
     _notificationCenter = notificationCenter;
 
@@ -117,14 +126,19 @@ NSString * const NYTPhotoViewControllerPhotoImageUpdatedNotification = @"NYTPhot
 - (void)photoImageUpdatedWithNotification:(NSNotification *)notification {
     id <NYTPhoto> photo = notification.object;
     if ([photo conformsToProtocol:@protocol(NYTPhoto)] && [photo isEqual:self.photo]) {
-        [self updateImage:photo.image];
+        [self updateImage:photo.image imageData:photo.imageData];
     }
 }
 
-- (void)updateImage:(UIImage *)image {
-    [self.scalingImageView updateImage:image];
+- (void)updateImage:(UIImage *)image imageData:(NSData *)imageData {
+    if (imageData) {
+        [self.scalingImageView updateImageData:imageData];
+    }
+    else {
+        [self.scalingImageView updateImage:image];
+    }
     
-    if (image) {
+    if (imageData || image) {
         [self.loadingView removeFromSuperview];
         self.loadingView = nil;
     }
@@ -143,8 +157,9 @@ NSString * const NYTPhotoViewControllerPhotoImageUpdatedNotification = @"NYTPhot
     CGPoint pointInView = [recognizer locationInView:self.scalingImageView.imageView];
     
     CGFloat newZoomScale = self.scalingImageView.maximumZoomScale;
-    
-    if (self.scalingImageView.zoomScale >= self.scalingImageView.maximumZoomScale) {
+
+    if (self.scalingImageView.zoomScale >= self.scalingImageView.maximumZoomScale
+        || ABS(self.scalingImageView.zoomScale - self.scalingImageView.maximumZoomScale) <= 0.01) {
         newZoomScale = self.scalingImageView.minimumZoomScale;
     }
     

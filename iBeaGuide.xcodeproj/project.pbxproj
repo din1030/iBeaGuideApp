@@ -21,16 +21,6 @@
 		A6B309091C140FC700DDA89E /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308E91C140FC700DDA89E /* UITableView+FDKeyedHeightCache.m */; };
 		A6B3090A1C140FC700DDA89E /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308EB1C140FC700DDA89E /* UITableView+FDTemplateLayoutCell.m */; };
 		A6B3090B1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308ED1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m */; };
-		A6B3090C1C140FC700DDA89E /* NYTPhotoCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308F01C140FC700DDA89E /* NYTPhotoCaptionView.m */; };
-		A6B3090D1C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308F21C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m */; };
-		A6B3090E1C140FC700DDA89E /* NYTPhotosDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308F41C140FC700DDA89E /* NYTPhotosDataSource.m */; };
-		A6B3090F1C140FC700DDA89E /* NYTPhotosOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308F61C140FC700DDA89E /* NYTPhotosOverlayView.m */; };
-		A6B309101C140FC700DDA89E /* NYTPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308F81C140FC700DDA89E /* NYTPhotosViewController.m */; };
-		A6B309111C140FC700DDA89E /* NYTPhotoTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308FA1C140FC700DDA89E /* NYTPhotoTransitionAnimator.m */; };
-		A6B309121C140FC700DDA89E /* NYTPhotoTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308FC1C140FC700DDA89E /* NYTPhotoTransitionController.m */; };
-		A6B309131C140FC700DDA89E /* NYTPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B308FE1C140FC700DDA89E /* NYTPhotoViewController.m */; };
-		A6B309141C140FC700DDA89E /* NYTScalingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B309001C140FC700DDA89E /* NYTScalingImageView.m */; };
-		A6B309151C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B309071C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m */; };
 		A6B9D50C1C15F4B300654815 /* iBGMyCollectionTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B9D50B1C15F4B300654815 /* iBGMyCollectionTableViewHeaderCell.m */; };
 		A6B9D50F1C16250900654815 /* iBGSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B9D50E1C16250900654815 /* iBGSettingTableViewController.m */; };
 		A6B9D5141C1819FC00654815 /* NSManagedObject+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B9D5131C1819FC00654815 /* NSManagedObject+Serialization.m */; };
@@ -107,6 +97,16 @@
 		A6DB85961BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB85951BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m */; };
 		A6DB85991BF8BF7400E40EEF /* iBGSectionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */; };
 		A6E2251B1C21F9B400C9B8F8 /* din.png in Resources */ = {isa = PBXBuildFile; fileRef = A6E2251A1C21F9B400C9B8F8 /* din.png */; };
+		A6EB756B1C68A95F0030A3F7 /* NYTPhotoCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75521C68A95F0030A3F7 /* NYTPhotoCaptionView.m */; };
+		A6EB756C1C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75541C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.m */; };
+		A6EB756D1C68A95F0030A3F7 /* NYTPhotosDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75561C68A95F0030A3F7 /* NYTPhotosDataSource.m */; };
+		A6EB756E1C68A95F0030A3F7 /* NYTPhotosOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75581C68A95F0030A3F7 /* NYTPhotosOverlayView.m */; };
+		A6EB756F1C68A95F0030A3F7 /* NYTPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB755A1C68A95F0030A3F7 /* NYTPhotosViewController.m */; };
+		A6EB75701C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB755C1C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.m */; };
+		A6EB75711C68A95F0030A3F7 /* NYTPhotoTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB755E1C68A95F0030A3F7 /* NYTPhotoTransitionController.m */; };
+		A6EB75721C68A95F0030A3F7 /* NYTPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75601C68A95F0030A3F7 /* NYTPhotoViewController.m */; };
+		A6EB75731C68A95F0030A3F7 /* NYTScalingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB75621C68A95F0030A3F7 /* NYTScalingImageView.m */; };
+		A6EB75741C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EB756A1C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.m */; };
 		A6ED0A961C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX.png in Resources */ = {isa = PBXBuildFile; fileRef = A6ED0A901C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX.png */; };
 		A6ED0A971C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6ED0A911C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@2x.png */; };
 		A6ED0A981C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6ED0A921C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@3x.png */; };
@@ -167,29 +167,6 @@
 		A6B308EB1C140FC700DDA89E /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		A6B308EC1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
 		A6B308ED1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
-		A6B308EF1C140FC700DDA89E /* NYTPhotoCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoCaptionView.h; sourceTree = "<group>"; };
-		A6B308F01C140FC700DDA89E /* NYTPhotoCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoCaptionView.m; sourceTree = "<group>"; };
-		A6B308F11C140FC700DDA89E /* NYTPhotoDismissalInteractionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoDismissalInteractionController.h; sourceTree = "<group>"; };
-		A6B308F21C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoDismissalInteractionController.m; sourceTree = "<group>"; };
-		A6B308F31C140FC700DDA89E /* NYTPhotosDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosDataSource.h; sourceTree = "<group>"; };
-		A6B308F41C140FC700DDA89E /* NYTPhotosDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosDataSource.m; sourceTree = "<group>"; };
-		A6B308F51C140FC700DDA89E /* NYTPhotosOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosOverlayView.h; sourceTree = "<group>"; };
-		A6B308F61C140FC700DDA89E /* NYTPhotosOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosOverlayView.m; sourceTree = "<group>"; };
-		A6B308F71C140FC700DDA89E /* NYTPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosViewController.h; sourceTree = "<group>"; };
-		A6B308F81C140FC700DDA89E /* NYTPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosViewController.m; sourceTree = "<group>"; };
-		A6B308F91C140FC700DDA89E /* NYTPhotoTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoTransitionAnimator.h; sourceTree = "<group>"; };
-		A6B308FA1C140FC700DDA89E /* NYTPhotoTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoTransitionAnimator.m; sourceTree = "<group>"; };
-		A6B308FB1C140FC700DDA89E /* NYTPhotoTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoTransitionController.h; sourceTree = "<group>"; };
-		A6B308FC1C140FC700DDA89E /* NYTPhotoTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoTransitionController.m; sourceTree = "<group>"; };
-		A6B308FD1C140FC700DDA89E /* NYTPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoViewController.h; sourceTree = "<group>"; };
-		A6B308FE1C140FC700DDA89E /* NYTPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoViewController.m; sourceTree = "<group>"; };
-		A6B308FF1C140FC700DDA89E /* NYTScalingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTScalingImageView.h; sourceTree = "<group>"; };
-		A6B309001C140FC700DDA89E /* NYTScalingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTScalingImageView.m; sourceTree = "<group>"; };
-		A6B309021C140FC700DDA89E /* NYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhoto.h; sourceTree = "<group>"; };
-		A6B309031C140FC700DDA89E /* NYTPhotoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoContainer.h; sourceTree = "<group>"; };
-		A6B309041C140FC700DDA89E /* NYTPhotosViewControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosViewControllerDataSource.h; sourceTree = "<group>"; };
-		A6B309061C140FC700DDA89E /* NSBundle+NYTPhotoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+NYTPhotoViewer.h"; sourceTree = "<group>"; };
-		A6B309071C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+NYTPhotoViewer.m"; sourceTree = "<group>"; };
 		A6B9D50A1C15F4B200654815 /* iBGMyCollectionTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGMyCollectionTableViewHeaderCell.h; sourceTree = "<group>"; };
 		A6B9D50B1C15F4B300654815 /* iBGMyCollectionTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGMyCollectionTableViewHeaderCell.m; sourceTree = "<group>"; };
 		A6B9D50D1C16250900654815 /* iBGSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGSettingTableViewController.h; sourceTree = "<group>"; };
@@ -291,6 +268,30 @@
 		A6DB85971BF8BF7400E40EEF /* iBGSectionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBGSectionInfoViewController.h; sourceTree = "<group>"; };
 		A6DB85981BF8BF7400E40EEF /* iBGSectionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBGSectionInfoViewController.m; sourceTree = "<group>"; };
 		A6E2251A1C21F9B400C9B8F8 /* din.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = din.png; sourceTree = "<group>"; };
+		A6EB75511C68A95F0030A3F7 /* NYTPhotoCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoCaptionView.h; sourceTree = "<group>"; };
+		A6EB75521C68A95F0030A3F7 /* NYTPhotoCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoCaptionView.m; sourceTree = "<group>"; };
+		A6EB75531C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoDismissalInteractionController.h; sourceTree = "<group>"; };
+		A6EB75541C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoDismissalInteractionController.m; sourceTree = "<group>"; };
+		A6EB75551C68A95F0030A3F7 /* NYTPhotosDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosDataSource.h; sourceTree = "<group>"; };
+		A6EB75561C68A95F0030A3F7 /* NYTPhotosDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosDataSource.m; sourceTree = "<group>"; };
+		A6EB75571C68A95F0030A3F7 /* NYTPhotosOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosOverlayView.h; sourceTree = "<group>"; };
+		A6EB75581C68A95F0030A3F7 /* NYTPhotosOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosOverlayView.m; sourceTree = "<group>"; };
+		A6EB75591C68A95F0030A3F7 /* NYTPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosViewController.h; sourceTree = "<group>"; };
+		A6EB755A1C68A95F0030A3F7 /* NYTPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotosViewController.m; sourceTree = "<group>"; };
+		A6EB755B1C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoTransitionAnimator.h; sourceTree = "<group>"; };
+		A6EB755C1C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoTransitionAnimator.m; sourceTree = "<group>"; };
+		A6EB755D1C68A95F0030A3F7 /* NYTPhotoTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoTransitionController.h; sourceTree = "<group>"; };
+		A6EB755E1C68A95F0030A3F7 /* NYTPhotoTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoTransitionController.m; sourceTree = "<group>"; };
+		A6EB755F1C68A95F0030A3F7 /* NYTPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoViewController.h; sourceTree = "<group>"; };
+		A6EB75601C68A95F0030A3F7 /* NYTPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTPhotoViewController.m; sourceTree = "<group>"; };
+		A6EB75611C68A95F0030A3F7 /* NYTScalingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTScalingImageView.h; sourceTree = "<group>"; };
+		A6EB75621C68A95F0030A3F7 /* NYTScalingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTScalingImageView.m; sourceTree = "<group>"; };
+		A6EB75641C68A95F0030A3F7 /* NYTPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhoto.h; sourceTree = "<group>"; };
+		A6EB75651C68A95F0030A3F7 /* NYTPhotoCaptionViewLayoutWidthHinting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoCaptionViewLayoutWidthHinting.h; sourceTree = "<group>"; };
+		A6EB75661C68A95F0030A3F7 /* NYTPhotoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotoContainer.h; sourceTree = "<group>"; };
+		A6EB75671C68A95F0030A3F7 /* NYTPhotosViewControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTPhotosViewControllerDataSource.h; sourceTree = "<group>"; };
+		A6EB75691C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+NYTPhotoViewer.h"; sourceTree = "<group>"; };
+		A6EB756A1C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+NYTPhotoViewer.m"; sourceTree = "<group>"; };
 		A6ED0A901C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NYTPhotoViewerCloseButtonX.png; sourceTree = "<group>"; };
 		A6ED0A911C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NYTPhotoViewerCloseButtonX@2x.png"; sourceTree = "<group>"; };
 		A6ED0A921C0DA5D5009BD030 /* NYTPhotoViewerCloseButtonX@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NYTPhotoViewerCloseButtonX@3x.png"; sourceTree = "<group>"; };
@@ -366,14 +367,14 @@
 		A63994371BDE4614003E1BCA /* iBeaGuide */ = {
 			isa = PBXGroup;
 			children = (
+				A6EB75501C68A95F0030A3F7 /* NYTPhotoViewer */,
 				A6CA5D641C19CC6D002640FB /* MBProgressHUD */,
 				A6B9D5111C1819FC00654815 /* NSManagedObject+Serialization */,
 				A6B308E51C140FC700DDA89E /* FDTemplateLayoutCell */,
-				A6B308EE1C140FC700DDA89E /* NYTPhotoViewer */,
+				A6CBE9781C40738B0007E762 /* audioguide */,
 				A63994381BDE4614003E1BCA /* Supporting Files */,
 				A6CE217D1BDFB2BE00249226 /* images */,
 				A63994411BDE4615003E1BCA /* Main.storyboard */,
-				A6CBE9781C40738B0007E762 /* audioguide */,
 				A6D488571C2BC97A00186A04 /* audioguide.mp3 */,
 				A639943B1BDE4615003E1BCA /* AppDelegate.h */,
 				A639943C1BDE4615003E1BCA /* AppDelegate.m */,
@@ -444,52 +445,6 @@
 				A6B308ED1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m */,
 			);
 			path = FDTemplateLayoutCell;
-			sourceTree = "<group>";
-		};
-		A6B308EE1C140FC700DDA89E /* NYTPhotoViewer */ = {
-			isa = PBXGroup;
-			children = (
-				A6B308EF1C140FC700DDA89E /* NYTPhotoCaptionView.h */,
-				A6B308F01C140FC700DDA89E /* NYTPhotoCaptionView.m */,
-				A6B308F11C140FC700DDA89E /* NYTPhotoDismissalInteractionController.h */,
-				A6B308F21C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m */,
-				A6B308F31C140FC700DDA89E /* NYTPhotosDataSource.h */,
-				A6B308F41C140FC700DDA89E /* NYTPhotosDataSource.m */,
-				A6B308F51C140FC700DDA89E /* NYTPhotosOverlayView.h */,
-				A6B308F61C140FC700DDA89E /* NYTPhotosOverlayView.m */,
-				A6B308F71C140FC700DDA89E /* NYTPhotosViewController.h */,
-				A6B308F81C140FC700DDA89E /* NYTPhotosViewController.m */,
-				A6B308F91C140FC700DDA89E /* NYTPhotoTransitionAnimator.h */,
-				A6B308FA1C140FC700DDA89E /* NYTPhotoTransitionAnimator.m */,
-				A6B308FB1C140FC700DDA89E /* NYTPhotoTransitionController.h */,
-				A6B308FC1C140FC700DDA89E /* NYTPhotoTransitionController.m */,
-				A6B308FD1C140FC700DDA89E /* NYTPhotoViewController.h */,
-				A6B308FE1C140FC700DDA89E /* NYTPhotoViewController.m */,
-				A6B308FF1C140FC700DDA89E /* NYTScalingImageView.h */,
-				A6B309001C140FC700DDA89E /* NYTScalingImageView.m */,
-				A6B309011C140FC700DDA89E /* Protocols */,
-				A6B309051C140FC700DDA89E /* Resource Loading */,
-			);
-			path = NYTPhotoViewer;
-			sourceTree = "<group>";
-		};
-		A6B309011C140FC700DDA89E /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				A6B309021C140FC700DDA89E /* NYTPhoto.h */,
-				A6B309031C140FC700DDA89E /* NYTPhotoContainer.h */,
-				A6B309041C140FC700DDA89E /* NYTPhotosViewControllerDataSource.h */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		A6B309051C140FC700DDA89E /* Resource Loading */ = {
-			isa = PBXGroup;
-			children = (
-				A6B309061C140FC700DDA89E /* NSBundle+NYTPhotoViewer.h */,
-				A6B309071C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m */,
-			);
-			path = "Resource Loading";
 			sourceTree = "<group>";
 		};
 		A6B9D5111C1819FC00654815 /* NSManagedObject+Serialization */ = {
@@ -590,6 +545,53 @@
 				A6D003F21BFD0DDE0067CEF1 /* Jade_Cabbage@2x.jpg */,
 			);
 			name = Sample;
+			sourceTree = "<group>";
+		};
+		A6EB75501C68A95F0030A3F7 /* NYTPhotoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				A6EB75511C68A95F0030A3F7 /* NYTPhotoCaptionView.h */,
+				A6EB75521C68A95F0030A3F7 /* NYTPhotoCaptionView.m */,
+				A6EB75531C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.h */,
+				A6EB75541C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.m */,
+				A6EB75551C68A95F0030A3F7 /* NYTPhotosDataSource.h */,
+				A6EB75561C68A95F0030A3F7 /* NYTPhotosDataSource.m */,
+				A6EB75571C68A95F0030A3F7 /* NYTPhotosOverlayView.h */,
+				A6EB75581C68A95F0030A3F7 /* NYTPhotosOverlayView.m */,
+				A6EB75591C68A95F0030A3F7 /* NYTPhotosViewController.h */,
+				A6EB755A1C68A95F0030A3F7 /* NYTPhotosViewController.m */,
+				A6EB755B1C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.h */,
+				A6EB755C1C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.m */,
+				A6EB755D1C68A95F0030A3F7 /* NYTPhotoTransitionController.h */,
+				A6EB755E1C68A95F0030A3F7 /* NYTPhotoTransitionController.m */,
+				A6EB755F1C68A95F0030A3F7 /* NYTPhotoViewController.h */,
+				A6EB75601C68A95F0030A3F7 /* NYTPhotoViewController.m */,
+				A6EB75611C68A95F0030A3F7 /* NYTScalingImageView.h */,
+				A6EB75621C68A95F0030A3F7 /* NYTScalingImageView.m */,
+				A6EB75631C68A95F0030A3F7 /* Protocols */,
+				A6EB75681C68A95F0030A3F7 /* Resource Loading */,
+			);
+			path = NYTPhotoViewer;
+			sourceTree = "<group>";
+		};
+		A6EB75631C68A95F0030A3F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A6EB75641C68A95F0030A3F7 /* NYTPhoto.h */,
+				A6EB75651C68A95F0030A3F7 /* NYTPhotoCaptionViewLayoutWidthHinting.h */,
+				A6EB75661C68A95F0030A3F7 /* NYTPhotoContainer.h */,
+				A6EB75671C68A95F0030A3F7 /* NYTPhotosViewControllerDataSource.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A6EB75681C68A95F0030A3F7 /* Resource Loading */ = {
+			isa = PBXGroup;
+			children = (
+				A6EB75691C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.h */,
+				A6EB756A1C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.m */,
+			);
+			path = "Resource Loading";
 			sourceTree = "<group>";
 		};
 		A6ED0A8F1C0DA5D5009BD030 /* NYT */ = {
@@ -890,23 +892,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6B309111C140FC700DDA89E /* NYTPhotoTransitionAnimator.m in Sources */,
 				A6D09A8F1BECC95900E50EDC /* iBGNYTPhoto.m in Sources */,
-				A6B3090E1C140FC700DDA89E /* NYTPhotosDataSource.m in Sources */,
+				A6EB756F1C68A95F0030A3F7 /* NYTPhotosViewController.m in Sources */,
 				A6D2F6981BEA3DF600639707 /* iBGItemMaskViewController.m in Sources */,
 				A6B309081C140FC700DDA89E /* UITableView+FDIndexPathHeightCache.m in Sources */,
+				A6EB75741C68A95F0030A3F7 /* NSBundle+NYTPhotoViewer.m in Sources */,
 				A6CF59A91BF4A7E40025A26C /* iBGTextInputLayer.m in Sources */,
 				A6A7348D1BE8E64800772655 /* iBGCommentViewController.m in Sources */,
-				A6B3090C1C140FC700DDA89E /* NYTPhotoCaptionView.m in Sources */,
 				A6B9D5141C1819FC00654815 /* NSManagedObject+Serialization.m in Sources */,
 				A6CE21B61BDFD97200249226 /* iBGExhInfoViewController.m in Sources */,
 				A6DB85961BF8B4AA00E40EEF /* iBGCommentTableViewHeaderCell.m in Sources */,
+				A6EB756B1C68A95F0030A3F7 /* NYTPhotoCaptionView.m in Sources */,
 				A6DB85991BF8BF7400E40EEF /* iBGSectionInfoViewController.m in Sources */,
+				A6EB756C1C68A95F0030A3F7 /* NYTPhotoDismissalInteractionController.m in Sources */,
+				A6EB756D1C68A95F0030A3F7 /* NYTPhotosDataSource.m in Sources */,
 				A6D0C7241BFB4DE200D8EC7E /* iBGMyCollectionTableViewCell.m in Sources */,
 				A63994461BDE4615003E1BCA /* iBeaGuide.xcdatamodeld in Sources */,
 				A6B3090A1C140FC700DDA89E /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A6D0BD9F1BF9FDFD0007C13E /* iBGWebViewController.m in Sources */,
-				A6B309131C140FC700DDA89E /* NYTPhotoViewController.m in Sources */,
+				A6EB75711C68A95F0030A3F7 /* NYTPhotoTransitionController.m in Sources */,
 				A6ED0A9E1C0DD20D009BD030 /* UILabel+AutoHeight.m in Sources */,
 				A6CA5D741C1CBF4C002640FB /* iBGGlobalData.m in Sources */,
 				A6D58BC71BE78EA800C4AFF4 /* iBGItemPageParentViewController.m in Sources */,
@@ -919,23 +923,21 @@
 				A6CA5D671C19CC6D002640FB /* MBProgressHUD.m in Sources */,
 				A6DB85931BF8B46B00E40EEF /* iBGCommentTableViewCell.m in Sources */,
 				A6EED1711BF89F0A001CB88A /* iBGExhPageParentViewController.m in Sources */,
-				A6B309101C140FC700DDA89E /* NYTPhotosViewController.m in Sources */,
 				A639943A1BDE4615003E1BCA /* main.m in Sources */,
 				A6A7348A1BE8DBA000772655 /* iBGItemDetailViewController.m in Sources */,
 				A6B9D50F1C16250900654815 /* iBGSettingTableViewController.m in Sources */,
-				A6B309151C140FC700DDA89E /* NSBundle+NYTPhotoViewer.m in Sources */,
-				A6B3090D1C140FC700DDA89E /* NYTPhotoDismissalInteractionController.m in Sources */,
+				A6EB75701C68A95F0030A3F7 /* NYTPhotoTransitionAnimator.m in Sources */,
+				A6EB756E1C68A95F0030A3F7 /* NYTPhotosOverlayView.m in Sources */,
+				A6EB75721C68A95F0030A3F7 /* NYTPhotoViewController.m in Sources */,
+				A6EB75731C68A95F0030A3F7 /* NYTScalingImageView.m in Sources */,
 				A6EED1691BF712DA001CB88A /* iBGTopicCollectionViewController.m in Sources */,
 				A6B3090B1C140FC700DDA89E /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
-				A6B309121C140FC700DDA89E /* NYTPhotoTransitionController.m in Sources */,
 				A6B309091C140FC700DDA89E /* UITableView+FDKeyedHeightCache.m in Sources */,
-				A6B309141C140FC700DDA89E /* NYTScalingImageView.m in Sources */,
 				A6D09A921BECF27500E50EDC /* iBGCommentTableViewController.m in Sources */,
 				A6B9D50C1C15F4B300654815 /* iBGMyCollectionTableViewHeaderCell.m in Sources */,
 				A6CF59A01BEDD35D0025A26C /* UIView+Glow.m in Sources */,
 				A6ED0AA11C0F1A71009BD030 /* iBGExitViewController.m in Sources */,
 				A6D2F69B1BEA483500639707 /* iBGItemMenuButton.m in Sources */,
-				A6B3090F1C140FC700DDA89E /* NYTPhotosOverlayView.m in Sources */,
 				A6CE217C1BDF6AE600249226 /* iBGMoniterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1071,7 +1073,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "/Users/din1030/Desktop/Projects/FacebookSDKs-iOS-20151111";
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuideRange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1086,7 +1088,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "/Users/din1030/Desktop/Projects/FacebookSDKs-iOS-20151111";
 				INFOPLIST_FILE = iBeaGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengChiaTing.iBeaGuideRange;
 				PRODUCT_NAME = "$(TARGET_NAME)";

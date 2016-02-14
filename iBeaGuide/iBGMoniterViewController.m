@@ -12,9 +12,8 @@
 #import "iBGMoniterViewController.h"
 #import "UIView+Glow.h"
 #import "MBProgressHUD.h"
- #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-#define kWebAPIRoot @"http://114.34.1.57/iBeaGuide/App"
 //#define kBeaconIdentifier @"iBeaGuide"
 #define kBeaconIdentifier(i) \
 [NSString stringWithFormat:@"iBeaGuide%d", i]
@@ -271,31 +270,27 @@
 - (void)locationManager:(CLLocationManager *)manager
 		didRangeBeacons:(NSArray *)beacons
 			   inRegion:(CLBeaconRegion *)region {
-//	NSLog(@"%@", region);
+	// NSLog(@"%@", region);
 	
 	CLBeacon *foundBeacon = [beacons firstObject];
 	NSLog(@"Same Beacon: %d", ![foundBeacon.major isEqual:self.nowBeacon.major]);
-//	for (CLBeacon *foundBeacon in beacons) {
-//		NSLog(@"%@", foundBeacon);
-//		if (foundBeacon.proximity == CLProximityNear) {
-			NSString *uuid = foundBeacon.proximityUUID.UUIDString;
-			NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
-			NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
-			NSLog(@"foundBeacon %@/%@/%@/%ld", uuid, major ,minor, (long)foundBeacon.proximity);
-//		}
-//	}
+	NSString *uuid = foundBeacon.proximityUUID.UUIDString;
+	NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
+	NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
+	NSLog(@"foundBeacon %@/%@/%@/%ld", uuid, major ,minor, (long)foundBeacon.proximity);
+
 	
 	NSLog(@"Same Beacon: %d", ![foundBeacon.major isEqual:self.nowBeacon.major]);
-		if (![foundBeacon.major isEqual:self.nowBeacon.major] && (foundBeacon.proximity == CLProximityNear ||foundBeacon.proximity == CLProximityImmediate)) {
-			[self getBeaconLinkedObjByBeacon:foundBeacon];
-			self.nowBeacon = foundBeacon;
-		}
+	if (![foundBeacon.major isEqual:self.nowBeacon.major] && (foundBeacon.proximity == CLProximityNear || foundBeacon.proximity == CLProximityImmediate)) {
+		[self getBeaconLinkedObjByBeacon:foundBeacon];
+		self.nowBeacon = foundBeacon;
+	}
 	
-	//	 You can retrieve the beacon data from its properties
-//	NSString *uuid = foundBeacon.proximityUUID.UUIDString;
-//	NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
-//	NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
-//	NSLog(@"%@/%@/%@", uuid, major ,minor);
+	//	You can retrieve the beacon data from its properties
+	//	NSString *uuid = foundBeacon.proximityUUID.UUIDString;
+	//	NSString *major = [NSString stringWithFormat:@"%@", foundBeacon.major];
+	//	NSString *minor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
+	//	NSLog(@"%@/%@/%@", uuid, major ,minor);
 	
 }
 

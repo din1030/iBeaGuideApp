@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Cheng Chia Ting. All rights reserved.
 //
 
+#import "iBGGlobal.h"
 #import "iBGSectionInfoViewController.h"
 
 @interface iBGSectionInfoViewController ()
@@ -23,7 +24,7 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 	
 		// 從 url 取得圖片
-		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"http://114.34.1.57/iBeaGuide/user_uploads/user_1/sec_%@.jpg", [self.prepareItemInfo objectForKey:@"sec_id"]]];
+		UIImage *image1 = [self urlStringToImage:[NSString stringWithFormat:@"%@/user_uploads/user_1/sec_%@.jpg", kWebRoot, [self.prepareItemInfo objectForKey:@"sec_id"]]];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			self.secPic.image = image1;

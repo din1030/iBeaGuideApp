@@ -9,6 +9,9 @@
 #ifndef iBGGlobal_h
 #define iBGGlobal_h
 
+#define kWebRoot @"http://52.69.53.255/iBeaGuide"
+#define kWebAPIRoot @"http://52.69.53.255/iBeaGuide/App"
+
 #define UIColorFromRGBWithAlpha(rgbValue, a) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 				green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
