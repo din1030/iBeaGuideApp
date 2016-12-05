@@ -393,8 +393,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="評分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tYV-eE-kh2">
-                                        <rect key="frame" x="35" y="92" width="34" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜愛程度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tYV-eE-kh2">
+                                        <rect key="frame" x="35" y="92" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -422,7 +422,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <view contentMode="scaleToFill" id="ZMx-B1-6TJ">
-                                        <rect key="frame" x="92" y="88" width="162" height="27"/>
+                                        <rect key="frame" x="119" y="86" width="162" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XhA-3b-udx">
@@ -818,6 +818,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="G65-fW-WFP">
+                                        <rect key="frame" x="142" y="120" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" red="0.88627451660000001" green="0.29019609089999998" blue="0.27450981740000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -840,6 +845,7 @@
                         <outlet property="exhTime" destination="9Zs-c6-vrg" id="N52-cK-87I"/>
                         <outlet property="exhVenue" destination="n4r-7K-HAp" id="3sv-F1-wZc"/>
                         <outlet property="imageButton" destination="c1y-3j-hOb" id="IbA-jg-AN9"/>
+                        <outlet property="loadingIndicator" destination="G65-fW-WFP" id="aWl-SM-RHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWq-L8-8SL" sceneMemberID="firstResponder"/>
@@ -1090,7 +1096,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者資訊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xmB-H0-yKN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="關於 iBeaGuide 作者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xmB-H0-yKN">
                                                     <rect key="frame" x="25" y="11" width="262" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1145,7 +1151,7 @@
             </objects>
             <point key="canvasLocation" x="651" y="2174"/>
         </scene>
-        <!--作者資訊-->
+        <!--iBeaGuide 作者資訊-->
         <scene sceneID="rQ4-mM-ODO">
             <objects>
                 <viewController id="Zlh-zw-s8u" sceneMemberID="viewController">
@@ -1178,7 +1184,7 @@
                         <color key="backgroundColor" red="0.97647058959999999" green="0.96862745289999996" blue="0.9529411793" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="作者資訊" id="1q0-G6-YPz"/>
+                    <navigationItem key="navigationItem" title="iBeaGuide 作者資訊" id="1q0-G6-YPz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JtI-2h-LmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1501,7 +1507,7 @@ By default a UILabel will center the text vertically. To have the text top align
                                         <rect key="frame" x="20" y="14" width="128" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>

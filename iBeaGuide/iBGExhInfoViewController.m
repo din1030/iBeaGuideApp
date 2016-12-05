@@ -13,12 +13,15 @@
 
 @interface iBGExhInfoViewController ()
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
+
 @end
 
 @implementation iBGExhInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//	[self.loadingIndicator startAnimating];
 	
 #warning Link real pic
 	// 在背景 load 圖片
@@ -30,6 +33,7 @@
 		
 		// 回到 main queue 更新 UI (圖片)
 		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.loadingIndicator stopAnimating];
 			[[self.imageButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
 			[self.imageButton setImage:image1 forState:UIControlStateNormal];
 

@@ -35,6 +35,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	
 	if ([FBSDKAccessToken currentAccessToken]) {
+		NSLog(@"viewDidAppear");
 		[self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
 	}
 	
@@ -48,7 +49,8 @@
 // Once the button is clicked, show the login dialog
 -(void)loginButtonClicked {
 	
-	if (![FBSDKAccessToken currentAccessToken]) {
+	if (![FBSDKAccessToken currentAccessToken] || [FBSDKAccessToken currentAccessToken].expirationDate.timeIntervalSince1970 < [NSDate date].timeIntervalSince1970) {
+		NSLog(@"No FBSDKAccessToken");
 		FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
 		[login logInWithReadPermissions: @[@"public_profile", @"email", @"user_birthday"]
 					fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *FBLoginError) {
@@ -77,7 +79,7 @@
 										 userData[@"birthday"] = [dateFormater stringFromDate:birthday];
 										 
 										 [self sendUserData:userData url:[NSString stringWithFormat:@"%@/post_user_action", kWebAPIRoot]];
-										 [self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
+//										 [self performSegueWithIdentifier:@"HomeToMoniter" sender:self];
 									 }
 								 }];
 							}

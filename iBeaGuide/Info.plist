@@ -45,7 +45,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>iBeaGuide 使用藍牙提昇您的導覽體驗！</string>
+	<string>iBeaGuide 透過定位功能提昇您的導覽體驗！</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

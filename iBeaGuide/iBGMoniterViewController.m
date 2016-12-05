@@ -43,7 +43,8 @@
 	
 	[self.refreshBtn setBackgroundImage:[UIImage animatedImageNamed:@"logo_" duration:2.0] forState:UIControlStateNormal];
 	
-	[self.hintLabel startGlowing];
+//	[self.hintLabel startGlowing];
+	[UIView transitionWithView:self.hintLabel duration:2.0 options:UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse animations:^{ self.hintLabel.alpha = 0; } completion:nil];
 	
 	// 設定 tab bar 圖案
 	UIImage *moniterImg = [[UIImage imageNamed:@"guide_1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
